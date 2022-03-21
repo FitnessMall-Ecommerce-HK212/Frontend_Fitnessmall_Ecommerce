@@ -1,18 +1,25 @@
-import './App.css';
-import { Component } from 'react';
-import logo from './logo.svg';
+import { useEffect } from 'react';
+import { Provider } from 'react-redux';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import store from './redux/store';
+import { HomePage, Register, Login} from './pages';
+// import PrivateRoute from './PrivateRoute';
 
-class App extends Component {
-  render() {
+const App = () => {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello, React!.</p>
-      </header>
-    </div>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
+          {/* <PrivateRoute path="/..." component={...} /> */}
+
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   );
-}
-}
+};
 
 export default App;
