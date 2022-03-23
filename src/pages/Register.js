@@ -2,6 +2,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
+import {Footer, Header} from '../components';
 // import { registerUser,checkRegister } from '../redux/auth/authSlice';
 import {
   Grid,
@@ -161,6 +162,8 @@ export default function Register() {
   // }
 
   return (
+    <>
+    <Header/>
     <Grid container direction="row" spacing={0} className={classes.root} >
       <Grid item xs={7}>
         {/* <img
@@ -213,5 +216,6 @@ export default function Register() {
         </Card>
       </Grid>
     </Grid>
+    </>
   );
 }

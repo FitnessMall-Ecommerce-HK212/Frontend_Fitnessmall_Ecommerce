@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { Link,Redirect} from 'react-router-dom';
 // import { loginUser,checkLogin } from '../redux/auth/authSlice';
+import {Footer, Header} from '../components';
 import '../styles/Login_Register.css'
 import IconButton from "@material-ui/core/IconButton";
 import Visibility from "@material-ui/icons/Visibility";
@@ -169,6 +170,8 @@ export default function Login() {
     setValues({ ...values, [prop]: event.target.value });
   };
   return (
+    <>
+    <Header/>
     <Grid container direction="row" spacing={0} className={classes.root} >
       <Grid item xs={7}>
         {/* <img
@@ -206,7 +209,7 @@ type={values.showPassword ? "text" : "password"} onChange={handlePasswordChange(
             </input>
           </div>
           </form>
-          
+
           <p style={{fontSize:"14px",color: "#FF2C86",fontWeight:600,cursor: "pointer"}}
           >Forgotten password</p>
 
@@ -235,5 +238,6 @@ type={values.showPassword ? "text" : "password"} onChange={handlePasswordChange(
         </Card>
       </Grid>
     </Grid>
+    </>
   );
 }
