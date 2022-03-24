@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 // import { useDispatch, useSelector } from 'react-redux';
 import '../../styles/Header.css'
-import logo_fitness from '../../assets/logo/try.png'
+import logo_fitness from '../../assets/logo/fitness_logo.png'
 function Header(props) {
 
   return (

@@ -238,6 +238,7 @@ type={values.showPassword ? "text" : "password"} onChange={handlePasswordChange(
         </Card>
       </Grid>
     </Grid>
+    <Footer/>
     </>
   );
 }

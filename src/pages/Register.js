@@ -216,6 +216,7 @@ export default function Register() {
         </Card>
       </Grid>
     </Grid>
+    <Footer/>
     </>
   );
 }
