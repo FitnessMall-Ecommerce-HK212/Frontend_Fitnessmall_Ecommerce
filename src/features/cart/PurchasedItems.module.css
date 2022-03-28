@@ -119,3 +119,104 @@ input::-webkit-inner-spin-button {
     display: flex;
     align-self: flex-start;
 }
+
+.items__close__symbol:hover {
+    cursor: pointer;
+}
+
+.alldata__paymentinfo__diachi {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffecf4;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.alldata__paymentinfo__diachi__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.alldata__paymentinfo__diachi__namephone {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.alldata__paymentinfo {
+    /* width: 337px; */
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.alldata__paymentinfo__voucher{
+    display: flex;
+    flex-direction: column;
+    background-color: #ffecf4;
+    margin-top: 20px;
+    padding: 15px;
+
+}
+
+.alldata__paymentinfo__voucher__choosevoucer {
+    display: flex;
+    width: 337px;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.alldata__paymentinfo__price {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffecf4;
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.alldata__paymentinfo__price__sum, .alldata__paymentinfo__price__voucher, .alldata__paymentinfo__price__realprice{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.alldata__paymentinfo__buybutton {
+    margin-top: 20px;
+
+}
+
+.alldata__paymentinfo__buybutton__element {
+    border-radius: 5px;
+    font-size: xx-large;
+    color: white;
+    padding-left: 85px;
+    padding-right: 85px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #FF2C86;
+    
+}
+
+.alldata__paymentinfo__buybutton__element:hover {
+    cursor: pointer;
+    background-color: #ff2c87bb;
+
+}
+
+.text_pink {
+    color: #FF2C86
+}
+
+.text_pink:hover {
+    cursor: pointer;
+}
+
+.items__item__sum {
+    color: #FF2C86
+}
