@@ -1,0 +1,121 @@
+.title {
+    margin: 50px;
+}
+
+.alldata {
+    display: flex;
+}
+
+.alldata__itemslist__header {
+    display: flex;
+    width: 1008px;
+    height: 120px;    
+    background-color: #ffecf4;
+    border-radius: 12px;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 20px;
+}
+
+.items__thumb {
+    width: 129px;
+    height: 172px;
+    border: 1px solid #FF2C86;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+.alldata__itemslist__header__tatca {
+    display: flex;
+    align-items: center;
+    flex: 2;
+}
+
+.alldata__itemslist__header__tatca__input {
+    margin-right: 10px;
+}
+
+.alldata__itemslist__header__item {
+    flex: 1;
+    text-align: center;
+}
+
+.items {
+    display: flex;
+    background-color: #ffecf4;
+    border-radius: 12px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 20px;
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.items__checkthumb__check {
+    margin-right: 10px;
+}
+
+.items__checkthumb {
+    display: flex;
+    align-items: center;
+    flex: 2;
+}
+
+.items__item {
+    flex: 1;
+    text-align: center;
+}
+
+.items__quantity {
+    display: flex;
+    justify-content: center;
+    height: 45px;
+}
+
+.items__quantity__decrease {
+    width: 50px;
+    border: 1px solid #FF2C86;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.items__quantity__decrease:hover {
+    cursor: pointer;
+}
+
+.items__quantity__increase {
+    width: 50px;
+    border: 1px solid #FF2C86;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.items__quantity__increase:hover {
+    cursor: pointer;    
+}
+
+
+.items__quantity__value {
+    width: 50px;
+    border: 1px solid #FF2C86;
+    text-align: center;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.items__close {
+    display: flex;
+    align-self: flex-start;
+}
