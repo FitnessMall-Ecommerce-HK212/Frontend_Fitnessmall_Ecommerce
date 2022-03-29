@@ -5,7 +5,8 @@ import store from './redux/store';
 import  {Login,Register,HomePage} from './pages';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AllProducts from './pages/AllProducts';
-
+import PurchasedItemsList from './features/cart/PurchasedItemsList';
+import OrdersList from './features/orders/OrdersList';
 // import PrivateRoute from './PrivateRoute';
 
 const App = () => {
@@ -19,7 +20,8 @@ const App = () => {
           <Route path="/login" component={Login} />
           <Route path="/products" component={AllProducts} />
           {/* <PrivateRoute path="/..." component={...} /> */}
-
+          <Route exact path="/cart" component={PurchasedItemsList} />
+          <Route exact path="/history/order" component={OrdersList} />
         </Switch>
       </BrowserRouter>
     </Provider>
