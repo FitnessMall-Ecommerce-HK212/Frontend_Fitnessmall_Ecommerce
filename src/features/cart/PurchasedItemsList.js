@@ -15,9 +15,9 @@ export default function PurchasedItemsList() {
   const dispatch = useDispatch()
 
   function formatToCurrency(amount){
-    amount = (amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+    amount = (amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&.');
     return amount.substring(0, amount.length-3); 
-}
+  }
 
   const onChecked = (itemId) => {
     dispatch(checkItem({ id: itemId}))
@@ -27,7 +27,7 @@ export default function PurchasedItemsList() {
     dispatch(removeItem({id: itemId}))
   }
 
-  const renderedItems = items.map((item, index) => {
+  const renderedItems = items.map((item) => {
       if (item.isChosen) {
         sum = sum + item.price * item.quantity
       }
