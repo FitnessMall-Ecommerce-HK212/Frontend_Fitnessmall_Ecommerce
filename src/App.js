@@ -3,6 +3,8 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import store from './redux/store';
 import  {Login,Register,HomePage} from './pages';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 // import PrivateRoute from './PrivateRoute';
 
 const App = () => {

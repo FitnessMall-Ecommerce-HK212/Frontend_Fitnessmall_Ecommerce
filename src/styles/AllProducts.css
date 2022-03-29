@@ -1,0 +1,13 @@
+.sidebar-product {
+    background-color: #F0EEEE;
+    width: 25%;
+    height: 800px;
+    border-radius: 0 10px 10px 0;
+    text-align: center;
+}
+
+.sidebar-product .title{
+    font-size: 25;
+    font-weight: 600;
+    color: var(--primary);
+}
