@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styles from './OrdersList.module.css'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -8,6 +8,8 @@ import DeliveryTruck from '../../assets/icons/DeliveryTruck.svg'
 import Package from '../../assets/icons/Package.svg'
 import success from '../../assets/icons/success.svg'
 import Tasklist from '../../assets/icons/Tasklist.svg'
+import { Footer, Header, Sidebar, GhostButton } from '../../components'
+
 
 export default function OrdersList() {
 
@@ -17,6 +19,7 @@ export default function OrdersList() {
       }
     
     const orders = useSelector(selectOrder)
+    const[kind, setKind] = useState("Tất cả đơn hàng")
 
     const renderState = (order) => {
         if (order.state === "Đã hủy") {
@@ -102,44 +105,63 @@ export default function OrdersList() {
 
     const renderedOrders = orders.map(order => {
         return (
-            <div key={order.code} className={styles.orderlist__header__content__item}>
-                {renderState(order)}
-                {renderItems(order)}
-                <hr/>
-                <div className={styles.orderlist__header__content__item__footer} >
-                    <div>
+            <div>
+                <div>
 
-                    </div>
-                    <div>
-                        <p>Tổng tiền: {formatToCurrency(order.tongtien)}đ</p>
+                </div>
+                <div key={order.code} className={styles.orderlist__header__content__item}>
+                    {renderState(order)}
+                    {renderItems(order)}
+                    <hr/>
+                    <div className={styles.orderlist__header__content__item__footer} >
+                        <div>
+                            <Link to={`/history/orders/${order.id}`} className={styles.orderlist__header__content__item__footer__linktoitem} >
+                                <GhostButton value={"Xem chi tiết"} onClick={()=>{}}/>
+                            </Link>
+                        </div>
+                        <div>
+                            <p>Tổng tiền: {formatToCurrency(order.tongtien)}đ</p>
+                        </div>
                     </div>
                 </div>
-
             </div>
         )
     })
 
     return (
-        <div className={styles.orderlist}>
-            <div className={styles.orderlist__header}>
-                <div>
-                    <p className={styles.orderlist__header__text}>Hiển thị:</p>
-                </div>
-                <div>
-                    <select name="kind" className={styles.orderlist__header__select}>
-                        <option value="Tất cả đơn hàng">Tất cả đơn hàng</option>
-                        <option value="Đang xử lý">Đang xử lý</option>
-                        <option value="Đã đóng gói">Đã đóng gói</option>
-                        <option value="Đang vận chuyển">Đang vận chuyển</option>
-                        <option value="Đang giao hàng">Đã giao hàng</option>
-                        <option value="Đã hủy">Đã hủy</option>
-                    </select>
-                </div>
+        <div>
+            <div>
+                <Header />
             </div>
+            <div className={styles.orderlist__content}>
+                <div>
+                <Sidebar />
+                </div>
+                <div className={styles.orderlist}>
+                    <div className={styles.orderlist__header}>
+                        <div>
+                            <p className={styles.orderlist__header__text}>Hiển thị:</p>
+                        </div>
+                        <div>
+                            <select name="kind" className={styles.orderlist__header__select}>
+                                <option value="Tất cả đơn hàng">Tất cả đơn hàng</option>
+                                <option value="Đang xử lý">Đang xử lý</option>
+                                <option value="Đã đóng gói">Đã đóng gói</option>
+                                <option value="Đang vận chuyển">Đang vận chuyển</option>
+                                <option value="Đang giao hàng">Đã giao hàng</option>
+                                <option value="Đã hủy">Đã hủy</option>
+                            </select>
+                        </div>
+                    </div>
 
-            <div className={styles.orderlist__header__content}>
-                {renderedOrders}
+                    <div className={styles.orderlist__header__content}>
+                        {renderedOrders}
+                    </div>
+                </div>   
             </div>
+            <div>
+                <Footer />
+            </div>        
         </div>
     )
 }
