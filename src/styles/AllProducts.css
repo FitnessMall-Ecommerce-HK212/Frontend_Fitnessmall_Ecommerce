@@ -1,0 +1,53 @@
+.sidebar-product {
+    background-color: #F0EEEE;
+    width: 25%;
+    height: 800px;
+    border-radius: 0 10px 10px 0;
+    text-align: center;
+}
+
+.sidebar-product .title{
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.optionbutton .btn-option{
+    background-color: var(--background);
+    border-radius: 10px;
+    border-color: var(--lightprimary);
+    border-width: 2px;
+    width: 250px;
+}
+
+.optionbutton .btn-option:hover{
+    background-color: var(--lightprimary);
+    color: white;
+    border-radius: 10px;
+    border-width: 2px;
+    border-color: var(--lightprimary);
+    width: 250px;
+}
+
+.productcard .card-body{
+    padding: 0 10px 10px 5px;
+}
+
+.productcard .card-title{
+    font-size: 25px;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.productcard .card-text{
+    font-size: 16px;
+    text-align: justify;
+    color: var(--lightsecondary);
+}
+
+.productcard .view-detail {
+    border-color: var(--primary);
+    color: var(--primary);
+    border-radius: 10px;
+    font-size: 14px;
+}
