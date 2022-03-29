@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import store from './redux/store';
-import  {Login,Register,HomePage} from './pages';
+import  {Login,Register,HomePage,Account} from './pages';
 // import PrivateRoute from './PrivateRoute';
 
 const App = () => {
@@ -14,6 +14,7 @@ const App = () => {
           <Route exact path="/" component={HomePage} />
           <Route exact path="/register" component={Register} />
           <Route path="/login" component={Login} />
+          <Route path="/account" component={Account} />
           {/* <PrivateRoute path="/..." component={...} /> */}
 
         </Switch>

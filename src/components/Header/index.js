@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 // import { useDispatch, useSelector } from 'react-redux';
 import '../../styles/Header.css'
+import { Link,Redirect} from 'react-router-dom';
 import logo_fitness from '../../assets/logo/fitness_logo.png'
+import {CTAButton} from '../'
+import { useDispatch, useSelector } from 'react-redux';
+function hello(){ console.log('Hello')}
 function Header(props) {
-
+  const { isAuthenticated } = useSelector((state) => state.auth);
   return (
     <div class="Container">
       <div class="Middle_Wrap">
@@ -19,19 +23,20 @@ function Header(props) {
           <div class="FormSearch" style={{flex: "1 1 0%"}}>
             <div class="FormSearch_Form">  
               <input type="text" placeholder="Search accessories you want.." class="FormSearch_Input"/>
-              <button class="FormSearch_Button">
-              Search</button>
-            </div>
+              <CTAButton value="Search"/>
+            </div> 
           </div>
         </div>
         <div class="RightContainer">
           <div class="Userstyle_Item">
+            {/* <Link to={isAuthenticated?"/account":"/"}> */}
             <img class="profile-icon" src="https://salt.tikicdn.com/ts/upload/67/de/1e/90e54b0a7a59948dd910ba50954c702e.png"/>
             <span class="Userstyle_ItemText">
               <span class="account-label">
                 <span style={{fontSize:"16px"}}>Account</span>
                 </span>
             </span>
+            {/* </Link> */}
           </div>
           <div class="Userstyle_Item">
             <img class="profile-icon" src="https://salt.tikicdn.com/ts/upload/40/44/6c/b80ad73e5e84aeb71c08e5d8d438eaa1.png"/>
