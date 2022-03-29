@@ -4,7 +4,7 @@
     padding-right: 15px;
     margin-right: auto;
     margin-left: auto;
-    background-color: black;
+    background-color: var(--secondary);
 }
 .Middle_Wrap{
     display: flex;
@@ -53,27 +53,47 @@
     padding: 0px 12px;
     font-size: 13px;
     border-radius: 10px 0px 0px 10px;
-    border:1px solid white;
+    border:1px solid var(--background);
     border-right: 0px;
     flex: 1 1 0%;
     /* outline: none; */
     background: none;
     height:48px;
     width: 100px;
-    color:#FFA5CB;
+    color:var(--lightprimary);
 }
 .FormSearch_Input::placeholder {
-    color: #FFA5CB;
+    color: var(--lightprimary);
     opacity: 1;
 }
 .FormSearch_Button{
     cursor: pointer;
     border: 0px;
     width: 100px;
-    background: #FF2C86;
+    background: var(--primary);
     height: 48px;
     border-radius: 10px 10px 10px 10px;
-    color: white;
+    color: var(--background);
+    font-size: 15px;
+    font-weight: 500;
+    outline: none;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    text-transform: none;
+    overflow: visible;
+}
+.Ghost_Button{
+    cursor: pointer;
+    border: 0px;
+    width: 100px;
+    background: transparent;
+    height: 48px;
+    border: solid 1px var(--primary);
+    border-radius: 10px 10px 10px 10px;
+    color: var(--primary);
     font-size: 15px;
     font-weight: 500;
     outline: none;
@@ -99,7 +119,7 @@
     -webkit-box-align: center;
     align-items: center;
     display: flex;
-    color: rgb(255, 255, 255);
+    color: var(--background);
     font-size: 12px;
     position: relative;
     letter-spacing: 0.7px;
@@ -112,7 +132,7 @@
     border-radius: 2px;
 }
 .Userstyle_ItemText{
-    color: rgb(255, 255, 255);
+    color: var(--background);
     font-weight: 400;
     white-space: nowrap;
     display: flex;
@@ -152,7 +172,7 @@
     margin: 0px 0px 0px 16px;
     -webkit-box-align: center;
     display: flex;
-    color: rgb(255, 255, 255);
+    color: var(--background);
     font-size: 12px;
     position: relative;
     letter-spacing: 0.7px;
