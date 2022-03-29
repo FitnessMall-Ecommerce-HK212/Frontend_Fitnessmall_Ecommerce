@@ -1,6 +1,6 @@
 import React from 'react';
 import Slider from "react-slick";
-import '../../styles/Home.css'
+import '../../styles/HomePage.css'
 import banner_homepage from '../../assets/banner/homepage.png'
 import IntroCard from './introcard';
 import HotdealCard from './hotdealcard';
@@ -84,18 +84,26 @@ function Home(props) {
     return (
         <div>
             <img src={banner_homepage} alt='banner' style={{width:"100%",height:"100%",borderStyle:"none"}}/>
-            <div className='all-service'>
-                <h5 className='intro pt-5 ps-5'>Sản phẩm cung cấp</h5>
+            <div className='all-service pt-5'>
+            <div className='intro'>
+                    <div className='line'></div>
+                    <h5 className='pt-2 ps-1 pe-1'>Sản phẩm cung cấp</h5>
+                    <div className='line'></div>
+                </div>
                 <div className='introcard-container pt-3'>
                     <div className='row'>
-                        <div className='col-4 ps-5 pe-5'><IntroCard name="Personal Training"/></div>
-                        <div className='col-4 ps-5 pe-5'><IntroCard name="Medical Blogs"/></div>
-                        <div className='col-4 ps-5 pe-5'><IntroCard name="Fitness Accessories"/></div>
+                        <div className='col-4 col-xs-12 ps-5 pe-5'><IntroCard name="Personal Training"/></div>
+                        <div className='col-4 col-xs-12 ps-5 pe-5'><IntroCard name="Medical Blogs"/></div>
+                        <div className='col-4 col-xs-12 ps-5 pe-5'><IntroCard name="Fitness Accessories"/></div>
                     </div>
                 </div>
             </div>
             <div className='hotdeals pt-5'>
-                <h5 className='intro pt-3 ps-5'>Hotdeals</h5>
+                <div className='intro'>
+                    <div className='line'></div>
+                    <h5 className='pt-2 ps-1 pe-1'>Hot Deals</h5>
+                    <div className='line'></div>
+                </div>
                 <Slider {...setting1}>
                     {list.map((i) => {
                         return (
@@ -107,7 +115,11 @@ function Home(props) {
                 </Slider>
             </div>
             <div className='hotblogs pt-5 pb-5'>
-                <h5 className='intro pt-3 ps-5'>Hotblogs</h5>
+                <div className='intro'>
+                    <div className='line'></div>
+                    <h5 className='pt-2 ps-1 pe-1'>Hot Blogs</h5>
+                    <div className='line'></div>
+                </div>
                 <Slider {...setting2}>
                     {list.map((i) => {
                         return (

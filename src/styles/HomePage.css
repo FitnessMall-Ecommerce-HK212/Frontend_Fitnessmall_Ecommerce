@@ -41,6 +41,15 @@
     justify-content: center;
 }
 
+.hotdealcard {
+    width: 18rem;
+}
+
+.hotdealcard:hover{
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}
+
 .hotdealcard .card .card-body{
     background-color: var(--surface);
     color: var(--primary);
@@ -65,10 +74,27 @@
     width: 0px;
 }
 
+.hotblogcard:hover{
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}
+
 .hotblogcard .card-body{
     color: var(--primary)
 }
 
 .hotblogcard .card-body .card-text{
     font-weight: 600;
+}
+
+.intro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.intro .line{
+    background-color: var(--primary);
+    width: 51px;
+    height: 2px;
 }

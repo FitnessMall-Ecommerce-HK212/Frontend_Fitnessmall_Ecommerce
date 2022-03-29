@@ -1,4 +1,4 @@
-import '../../styles/Home.css'
+import '../../styles/HomePage.css'
 function HotBlogCard(props){
     return(
         <div className='hotblogcard'>
