@@ -147,6 +147,15 @@ export default function PurchasedItemsList() {
 
                 <div className={styles.alldata__paymentinfo__price__voucher}>
                   <div>
+                    <p>Phí vận chuyển</p>
+                  </div>
+                  <div>
+                    <p>-0đ</p>
+                  </div>
+                </div>
+
+                <div className={styles.alldata__paymentinfo__price__voucher}>
+                  <div>
                     <p>Voucher</p>
                   </div>
                   <div>
