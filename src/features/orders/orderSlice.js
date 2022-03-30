@@ -11,7 +11,7 @@ const initialState = [
     // },
     { 
         id: '1',
-        username: 'hongphuc', 
+        username: 'Võ Hồng Phúc', 
         diachi: 'Nhà khách ĐHQG, Đông Hòa, Dĩ An, Bình Dương', 
         SDT: '0923784234',
         tongtien: 460000,
@@ -27,12 +27,17 @@ const initialState = [
         ],
         state: "Đã giao hàng",     
         ngaydat: "01/03/2022",
-        ngaygiao: "20/03/2022"
+        ngaygiao: "20/03/2022",
+        ghichu: "Giao vào giờ hành chính",
+        payment_method: "Ví Zalo pay",
+        phivanchuyen: 20000,
+        khuyenmai: 10000,
+        tongcong: 470000,
     },
 
     { 
         id: '2',
-        username: 'hongphuc', 
+        username: 'Võ Hồng Phúc', 
         diachi: 'Nhà khách ĐHQG, Đông Hòa, Dĩ An, Bình Dương', 
         SDT: '0923784234',
         tongtien: 460000,
@@ -49,6 +54,12 @@ const initialState = [
         state: "Đã hủy",     
         ngaydat: "01/03/2022",
         ngaygiao: undefined,
+        ghichu: "Giao tại cổng AH",
+        payment_method: "Ví Zalo pay",
+        phivanchuyen: 20000,
+        khuyenmai: 10000,
+        tongcong: 470000,
+
     },
 ]
 
