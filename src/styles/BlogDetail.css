@@ -58,6 +58,10 @@
     opacity: 50%;
 }
 
+.blogDetail .blogContent {
+    margin-bottom: 1rem;
+}
+
 .blogDetail .commentOnBlog {
     background-color: var(--lightprimary);
     border-radius: 0.5rem;
@@ -99,7 +103,7 @@
     border-radius: 8px;
     padding: 0.5rem;
     font-weight: bold;
-    margin: 1rem 0.5rem 0 0;
+    margin: 5rem 0.5rem 0 0;
 }
 
 .authorBlog .userInfo {
