@@ -8,7 +8,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import AllProducts from './pages/AllProducts';
 import PurchasedItemsList from './features/cart/PurchasedItemsList';
 import OrdersList from './features/orders/OrdersList';
+
+import BlogPage from './pages/BlogPage';
+import BlogDetailPage from './pages/BlogDetailPage';
 import SingleOrderPage from './features/orders/SingleOrderPage';
+
 // import PrivateRoute from './PrivateRoute';
 
 const App = () => {
@@ -22,6 +26,8 @@ const App = () => {
           <Route path="/login" component={Login} />
           <Route path="/account" component={Account} />
           <Route path="/products" component={AllProducts} />
+          <Route exact path="/blog" component={BlogPage} />
+          <Route path="/blog/detail/1" component={BlogDetailPage} />
           {/* <PrivateRoute path="/..." component={...} /> */}
           <Route exact path="/cart" component={PurchasedItemsList} />
           <Route exact path="/history/order" component={OrdersList} />
