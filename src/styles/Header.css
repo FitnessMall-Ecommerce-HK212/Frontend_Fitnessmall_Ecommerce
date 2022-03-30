@@ -1,0 +1,184 @@
+.Container{
+    /* width: 1270px; */
+    padding-left: 50px;
+    padding-right: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: var(--secondary);
+}
+.Middle_Wrap{
+    display: flex;
+    padding: 10px 0px 10px;
+    height: auto;
+    position: relative;
+    z-index: 2;
+    -webkit-box-align: center;
+    align-items: center;
+}
+.LeftContainer{
+    display: flex;
+    flex: 1 1 0%;
+    -webkit-box-align: center;
+    align-items: center;
+}
+.logo-menu{
+    display: flex;
+    align-items: flex-start;
+    flex-basis: 350px;
+    flex-shrink: 0;
+    margin-right: 16px;
+}
+.style_Logo{
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    flex: 1 1 0%;
+}
+.logo{
+    width: 300px;
+    height: 57px;
+    display: block;
+    color: rgb(11, 116, 229);
+    text-decoration: none;
+    background-color: transparent;
+}
+.FormSearch_Form{
+    width: 90%;
+    display: flex;
+    position: relative;
+    box-shadow: rgb(98 98 98 / 50%) 0px 1px 2px 0px;
+    padding-right: 0px;
+}
+.FormSearch_Input{
+    padding: 0px 12px;
+    font-size: 13px;
+    border-radius: 10px 0px 0px 10px;
+    border:1px solid var(--background);
+    border-right: 0px;
+    flex: 1 1 0%;
+    /* outline: none; */
+    background: none;
+    height:48px;
+    width: 100px;
+    color:var(--lightprimary);
+}
+.FormSearch_Input::placeholder {
+    color: var(--lightprimary);
+    opacity: 1;
+}
+.FormSearch_Button{
+    cursor: pointer;
+    border: 0px;
+    width: 100px;
+    background: var(--primary);
+    height: 48px;
+    border-radius: 10px 10px 10px 10px;
+    color: var(--background);
+    font-size: 15px;
+    font-weight: 500;
+    outline: none;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    text-transform: none;
+    overflow: visible;
+}
+.Ghost_Button{
+    cursor: pointer;
+    border: 0px;
+    width: 100px;
+    background: transparent;
+    height: 48px;
+    border: solid 1px var(--primary);
+    border-radius: 10px 10px 10px 10px;
+    color: var(--primary);
+    font-size: 15px;
+    font-weight: 500;
+    outline: none;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    text-transform: none;
+    overflow: visible;
+}
+.RightContainer{
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+    
+}
+.Userstyle_Item{
+    cursor: pointer;
+    margin: 0px 0px 0px 16px;
+    -webkit-box-align: center;
+    align-items: center;
+    display: flex;
+    color: var(--background);
+    font-size: 12px;
+    position: relative;
+    letter-spacing: 0.7px;
+    width: 162px;
+}
+.profile-icon{
+    width: 32px;
+    height: 32px;
+    margin-right: 8px;
+    border-radius: 2px;
+}
+.Userstyle_ItemText{
+    color: var(--background);
+    font-weight: 400;
+    white-space: nowrap;
+    display: flex;
+    flex-direction: column;
+}
+.Userstyle_NoWrap{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: inline-block;
+    overflow: hidden;
+    text-transform: capitalize;
+    font-size: 11px;
+    line-height: 16px;
+}
+.account-label{
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    font-size: 13px;
+    line-height: 20px;
+    min-width: 120px;
+}
+.account-label > span{
+    max-width: 104px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.Userstyle_CartItem{
+    position: relative;
+    display: block;
+}
+.Userstyle_CartItem{
+    align-items: flex-end;
+    width: 94px;
+    cursor: pointer;
+    margin: 0px 0px 0px 16px;
+    -webkit-box-align: center;
+    display: flex;
+    color: var(--background);
+    font-size: 12px;
+    position: relative;
+    letter-spacing: 0.7px;
+}
+.cart-wrapper{
+    position: relative;
+    margin-right: 8px;
+    display: flex;
+}

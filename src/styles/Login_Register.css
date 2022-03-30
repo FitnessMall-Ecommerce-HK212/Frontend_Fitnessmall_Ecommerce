@@ -1,4 +1,4 @@
 #inputPhone::placeholder {
-    color: #FFA5CB;
+    color: var(--lightprimary);
     opacity: 1;
 }

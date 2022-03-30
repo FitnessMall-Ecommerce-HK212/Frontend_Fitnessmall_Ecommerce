@@ -8,7 +8,15 @@
 @import "~antd/dist/antd.css"; */
 
 :root {
-  --yellow: linear-gradient(to right, #f3723b, #e54750);
+  --yellow: linear-gradient(to right, #fa54c3, #e54750);
+  --primary: #FF2C86;
+  --lightprimary: #FFA5CB !important;
+  --secondary: #000000;
+  --lightsecondary: #B3BDC8;
+  --surface: #F3F8FB;
+  --negative: #FF2F2F;
+  --positive: #0057FF;
+  --background: #FFFFFF;
 }
 
 * {
