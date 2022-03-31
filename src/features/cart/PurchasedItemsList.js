@@ -6,6 +6,8 @@ import ChangeQuantity from './ChangeQuantity'
 import Sale from '../../assets/logo/Sale.svg'
 import { checkItem, removeItem } from './cartSlice'
 import NoItemInCart from './NoItemInCart'
+import Header from '../../components/Header/index'
+import Footer from '../../components/Footer/index'
 
 export default function PurchasedItemsList() {
 
@@ -82,87 +84,105 @@ export default function PurchasedItemsList() {
     <NoItemInCart />
 
     :
-    <section className={styles.body}>
-      <h2 className={styles.title}>Giỏ hàng</h2>
-      <div className={styles.alldata}>
-        <div className={styles.alldata__itemslist}>
-          <div className={styles.alldata__itemslist__header}>
-            <div className={styles.alldata__itemslist__header__tatca}>
-              <input type='checkbox' className={styles.alldata__itemslist__header__tatca__input}  checked={isChosenAll} onChange={handleChooseAll}></input>
-              <p>Tất cả (1 sản phẩm)</p>
-            </div>
-            <div className={styles.alldata__itemslist__header__item}>
-              <p>Đơn giá</p>
-            </div>
-            <div className={styles.alldata__itemslist__header__item}>
-              <p>Số lượng</p>
-            </div>
-            <div className={styles.alldata__itemslist__header__item}>
-              <p>Thành tiền</p>
-            </div>
-          </div>
-          <div className={styles.alldata__itemslist__content}>
-            {renderedItems}
-          </div>
-        </div>
-
-        <div className={styles.alldata__paymentinfo}>
-            <div className={styles.alldata__paymentinfo__diachi}>
-              <div className={styles.alldata__paymentinfo__diachi__header}>
-                <h2>Giao tới</h2>
-                <h3 className={styles.text_pink}>Thay đổi</h3>
-              </div>
-              <div className={styles.alldata__paymentinfo__diachi__namephone}>
-                <p>Võ Hồng Phúc</p> 
-                <p>|</p>
-                <p>0123456789</p>
-              </div>
-              <div>
-                <p>Ký túc xá khu A ĐHQG TP Hồ Chí Minh, Phường Linh Trung, Quận Thủ Đức - TP Thủ Đức, Hồ Chí Minh</p>
-              </div>
-            </div>
-            <div className={styles.alldata__paymentinfo__voucher}>
-              <p>Khuyến mãi</p>
-              <div className={styles.alldata__paymentinfo__voucher__choosevoucer}>
-                <img src={Sale} alt='sale-icon'/>
-                <p className={[styles.text_pink]}>Chọn hoặc nhập Khuyến mãi khác</p>
-              </div>
-
-            </div>
-            <div className={styles.alldata__paymentinfo__price}>
-              <div className={styles.alldata__paymentinfo__price__sum}>
-                <div>
-                  <p>Tổng tiền</p>
-                </div>
-                <div>
-                  <p>{`${formatToCurrency(sum)}đ`}</p>
-                </div>
-              </div>
-
-              <div className={styles.alldata__paymentinfo__price__voucher}>
-                <div>
-                  <p>Voucher</p>
-                </div>
-                <div>
-                  <p>0đ</p>
-                </div>
-              </div>
-
-              <hr/>
-              <div className={styles.alldata__paymentinfo__price__realprice}>
-                <div>
-                  <p>Tổng cộng</p>
-                </div>
-                <div>
-                  <p className={styles.text_pink}>{sum==0? "Vui lòng chọn sản phẩm" : `${formatToCurrency(sum)}đ`}</p>
-                </div>
-              </div>
-            </div>
-            <div className={styles.alldata__paymentinfo__buybutton}>
-                <button type='button' className={styles.alldata__paymentinfo__buybutton__element}>Mua hàng</button>
-            </div>
-        </div>
+    <div>
+      <div>
+        <Header />
       </div>
-    </section>
+        <section className={styles.body}>
+        <h2 className={styles.title}>Giỏ hàng</h2>
+        <div className={styles.alldata}>
+          <div className={styles.alldata__itemslist}>
+            <div className={styles.alldata__itemslist__header}>
+              <div className={styles.alldata__itemslist__header__tatca}>
+                <input type='checkbox' className={styles.alldata__itemslist__header__tatca__input}  checked={isChosenAll} onChange={handleChooseAll}></input>
+                <p>Tất cả (1 sản phẩm)</p>
+              </div>
+              <div className={styles.alldata__itemslist__header__item}>
+                <p>Đơn giá</p>
+              </div>
+              <div className={styles.alldata__itemslist__header__item}>
+                <p>Số lượng</p>
+              </div>
+              <div className={styles.alldata__itemslist__header__item}>
+                <p>Thành tiền</p>
+              </div>
+            </div>
+            <div className={styles.alldata__itemslist__content}>
+              {renderedItems}
+            </div>
+          </div>
+
+          <div className={styles.alldata__paymentinfo}>
+              <div className={styles.alldata__paymentinfo__diachi}>
+                <div className={styles.alldata__paymentinfo__diachi__header}>
+                  <h2>Giao tới</h2>
+                  <h3 className={styles.text_pink}>Thay đổi</h3>
+                </div>
+                <div className={styles.alldata__paymentinfo__diachi__namephone}>
+                  <p>Võ Hồng Phúc</p> 
+                  <p>|</p>
+                  <p>0123456789</p>
+                </div>
+                <div>
+                  <p>Ký túc xá khu A ĐHQG TP Hồ Chí Minh, Phường Linh Trung, Quận Thủ Đức - TP Thủ Đức, Hồ Chí Minh</p>
+                </div>
+              </div>
+              <div className={styles.alldata__paymentinfo__voucher}>
+                <p>Khuyến mãi</p>
+                <div className={styles.alldata__paymentinfo__voucher__choosevoucer}>
+                  <img src={Sale} alt='sale-icon'/>
+                  <p className={[styles.text_pink]}>Chọn hoặc nhập Khuyến mãi khác</p>
+                </div>
+
+              </div>
+              <div className={styles.alldata__paymentinfo__price}>
+                <div className={styles.alldata__paymentinfo__price__sum}>
+                  <div>
+                    <p>Tổng tiền</p>
+                  </div>
+                  <div>
+                    <p>{`${formatToCurrency(sum)}đ`}</p>
+                  </div>
+                </div>
+
+                <div className={styles.alldata__paymentinfo__price__voucher}>
+                  <div>
+                    <p>Phí vận chuyển</p>
+                  </div>
+                  <div>
+                    <p>-0đ</p>
+                  </div>
+                </div>
+
+                <div className={styles.alldata__paymentinfo__price__voucher}>
+                  <div>
+                    <p>Voucher</p>
+                  </div>
+                  <div>
+                    <p>0đ</p>
+                  </div>
+                </div>
+
+                <hr/>
+                <div className={styles.alldata__paymentinfo__price__realprice}>
+                  <div>
+                    <p>Tổng cộng</p>
+                  </div>
+                  <div>
+                    <p className={styles.text_pink}>{sum==0? "Vui lòng chọn sản phẩm" : `${formatToCurrency(sum)}đ`}</p>
+                  </div>
+                </div>
+              </div>
+              <div className={styles.alldata__paymentinfo__buybutton}>
+                  <button type='button' className={styles.alldata__paymentinfo__buybutton__element}>Mua hàng</button>
+              </div>
+          </div>
+        </div>
+        </section>
+      <div>
+        <Footer />
+      </div>
+    </div>
+
   )
 }

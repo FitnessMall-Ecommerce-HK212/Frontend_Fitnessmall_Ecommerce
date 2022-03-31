@@ -1,0 +1,115 @@
+.blogDetail {
+    display: flex;
+}
+
+.commentGrid {
+    display: flex;
+}
+
+.blogDetail .leftContent {
+    width: 90%;
+    margin: 1rem 2rem 1rem 1rem;
+}
+
+.commentGrid img{
+    width: 3rem;
+    margin: 1rem 1rem 3rem 0;
+    border-radius: 50%;
+}
+
+.blogDetail .blogTitle {
+    font-weight: bold;
+    color: var(--primary)
+}
+
+.blogDetail .datePosted {
+    font-style: italic;
+    opacity: 50%;
+}
+
+.blogDetail .blockComment {
+    background-color: var(--surface);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-top: 3rem;
+}
+
+.blogDetail .blockComment .blockCmtTitle {
+    color: var(--primary);
+    font-weight: bold;
+    text-align: center;
+}
+
+.blogDetail .blockComment .underScore {
+    color: var(--primary);
+    text-align: center;
+}
+
+.commentGrid p {
+    margin-bottom: 0;
+}
+
+.commentGrid .userComment {
+    font-weight: bold;
+}
+
+.commentGrid .dateComment {
+    font-style: italic;
+    opacity: 50%;
+}
+
+.blogDetail .blogContent {
+    margin-bottom: 1rem;
+}
+
+.blogDetail .commentOnBlog {
+    background-color: var(--lightprimary);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin: 2rem 0;
+}
+
+.blogDetail .userInfo, .blogDetail .commentOnBlog .formComment {
+    display: flex;
+}
+
+.blogDetail .userInfo img {
+    width: 3rem;
+    margin: 0rem 1rem 4rem 0;
+    border-radius: 50%;
+}
+
+.blogDetail .userInfo .userName {
+    font-weight: bold;
+    margin-top: 0.5rem;
+}
+
+.blogDetail .commentOnBlog .formComment input {
+    padding: 0px 12px;
+    font-size: 13px;
+    border-radius: 10px;
+    border:1px solid var(--background);
+    flex: 1 1 0%;
+    background: none;
+    height:48px;
+    width: 100px;
+    color:var(--lightprimary);
+    margin-right: 0.5rem;
+}
+
+.blogTags {
+    background-color: var(--lightprimary);
+    color: var(--primary);
+    border-radius: 8px;
+    padding: 0.5rem;
+    font-weight: bold;
+    margin: 5rem 0.5rem 0 0;
+}
+
+.authorBlog .userInfo {
+    justify-content: flex-end;
+}
+
+.blogDetail .commentOnBlog .formComment .FormSearch_Button {
+    width: 150px;
+}

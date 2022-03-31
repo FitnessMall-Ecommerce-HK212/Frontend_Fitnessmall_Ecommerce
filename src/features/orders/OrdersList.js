@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styles from './OrdersList.module.css'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -8,15 +8,22 @@ import DeliveryTruck from '../../assets/icons/DeliveryTruck.svg'
 import Package from '../../assets/icons/Package.svg'
 import success from '../../assets/icons/success.svg'
 import Tasklist from '../../assets/icons/Tasklist.svg'
+import { Footer, Header, Sidebar, GhostButton } from '../../components'
+
 
 export default function OrdersList() {
 
     function formatToCurrency(amount){
         amount = (amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&.');
         return amount.substring(0, amount.length-3); 
-      }
+    }
     
     const orders = useSelector(selectOrder)
+    const[kind, setKind] = useState("Tất cả đơn hàng")
+
+    const onChangeKind = (e) => {
+        setKind(e.target.value)
+    }
 
     const renderState = (order) => {
         if (order.state === "Đã hủy") {
@@ -26,7 +33,7 @@ export default function OrdersList() {
                         <img src={Close} alt='cancel'/>
                     </div>
                     <div className={styles.orderlist__header__content__item__state__text}>
-                        <p>Đã hủy</p>
+                        <p className={styles.orderlist__header__content__item__state__text}>Đã hủy</p>
                     </div>
                 </div>
             )
@@ -37,7 +44,7 @@ export default function OrdersList() {
                         <img src={success} alt='...'/>
                     </div>
                     <div className={styles.orderlist__header__content__item__state__text}>
-                        <p>Đã giao ngày {order.ngaygiao}</p>
+                        <p className={styles.orderlist__header__content__item__state__text}>Đã giao ngày {order.ngaygiao}</p>
                     </div>
                 </div>
             )
@@ -48,7 +55,7 @@ export default function OrdersList() {
                         <img src={Package} alt='...'/>
                     </div>
                     <div className={styles.orderlist__header__content__item__state__text}>
-                        <p>Đã đóng gói ngày {order.ngaygiao}</p>
+                        <p className={styles.orderlist__header__content__item__state__text}>Đã đóng gói ngày {order.ngaygiao}</p>
                     </div>
                 </div>
             )
@@ -59,7 +66,7 @@ export default function OrdersList() {
                         <img src={DeliveryTruck} alt='...'/>
                     </div>
                     <div className={styles.orderlist__header__content__item__state__text}>
-                        <p>Đang vận chuyển</p>
+                        <p className={styles.orderlist__header__content__item__state__text}>Đang vận chuyển</p>
                     </div>
                 </div>
             )
@@ -70,7 +77,7 @@ export default function OrdersList() {
                         <img src={Tasklist} alt='...'/>
                     </div>
                     <div className={styles.orderlist__header__content__item__state__text}>
-                        <p>Đang xử lý</p>
+                        <p className={styles.orderlist__header__content__item__state__text}>Đang xử lý</p>
                     </div>
                 </div>
             )
@@ -97,49 +104,66 @@ export default function OrdersList() {
                 </div>
             )
         })
-        
     }
 
     const renderedOrders = orders.map(order => {
-        return (
-            <div key={order.code} className={styles.orderlist__header__content__item}>
-                {renderState(order)}
-                {renderItems(order)}
-                <hr/>
-                <div className={styles.orderlist__header__content__item__footer} >
-                    <div>
-
-                    </div>
-                    <div>
-                        <p>Tổng tiền: {formatToCurrency(order.tongtien)}đ</p>
+        if (kind === order.state || kind === "Tất cả đơn hàng") {
+            return (
+                <div>
+                    <div key={order.code} className={styles.orderlist__header__content__item}>
+                        {renderState(order)}
+                        {renderItems(order)}
+                        <hr/>
+                        <div className={styles.orderlist__header__content__item__footer} >
+                            <div>
+                                <Link to={`/history/order/${order.id}`} className={styles.orderlist__header__content__item__footer__linktoitem} >
+                                    <GhostButton value={"Xem chi tiết"} onClick={()=>{}}/>
+                                </Link>
+                            </div>
+                            <div>
+                                <p>Tổng tiền: {formatToCurrency(order.tongtien)}đ</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-            </div>
-        )
+            )            
+        }
     })
 
     return (
-        <div className={styles.orderlist}>
-            <div className={styles.orderlist__header}>
-                <div>
-                    <p className={styles.orderlist__header__text}>Hiển thị:</p>
-                </div>
-                <div>
-                    <select name="kind" className={styles.orderlist__header__select}>
-                        <option value="Tất cả đơn hàng">Tất cả đơn hàng</option>
-                        <option value="Đang xử lý">Đang xử lý</option>
-                        <option value="Đã đóng gói">Đã đóng gói</option>
-                        <option value="Đang vận chuyển">Đang vận chuyển</option>
-                        <option value="Đang giao hàng">Đã giao hàng</option>
-                        <option value="Đã hủy">Đã hủy</option>
-                    </select>
-                </div>
+        <div>
+            <div>
+                <Header />
             </div>
+            <div className={styles.orderlist__content}>
+                <div>
+                <Sidebar />
+                </div>
+                <div className={styles.orderlist}>
+                    <div className={styles.orderlist__header}>
+                        <div>
+                            <p className={styles.orderlist__header__text}>Hiển thị:</p>
+                        </div>
+                        <div>
+                            <select name="kind" className={styles.orderlist__header__select} onChange={onChangeKind}>
+                                <option value="Tất cả đơn hàng">Tất cả đơn hàng</option>
+                                <option value="Đang xử lý">Đang xử lý</option>
+                                <option value="Đã đóng gói">Đã đóng gói</option>
+                                <option value="Đang vận chuyển">Đang vận chuyển</option>
+                                <option value="Đã giao hàng">Đã giao hàng</option>
+                                <option value="Đã hủy">Đã hủy</option>
+                            </select>
+                        </div>
+                    </div>
 
-            <div className={styles.orderlist__header__content}>
-                {renderedOrders}
+                    <div className={styles.orderlist__header__content}>
+                        {renderedOrders}
+                    </div>
+                </div>   
             </div>
+            <div>
+                <Footer />
+            </div>        
         </div>
     )
 }
