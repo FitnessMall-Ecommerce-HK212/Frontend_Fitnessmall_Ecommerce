@@ -55,7 +55,7 @@
     display: flex;
     -webkit-box-align: center;
     align-items: center;
-    /* padding: 15px 0px 15px 10px; */
+    text-decoration: none;
     color: rgb(74, 74, 74);
     
 }
@@ -71,6 +71,7 @@
     flex-wrap: nowrap;
     -webkit-box-pack: justify;
     justify-content: space-between;
+    padding: 20px;
     background-color: rgb(255, 255, 255);
 }
 .info-title{
@@ -89,11 +90,11 @@
     flex-direction: row;
 }
 .styles_StyleAvatar{
-    background-color: rgb(240, 248, 255);
+    background-color: var(--surface);
     border-radius: 50%;
     width: 112px;
     height: 112px;
-    border: 4px solid rgb(194, 225, 255);
+    border: 4px solid var(--primary);
     position: relative;
     -webkit-box-pack: center;
     justify-content: center;
@@ -131,10 +132,11 @@
     flex-direction: column;
 }
 .form-control{
-    display: flex;
+
     -webkit-box-align: center;
     align-items: center;
     margin: 0px 0px 34px;
+    
 }
 .form-info .form-control{
     display: flex;

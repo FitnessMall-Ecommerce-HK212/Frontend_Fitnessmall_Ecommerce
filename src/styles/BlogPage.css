@@ -1,0 +1,73 @@
+.blogCardContainer {
+    background-color: var(--lightprimary);
+    border-radius: 0.5rem;
+    margin: 2rem 1rem;
+}
+
+.blogCardContainer img {
+    width: 100%;
+    padding: 0.5rem 1rem;
+}
+
+.blogCardContainer .blogTag {
+    text-transform: uppercase;
+    margin: 1rem 0 0 1rem;
+    font-weight: bold;
+}
+
+.blogCardContainer .blogTitle {
+    text-align: center;
+    color: var(--primary);
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.blogCardContainer .datePosted {
+    text-align: right;
+    font-weight: bold;
+    margin: 1rem 1rem 0 0;
+}
+
+.blogCardContainer .blogAuthor {
+    font-weight: bold;
+    text-transform: capitalize;
+    margin-bottom: 0;
+}
+
+.BlogPage {
+    display: flex;
+}
+
+.hotBlogCard {
+    padding: 1rem;
+}
+
+.hotBlogCard .card-body{
+    color: var(--primary)
+}
+
+.hotBlogCard .card-title {
+    text-transform: uppercase;
+}
+
+.hotBlogCard .card-body .card-text{
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.hotBlogCard:hover{
+    transform: scale(1.01);
+}
+
+.hotBlog, .relatedBlog {
+    background-color: var(--lightprimary);
+    margin: 2rem;
+    border-radius: 0.5rem;
+}
+
+.hotBlog .hotTitle, .relatedBlog .hotTitle {
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 1px solid black;
+    padding-top: 1rem;
+}
