@@ -12,7 +12,7 @@ import OrdersList from './features/orders/OrdersList';
 import BlogPage from './pages/BlogPage';
 import BlogDetailPage from './pages/BlogDetailPage';
 import SingleOrderPage from './features/orders/SingleOrderPage';
-
+import SingleShipmentPage from './features/shipment/SingleShipmentPage';
 // import PrivateRoute from './PrivateRoute';
 
 const App = () => {
@@ -32,6 +32,7 @@ const App = () => {
           <Route exact path="/cart" component={PurchasedItemsList} />
           <Route exact path="/history/order" component={OrdersList} />
           <Route exact path="/history/order/:orderId" component={SingleOrderPage} />
+          <Route exact path="/history/order/:orderId/:shipmentId" component={SingleShipmentPage} />
         </Switch>
       </BrowserRouter>
     </Provider>
