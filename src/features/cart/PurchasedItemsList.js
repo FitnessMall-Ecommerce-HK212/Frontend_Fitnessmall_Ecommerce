@@ -8,6 +8,7 @@ import { checkItem, removeItem } from './cartSlice'
 import NoItemInCart from './NoItemInCart'
 import Header from '../../components/Header/index'
 import Footer from '../../components/Footer/index'
+import { Link } from 'react-router-dom'
 
 export default function PurchasedItemsList() {
 
@@ -174,7 +175,9 @@ export default function PurchasedItemsList() {
                 </div>
               </div>
               <div className={styles.alldata__paymentinfo__buybutton}>
-                  <button type='button' className={styles.alldata__paymentinfo__buybutton__element}>Mua hàng</button>
+                  <Link to={`cart/confirm`} >
+                    <button type='button' className={styles.alldata__paymentinfo__buybutton__element}>Mua hàng</button>
+                  </Link>
               </div>
           </div>
         </div>

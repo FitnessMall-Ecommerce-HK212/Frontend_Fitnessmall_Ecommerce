@@ -201,3 +201,7 @@ p {
     text-decoration: none;
     color: var(--primary__thanh);
 }
+
+.orderlist__header__content__item__state__shipmentdetail {
+    text-decoration: none;
+} 

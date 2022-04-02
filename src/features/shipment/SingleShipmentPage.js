@@ -70,7 +70,7 @@ export default function SingleShipmentPage() {
                     </div>
                     <div className={styles.SingleShipmentPageContent__controller__content__stepsdone}>
                         <div className={styles.SingleShipmentPageContent__controller__content__stepsdone__items}>
-                            <div>
+                            <div  className={styles.SingleShipmentPageContent__controller__content__stepsdone__items__text}>
                                 <p>18/03 09:11</p>
                             </div>
                             <div>
@@ -82,7 +82,7 @@ export default function SingleShipmentPage() {
                             </div>
                         </div>
                         <div className={styles.SingleShipmentPageContent__controller__content__stepsdone__items}>
-                            <div>
+                            <div className={styles.SingleShipmentPageContent__controller__content__stepsdone__items__text}>
                                 <p>18/03 08:00</p>
                             </div>
                             <div>
@@ -90,11 +90,11 @@ export default function SingleShipmentPage() {
                             </div>
                             <div>
                                 <p>Kiện hàng sắp đến!</p>
-                                <p>Đơn vị vận chuyển sẽ giao hàng tới bạn trong khoảng 1 giờ tới. Hãy chú ý điện thoại giao hàng bạn nhé!</p>
+                                <p>Đơn vị vận chuyển sẽ giao hàng tới bạn trong khoảng 1 giờ tới.</p>
                             </div>
                         </div>
                         <div className={styles.SingleShipmentPageContent__controller__content__stepsdone__items}>
-                            <div>
+                            <div className={styles.SingleShipmentPageContent__controller__content__stepsdone__items__text}>
                                 <p>18/03 06:50</p>
                             </div>
                             <div>
@@ -106,7 +106,7 @@ export default function SingleShipmentPage() {
                             </div>
                         </div>
                         <div className={styles.SingleShipmentPageContent__controller__content__stepsdone__items}>
-                            <div>
+                            <div className={styles.SingleShipmentPageContent__controller__content__stepsdone__items__text}>
                                 <p>28/02 08:12</p>
                             </div>
                             <div>
@@ -118,7 +118,7 @@ export default function SingleShipmentPage() {
                             </div>
                         </div>
                         <div className={styles.SingleShipmentPageContent__controller__content__stepsdone__items}>
-                            <div>
+                            <div className={styles.SingleShipmentPageContent__controller__content__stepsdone__items__text}>
                                 <p>22/02 20:00</p>
                             </div>
                             <div>
@@ -130,7 +130,7 @@ export default function SingleShipmentPage() {
                             </div>
                         </div>
                         <div className={styles.SingleShipmentPageContent__controller__content__stepsdone__items}>
-                            <div>
+                            <div className={styles.SingleShipmentPageContent__controller__content__stepsdone__items__text}>
                                 <p>20/02 19:00</p>
                             </div>
                             <div>
@@ -138,7 +138,7 @@ export default function SingleShipmentPage() {
                             </div>
                             <div>
                                 <p>Hoàn tất đóng gói</p>
-                                <p>Kiện hàng của bạn đã hoàn tất đóng gói và sẵn sàng bàn giao cho đơn vị vận chuyển</p>
+                                <p>Kiện hàng của bạn đã hoàn tất đóng gói</p>
                             </div>
                         </div>
                     </div>
