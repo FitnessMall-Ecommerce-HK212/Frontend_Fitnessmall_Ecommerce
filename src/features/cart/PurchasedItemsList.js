@@ -9,6 +9,86 @@ import NoItemInCart from './NoItemInCart'
 import Header from '../../components/Header/index'
 import Footer from '../../components/Footer/index'
 import { Link } from 'react-router-dom'
+import DialogTitle from '@mui/material/DialogTitle';
+import Avatar from '@mui/material/Avatar';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import ListItemText from '@mui/material/ListItemText';
+import Dialog from '@mui/material/Dialog';
+import PersonIcon from '@mui/icons-material/Person';
+import AddIcon from '@mui/icons-material/Add';
+import { blue } from '@mui/material/colors';
+
+const a1 = <>
+<div className={styles.alldata__paymentinfo__diachi__namephone}>
+                        <p>Võ Hồng Phúc</p> 
+                        <p>|</p>
+                        <p>0123456789</p>
+                      </div>
+                      <div>
+                        <p>Ký túc xá khu A ĐHQG TP Hồ Chí Minh, Phường Linh Trung, Quận Thủ Đức - TP Thủ Đức, Hồ Chí Minh</p>
+                      </div>
+</>
+
+const a2 = 
+<>
+<div className={styles.alldata__paymentinfo__diachi__namephone}>
+                        <p>Võ Ngọc Quang</p> 
+                        <p>|</p>
+                        <p>0123999999</p>
+                      </div>
+                      <div>
+                        <p>10-12 Đinh Tiên Hoàng Quận 1 Thành phố Hồ Chí Minh</p>
+                      </div>
+</>
+const addresses = [a1, a2];
+
+export class SimpleDialogProps {
+  constructor(open, selectedValue, onClose) {
+    this.open = open;
+    this.selectedValue = selectedValue;
+    this.onClose = onClose;
+  }
+}
+
+function SimpleDialog(props) {
+  const { onClose, selectedValue, open } = props;
+
+  const handleClose = () => {
+    onClose(selectedValue);
+  };
+
+  const handleListItemClick = (value) => {
+    onClose(value);
+  };
+
+  return (
+    <Dialog onClose={handleClose} open={open}>
+      <DialogTitle>Set backup account</DialogTitle>
+      <List sx={{ pt: 0 }}>
+        {addresses.map((address, index) => (
+          <ListItem button onClick={() => handleListItemClick(address)} key={index}>
+            <ListItemAvatar>
+              <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
+                <PersonIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText primary={address} />
+          </ListItem>
+        ))}
+        <ListItem autoFocus button onClick={() => handleListItemClick('Địa chỉ được thêm')}>
+          <ListItemAvatar>
+            <Avatar>
+              <AddIcon />
+            </Avatar>
+          </ListItemAvatar>
+          <ListItemText primary="Thêm địa chỉ" />
+        </ListItem>
+      </List>
+    </Dialog>
+  );
+}
 
 export default function PurchasedItemsList() {
 
@@ -17,6 +97,17 @@ export default function PurchasedItemsList() {
   var sum = 0
   const dispatch = useDispatch()
 
+  const [openAddress, setOpenAddress] = React.useState(false);
+  const [selectedValue, setSelectedValue] = React.useState(addresses[0]);
+
+  const handleClickOpenAddress = () => {
+    setOpenAddress(true);
+  };
+
+  const handleCloseAddress = (value) => {
+    setOpenAddress(false);
+    setSelectedValue(value);
+  };
   function formatToCurrency(amount){
     amount = (amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&.');
     return amount.substring(0, amount.length-3); 
@@ -115,18 +206,19 @@ export default function PurchasedItemsList() {
 
           <div className={styles.alldata__paymentinfo}>
               <div className={styles.alldata__paymentinfo__diachi}>
-                <div className={styles.alldata__paymentinfo__diachi__header}>
-                  <h2>Giao tới</h2>
-                  <h3 className={styles.text_pink}>Thay đổi</h3>
-                </div>
-                <div className={styles.alldata__paymentinfo__diachi__namephone}>
-                  <p>Võ Hồng Phúc</p> 
-                  <p>|</p>
-                  <p>0123456789</p>
-                </div>
-                <div>
-                  <p>Ký túc xá khu A ĐHQG TP Hồ Chí Minh, Phường Linh Trung, Quận Thủ Đức - TP Thủ Đức, Hồ Chí Minh</p>
-                </div>
+                  <div className={styles.alldata__paymentinfo__diachi__header}>
+                    <h2>Giao tới</h2>
+                    <h3 className={styles.text_pink} onClick={handleClickOpenAddress}>Thay đổi</h3>
+                      {/* <Button variant="outlined" onClick={handleClickOpenAddress}>
+                        Open simple dialog
+                      </Button> */}
+                  </div>
+                  <SimpleDialog
+                        selectedValue={selectedValue}
+                        open={openAddress}
+                        onClose={handleCloseAddress}
+                      />
+                  {selectedValue}
               </div>
               <div className={styles.alldata__paymentinfo__voucher}>
                 <p>Khuyến mãi</p>
