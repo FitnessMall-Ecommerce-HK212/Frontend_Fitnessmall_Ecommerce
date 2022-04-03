@@ -70,3 +70,7 @@
     margin-left: 10px;
     margin-right: 10px;
 }
+
+.SingleShipmentPageContent__controller__content__stepsdone__items__text {
+    width: 200px;
+}

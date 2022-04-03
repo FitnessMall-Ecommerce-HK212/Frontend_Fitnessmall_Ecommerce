@@ -13,6 +13,7 @@ import BlogPage from './pages/BlogPage';
 import BlogDetailPage from './pages/BlogDetailPage';
 import SingleOrderPage from './features/orders/SingleOrderPage';
 import SingleShipmentPage from './features/shipment/SingleShipmentPage';
+import Confirm from './features/cart/Confirm';
 // import PrivateRoute from './PrivateRoute';
 
 const App = () => {
@@ -30,6 +31,7 @@ const App = () => {
           <Route path="/blog/detail/1" component={BlogDetailPage} />
           {/* <PrivateRoute path="/..." component={...} /> */}
           <Route exact path="/cart" component={PurchasedItemsList} />
+          <Route exact path="/cart/confirm" component={Confirm} />
           <Route exact path="/history/order" component={OrdersList} />
           <Route exact path="/history/order/:orderId" component={SingleOrderPage} />
           <Route exact path="/history/order/:orderId/:shipmentId" component={SingleShipmentPage} />
