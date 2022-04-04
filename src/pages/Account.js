@@ -16,24 +16,25 @@ export default function Account(){
             <div class="styles_StyledAccountInfo">
              <form>
              <div class="form-info">
-               <div class="form-avatar" style={{marginRight:"16px"}}>
+               <div class="form-avatar" style={{marginRight:"50px",marginLeft:"20px"}}>
                  <div class="styles_StyleAvatar">
                  <div>
                  <div class="avatar-view">
-                 <img src="https://frontend.tikicdn.com/_desktop-next/static/img/account/avatar.png" alt="avatar" class="default" style={{width: "50px",height: "50px"}}/>
-                 <div class="edit"><img src="https://frontend.tikicdn.com/_desktop-next/static/img/account/edit.png" class="edit_img" alt="" style={{width: "10px",height: "10px"}}/>
+                 <img src="https://frontend.tikicdn.com/_desktop-next/static/img/account/avatar.png" alt="avatar" class="default" style={{width: "60px",height: "60px"}}/>
+                 <div class="edit"><img src="https://frontend.tikicdn.com/_desktop-next/static/img/account/edit.png" class="edit_img" alt="" style={{width: "16px",height: "16px"}}/>
                  </div></div></div></div>
                </div>
                <div class="form-name" >
                  <div class="form-control" style={{display:"flex",border:"none"}}>
                    <label class="input-label">Họ &amp; Tên</label>
                    <div>
-                   <div class="hisWEc"><input class="input " type="search" name="fullName" maxlength="128" placeholder="Thêm họ tên" value="Nguyễn Huỳnh Tiến"/>
+                   <div class="hisWEc" >
+                     <input class="input " type="search" name="fullName" maxlength="100" placeholder="Thêm họ tên"/>
                  </div></div></div>
                 <div class="form-control" style={{display:"flex",border:"none"}}>
-                  <label class="input-label">Nickname</label>
+                  <label class="input-label">Mật khẩu</label>
                   <div>
-                  <div class="hisWEc"><input class="input " name="userName" maxlength="128" placeholder="Thêm nickname" type="search" value=""/>
+                  <div class="hisWEc"><input class="input " name="userName" maxlength="128" placeholder="Đặt mật khẩu" type="text"/>
                   </div></div></div></div></div>
                 <div class="form-control" style={{display:"flex",border:"none"}}>
                   <label class="input-label">Ngày sinh</label>
@@ -59,7 +60,20 @@ export default function Account(){
                     <div><div class="hisWEc">
                         <input style={{paddingRight: "35px"}} class="input with-icon-right" name="nationality" maxlength="128" placeholder="Chọn quốc tịch" readonly="" value=""/>
                         {/* <svg class="icon-right" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.30806 6.43306C3.55214 6.18898 3.94786 6.18898 4.19194 6.43306L10 12.2411L15.8081 6.43306C16.0521 6.18898 16.4479 6.18898 16.6919 6.43306C16.936 6.67714 16.936 7.07286 16.6919 7.31694L10.4419 13.5669C10.1979 13.811 9.80214 13.811 9.55806 13.5669L3.30806 7.31694C3.06398 7.07286 3.06398 6.67714 3.30806 6.43306Z" fill="#808089"></path></svg> */}
-                        </div></div></div>
+                        </div></div>
+                </div>
+                <div class="form-control" style={{display:"flex",border:"none"}}>
+                    <label class="input-label">Số điện thoại</label>
+                    <div><div class="hisWEc">
+                        <input style={{paddingRight: "35px"}} class="input with-icon-right" name="nationality" maxlength="128" placeholder="Nhập sđt" type="text" />
+                        </div></div>
+                </div>
+                <div class="form-control" style={{display:"flex",border:"none"}}>
+                    <label class="input-label">Email</label>
+                    <div><div class="hisWEc">
+                        <input style={{paddingRight: "35px"}} class="input with-icon-right" name="nationality" maxlength="128" placeholder="Nhập email" type="text" />
+                        </div></div>
+                </div>
                     <div class="form-control" style={{display:"flex",border:"none"}}>
                         <label class="input-label">&nbsp;</label>
                         <CTAButton value="Lưu thay đổi"/>

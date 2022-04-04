@@ -71,11 +71,11 @@
     flex-wrap: nowrap;
     -webkit-box-pack: justify;
     justify-content: space-between;
-    padding: 20px;
+    padding: 20px 40px 20px 40px;
     background-color: rgb(255, 255, 255);
 }
 .info-title{
-    font-size: 16px;
+    font-size: 18px;
     line-height: 24px;
     font-weight: 400;
     color: rgb(100, 100, 109);
@@ -83,7 +83,7 @@
 .styles_StyledAccountInfo{
     background-color: rgb(255, 255, 255);
     border-radius: 4px;
-    margin-top: 16px;
+    margin-top: 22px;
 }
 .form-info{
     display: flex;
@@ -92,8 +92,8 @@
 .styles_StyleAvatar{
     background-color: var(--surface);
     border-radius: 50%;
-    width: 112px;
-    height: 112px;
+    width: 150px;
+    height: 150px;
     border: 4px solid var(--primary);
     position: relative;
     -webkit-box-pack: center;
@@ -112,8 +112,8 @@
 }
 .avatar-view .edit{
     position: absolute;
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
     background-color: rgb(100, 100, 109);
     border-radius: 12px;
     right: 3px;
@@ -135,7 +135,7 @@
 
     -webkit-box-align: center;
     align-items: center;
-    margin: 0px 0px 34px;
+    margin: 0px 0px 25px;
     
 }
 .form-info .form-control{
@@ -147,20 +147,22 @@
 .form-control .input-label{
     width: 110px;
     min-width: 110px;
-    font-size: 14px;
+    font-size: 16px;
     color: rgb(51, 51, 51);
     margin-right: 16px;
 }
 .hisWEc input{
     transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s, -webkit-box-shadow 0.15s ease-in-out 0s;
-    height: 36px;
-    width: 100%;
-    border-radius: 4px;
+    height: 40px;
+    width: 150%;
+    border-radius: 12px;
     padding: 10px 12px;
     line-height: 20px;
     outline: none;
     flex: 1 1 0%;
-    border: 1px solid rgb(196, 196, 207);
+    color:var(--lightprimary);
+    background-color: var(--surface);
+    border: 1px solid var(--lightprimary);
 }
 .style_StyledBirthdayPicker{
     display: flex;
@@ -170,19 +172,21 @@
 }
 .style_StyledBirthdayPicker select{
     width: 100px;
-    border: 1px solid rgb(204, 204, 204);
+    color:var(--lightprimary);
+    border: 1px solid var(--lightprimary);
     height: 34px;
     padding: 6px 12px;
     line-height: 34px;
     outline: none;
-    border-radius: 4px;
-    margin: 0px 12px 0px 0px;
-    background: 0px center;
+    border-radius: 12px;
+    margin: 0px 60px 0px 0px;
+    background-color: var(--surface);
+    /* background: 0px center; */
     box-shadow: none;
 }
 .Radio_StyledRadio{
     display: flex;
-    margin-right: 15px;
+    margin-right: 50px;
     cursor: pointer;
 }
 .Radio_StyledRadio .label{
@@ -191,6 +195,7 @@
     display: flex;
     -webkit-box-align: center;
     align-items: center;
+    color: var(--lightprimary)
 }
 .Radio_StyledRadio .radio-fake{
     width: 18px;
@@ -219,4 +224,7 @@
     top: 75%;
     transform: translateY(-50%);
     width: 24px;
+}
+.hisWEc ::placeholder{
+    color:var(--lightprimary)
 }
