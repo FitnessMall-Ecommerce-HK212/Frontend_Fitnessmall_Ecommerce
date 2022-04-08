@@ -294,3 +294,48 @@ input::-webkit-inner-spin-button {
 .noitem__text__alert {
     font-size: larger;
 }
+
+.alldata__itemslist__shipinfo {
+    display: flex;
+    justify-content: space-between;
+}
+
+.alldata__itemslist__shipinfo__text {
+    color: var(--gray__thanh);
+}
+
+.alldata__itemslist__paymentmethod {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #ffecf4;
+    border-radius: 12px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.alldata__itemslist__paymentmethod__options {
+    display: flex;
+    align-items: center;
+    width: 400px;
+    padding-left: 25px;
+}
+
+.alldata__itemslist__paymentmethod__options__pic {
+    margin: 20px;
+}
+
+.alldata__itemslist__text {
+    margin-top: 20px;
+}
+
+.alldata__itemslist__note {
+    color: var(--primary__thanh);
+}
+
+.alldata__itemslist__note:hover {
+    cursor: pointer;
+}

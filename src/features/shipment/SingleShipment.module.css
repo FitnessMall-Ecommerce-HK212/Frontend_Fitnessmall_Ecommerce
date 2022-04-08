@@ -1,0 +1,76 @@
+.SingleShipmentPageContent {
+    display: flex;
+}
+
+.SingleShipmentPageContent__controller {
+    flex: 1;
+}
+
+.SingleShipmentPageContent__controller__text {
+    color: var(--primary__thanh);
+    font-size: x-large;
+    font-weight: 700;
+    margin: 15px
+}
+
+.SingleShipmentPageContent__controller__content {
+    /* make box */
+    padding: 10px;
+    border-radius: 10px;
+    margin: 20px;
+    border: 1px solid var(--primary__thanh);
+    background-color: var(--lightprimary__thanh);
+    /* make box */
+    flex: 1;
+}
+
+.SingleShipmentPageContent__controller__contentaf {
+    display: flex;
+}
+
+.SingleShipmentPageContent__controller__contentaf__middle {
+    margin-left: 50px;
+    margin-right: 100px;
+}
+
+.SingleShipmentPageContent__controller__contentaf__middle__name {
+    color: var(--primary__thanh);
+    font-size: large;
+}
+
+.SingleShipmentPageContent__controller__content__icons {
+    display: flex;
+    justify-content: center;
+}
+
+.SingleShipmentPageContent__controller__content__icons__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.SingleShipmentPageContent__controller__content__icons__item__dot {
+    color: var(--gray__thanh);
+    padding-bottom: 30px;
+}
+
+.SingleShipmentPageContent__controller__content__stepsdone {
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+}
+
+.SingleShipmentPageContent__controller__content__stepsdone__items {
+    display: flex;
+    margin: 20px;
+}
+
+.SingleShipmentPageContent__controller__content__stepsdone__items img {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.SingleShipmentPageContent__controller__content__stepsdone__items__text {
+    width: 200px;
+}

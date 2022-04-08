@@ -33,6 +33,7 @@ const initialState = [
         phivanchuyen: 20000,
         khuyenmai: 10000,
         tongcong: 470000,
+        shipmentId: 1,
     },
 
     { 
@@ -59,6 +60,7 @@ const initialState = [
         phivanchuyen: 20000,
         khuyenmai: 10000,
         tongcong: 470000,
+        shipmentId: 2,
 
     },
 ]
