@@ -188,7 +188,7 @@ export default function Login() {
           alignItems: "center",
         }}
       >
-        <Card style={{ padding: "35px 29px", height: "460px", width: "472px" }}>
+        <Card style={{ padding: "35px 29px", height: "480px", width: "472px" }}>
           <Typography className={classes.text20}>Login</Typography>
 
           <form>
@@ -231,9 +231,10 @@ type={values.showPassword ? "text" : "password"} onChange={handlePasswordChange(
             <div className={classes.icon}><div className={classes.icon_Facebook}></div></div>
             <div>Facebook</div>
           </button>        
-          </div> <br></br>
+          </div> 
+          <br></br>
           <div>
-            <p style={{textAlign:"center",fontSize:"13px",fontWeight:600}}>New to fitnessmall?  <Link to="/register"><span style={{color:"#FF2C86",cursor: "pointer"}}>Sign up</span></Link></p>
+            <p style={{textAlign:"center",fontSize:"13px",fontWeight:600}}>New to fitnessmall?  <Link to="/register" style={{textDecoration:"None"}}><span style={{color:"#FF2C86",cursor: "pointer"}}>Sign up</span></Link></p>
           </div>
         </Card>
       </Grid>
