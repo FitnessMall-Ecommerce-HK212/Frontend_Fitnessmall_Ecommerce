@@ -29,8 +29,16 @@
     width: 250px;
 }
 
+.productcard .card {
+    width: 250px;
+}
+.productcard .card img{
+    height: 175px;
+}
+
 .productcard .card-body{
     padding: 0 10px 10px 5px;
+    background-color: var(--surface);
 }
 
 .productcard .card-title{
@@ -50,4 +58,9 @@
     color: var(--primary);
     border-radius: 10px;
     font-size: 14px;
+}
+
+.productcard .price {
+    color: var(--lightprimary);
+    font-size: 25px;
 }
