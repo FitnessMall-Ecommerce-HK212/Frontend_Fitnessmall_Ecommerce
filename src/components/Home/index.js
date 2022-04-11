@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import '../../styles/HomePage.css'
 import banner_homepage from '../../assets/banner/homepage.png'
 import IntroCard from './introcard';
-import HotdealCard from './hotdealcard';
+import ProductCard from '../All_Products/productcard';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import HotBlogCard from './hotblogcard';
@@ -108,7 +108,13 @@ function Home(props) {
                     {list.map((i) => {
                         return (
                             <div className="pt-3 pb-3 d-flex justify-content-center">
-                                <HotdealCard img='https://sc04.alicdn.com/kf/U197d056a90a34c05bd9e4f15240cb91bu.jpg' price='300.000'/>
+                                {/* <HotdealCard img='https://sc04.alicdn.com/kf/U197d056a90a34c05bd9e4f15240cb91bu.jpg' price='300.000'/> */}
+                                <ProductCard 
+                                        img='https://static.onecms.io/wp-content/uploads/sites/35/2020/03/24/workout-dice-bells-tout1244x1244.jpg'
+                                        name='Tạ tay'
+                                        description='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+                                        price='$299.99'
+                                    />
                             </div>
                         );
                     })}

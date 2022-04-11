@@ -14,6 +14,7 @@ import BlogDetailPage from './pages/BlogDetailPage';
 import SingleOrderPage from './features/orders/SingleOrderPage';
 import SingleShipmentPage from './features/shipment/SingleShipmentPage';
 import Confirm from './features/cart/Confirm';
+import ProductDetailPage from './pages/ProductDetailPage';
 import PaymentDonePage from './pages/PaymentDonePage';
 
 // import PrivateRoute from './PrivateRoute';
@@ -26,6 +27,13 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/account" component={Account} />
+          <Route exact path="/products" component={AllProducts} />
+          <Route exact path="/products/food" component={AllProducts} />
+          <Route exact path="/products/food/1" component={ProductDetailPage} />
+          <Route exact path="/blog" component={BlogPage} />
+          <Route exact path="/blog/detail/1" component={BlogDetailPage} />
           <Route path="/login" component={Login} />
           <Route path="/account" component={Account} />
           <Route path="/healthinfo" component={HealthInfo} />
