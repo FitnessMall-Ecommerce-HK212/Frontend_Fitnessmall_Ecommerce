@@ -211,7 +211,7 @@ export default function Register() {
           </div> 
           <br></br>
           <div>
-            <p style={{textAlign:"center",fontSize:"13px",fontWeight:600}}>Already have an account?  <Link to="/login"><span style={{color:"#FF2C86",cursor: "pointer"}}> Login now</span></Link></p>
+            <p style={{textAlign:"center",fontSize:"13px",fontWeight:600}}>Already have an account?  <Link to="/login" style={{textDecoration:"None"}}><span style={{color:"#FF2C86",cursor: "pointer"}}> Login now</span></Link></p>
           </div>
         </Card>
       </Grid>

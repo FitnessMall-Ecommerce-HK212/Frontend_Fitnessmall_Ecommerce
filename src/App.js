@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import store from './redux/store';
 
-import  {Login,Register,HomePage,Account} from './pages';
+import  {Login,Register,HomePage,Account,HealthInfo,Address} from './pages';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AllProducts from './pages/AllProducts';
 import PurchasedItemsList from './features/cart/PurchasedItemsList';
@@ -28,6 +28,8 @@ const App = () => {
           <Route exact path="/register" component={Register} />
           <Route path="/login" component={Login} />
           <Route path="/account" component={Account} />
+          <Route path="/healthinfo" component={HealthInfo} />
+          <Route path="/address" component={Address} />
           <Route path="/products" component={AllProducts} />
           <Route exact path="/blog" component={BlogPage} />
           <Route path="/blog/detail/:blogId" component={BlogDetailPage} />
@@ -38,6 +40,7 @@ const App = () => {
           <Route exact path="/history/order" component={OrdersList} />
           <Route exact path="/history/order/:orderId" component={SingleOrderPage} />
           <Route exact path="/history/order/:orderId/:shipmentId" component={SingleShipmentPage} />
+          
         </Switch>
       </BrowserRouter>
     </Provider>

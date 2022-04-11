@@ -1,4 +1,4 @@
-.Container{
+.Container {
     /* width: 1270px; */
     padding-left: 50px;
     padding-right: 15px;
@@ -6,7 +6,8 @@
     margin-left: auto;
     background-color: var(--secondary);
 }
-.Middle_Wrap{
+
+.Middle_Wrap {
     display: flex;
     padding: 10px 0px 10px;
     height: auto;
@@ -15,26 +16,30 @@
     -webkit-box-align: center;
     align-items: center;
 }
-.LeftContainer{
+
+.LeftContainer {
     display: flex;
     flex: 1 1 0%;
     -webkit-box-align: center;
     align-items: center;
 }
-.logo-menu{
+
+.logo-menu {
     display: flex;
     align-items: flex-start;
     flex-basis: 350px;
     flex-shrink: 0;
     margin-right: 16px;
 }
-.style_Logo{
+
+.style_Logo {
     display: flex;
     -webkit-box-pack: justify;
     justify-content: space-between;
     flex: 1 1 0%;
 }
-.logo{
+
+.logo {
     width: 300px;
     height: 57px;
     display: block;
@@ -42,31 +47,35 @@
     text-decoration: none;
     background-color: transparent;
 }
-.FormSearch_Form{
+
+.FormSearch_Form {
     width: 90%;
     display: flex;
     position: relative;
     box-shadow: rgb(98 98 98 / 50%) 0px 1px 2px 0px;
     padding-right: 0px;
 }
-.FormSearch_Input{
+
+.FormSearch_Input {
     padding: 0px 12px;
     font-size: 13px;
     border-radius: 10px 0px 0px 10px;
-    border:1px solid var(--background);
+    border: 1px solid var(--background);
     border-right: 0px;
     flex: 1 1 0%;
     /* outline: none; */
     background: none;
-    height:48px;
+    height: 48px;
     width: 100px;
-    color:var(--lightprimary);
+    color: var(--lightprimary);
 }
+
 .FormSearch_Input::placeholder {
     color: var(--lightprimary);
     opacity: 1;
 }
-.FormSearch_Button{
+
+.FormSearch_Button {
     cursor: pointer;
     border: 0px;
     width: 100px;
@@ -85,7 +94,8 @@
     text-transform: none;
     overflow: visible;
 }
-.Ghost_Button{
+
+.Ghost_Button {
     cursor: pointer;
     border: 0px;
     width: 100px;
@@ -105,15 +115,17 @@
     text-transform: none;
     overflow: visible;
 }
-.RightContainer{
+
+.RightContainer {
     display: flex;
     -webkit-box-align: center;
     align-items: center;
     -webkit-box-pack: end;
     justify-content: flex-end;
-    
+
 }
-.Userstyle_Item{
+
+.Userstyle_Item {
     cursor: pointer;
     margin: 0px 0px 0px 16px;
     -webkit-box-align: center;
@@ -125,20 +137,23 @@
     letter-spacing: 0.7px;
     width: 162px;
 }
-.profile-icon{
+
+.profile-icon {
     width: 32px;
     height: 32px;
     margin-right: 8px;
     border-radius: 2px;
 }
-.Userstyle_ItemText{
+
+.Userstyle_ItemText {
     color: var(--background);
     font-weight: 400;
     white-space: nowrap;
     display: flex;
     flex-direction: column;
 }
-.Userstyle_NoWrap{
+
+.Userstyle_NoWrap {
     white-space: nowrap;
     text-overflow: ellipsis;
     display: inline-block;
@@ -147,7 +162,8 @@
     font-size: 11px;
     line-height: 16px;
 }
-.account-label{
+
+.account-label {
     display: flex;
     -webkit-box-align: center;
     align-items: center;
@@ -155,17 +171,20 @@
     line-height: 20px;
     min-width: 120px;
 }
-.account-label > span{
+
+.account-label>span {
     max-width: 104px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
 }
-.Userstyle_CartItem{
+
+.Userstyle_CartItem {
     position: relative;
     display: block;
 }
-.Userstyle_CartItem{
+
+.Userstyle_CartItem {
     align-items: flex-end;
     width: 94px;
     cursor: pointer;
@@ -177,8 +196,25 @@
     position: relative;
     letter-spacing: 0.7px;
 }
-.cart-wrapper{
+
+.cart-wrapper {
     position: relative;
     margin-right: 8px;
     display: flex;
+}
+
+.dropdown-button {
+    flex: 1;
+    display: flex;
+    height: 92px;
+    background-color: var(--lightprimary__thanh);
+    border-radius: 10px;
+    border: 1px solid var(--primary__thanh);
+    margin: 20px;
+    align-items: center;
+    justify-content: flex-start;
+    color: var(--primary__thanh);
+    padding: 10px;
+    /* width: 200px; */
+    font-size: larger;
 }
