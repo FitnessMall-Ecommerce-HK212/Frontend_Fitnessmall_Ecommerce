@@ -1,40 +1,92 @@
-// import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { AccountBalance } from "@material-ui/icons";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { Link,Redirect} from 'react-router-dom';
 import {Footer, Header,Sidebar,CTAButton} from '../components';
+import IconButton from "@material-ui/core/IconButton";
+import Visibility from "@material-ui/icons/Visibility";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 export default function Account(){
+  // For Radio button
+  const [checked,setCheck]=useState(false)
+  function handleChecked(e){
+    if (!checked){
+      e.currentTarget.style="background-color: var(--primary);transition: transform 0.3s ease 0s";
+      setCheck(true)
+    }
+    else {
+      e.currentTarget.style="background-color: white;transition: transform 0.3s ease 0s"
+      setCheck(false)
+  }
+  }
+  //For password eye
+  const [values, setValues] = useState({
+    password: "",
+    showPassword: false,
+  });
+  
+  const handleClickShowPassword = () => {
+    setValues({ ...values, showPassword: !values.showPassword });
+  };
+  
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+  
+  const handlePasswordChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
+  //For select
+  const [country, setCountry] = useState('');
+
+  const handleSelect = (event) => {
+    setCountry(event.target.value);
+  };
    return (
        <>
         <Header/>
         <div class="Container_acc" style={{backgroundColor:"white"}}>
           <div class="Account_Style">
-          <Sidebar/>
+          <Sidebar nameActive="1" />
           <div class="Infor_Style">
           <span class="info-title">Thông tin cá nhân</span>
             <div class="styles_StyledAccountInfo">
              <form>
              <div class="form-info">
-               <div class="form-avatar" style={{marginRight:"16px"}}>
+               <div class="form-avatar" style={{marginRight:"50px",marginLeft:"20px"}}>
                  <div class="styles_StyleAvatar">
                  <div>
                  <div class="avatar-view">
-                 <img src="https://frontend.tikicdn.com/_desktop-next/static/img/account/avatar.png" alt="avatar" class="default" style={{width: "50px",height: "50px"}}/>
-                 <div class="edit"><img src="https://frontend.tikicdn.com/_desktop-next/static/img/account/edit.png" class="edit_img" alt="" style={{width: "10px",height: "10px"}}/>
+                 <img src="https://frontend.tikicdn.com/_desktop-next/static/img/account/avatar.png" alt="avatar" class="default" style={{width: "60px",height: "60px"}}/>
+                 <div class="edit"><img src="https://frontend.tikicdn.com/_desktop-next/static/img/account/edit.png" class="edit_img" alt="" style={{width: "16px",height: "16px"}}/>
                  </div></div></div></div>
                </div>
                <div class="form-name" >
-                 <div class="form-control" style={{display:"flex",border:"none"}}>
-                   <label class="input-label">Họ &amp; Tên</label>
-                   <div>
-                   <div class="hisWEc"><input class="input " type="search" name="fullName" maxlength="128" placeholder="Thêm họ tên" value="Nguyễn Huỳnh Tiến"/>
-                 </div></div></div>
-                <div class="form-control" style={{display:"flex",border:"none"}}>
-                  <label class="input-label">Nickname</label>
-                  <div>
-                  <div class="hisWEc"><input class="input " name="userName" maxlength="128" placeholder="Thêm nickname" type="search" value=""/>
-                  </div></div></div></div></div>
+                  <div class="form-control" style={{display:"flex",border:"none"}}>
+                    <label class="input-label">Họ &amp; Tên</label>
+                    <div>
+                    <div class="hisWEc" >
+                      <input class="input " type="search" name="fullName" maxlength="100" placeholder="Thêm họ tên"/>
+                  </div></div></div>
+                  <div class="form-control" style={{display:"flex",border:"none"}}>
+                    <label class="input-label">Mật khẩu</label>
+                    <div>
+                    <div class="hisWEc" style={{position:"relative"}}>
+                    <InputAdornment position="end" style={{zIndex: 1,position:"absolute",left: "15.3rem",top:"21px"}}>
+                    <IconButton
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                    >
+                      {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                      <input class="input " name="userName" maxlength="128" placeholder="Đặt mật khẩu" type={values.showPassword ? "text" : "password"} onChange={handlePasswordChange("password")} value={values.password}/>
+                    </div></div></div>
+               </div>
+              </div>
                 <div class="form-control" style={{display:"flex",border:"none"}}>
                   <label class="input-label">Ngày sinh</label>
                   <div class="style_StyledBirthdayPicker">
@@ -48,23 +100,56 @@ export default function Account(){
                 <div class="form-control" style={{display:"flex",border:"none"}}>
                     <label class="input-label">Giới tính</label>
                     <label class="Radio_StyledRadio">
-                        <input type="radio" name="gender" value="male"/><span class="radio-fake"></span><span class="label">Nam</span></label>
+                        <input type="radio" name="gender" value="male"/><span class="radio-fake" onClick={(e)=>handleChecked(e)}></span><span class="label">Nam</span></label>
                     <label class="Radio_StyledRadio">
-                        <input type="radio" name="gender" value="male"/><span class="radio-fake"></span><span class="label">Nữ</span></label>
+                        <input type="radio" name="gender" value="male"/><span class="radio-fake" onClick={(e)=>handleChecked(e)}></span><span class="label">Nữ</span></label>
                     <label class="Radio_StyledRadio">
-                        <input type="radio" name="gender" value="male"/><span class="radio-fake"></span><span class="label">Khác</span></label>
+                        <input type="radio" name="gender" value="male"/><span class="radio-fake" onClick={(e)=>handleChecked(e)}></span><span class="label">Khác</span></label>
                     </div>
                 <div class="form-control" style={{display:"flex",border:"none"}}>
                     <label class="input-label">Quốc tịch</label>
+                    <div class="hisWEc">
+                        {/* <input style={{paddingRight: "35px"}} class="input with-icon-right" name="nationality" maxlength="128" placeholder="Chọn quốc tịch" readonly="" value=""/>
+                        <img height="20px" width="20px" style={{cursor: "pointer",zIndex: 1,position:"relative",left:"21rem",top:"-30px"}} src="https://cdn-icons.flaticon.com/png/512/2985/premium/2985150.png?token=exp=1649435816~hmac=08d69e0c4379f5afe8a7cf69ecd91570"/> */}
+                        <FormControl sx={{ m: 1, minWidth: 250 }} >
+                          <Select
+                            value={country}
+                            onChange={handleSelect}
+                            className="Selected"
+                            displayEmpty
+                            inputProps={{ 'aria-label': 'Without label' }}
+                            style={{color:"var(--lightprimary)",borderRadius: "12px"}}
+                          >
+                            <MenuItem value="" style={{padding:"None"}}>
+                              Chọn quốc tịch
+                            </MenuItem>
+                            <MenuItem value={"VietNam"}>VietNam</MenuItem>
+                            <MenuItem value={"France"}>France</MenuItem>
+                            <MenuItem value={"Endland"}>England</MenuItem>
+                            <MenuItem value={"Senegal"}>Senegal</MenuItem>
+                            <MenuItem value={"Italy"}>Italy</MenuItem>
+                          </Select>
+                        </FormControl>
+                        </div>
+                </div>
+                <div class="form-control" style={{display:"flex",border:"none"}}>
+                    <label class="input-label">Số điện thoại</label>
                     <div><div class="hisWEc">
-                        <input style={{paddingRight: "35px"}} class="input with-icon-right" name="nationality" maxlength="128" placeholder="Chọn quốc tịch" readonly="" value=""/>
-                        {/* <svg class="icon-right" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.30806 6.43306C3.55214 6.18898 3.94786 6.18898 4.19194 6.43306L10 12.2411L15.8081 6.43306C16.0521 6.18898 16.4479 6.18898 16.6919 6.43306C16.936 6.67714 16.936 7.07286 16.6919 7.31694L10.4419 13.5669C10.1979 13.811 9.80214 13.811 9.55806 13.5669L3.30806 7.31694C3.06398 7.07286 3.06398 6.67714 3.30806 6.43306Z" fill="#808089"></path></svg> */}
-                        </div></div></div>
+                        <input style={{paddingRight: "35px"}} class="input with-icon-right" name="nationality" maxlength="128" placeholder="Nhập sđt" type="text" />
+                        </div></div>
+                </div>
+                <div class="form-control" style={{display:"flex",border:"none"}}>
+                    <label class="input-label">Email</label>
+                    <div><div class="hisWEc">
+                        <input style={{paddingRight: "35px"}} class="input with-icon-right" name="nationality" maxlength="128" placeholder="Nhập email" type="text" />
+                        </div></div>
+                </div>
                     <div class="form-control" style={{display:"flex",border:"none"}}>
                         <label class="input-label">&nbsp;</label>
                         <CTAButton value="Lưu thay đổi"/>
                         </div>
-            </form></div>
+            </form>
+            </div>
           </div>
           </div>
         </div>

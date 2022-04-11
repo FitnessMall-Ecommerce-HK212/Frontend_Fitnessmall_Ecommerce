@@ -30,6 +30,9 @@
 .block{
     width: 226px;
 }
+.block a{
+    text-decoration: none;
+}
 .icon{
     display: inline-block;
     margin-right: 8px;

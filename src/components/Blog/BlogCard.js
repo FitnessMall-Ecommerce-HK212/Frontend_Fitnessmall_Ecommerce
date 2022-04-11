@@ -1,6 +1,7 @@
 import React from 'react'
 import '../../styles/BlogPage.css'
 import { CTAButton } from '../Buttons'
+import { Link } from 'react-router-dom'
 
 const BlogCard = (props) => {
   return (
@@ -17,7 +18,9 @@ const BlogCard = (props) => {
                     <p className='datePosted'>{props.date}</p>
                     <p className='blogAuthor'>{props.author}</p>
                     <p className='blogShortContent'>{props.content}</p>
-                    <CTAButton value="Read More" />
+                    <Link to={`/blog/detail/${props.id}`} style={{textDecoration: "none"}}>
+                        <CTAButton value="Read More" onClick={() => {}}/>
+                    </Link>
                 </div>
             </div>
         </div>

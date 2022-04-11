@@ -195,7 +195,7 @@ input::-webkit-inner-spin-button {
 
 .alldata__paymentinfo__buybutton {
     margin-top: 20px;
-
+    margin-bottom: 20px;
 }
 
 .alldata__paymentinfo__buybutton__element {

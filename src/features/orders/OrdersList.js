@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import styles from './OrdersList.module.css'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -13,13 +13,13 @@ import { Footer, Header, Sidebar, GhostButton } from '../../components'
 
 export default function OrdersList() {
 
-    function formatToCurrency(amount){
+    function formatToCurrency(amount) {
         amount = (amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&.');
-        return amount.substring(0, amount.length-3); 
+        return amount.substring(0, amount.length - 3);
     }
-    
+
     const orders = useSelector(selectOrder)
-    const[kind, setKind] = useState("Tất cả đơn hàng")
+    const [kind, setKind] = useState("Tất cả đơn hàng")
 
     const onChangeKind = (e) => {
         setKind(e.target.value)
@@ -30,7 +30,7 @@ export default function OrdersList() {
             return (
                 <div className={styles.orderlist__header__content__item__state}>
                     <div>
-                        <img src={Close} alt='cancel'/>
+                        <img src={Close} alt='cancel' />
                     </div>
                     <div className={styles.orderlist__header__content__item__state__text}>
                         <p className={styles.orderlist__header__content__item__state__text}>Đã hủy</p>
@@ -41,7 +41,7 @@ export default function OrdersList() {
             return (
                 <div className={styles.orderlist__header__content__item__state}>
                     <div>
-                        <img src={success} alt='...'/>
+                        <img src={success} alt='...' />
                     </div>
                     <div className={styles.orderlist__header__content__item__state__text}>
                         <p className={styles.orderlist__header__content__item__state__text}>Đã giao ngày {order.ngaygiao}</p>
@@ -52,7 +52,7 @@ export default function OrdersList() {
             return (
                 <div className={styles.orderlist__header__content__item__state}>
                     <div>
-                        <img src={Package} alt='...'/>
+                        <img src={Package} alt='...' />
                     </div>
                     <div className={styles.orderlist__header__content__item__state__text}>
                         <p className={styles.orderlist__header__content__item__state__text}>Đã đóng gói ngày {order.ngaygiao}</p>
@@ -63,7 +63,7 @@ export default function OrdersList() {
             return (
                 <div className={styles.orderlist__header__content__item__state}>
                     <div>
-                        <img src={DeliveryTruck} alt='...'/>
+                        <img src={DeliveryTruck} alt='...' />
                     </div>
                     <div className={styles.orderlist__header__content__item__state__text}>
                         <p className={styles.orderlist__header__content__item__state__text}>Đang vận chuyển</p>
@@ -74,7 +74,7 @@ export default function OrdersList() {
             return (
                 <div className={styles.orderlist__header__content__item__state}>
                     <div>
-                        <img src={Tasklist} alt='...'/>
+                        <img src={Tasklist} alt='...' />
                     </div>
                     <div className={styles.orderlist__header__content__item__state__text}>
                         <p className={styles.orderlist__header__content__item__state__text}>Đang xử lý</p>
@@ -90,7 +90,7 @@ export default function OrdersList() {
                 <div className={styles.orderlist__header__content__item__info}>
                     <div className={styles.orderlist__header__content__item__info__thumbquantity}>
                         <div>
-                            <img src={product.image} alt='...'  className={styles.orderlist__header__content__item__info__thumb}/>
+                            <img src={product.image} alt='...' className={styles.orderlist__header__content__item__info__thumb} />
                         </div>
                         <div className={styles.orderlist__header__content__item__info__text}>
                             <p>{product.name}</p>
@@ -99,7 +99,7 @@ export default function OrdersList() {
                     </div>
 
                     <div>
-                        <p>{formatToCurrency(product.price*product.quantity)}đ</p>
+                        <p>{formatToCurrency(product.price * product.quantity)}đ</p>
                     </div>
                 </div>
             )
@@ -113,11 +113,11 @@ export default function OrdersList() {
                     <div key={order.code} className={styles.orderlist__header__content__item}>
                         {renderState(order)}
                         {renderItems(order)}
-                        <hr/>
+                        <hr />
                         <div className={styles.orderlist__header__content__item__footer} >
                             <div>
                                 <Link to={`/history/order/${order.id}`} className={styles.orderlist__header__content__item__footer__linktoitem} >
-                                    <GhostButton value={"Xem chi tiết"} onClick={()=>{}}/>
+                                    <GhostButton value={"Xem chi tiết"} onClick={() => { }} />
                                 </Link>
                             </div>
                             <div>
@@ -126,7 +126,7 @@ export default function OrdersList() {
                         </div>
                     </div>
                 </div>
-            )            
+            )
         }
     })
 
@@ -137,7 +137,7 @@ export default function OrdersList() {
             </div>
             <div className={styles.orderlist__content}>
                 <div>
-                <Sidebar />
+                    <Sidebar nameActive="3" />
                 </div>
                 <div className={styles.orderlist}>
                     <div className={styles.orderlist__header}>
@@ -159,11 +159,11 @@ export default function OrdersList() {
                     <div className={styles.orderlist__header__content}>
                         {renderedOrders}
                     </div>
-                </div>   
+                </div>
             </div>
             <div>
                 <Footer />
-            </div>        
+            </div>
         </div>
     )
 }
