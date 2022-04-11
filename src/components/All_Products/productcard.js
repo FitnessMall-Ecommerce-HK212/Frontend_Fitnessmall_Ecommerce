@@ -1,6 +1,7 @@
 import '../../styles/AllProducts.css'
 import RatingStar from '../ProductDetail/ratingstar';
 import { GhostButton } from '../Buttons'
+import React from "react";
 function ProductCard(props){
     return(
         <div className="productcard">

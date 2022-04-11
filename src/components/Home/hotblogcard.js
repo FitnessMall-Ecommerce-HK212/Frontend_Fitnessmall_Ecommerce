@@ -1,4 +1,5 @@
 import '../../styles/HomePage.css'
+import React from "react";
 function HotBlogCard(props){
     return(
         <div className='hotblogcard'>

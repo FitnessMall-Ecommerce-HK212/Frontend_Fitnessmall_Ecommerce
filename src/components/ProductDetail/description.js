@@ -3,7 +3,7 @@ import '../../styles/AllProducts.css';
 import InputSpinner from "./inputSpinner";
 import { CTAButton, GhostButton } from '../Buttons'
 import RatingStar from "./ratingstar";
-
+import React from "react";
 function Description(props){
     return (
         <div className="description">

@@ -1,7 +1,7 @@
 import ProductCard from "./productcard";
 import SideBar from "./sidebar";
+import React from "react";
 var list = [1,2,3,4,5,6,7,8];
-
 function All_Products(){
     return (
         <div className="row all_products d-flex">

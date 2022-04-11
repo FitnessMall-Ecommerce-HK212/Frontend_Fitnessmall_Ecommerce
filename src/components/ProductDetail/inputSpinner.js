@@ -1,3 +1,4 @@
+import React from "react";
 function InputSpinner(){
     return (
         <div class="input-spinner">

@@ -4,7 +4,7 @@ import Description from "./description";
 import Feedback from "./feedback";
 import HotBlogCard from '../Home/hotblogcard';
 import { CTAButton } from '../Buttons'
-
+import React from "react";
 const list = [1, 2, 3];
 
 function ProductDetail(props){
