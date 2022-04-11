@@ -1,5 +1,5 @@
 import axios from 'axios';
-const API_SERVER_URL = 'http://localhost:5000';
+const API_SERVER_URL = 'http://localhost:8080';
 
 const config = {
   headers: {
@@ -8,10 +8,10 @@ const config = {
 };
 
 export const AuthAPI = {
-  loadUser: () => axios.get(`${API_SERVER_URL}/api/auth`),
+  loadUser: () => axios.get(`${API_SERVER_URL}/api/user_session`),
 
   registerUser: (data) => axios.post(`${API_SERVER_URL}/api/users`, data, config),
 
-  loginUser: (data) => axios.post(`${API_SERVER_URL}/api/auth`, data, config),
+  loginUser: (data) => axios.get(`${API_SERVER_URL}/api/user_signin`, { params: data }, config),
   
 };

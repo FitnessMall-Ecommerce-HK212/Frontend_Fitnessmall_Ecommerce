@@ -1,14 +1,16 @@
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { Link,Redirect} from 'react-router-dom';
-// import { loginUser,checkLogin } from '../redux/auth/authSlice';
+import axios from "axios";
+import { Link,useHistory} from 'react-router-dom';
+ import { loginUser } from '../redux/auth/authSlice';
 import {Footer, Header} from '../components';
 import '../styles/Login_Register.css'
 import IconButton from "@material-ui/core/IconButton";
 import Visibility from "@material-ui/icons/Visibility";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import md5 from 'md5';
 import Input from "@material-ui/core/Input";
 import {
   Grid,
@@ -18,7 +20,8 @@ import {
   ListItem,
   Button,
 } from "@material-ui/core";
-
+import { loadUser } from '../redux/auth/authSlice';
+import bcrypt from 'bcryptjs';
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -54,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "16px 12px",
     border:"1px solid #979CA3",
     boxShadow:"4px 4px 1px rgba(36,37,94,0.1) ",
-    color:"#FFA5CB",
+    color:"var(--lightprimary)",
   },
   label: {
     marginBottom: "16px",
@@ -136,25 +139,12 @@ const useStyles = makeStyles((theme) => ({
 export default function Login() {
   const classes = useStyles();
   const theme = useTheme();
-
-  // const dispatch = useDispatch();
-  // const { isAuthenticated,errorLogin } = useSelector((state) => state.auth);
-  // const [formData, setFormData]=useState({username:'',password:'',})
-  // const {username, password}=formData;
-
-  // const onChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   dispatch(checkLogin({username,password}))
-  //   dispatch(loginUser({ username, password }));
-  // };
-
-  // if (isAuthenticated) {
-  //   return <Redirect to="/control" />;
-  // }
+  const dispatch = useDispatch();
+  const [username, setName]=useState('');
+  const history=useHistory();
+  
   const [values, setValues] = useState({
-    password: "",
+    pwd: "",
     showPassword: false,
   });
   
@@ -165,10 +155,34 @@ export default function Login() {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-  
+  const [password, setPass]=useState('')
+  const rounds = 10;
   const handlePasswordChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
+
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();  
+    const hash =md5(values.pwd);
+    setPass(hash)
+    // console.log(hash)
+    dispatch(loginUser({ username:username, password: password}));
+    axios
+      .get(
+        `http://127.0.0.1:8080/api/user_author/${sessionStorage.getItem("sessionID")}`,
+            {
+            },
+            { headers: { "Content-Type": "application/json" } }
+          )
+                        .then((res) => {
+                             history.push("/")
+                        })
+                        .catch((err) => {
+                          alert(err);
+                        });
+  };
+
   return (
     <>
     <Header/>
@@ -192,7 +206,7 @@ export default function Login() {
           <Typography className={classes.text20}>Login</Typography>
 
           <form>
-            <input type="text" id="inputPhone" className={classes.input} name="phonenumber" placeholder = "Phone number" // onChange={onChange}
+            <input type="text" id="inputName" className={classes.input} name="username" placeholder = "Username"  onChange={(e)=>{setName(e.target.value)}}
             ></input>
             <div style={{position:"relative"}}>
             <InputAdornment position="end" style={{zIndex: 1,position:"absolute",right: "20px",top:"35px"}}>
@@ -203,8 +217,8 @@ export default function Login() {
               {values.showPassword ? <Visibility /> : <VisibilityOff />}
             </IconButton>
           </InputAdornment>
-            <input id="inputPhone" className={classes.input} name="password" placeholder = "Password"
-type={values.showPassword ? "text" : "password"} onChange={handlePasswordChange("password")} value={values.password}
+            <input id="inputPass" className={classes.input} name="password" placeholder = "Password"
+type={values.showPassword ? "text" : "password"} onChange={handlePasswordChange("pwd")} value={values.pwd}
         > 
             </input>
           </div>
@@ -213,7 +227,7 @@ type={values.showPassword ? "text" : "password"} onChange={handlePasswordChange(
           <p style={{fontSize:"14px",color: "#FF2C86",fontWeight:600,cursor: "pointer"}}
           >Forgotten password</p>
 
-          <Button variant="contained" type="submit" className={classes.button_login}
+          <Button variant="contained" type="submit" className={classes.button_login} onClick={handleSubmit}
           >Login</Button>
 
           <div style={{paddingBottom:"0.875rem",display:"flex",alignItems:"center",paddingTop:"20px"}} >
@@ -234,7 +248,8 @@ type={values.showPassword ? "text" : "password"} onChange={handlePasswordChange(
           </div> 
           <br></br>
           <div>
-            <p style={{textAlign:"center",fontSize:"13px",fontWeight:600}}>New to fitnessmall?  <Link to="/register" style={{textDecoration:"None"}}><span style={{color:"#FF2C86",cursor: "pointer"}}>Sign up</span></Link></p>
+            <p style={{textAlign:"center",fontSize:"13px",fontWeight:600}}>New to fitnessmall?  
+            <Link to="/register" style={{textDecoration:"None"}}  ><span style={{color:"#FF2C86",cursor: "pointer"}} >Sign up</span></Link></p>
           </div>
         </Card>
       </Grid>

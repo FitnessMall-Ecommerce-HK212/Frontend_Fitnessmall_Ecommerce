@@ -16,9 +16,9 @@ export function GhostButton(e) {
 export function DropdownButton(e) {
    return (
       <div>
-         <select name="kind" className='dropdown-button'>
+         <select name="kind" className='dropdown-button' style={e.style}>
             {e.value.map((item)=>
-            <option value={item}>{item}</option>
+            <option value={item} >{item}</option>
             )}
             
          </select>

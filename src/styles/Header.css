@@ -209,12 +209,12 @@
     /* height: 92px; */
     background-color: var(--surface);
     border-radius: 12px;
-    border: 1px solid var(--primary__thanh);
+    border: 1px solid var(--lightprimary);
     margin: 20px;
     align-items: center;
     justify-content: flex-start;
     color: var(--lightprimary);
-    padding: 8px;
+    padding: 10px;
     /* width: 200px; */
     font-size: larger;
 }
