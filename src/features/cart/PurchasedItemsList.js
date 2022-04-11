@@ -20,29 +20,29 @@ import PersonIcon from '@mui/icons-material/Person';
 import AddIcon from '@mui/icons-material/Add';
 import { blue } from '@mui/material/colors';
 
-const a1 = <>
-  <div className={styles.alldata__paymentinfo__diachi__namephone}>
-    <p>Võ Hồng Phúc</p>
-    <p>|</p>
-    <p>0123456789</p>
-  </div>
-  <div>
-    <p>Ký túc xá khu A ĐHQG TP Hồ Chí Minh, Phường Linh Trung, Quận Thủ Đức - TP Thủ Đức, Hồ Chí Minh</p>
-  </div>
-</>
+// const a1 = <>
+//   <div className={styles.alldata__paymentinfo__diachi__namephone}>
+//     <p>Võ Hồng Phúc</p>
+//     <p>|</p>
+//     <p>0123456789</p>
+//   </div>
+//   <div>
+//     <p>Ký túc xá khu A ĐHQG TP Hồ Chí Minh, Phường Linh Trung, Quận Thủ Đức - TP Thủ Đức, Hồ Chí Minh</p>
+//   </div>
+// </>
 
-const a2 =
-  <>
-    <div className={styles.alldata__paymentinfo__diachi__namephone}>
-      <p>Võ Ngọc Quang</p>
-      <p>|</p>
-      <p>0123999999</p>
-    </div>
-    <div>
-      <p>10-12 Đinh Tiên Hoàng Quận 1 Thành phố Hồ Chí Minh</p>
-    </div>
-  </>
-const addresses = [a1, a2];
+// const a2 =
+//   <>
+//     <div className={styles.alldata__paymentinfo__diachi__namephone}>
+//       <p>Võ Ngọc Quang</p>
+//       <p>|</p>
+//       <p>0123999999</p>
+//     </div>
+//     <div>
+//       <p>10-12 Đinh Tiên Hoàng Quận 1 Thành phố Hồ Chí Minh</p>
+//     </div>
+//   </>
+const addresses = [];
 
 export class SimpleDialogProps {
   constructor(open, selectedValue, onClose) {
@@ -91,6 +91,58 @@ function SimpleDialog(props) {
 }
 
 export default function PurchasedItemsList() {
+  const [userAd, setUserAd] = React.useState([]);
+
+  React.useEffect(() => {
+    var axios = require('axios');
+    var data = JSON.stringify({
+      "username": "giacat"
+    });
+
+    var config = {
+      method: 'get',
+      url: 'http://localhost:8080/api/info/ditdzangxinkdep/W3MXBuMVVh110jCUtLC3',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: data
+    };
+
+    axios(config)
+      .then(function (response) {
+        // console.log(JSON.stringify(response.data));
+        if (response.data) {
+          setUserAd(<>
+            <div className={styles.alldata__paymentinfo__diachi__namephone}>
+              <p>{response.data.username}</p>
+              <p>|</p>
+              <p>{response.data.phone}</p>
+            </div>
+            <div>
+              <p>{response.data.address}, {response.data.district}, {response.data.province}</p>
+            </div>
+          </>)
+          addresses.push(<>
+            <div className={styles.alldata__paymentinfo__diachi__namephone}>
+              <p>{response.data.username}</p>
+              <p>|</p>
+              <p>{response.data.phone}</p>
+            </div>
+            <div>
+              <p>{response.data.address}, {response.data.district}, {response.data.province}</p>
+            </div>
+          </>)
+          localStorage.setItem("username", response.data.username)
+          localStorage.setItem("phone", response.data.phone)
+          localStorage.setItem("address", `${response.data.address}, ${response.data.district}, ${response.data.province}`)
+          localStorage.setItem("username", response.data.username)
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+  }, [])
 
   const items = useSelector(selectCart)
   var isChosenAll = true
