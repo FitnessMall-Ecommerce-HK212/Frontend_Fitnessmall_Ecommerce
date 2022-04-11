@@ -1,0 +1,183 @@
+.product-detail{
+    margin: 30px 55px;
+    font-weight: 500;
+}
+
+.backtohome{
+    text-decoration: none;
+    color: black;
+}
+
+.backtohome:hover{
+    color: var(--primary);
+}
+
+.breadcrumb {
+    --bs-breadcrumb-divider: '>';
+}
+
+.breadcrumb .breadcrumb-item{
+    color: var(--primary);
+    font-weight: 500;
+}
+.description {
+    font-weight: 500;
+}
+
+.description .product-name{
+    color: var(--primary);
+    font-size: 20px;
+}
+
+.product-image img{
+    width: 500px;
+    border: 1px solid var(--primary);
+    border-radius: 10px;
+}
+
+.description .rating {
+    align-items: center;
+}
+
+.feedback-num {
+    color: var(--lightsecondary);
+}
+
+.description .brief {
+    padding-top: 20px;
+    text-align: justify;
+}
+
+.description .brief .readmore {
+    color: var(--lightsecondary);
+}
+
+.description .category{
+    padding-top: 100px;
+}
+
+.description .category .btn-option {
+    background-color: var(--background);
+    border-radius: 10px;
+    border-color: var(--primary);
+    color: var(--primary);
+    border-width: 2px;
+}
+
+.description .category .btn-option:hover{
+    background-color: var(--lightprimary);
+    border-radius: 10px;
+    color: white;
+    border-color: var(--primary);
+    border-width: 2px;
+}
+
+.description .category .clicked {
+    background-color: var(--lightprimary);
+    border-radius: 10px;
+    color: white;
+    border-color: var(--primary);
+    border-width: 2px;
+}
+
+.description .product-price{
+    color: var(--primary);
+}
+
+.price .action {
+    color: var(--primary);
+    font-size: 20px;
+}
+
+.input-spinner {
+    display: flex;
+	align-items: center;
+    justify-content: center;
+	width: 100%;
+}
+.input-spinner > button{
+	font-size: 1rem;
+	line-height: 1.5;
+    padding: .375rem .75rem;
+	outline: none;
+	border-color: var(--primary);
+    color: var(--primary);
+    background-color: white;
+	cursor: pointer;
+}
+.input-spinner .sub{
+	border-radius: 10px 0px 0px 10px;
+}
+.input-spinner .add{
+	border-radius: 0px 10px 10px 0px;
+}
+.input-spinner > button:active{
+    background: var(--primary);
+    color: white;
+}
+.input-spinner > input{
+	outline: none;
+	border-top: 2px solid var(--primary);
+    border-bottom: 2px solid var(--primary);
+    border-left: none;
+    border-right: none;
+	width: 50px;
+    padding: .375rem .75rem;
+	text-align: center;
+	font-size: 1rem;
+	color: var(--primary);
+    background: white;
+}
+
+.category {
+    display: flex;
+	align-items: center;
+}
+.price {
+    display: flex;
+	align-items: center;
+}
+.numberToOrder {
+    display: flex;
+	align-items: center;
+    justify-content: center;
+}
+
+.action .Ghost_Button{
+    width: fit-content;
+    padding: 0 10px;
+}
+.action .CTA_Button{
+    width: fit-content;
+}
+.action{
+    gap: 30px;
+}
+
+.divider {
+    width: 100%;
+    background-color: #e7e7e6;
+    padding: 0.5px;
+}
+
+.more-info {
+    font-weight: 500;
+}
+
+.title {
+    color: var(--primary);
+}
+.more-description .content{
+    margin: auto 50px;
+    text-align: justify;
+}
+
+.feedback .content {
+    font-size: 15px;
+    background-color: var(--surface);
+    border-color: var(--surface);
+}
+
+.listblog .hotblogcard{
+    width: 80%;
+}

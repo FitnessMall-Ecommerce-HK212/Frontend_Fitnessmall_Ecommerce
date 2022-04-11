@@ -10,11 +10,7 @@ import Footer from '../../components/Footer/index'
 import cash from '../../assets/icons/cash.svg'
 import momo from '../../assets/icons/momo.svg'
 import zalopay from '../../assets/icons/zalopay.svg'
-import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Avatar from '@mui/material/Avatar';
 import List from '@mui/material/List';
@@ -27,29 +23,17 @@ import AddIcon from '@mui/icons-material/Add';
 import { blue } from '@mui/material/colors';
 
 
-const a1 = <>
-  <div className={styles.alldata__paymentinfo__diachi__namephone}>
-    <p>Võ Hồng Phúc</p>
-    <p>|</p>
-    <p>0123456789</p>
-  </div>
-  <div>
-    <p>Ký túc xá khu A ĐHQG TP Hồ Chí Minh, Phường Linh Trung, Quận Thủ Đức - TP Thủ Đức, Hồ Chí Minh</p>
-  </div>
-</>
-
-const a2 =
-  <>
-    <div className={styles.alldata__paymentinfo__diachi__namephone}>
-      <p>Võ Ngọc Quang</p>
-      <p>|</p>
-      <p>0123999999</p>
-    </div>
-    <div>
-      <p>10-12 Đinh Tiên Hoàng Quận 1 Thành phố Hồ Chí Minh</p>
-    </div>
-  </>
-const addresses = [a1, a2];
+// const a1 = <>
+//   <div className={styles.alldata__paymentinfo__diachi__namephone}>
+//     <p>Võ Hồng Phúc</p>
+//     <p>|</p>
+//     <p>0123456789</p>
+//   </div>
+//   <div>
+//     <p>Ký túc xá khu A ĐHQG TP Hồ Chí Minh, Phường Linh Trung, Quận Thủ Đức - TP Thủ Đức, Hồ Chí Minh</p>
+//   </div>
+// </>
+const addresses = [];
 
 export class SimpleDialogProps {
   constructor(open, selectedValue, onClose) {
@@ -208,8 +192,20 @@ export default function Confirm() {
             <div className={styles.alldata__paymentinfo}>
               <div className={styles.alldata__paymentinfo__diachi}>
                 <div className={styles.alldata__paymentinfo__diachi__header}>
-                  <h2>Giao tới</h2>
-                  <h3 className={styles.text_pink} onClick={handleClickOpenAddress}>Thay đổi</h3>
+                  <div>
+                    <div>
+                      <h2>Giao tới</h2>
+                    </div>
+                    <div className={styles.alldata__paymentinfo__diachi__namephone}>
+                      <p>{localStorage.getItem("username")}</p>
+                      <p>|</p>
+                      <p>{localStorage.getItem("phone")}</p>
+                    </div>
+                    <div>
+                      <p>{localStorage.getItem("address")}</p>
+                    </div>
+                  </div>
+                  {/* <h3 className={styles.text_pink} onClick={handleClickOpenAddress}>Thay đổi</h3> */}
                   {/* <Button variant="outlined" onClick={handleClickOpenAddress}>
                               Open simple dialog
                             </Button> */}
