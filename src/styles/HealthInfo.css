@@ -1,0 +1,51 @@
+.gridBox{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: flex;
+    margin-top: 1rem;
+    gap: 15rem!important;
+}
+.healthBox{
+    border-radius: 10px 10px;
+    margin-left: 50px;
+    width: 16rem;
+    height: 10rem;
+    display: flex;
+}
+.getDate{
+    color:var(--lightprimary);
+    border-radius: 12px;
+    display:flex;
+    margin-top:8px;
+}
+.leftBox{
+    background-color: var(--lightprimary);
+    border-radius: 10px 0 0 10px;
+    flex: 1 1 0%;
+    height: 8rem;
+}
+.leftBox img{
+    width:50px;
+    margin-top: 26%;
+    margin-left:40px;
+}
+.rightBox{
+    border: solid 1px var(--lightprimary);
+    border-radius: 0 10px 10px 0;
+    flex: 1 1 0%;
+    height: 8rem;
+    text-align: center!important;
+    border-width: 2px!important;
+}
+.rightBox input{
+    width: 25px;
+    margin-top:50px;
+    color: var(--lightprimary);
+    border: none;
+}
+.topRBox{
+    color: var(--background);
+    padding-top: 10px;
+    padding-bottom: 1.5rem;
+    padding-left: 40px;
+    display: block;
+}
