@@ -206,15 +206,15 @@
 .dropdown-button {
     flex: 1;
     display: flex;
-    height: 92px;
-    background-color: var(--lightprimary__thanh);
-    border-radius: 10px;
+    /* height: 92px; */
+    background-color: var(--surface);
+    border-radius: 12px;
     border: 1px solid var(--primary__thanh);
     margin: 20px;
     align-items: center;
     justify-content: flex-start;
-    color: var(--primary__thanh);
-    padding: 10px;
+    color: var(--lightprimary);
+    padding: 8px;
     /* width: 200px; */
     font-size: larger;
 }
