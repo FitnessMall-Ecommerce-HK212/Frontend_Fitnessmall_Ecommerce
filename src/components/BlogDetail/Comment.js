@@ -7,7 +7,7 @@ const Comment = (props) => {
         <img src={unknown_logo} alt="avatar" />
         <div className='besideAvatar'>
             <p className='userComment'>{props.name}</p>
-            <p className='dateComment'>{props.date}</p>
+            <p className='dateComment'>{(new Date(props.date * 1000)).toLocaleString()}</p>
             <p className='commentContent'>{props.content}</p>
         </div>
     </div>
