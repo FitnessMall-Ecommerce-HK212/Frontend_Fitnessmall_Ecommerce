@@ -91,7 +91,7 @@ function SimpleDialog(props) {
 }
 
 export default function PurchasedItemsList() {
-  const [userAd, setUserAd] = React.useState([]);
+  const [userAd, setUserAd] = React.useState();
 
   React.useEffect(() => {
     var axios = require('axios');
@@ -270,7 +270,7 @@ export default function PurchasedItemsList() {
                   open={openAddress}
                   onClose={handleCloseAddress}
                 />
-                {selectedValue}
+                {userAd}
               </div>
               <div className={styles.alldata__paymentinfo__voucher}>
                 <p>Khuyến mãi</p>
