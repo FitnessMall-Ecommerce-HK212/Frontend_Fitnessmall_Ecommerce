@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { Link,Redirect} from 'react-router-dom';
-import {Footer, Header,Sidebar,CTAButton} from '../components';
+import {Footer, Header,Sidebar,CTAButton,DropdownButton} from '../components';
 import '../styles/HealthInfo.css'
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -59,48 +59,20 @@ export default function HealthInfo(){
               </div>
               
           </div>
-          <div>
+          <div style={{height:"5rem"}}>
            <p>Theo dõi luyện tập</p>
           </div>
           <div>
            <p>Thêm lộ trình tập</p>
            <div style={{display:"flex"}}>
-                <FormControl sx={{ m: 1, minWidth: 120 }} style={{display:"flex",marginRight:"80px"}}>
-                          <Select
-                            value={part}
-                            onChange={handlePart}
-                            className="Selected"
-                            displayEmpty
-                            inputProps={{ 'aria-label': 'Without label' }}
-                            style={{color:"var(--lightprimary)",borderRadius: "12px",display:"flex"}}
-                          >
-                            <MenuItem value="" >
-                              Tay
-                            </MenuItem>
-                            <MenuItem value={"Chan"}>Chân</MenuItem>
-                            <MenuItem value={"Co"}>Cổ</MenuItem>
-                          </Select>
-                </FormControl>
+                <DropdownButton value={["Tay","Chan","Co"]}/>
+                <div style={{marginTop:"20px",marginLeft:"30px",marginRight:"30px"}}>
                 <Space direction="vertical" size={12} style={{color:"var(--lightprimary)"}}>
-                <DatePicker showTime onChange={onChange} onOk={onOk} style={{color:"var(--lightprimary)",borderRadius: "12px",display:"flex",backgroundColor:"var(--surface)",border: "solid 1px var(--lightprimary)"}}/>
+                <DatePicker showTime onChange={onChange} onOk={onOk} style={{color:"var(--lightprimary)",borderRadius: "12px",display:"flex",backgroundColor:"var(--surface)",border: "solid 1.5px var(--lightprimary)",padding:"10px"}}/>
                 </Space>
-                <FormControl sx={{ m: 1, minWidth: 120 }} style={{display:"flex",marginRight:"80px"}}>
-                          <Select
-                            value={day}
-                            onChange={handleDay}
-                            className="Selected"
-                            displayEmpty
-                            inputProps={{ 'aria-label': 'Without label' }}
-                            style={{color:"var(--lightprimary)",borderRadius: "12px",display:"flex"}}
-                          >
-                            <MenuItem value="" >
-                              1 ngay
-                            </MenuItem>
-                            <MenuItem value={"2days"}>2 ngay</MenuItem>
-                            <MenuItem value={"1week"}>1 tuan</MenuItem>
-                          </Select>
-                </FormControl>
-                <div style={{marginTop:"10px"}}> <CTAButton value="Lưu thay đổi"/></div>
+                </div>
+                <DropdownButton value={["1 ngay","2 ngay","1 tuan"]}/>
+                <CTAButton value="Lưu thay đổi" style={{marginTop:"20px",marginLeft:"30px",width:"120px",height:"45px"}}/>
                 
            </div>
           </div>
