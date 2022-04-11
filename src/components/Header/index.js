@@ -1,13 +1,23 @@
 import React, { useState } from 'react';
 // import { useDispatch, useSelector } from 'react-redux';
 import '../../styles/Header.css'
-import { Link,Redirect} from 'react-router-dom';
+import axios from "axios";
+import { Link,useHistory} from 'react-router-dom';
 import logo_fitness from '../../assets/logo/fitness_logo.png'
 import {CTAButton} from '../'
 import { useDispatch, useSelector } from 'react-redux';
-function hello(){ console.log('Hello')}
+import { Popover, Button } from 'antd';
 function Header(props) {
-  const { isAuthenticated } = useSelector((state) => state.auth);
+  let history = useHistory();
+  const sign=sessionStorage.geItem("sessionID");
+  const [visible,setVisible]=useState(false)
+  const hide = () => {
+    setVisible(false);
+  };
+
+  const handleVisibleChange = visible => {
+  setVisible( visible );
+  };
   return (
     <div class="Container">
       <div class="Middle_Wrap">
@@ -30,12 +40,48 @@ function Header(props) {
         <div class="RightContainer">
           <div class="Userstyle_Item">
             {/* <Link to={isAuthenticated?"/account":"/"}> */}
-            <img class="profile-icon" src="https://salt.tikicdn.com/ts/upload/67/de/1e/90e54b0a7a59948dd910ba50954c702e.png"/>
+            <Popover
+        content={ 
+          <div style={{display:"flex",flexDirection:"column"}}>
+            <a href="/account" style={{color:"var(--primary)",marginBottom:"5px",textDecoration:'none'}} >Profile</a>
+            <a style={{color:"var(--primary)",marginBottom:"5px",textDecoration:'none'}} 
+            onClick={()=>{
+              axios
+        .get(
+        "http://127.0.0.1:8080/api/user_signout"
+           
+            
+          )
+                        .then((res) => {
+                          if (res.data=="Sign Out Successfully") {
+                            history.push("/");
+                          }
+                            
+                        })
+                        .catch((err) => {
+                          alert(err);
+                        });
+            }}
+            >Logout</a>
+            <a onClick={hide}>Close</a>
+            
+            {/* <a>Profile</a> */}
+          </div>
+        
+      }
+        title="Setting"
+        trigger="click"
+        visible={visible}
+        onVisibleChange={handleVisibleChange}
+      >
+           <img class="profile-icon" src="https://salt.tikicdn.com/ts/upload/67/de/1e/90e54b0a7a59948dd910ba50954c702e.png"/>
             <span class="Userstyle_ItemText">
               <span class="account-label">
                 <span style={{fontSize:"16px"}}>Account</span>
                 </span>
             </span>
+      </Popover>
+            
             {/* </Link> */}
           </div>
           <div class="Userstyle_Item">

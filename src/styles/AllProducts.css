@@ -1,7 +1,6 @@
 .sidebar-product {
     background-color: #F0EEEE;
-    width: 25%;
-    height: 800px;
+    height: 100%;
     border-radius: 0 10px 10px 0;
     text-align: center;
 }
@@ -20,6 +19,15 @@
     width: 250px;
 }
 
+.optionbutton .clicked{
+    background-color: var(--lightprimary);
+    color: white;
+    border-radius: 10px;
+    border-width: 2px;
+    border-color: var(--lightprimary);
+    width: 250px;
+}
+
 .optionbutton .btn-option:hover{
     background-color: var(--lightprimary);
     color: white;
@@ -29,8 +37,24 @@
     width: 250px;
 }
 
+.productcard .card {
+    width: 250px;
+    border-radius: 0 15px 0 0;
+    border-color: var(--background);
+    background-color: var(--background);
+}
+.productcard .card img{
+    height: 175px;
+    border-radius: 0 15px 0 0;
+}
+.productcard .card:hover{
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}
+
 .productcard .card-body{
     padding: 0 10px 10px 5px;
+    background-color: var(--surface);
 }
 
 .productcard .card-title{
@@ -50,4 +74,14 @@
     color: var(--primary);
     border-radius: 10px;
     font-size: 14px;
+}
+
+.productcard .price {
+    color: var(--lightprimary);
+    align-items: flex-end !important;
+    font-size: 25px;
+}
+
+.moreaction .Ghost_Button {
+    height: 30px;
 }

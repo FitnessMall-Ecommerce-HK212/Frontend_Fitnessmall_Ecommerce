@@ -1,4 +1,8 @@
-#inputPhone::placeholder {
+#inputName::placeholder {
+    color: var(--lightprimary);
+    opacity: 1;
+}
+#inputPass::placeholder {
     color: var(--lightprimary);
     opacity: 1;
 }
