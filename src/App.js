@@ -14,6 +14,8 @@ import BlogDetailPage from './pages/BlogDetailPage';
 import SingleOrderPage from './features/orders/SingleOrderPage';
 import SingleShipmentPage from './features/shipment/SingleShipmentPage';
 import Confirm from './features/cart/Confirm';
+import PaymentDonePage from './pages/PaymentDonePage';
+
 // import PrivateRoute from './PrivateRoute';
 
 const App = () => {
@@ -28,10 +30,11 @@ const App = () => {
           <Route path="/account" component={Account} />
           <Route path="/products" component={AllProducts} />
           <Route exact path="/blog" component={BlogPage} />
-          <Route path="/blog/detail/1" component={BlogDetailPage} />
+          <Route path="/blog/detail/:blogId" component={BlogDetailPage} />
           {/* <PrivateRoute path="/..." component={...} /> */}
           <Route exact path="/cart" component={PurchasedItemsList} />
           <Route exact path="/cart/confirm" component={Confirm} />
+          <Route exact path="/cart/confirm/payment" component={PaymentDonePage} />
           <Route exact path="/history/order" component={OrdersList} />
           <Route exact path="/history/order/:orderId" component={SingleOrderPage} />
           <Route exact path="/history/order/:orderId/:shipmentId" component={SingleShipmentPage} />
