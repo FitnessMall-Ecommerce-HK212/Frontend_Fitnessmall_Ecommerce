@@ -1,5 +1,3 @@
-// import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { AccountBalance } from "@material-ui/icons";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { Link,Redirect} from 'react-router-dom';
@@ -52,7 +50,7 @@ export default function Account(){
         <Header/>
         <div class="Container_acc" style={{backgroundColor:"white"}}>
           <div class="Account_Style">
-          <Sidebar/>
+          <Sidebar nameActive="1" />
           <div class="Infor_Style">
           <span class="info-title">Thông tin cá nhân</span>
             <div class="styles_StyledAccountInfo">
@@ -122,7 +120,7 @@ export default function Account(){
                             inputProps={{ 'aria-label': 'Without label' }}
                             style={{color:"var(--lightprimary)",borderRadius: "12px"}}
                           >
-                            <MenuItem value="">
+                            <MenuItem value="" style={{padding:"None"}}>
                               Chọn quốc tịch
                             </MenuItem>
                             <MenuItem value={"VietNam"}>VietNam</MenuItem>
