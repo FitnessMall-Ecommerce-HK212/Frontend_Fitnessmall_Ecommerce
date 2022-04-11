@@ -176,7 +176,9 @@ export default function Login() {
             { headers: { "Content-Type": "application/json" } }
           )
                         .then((res) => {
-                             history.push("/")
+                          console.log(res.data)
+                             if (res.data==="OK")
+                             {history.push("/")}
                         })
                         .catch((err) => {
                           alert(err);

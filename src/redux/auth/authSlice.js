@@ -26,7 +26,23 @@ export const registerUser = createAsyncThunk('auth/registerUser', async ({ first
 
 export const loginUser = createAsyncThunk('user_signin', async ({ username, password }) => {
   const res = await AuthAPI.loginUser({ username, password });
-  sessionStorage.setItem("sessionID", res.data)
+  switch (res.data){
+    case "Missing username value":
+      alert("Missing username value")
+      break;
+    case "Missing password value":
+      alert("Missing password value")
+      break
+    case "Wrong information":
+      alert("Wrong information")
+      break
+    case "Account hasn't been verified yet":
+      alert("Account hasn't been verified yet")
+      break
+    default:
+      sessionStorage.setItem("sessionID", res.data)
+      break
+  }
   console.log(res.data);
   return res.data;
 });
