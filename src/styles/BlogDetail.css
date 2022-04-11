@@ -93,7 +93,7 @@
     background: none;
     height:48px;
     width: 100px;
-    color:var(--lightprimary);
+    color: var(--secondary);
     margin-right: 0.5rem;
 }
 
@@ -112,4 +112,8 @@
 
 .blogDetail .commentOnBlog .formComment .FormSearch_Button {
     width: 150px;
+}
+
+.blogDetail .rightBar {
+    width: 40%;
 }

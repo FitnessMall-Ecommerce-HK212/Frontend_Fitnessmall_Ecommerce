@@ -1784,8 +1784,6 @@
     "prop-types" "^15.7.2"
     "react-is" "^17.0.2"
 
-<<<<<<< HEAD
-=======
 "@mui/base@5.0.0-alpha.75":
   "integrity" "sha512-eQ8SP2ML5nJyOdSqmk26ezg/eEP1k42Z+k6uMfNbgHZc8iZwgw9iVe+6g5j/qZPKS88AtxVG8YsLLZkXT82/Bw=="
   "resolved" "https://registry.npmjs.org/@mui/base/-/base-5.0.0-alpha.75.tgz"
@@ -1800,13 +1798,10 @@
     "prop-types" "^15.7.2"
     "react-is" "^17.0.2"
 
->>>>>>> a328291f726516b506b9dbab63da25e40313af6a
 "@mui/icons-material@^5.6.0":
   "integrity" "sha512-2GDGt+/BbwM3oVkF84b9FFKQdQ9TxBJIRnTwT99vO2mimdfJaojxMRB2lkysm9tUY4HOf0yoU6O//X6GTC0Zhw=="
   "resolved" "https://registry.npmjs.org/@mui/icons-material/-/icons-material-5.6.0.tgz"
   "version" "5.6.0"
-<<<<<<< HEAD
-=======
   dependencies:
     "@babel/runtime" "^7.17.2"
 
@@ -1814,7 +1809,6 @@
   "integrity" "sha512-MCx6t28L6xo5S3/GXFZqIfXBdFXfCO8UblEb+sf48UREDx1awUDLS7/n0BLC9N6pj6P95OpMx+at25gTSd2CQQ=="
   "resolved" "https://registry.npmjs.org/@mui/lab/-/lab-5.0.0-alpha.76.tgz"
   "version" "5.0.0-alpha.76"
->>>>>>> a328291f726516b506b9dbab63da25e40313af6a
   dependencies:
     "@babel/runtime" "^7.17.2"
     "@mui/base" "5.0.0-alpha.75"

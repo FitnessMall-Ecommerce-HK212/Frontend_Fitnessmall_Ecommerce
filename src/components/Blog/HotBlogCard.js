@@ -1,17 +1,32 @@
-import React from 'react'
+import { CircularProgress } from "@material-ui/core";
+import React from "react";
 
 const HotBlogCard = (props) => {
-  return (
-    <div className='hotBlogCard'>
-        <div class="card shadow">
-            <img src={props.img} class="card-img-top" alt="..."/>
-            <div class="card-body">
-                <p class="card-title text-center">{props.tags}</p>
-                <h5 class="card-text text-center">{props.title}</h5>
+  if (props.img !== undefined) {
+    return (
+      <div className="hotBlogCard">
+        <div className="card shadow">
+          <img src={props.img} class="card-img-top" alt="..." />
+          <div className="card-body">
+            <div className="card-tag">
+              {props.tags.map((tag, index) => {
+                return <p key={index} className="card-title text-center">{tag}</p>;
+              })}
             </div>
+            <h5 className="card-text text-center">{props.title}</h5>
+          </div>
         </div>
-    </div>
-  )
-}
+      </div>
+    );
+  } else {
+    return (
+      <div className="hotBlogCard">
+        <div className="card shadow">
+          <CircularProgress />
+        </div>
+      </div>
+    );
+  }
+};
 
-export default HotBlogCard
+export default HotBlogCard;

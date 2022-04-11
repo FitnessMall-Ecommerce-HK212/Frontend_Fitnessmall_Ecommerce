@@ -40,7 +40,7 @@ const App = () => {
           <Route path="/address" component={Address} />
           <Route path="/products" component={AllProducts} />
           <Route exact path="/blog" component={BlogPage} />
-          <Route path="/blog/detail/:blogId" component={BlogDetailPage} />
+          <Route path="/blog/detail/:idBlog" component={BlogDetailPage} />
           {/* <PrivateRoute path="/..." component={...} /> */}
           <Route exact path="/cart" component={PurchasedItemsList} />
           <Route exact path="/cart/confirm" component={Confirm} />
