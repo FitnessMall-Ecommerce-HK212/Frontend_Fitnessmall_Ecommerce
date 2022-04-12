@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { Link,Redirect} from 'react-router-dom';
-import {Footer, Header,Sidebar,CTAButton} from '../components';
+import { Link,useHistory} from 'react-router-dom';
+import axios from "axios";
+import {Footer, Header,Sidebar,CTAButton,DropdownButton} from '../components';
 import IconButton from "@material-ui/core/IconButton";
 import Visibility from "@material-ui/icons/Visibility";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -10,6 +11,23 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 export default function Account(){
+  const history=useHistory();
+  useEffect(()=>{
+    axios
+      .get(
+        "http://127.0.0.1:8080/api/user_author",
+            {
+            },
+            { headers: { "Content-Type": "application/json" } }
+          )
+                        .then((res) => {
+                          if (res.data=="Not Author") 
+                            history.push("/");
+                        })
+                        .catch((err) => {
+                          alert(err);
+                        });
+  },[])
   // For Radio button
   const [checked,setCheck]=useState(false)
   function handleChecked(e){
@@ -27,21 +45,17 @@ export default function Account(){
     password: "",
     showPassword: false,
   });
-  
   const handleClickShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword });
   };
-  
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-  
   const handlePasswordChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
   //For select
   const [country, setCountry] = useState('');
-
   const handleSelect = (event) => {
     setCountry(event.target.value);
   };
@@ -108,29 +122,7 @@ export default function Account(){
                     </div>
                 <div class="form-control" style={{display:"flex",border:"none"}}>
                     <label class="input-label">Quốc tịch</label>
-                    <div class="hisWEc">
-                        {/* <input style={{paddingRight: "35px"}} class="input with-icon-right" name="nationality" maxlength="128" placeholder="Chọn quốc tịch" readonly="" value=""/>
-                        <img height="20px" width="20px" style={{cursor: "pointer",zIndex: 1,position:"relative",left:"21rem",top:"-30px"}} src="https://cdn-icons.flaticon.com/png/512/2985/premium/2985150.png?token=exp=1649435816~hmac=08d69e0c4379f5afe8a7cf69ecd91570"/> */}
-                        <FormControl sx={{ m: 1, minWidth: 250 }} >
-                          <Select
-                            value={country}
-                            onChange={handleSelect}
-                            className="Selected"
-                            displayEmpty
-                            inputProps={{ 'aria-label': 'Without label' }}
-                            style={{color:"var(--lightprimary)",borderRadius: "12px"}}
-                          >
-                            <MenuItem value="" style={{padding:"None"}}>
-                              Chọn quốc tịch
-                            </MenuItem>
-                            <MenuItem value={"VietNam"}>VietNam</MenuItem>
-                            <MenuItem value={"France"}>France</MenuItem>
-                            <MenuItem value={"Endland"}>England</MenuItem>
-                            <MenuItem value={"Senegal"}>Senegal</MenuItem>
-                            <MenuItem value={"Italy"}>Italy</MenuItem>
-                          </Select>
-                        </FormControl>
-                        </div>
+                    <DropdownButton value={["England","France","American","Wakanda"]} style={{width:"300px",fontSize:"15px",margin:"none"}}/>
                 </div>
                 <div class="form-control" style={{display:"flex",border:"none"}}>
                     <label class="input-label">Số điện thoại</label>
