@@ -17,8 +17,6 @@ import Confirm from './features/cart/Confirm';
 import ProductDetailPage from './pages/ProductDetailPage';
 import PaymentDonePage from './pages/PaymentDonePage';
 
-// import PrivateRoute from './PrivateRoute';
-
 const App = () => {
 
   return (
@@ -29,19 +27,13 @@ const App = () => {
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/account" component={Account} />
-          <Route exact path="/products" component={AllProducts} />
-          <Route exact path="/products/food" component={AllProducts} />
-          <Route exact path="/products/food/1" component={ProductDetailPage} />
-          <Route exact path="/blog" component={BlogPage} />
-          <Route exact path="/blog/detail/1" component={BlogDetailPage} />
-          <Route path="/login" component={Login} />
+          <Route exact path="/products/:type" component={AllProducts} />
+          <Route exact path="/products/:type/:code" component={ProductDetailPage} />
           <Route path="/account" component={Account} />
           <Route path="/healthinfo" component={HealthInfo} />
           <Route path="/address" component={Address} />
-          <Route path="/products" component={AllProducts} />
           <Route exact path="/blog" component={BlogPage} />
           <Route path="/blog/detail/:blogId" component={BlogDetailPage} />
-          {/* <PrivateRoute path="/..." component={...} /> */}
           <Route exact path="/cart" component={PurchasedItemsList} />
           <Route exact path="/cart/confirm" component={Confirm} />
           <Route exact path="/cart/confirm/payment" component={PaymentDonePage} />

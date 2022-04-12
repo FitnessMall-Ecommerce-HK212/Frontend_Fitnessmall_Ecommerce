@@ -39,12 +39,13 @@
 
 .productcard .card {
     width: 250px;
+    height: 397px;
     border-radius: 0 15px 0 0;
     border-color: var(--background);
     background-color: var(--background);
 }
 .productcard .card img{
-    height: 175px;
+    height: 250px;
     border-radius: 0 15px 0 0;
 }
 .productcard .card:hover{
@@ -58,8 +59,8 @@
 }
 
 .productcard .card-title{
-    font-size: 25px;
-    font-weight: 600;
+    font-size: 18px;
+    font-weight: 500;
     color: var(--primary);
 }
 
@@ -77,9 +78,8 @@
 }
 
 .productcard .price {
-    color: var(--lightprimary);
     align-items: flex-end !important;
-    font-size: 25px;
+    font-size: 18px;
 }
 
 .moreaction .Ghost_Button {
