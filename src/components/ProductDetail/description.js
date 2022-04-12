@@ -10,13 +10,11 @@ function Description(props){
             <div className="product-name">{props.name}</div>
             <div class="rating d-flex" style={{gap: '5px'}}>
                 <RatingStar/>
-                <span class="feedback-num">| 1 đánh giá</span> 
+                <span class="feedback-num">| {props.numOfFeedbacks} đánh giá</span> 
             </div>
             <div className="brief">
-            Lựa chọn tuyệt vời cho cho chị em ăn vặt lành mạnh không lo tăng cân. 
-            Bánh Ăn Kiêng Nguyên Cám Biscotti là một loại bánh quy thơm ngon, nổi tiếng của Ý, được nướng 2 lần để có thể tạo nên vị giòn tan khi ăn. 
-            Trong 1 túi của bánh Biscotti có rất nhiều vị cho Nàng thỏa thích lựa chọn...
-            <span class="readmore">Xem thêm</span>
+            {props.des}
+            <span class="readmore">...Xem thêm</span>
             </div>
             <div className="row category">
                 <div className="col-2">Phân loại:</div>
