@@ -1,3 +1,4 @@
+import React from 'react';
 import "../../styles/ProductDetail.css"
 import {Link} from 'react-router-dom';
 import Description from "./description";

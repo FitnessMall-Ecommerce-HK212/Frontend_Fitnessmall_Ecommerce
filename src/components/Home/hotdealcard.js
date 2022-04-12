@@ -1,3 +1,4 @@
+import React from 'react';
 import '../../styles/HomePage.css'
 import SaleTag from './saletag'
 function HotdealCard(props){

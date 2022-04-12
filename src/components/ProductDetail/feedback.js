@@ -1,3 +1,4 @@
+import React from 'react';
 import { BsPersonCircle } from 'react-icons/bs';
 import RatingStar from './ratingstar';
 

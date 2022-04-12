@@ -1,3 +1,4 @@
+import React from 'react';
 import ProductCard from "./productcard";
 import SideBar from "./sidebar";
 var list = [1,2,3,4,5,6,7,8];

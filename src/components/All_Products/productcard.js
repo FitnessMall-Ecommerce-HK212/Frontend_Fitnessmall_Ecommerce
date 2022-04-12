@@ -1,3 +1,4 @@
+import React from 'react';
 import '../../styles/AllProducts.css'
 import RatingStar from '../ProductDetail/ratingstar';
 import { GhostButton } from '../Buttons'
