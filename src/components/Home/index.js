@@ -138,6 +138,8 @@ function Home() {
                                             img={item.id.image}
                                             name={item.id.name}
                                             price={item.id.itemtype[0].price}
+                                            type='equipment'
+                                            code={item.id.code}
                                         />
                                 </div>
                             );
