@@ -156,7 +156,6 @@ export default function Login() {
     event.preventDefault();
   };
   const [password, setPass]=useState('')
-  const rounds = 10;
   const handlePasswordChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
@@ -253,7 +252,7 @@ type={values.showPassword ? "text" : "password"} onChange={handlePasswordChange(
           <br></br>
           <div>
             <p style={{textAlign:"center",fontSize:"13px",fontWeight:600}}>New to fitnessmall?  
-            <Link to="/register" style={{textDecoration:"None"}}  ><span style={{color:"#FF2C86",cursor: "pointer"}} >Sign up</span></Link></p>
+            <Link to="/register" style={{textDecoration:"None"}}  ><span style={{color:"#FF2C86",cursor: "pointer"}} > Sign up</span></Link></p>
           </div>
         </Card>
       </Grid>

@@ -42,7 +42,8 @@ function Header(props) {
             <Popover
         content={ 
           <div style={{display:"flex",flexDirection:"column"}}>
-            <a href="/account" style={{color:"var(--primary)",marginBottom:"5px",textDecoration:'none'}} >Profile</a>
+            {!localStorage.getItem('isAuthenticated')?
+            <a href="/login" style={{color:"var(--primary)",marginBottom:"5px",textDecoration:'none'}} > Login</a>:
             <a style={{color:"var(--primary)",marginBottom:"5px",textDecoration:'none'}} 
             onClick={()=>{
               axios
@@ -61,6 +62,9 @@ function Header(props) {
                         });
             }}
             >Logout</a>
+          }
+            
+            <a href="/account" style={{color:"var(--primary)",marginBottom:"5px",textDecoration:'none'}} >Profile</a>
             <a onClick={hide}>Close</a>
             
             {/* <a>Profile</a> */}
