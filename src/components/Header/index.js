@@ -39,7 +39,6 @@ function Header(props) {
         </div>
         <div class="RightContainer">
           <div class="Userstyle_Item">
-            {/* <Link to={isAuthenticated?"/account":"/"}> */}
             <Popover
         content={ 
           <div style={{display:"flex",flexDirection:"column"}}>
@@ -48,12 +47,11 @@ function Header(props) {
             onClick={()=>{
               axios
         .get(
-        "http://127.0.0.1:8080/api/user_signout"
-           
-            
+        `http://127.0.0.1:8080/api/user_signout/${sessionStorage.getItem("sessionID")}`
           )
                         .then((res) => {
                           if (res.data=="Sign Out Successfully") {
+                            localStorage.removeItem('isAuthenticated');
                             history.push("/");
                           }
                             
@@ -75,14 +73,9 @@ function Header(props) {
         onVisibleChange={handleVisibleChange}
       >
            <img class="profile-icon" src="https://salt.tikicdn.com/ts/upload/67/de/1e/90e54b0a7a59948dd910ba50954c702e.png"/>
-            <span class="Userstyle_ItemText">
-              <span class="account-label">
-                <span style={{fontSize:"16px"}}>Account</span>
-                </span>
-            </span>
-      </Popover>
+            <span style={{fontSize:"16px",paddingTop:"100px"}}>Account</span>  
+            </Popover>
             
-            {/* </Link> */}
           </div>
           <div class="Userstyle_Item">
             <img class="profile-icon" src="https://salt.tikicdn.com/ts/upload/40/44/6c/b80ad73e5e84aeb71c08e5d8d438eaa1.png"/>

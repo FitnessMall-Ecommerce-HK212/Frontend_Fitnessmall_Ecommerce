@@ -166,9 +166,9 @@ export default function Login() {
     e.preventDefault();  
     const hash =md5(values.pwd);
     setPass(hash)
-    // console.log(hash)
-    dispatch(loginUser({ username:username, password: password}));
-    axios
+    dispatch(loginUser({ username:username, password: hash}));
+    setTimeout(() => {
+      axios
       .get(
         `http://127.0.0.1:8080/api/user_author/${sessionStorage.getItem("sessionID")}`,
             {
@@ -176,13 +176,17 @@ export default function Login() {
             { headers: { "Content-Type": "application/json" } }
           )
                         .then((res) => {
-                             history.push("/")
+                             if (res.data==="OK")
+                             {
+                               localStorage.setItem('isAuthenticated',true)
+                               history.push("/")
+                            }
                         })
                         .catch((err) => {
                           alert(err);
                         });
+    }, 1000);
   };
-
   return (
     <>
     <Header/>
