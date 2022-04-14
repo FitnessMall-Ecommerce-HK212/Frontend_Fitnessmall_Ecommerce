@@ -29,9 +29,9 @@ const App = () => {
           <PrivateRoute exact path="/account" component={Account} />
           <Route exact path="/products/:type" component={AllProducts} />
           <Route exact path="/products/:type/:code" component={ProductDetailPage} />
-          <Route path="/account" component={Account} />
-          <Route path="/healthinfo" component={HealthInfo} />
-          <Route path="/address" component={Address} />
+          <PrivateRoute path="/account" component={Account} />
+          <PrivateRoute path="/healthinfo" component={HealthInfo} />
+          <PrivateRoute path="/address" component={Address} />
           <Route exact path="/blog" component={BlogPage} />
           <Route path="/blog/detail/:idBlog" component={BlogDetailPage} />
           {/* <PrivateRoute path="/..." component={...} /> */}
