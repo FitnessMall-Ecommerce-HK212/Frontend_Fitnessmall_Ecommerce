@@ -1,14 +1,13 @@
-import React from 'react';
+import React, { useState,useEffect } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-
+import axios from "axios";
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const { isAuthenticated, loading } = useSelector((state) => state.auth);
-
+  const check=localStorage.getItem('isAuthenticated');
   return (
     <Route
       {...rest}
-      render={(props) => (!isAuthenticated && !loading ? <Redirect to="/login" /> : <Component {...props} />)}
+      render={(props) => (!check ? <Redirect to="/" /> : <Component {...props} />)}
     />
   );
 };

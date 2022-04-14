@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AuthAPI } from '../../services/auth';
 import { utils } from '../../helpers';
-
+import {useHistory} from 'react-router-dom';
+import axios from "axios";
 const { setAuthToken } = utils;
 
 const initialState = {
@@ -43,7 +44,7 @@ export const loginUser = createAsyncThunk('user_signin', async ({ username, pass
       sessionStorage.setItem("sessionID", res.data)
       break
   }
-  console.log(res.data);
+  // console.log(res.data);
   return res.data;
 });
 
