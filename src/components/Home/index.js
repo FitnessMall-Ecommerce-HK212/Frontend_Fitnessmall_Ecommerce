@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from "axios";
 import Slider from "react-slick";
 import '../../styles/HomePage.css'
 import banner_homepage from '../../assets/banner/homepage.png'
@@ -7,10 +8,11 @@ import ProductCard from '../All_Products/productcard';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import HotBlogCard from './hotblogcard';
+import { useEffect, useState } from "react";
+import { CircularProgress } from "@mui/material";
+const BASE_URL = "http://localhost:8080";
 
-const list = [1, 2, 3, 4, 5];
-
-function Home(props) {
+function Home() {
     var setting1 = {
         dots: true,
         infinite: false,
@@ -81,63 +83,88 @@ function Home(props) {
             }
         ]
     };
-    return (
-        <div>
-            <img src={banner_homepage} alt='banner' style={{width:"100%",height:"100%",borderStyle:"none"}}/>
-            <div className='all-service pt-5'>
-            <div className='intro'>
-                    <div className='line'></div>
-                    <h5 className='pt-2 ps-1 pe-1'>Sản phẩm cung cấp</h5>
-                    <div className='line'></div>
-                </div>
-                <div className='introcard-container pt-3'>
-                    <div className='row'>
-                        <div className='col-4 col-xs-12 ps-5 pe-5'><IntroCard name="Personal Training"/></div>
-                        <div className='col-4 col-xs-12 ps-5 pe-5'><IntroCard name="Medical Blogs"/></div>
-                        <div className='col-4 col-xs-12 ps-5 pe-5'><IntroCard name="Fitness Accessories"/></div>
+    const [hotItems, setHotItems] = useState([]);
+    const [hotBlogs, setHotBlogs] = useState([]);
+    const getHotItems = async () => {
+        const res = await axios.get(BASE_URL + '/api/items/hot');
+        console.log(res.data.hotItems);
+        setHotItems(res.data.hotItems);
+    }
+    const getHotBlogs = async () => {
+        const res = await axios.get(BASE_URL + '/api/blogs');
+        console.log(res.data.blogList);
+        setHotBlogs(res.data.blogList);
+    }
+    useEffect(() => {
+        getHotItems();
+        getHotBlogs();
+      }, []);
+    if (hotItems.length === 0 || hotBlogs.length === 0){
+        return (
+            <div className="d-flex justify-content-center mt-5">
+                <CircularProgress/>
+            </div>
+        );
+    }
+    else {
+        return (
+            <div>
+                <img src={banner_homepage} alt='banner' style={{width:"100%",height:"100%",borderStyle:"none"}}/>
+                <div className='all-service pt-5'>
+                <div className='intro'>
+                        <div className='line'></div>
+                        <h5 className='pt-2 ps-1 pe-1'>Sản phẩm cung cấp</h5>
+                        <div className='line'></div>
+                    </div>
+                    <div className='introcard-container pt-3'>
+                        <div className='row'>
+                            <div className='col-4 col-xs-12 ps-5 pe-5'><IntroCard name="Personal Training"/></div>
+                            <div className='col-4 col-xs-12 ps-5 pe-5'><IntroCard name="Medical Blogs"/></div>
+                            <div className='col-4 col-xs-12 ps-5 pe-5'><IntroCard name="Fitness Accessories"/></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div className='hotdeals pt-5'>
-                <div className='intro'>
-                    <div className='line'></div>
-                    <h5 className='pt-2 ps-1 pe-1'>Hot Deals</h5>
-                    <div className='line'></div>
+                <div className='hotdeals pt-5'>
+                    <div className='intro'>
+                        <div className='line'></div>
+                        <h5 className='pt-2 ps-1 pe-1'>Hot Deals</h5>
+                        <div className='line'></div>
+                    </div>
+                    <Slider {...setting1}>
+                        {hotItems.map((item) => {
+                            return (
+                                <div className="pt-3 pb-3 d-flex justify-content-center">
+                                    <ProductCard 
+                                            img={item.id.image}
+                                            name={item.id.name}
+                                            price={item.id.itemtype[0].price}
+                                            type='equipment'
+                                            code={item.id.code}
+                                        />
+                                </div>
+                            );
+                        })}
+                    </Slider>
                 </div>
-                <Slider {...setting1}>
-                    {list.map((i) => {
-                        return (
-                            <div className="pt-3 pb-3 d-flex justify-content-center">
-                                {/* <HotdealCard img='https://sc04.alicdn.com/kf/U197d056a90a34c05bd9e4f15240cb91bu.jpg' price='300.000'/> */}
-                                <ProductCard 
-                                        img='https://static.onecms.io/wp-content/uploads/sites/35/2020/03/24/workout-dice-bells-tout1244x1244.jpg'
-                                        name='Tạ tay'
-                                        description='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-                                        price='$299.99'
-                                    />
-                            </div>
-                        );
-                    })}
-                </Slider>
-            </div>
-            <div className='hotblogs pt-5 pb-5'>
-                <div className='intro'>
-                    <div className='line'></div>
-                    <h5 className='pt-2 ps-1 pe-1'>Hot Blogs</h5>
-                    <div className='line'></div>
+                <div className='hotblogs pt-5 pb-5'>
+                    <div className='intro'>
+                        <div className='line'></div>
+                        <h5 className='pt-2 ps-1 pe-1'>Hot Blogs</h5>
+                        <div className='line'></div>
+                    </div>
+                    <Slider {...setting2}>
+                        {hotBlogs.map((blog) => {
+                            return (
+                                <div className="pt-3 ps-5 pe-5 pb-3 d-flex justify-content-center">
+                                    <HotBlogCard img={blog.image} tags={blog.tags[0]} title={blog.title.toUpperCase()}/>
+                                </div>
+                            );
+                        })}
+                    </Slider>
                 </div>
-                <Slider {...setting2}>
-                    {list.map((i) => {
-                        return (
-                            <div className="pt-3 ps-5 pe-5 pb-3 d-flex justify-content-center">
-                                <HotBlogCard img='https://www.wheystore.vn/upload/news_optimize/wst_1602494019_workout_la_gi__tam_quan_trong_cua_workout_trong_the_hinh_image_1602494019_1.jpg' tags='FITNESS' title='5 WORKOUTS YOU CAN DO ALMOST EVERYWHERE'/>
-                            </div>
-                        );
-                    })}
-                </Slider>
             </div>
-        </div>
-    );
+        );
+    }
 }
 
 export default Home;
