@@ -208,7 +208,6 @@ export default function PurchasedItemsList() {
 
       :
       <div>
-        <div><button onClick={() => dispatch(addItem(3, "bro", 10000, "https://i0.wp.com/www.techquintal.com/wp-content/uploads/2021/05/Information-Technology.jpg?w=1366&ssl=1"))}>Thêm sản phẩm</button></div>
         <div>
           <Header />
         </div>
