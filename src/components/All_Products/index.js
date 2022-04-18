@@ -1,13 +1,25 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import ProductCard from "./productcard";
+import ProductCard from './productcard'
 import SideBar from "./sidebar";
+import ReactPaginate from 'react-paginate';
 import { CircularProgress } from "@mui/material";
 const BASE_URL = "http://localhost:8080";
 
 function All_Products(){
     const [productList, setProductList] = useState([]);
+    const [pageNumber, setPageNumber] = useState(0);
+
+    const productsPerPage = 6;
+    const pagesVisited = pageNumber * productsPerPage;
+    
+    const pageCount = Math.ceil(productList.length / productsPerPage);
+
+    const changePage = ({ selected }) => {
+        setPageNumber(selected);
+    };
+
     const { type } = useParams();
     const getProductList = async () => {
         var api;
@@ -20,7 +32,7 @@ function All_Products(){
     }
     useEffect(() => {
         getProductList();
-      }, [productList]);
+      }, []);
 
     if (productList.length === 0){
         return (
@@ -30,6 +42,22 @@ function All_Products(){
         );
     }
     else {
+        const displayProducts = productList
+        .slice(pagesVisited, pagesVisited + productsPerPage)
+        .map((product) => {
+            return (
+                <div className="col-md-4 pt-5">
+                    <ProductCard 
+                        img={product.image}
+                        name={product.name}
+                        price={product.price}
+                        point={product.point}
+                        code={product.code}
+                        type={type}
+                    />
+                </div>
+            );
+        });
         return (
             <div className="row all_products d-flex">
                 <div className="col-md-3">
@@ -37,20 +65,20 @@ function All_Products(){
                 </div>
                 <div className="col-md-9">
                     <div className="row content d-flex justify-content-center ms-5">
-                        {productList.map((product) => {
-                                return (
-                                    <div className="col-md-4 pt-5">
-                                        <ProductCard 
-                                            img={product.image}
-                                            name={product.name}
-                                            description={product.description.slice(0, 50)}
-                                            price={product.price}
-                                            code={product.code}
-                                            type={type}
-                                        />
-                                    </div>
-                                );
-                            })}
+                        {displayProducts}
+                    </div>
+                    <div className="mt-5 d-flex justify-content-center"> 
+                        <ReactPaginate
+                            previousLabel={'<<'}
+                            nextLabel={">>"}
+                            pageCount={pageCount}
+                            onPageChange={changePage}
+                            containerClassName={"paginationBttns"}
+                            previousLinkClassName={"previousBttn"}
+                            nextLinkClassName={"nextBttn"}
+                            disabledClassName={"paginationDisabled"}
+                            activeClassName={"paginationActive"}
+                        />
                     </div>
                 </div>
             </div>

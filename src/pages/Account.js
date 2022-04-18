@@ -60,7 +60,7 @@ export default function Account(){
     setCountry(event.target.value);
   };
    return (
-       <>
+       <div className="account">
         <Header/>
         <div class="Container_acc" style={{backgroundColor:"white"}}>
           <div class="Account_Style">
@@ -146,7 +146,7 @@ export default function Account(){
           </div>
         </div>
         <Footer/>
-       </>
+       </div>
       
    )
 }

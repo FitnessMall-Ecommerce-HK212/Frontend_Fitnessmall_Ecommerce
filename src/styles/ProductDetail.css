@@ -50,6 +50,8 @@
 
 .description .brief .readmore {
     color: var(--lightsecondary);
+    border: none;
+    background-color: var(--background);
 }
 
 .description .category{
@@ -89,44 +91,53 @@
     font-size: 20px;
 }
 
-.input-spinner {
-    display: flex;
-	align-items: center;
-    justify-content: center;
-	width: 100%;
+.numberToOrder .input-spinner {
+    padding-left: 50px;
 }
-.input-spinner > button{
-	font-size: 1rem;
-	line-height: 1.5;
-    padding: .375rem .75rem;
-	outline: none;
-	border-color: var(--primary);
+
+.numberToOrder .btn-primary {
+    border: 2px solid var(--primary) !important;
     color: var(--primary);
     background-color: white;
-	cursor: pointer;
 }
-.input-spinner .sub{
-	border-radius: 10px 0px 0px 10px;
-}
-.input-spinner .add{
-	border-radius: 0px 10px 10px 0px;
-}
-.input-spinner > button:active{
+
+.numberToOrder .btn-primary:active {
     background: var(--primary);
+    border-color: var(--primary) !important;
     color: white;
+    outline: none !important;
+    box-shadow: none;
 }
-.input-spinner > input{
-	outline: none;
-	border-top: 2px solid var(--primary);
+
+.numberToOrder .btn-primary:focus {
+    background: var(--primary);
+    border-color: var(--primary) !important;
+    color: white;
+    outline: none !important;
+    box-shadow: none;
+}
+
+.numberToOrder .form-control {
+    border-top: 2px solid var(--primary);
     border-bottom: 2px solid var(--primary);
     border-left: none;
     border-right: none;
-	width: 50px;
-    padding: .375rem .75rem;
-	text-align: center;
-	font-size: 1rem;
-	color: var(--primary);
-    background: white;
+    flex: 0.5 0.5;
+    text-align: center;
+    font-weight: 500;
+}
+
+.numberToOrder .form-control:focus{
+    outline: var(--lightprimary) solid 2px;
+    box-shadow: none;
+}
+
+#input-spinner-left-button {
+    border-radius: 10px 0px 0px 10px;
+}
+
+#input-spinner-right-button {
+    border-radius: 0px 10px 10px 0px;
 }
 
 .category {
