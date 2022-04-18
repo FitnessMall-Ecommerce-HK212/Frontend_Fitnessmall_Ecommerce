@@ -12,22 +12,6 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 export default function Account(){
   const history=useHistory();
-  useEffect(()=>{
-    axios
-      .get(
-        "http://127.0.0.1:8080/api/user_author",
-            {
-            },
-            { headers: { "Content-Type": "application/json" } }
-          )
-                        .then((res) => {
-                          if (res.data=="Not Author") 
-                            history.push("/");
-                        })
-                        .catch((err) => {
-                          alert(err);
-                        });
-  },[])
   // For Radio button
   const [checked,setCheck]=useState(false)
   function handleChecked(e){

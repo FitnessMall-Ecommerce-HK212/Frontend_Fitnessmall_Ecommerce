@@ -4,8 +4,11 @@ import InputSpinner from 'react-bootstrap-input-spinner'
 import { CTAButton, GhostButton } from '../Buttons'
 import RatingStar from "./ratingstar";
 import { useState } from 'react';
+import { increment, decrement, checkItem, removeItem, addItem } from '../../features/cart/cartSlice'
+import { useSelector, useDispatch } from 'react-redux'
 
-function Description(props){
+function Description(props) {
+    const dispatch = useDispatch()
     const [active, setActive] = useState(0);
     const [showResult, setShowResult] = useState(false);
     const onClick = () => setShowResult(!showResult)
@@ -25,12 +28,18 @@ function Description(props){
             </div>
         )
     }
+
+    const handleAddCart = () => {
+        dispatch(addItem(props.id, props.name, props.price, props.image, props.quantity))
+        alert(`Thêm sản phẩm '${props.name}' vào giỏ hàng thành công!`)
+    }
+
     return (
         <div className="description">
             <div className="product-name">{props.name}</div>
-            <div class="rating d-flex" style={{gap: '5px'}}>
-                <RatingStar/>
-                <span class="feedback-num">| {props.numOfFeedbacks} đánh giá</span> 
+            <div class="rating d-flex" style={{ gap: '5px' }}>
+                <RatingStar />
+                <span class="feedback-num">| {props.numOfFeedbacks} đánh giá</span>
             </div>
             <div className="brief">
             {showResult ? <LessInfo des={props.des}/>: <Info des={props.des}/>}
@@ -67,8 +76,8 @@ function Description(props){
             <div className="row d-flex mt-5">
                 <div className="col-2"></div> 
                 <div className="col-10 action d-flex">
-                    <GhostButton value="Thêm vào giỏ hàng"/>
-                    <CTAButton value="Mua ngay" className="after"/>
+                    <GhostButton value="Thêm vào giỏ hàng" onClick={handleAddCart} />
+                    <CTAButton value="Mua ngay" className="after" />
                 </div>
             </div>
         </div>

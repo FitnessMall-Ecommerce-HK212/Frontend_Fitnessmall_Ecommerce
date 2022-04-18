@@ -1,5 +1,5 @@
 import "../../styles/ProductDetail.css"
-import {Link, useParams} from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Description from "./description";
 import Feedback from "./feedback";
 import HotBlogCard from '../Home/hotblogcard';
@@ -28,25 +28,26 @@ function ProductDetail(){
     const { type, code} = useParams();
     const [productInfo, setProductInfo] = useState([]);
     var typename, api;
-    if (type === 'food'){
+    if (type === 'food') {
         typename = 'THỰC PHẨM DINH DƯỠNG';
         api = '/api/food/' + code;
     }
-    else if (type === 'equipment'){
+    else if (type === 'equipment') {
         typename = 'DỤNG CỤ TẬP LUYỆN';
         api = '/api/item/' + code;
     }
     const getProductInfo = async () => {
         const res = await axios.get(BASE_URL + api);
+        console.log(res.data)
         setProductInfo(res.data);
     }
     useEffect(() => {
         getProductInfo();
-      }, []);
-    if (productInfo.length === 0){
+    }, []);
+    if (productInfo.length === 0) {
         return (
             <div className="d-flex justify-content-center mt-5">
-                <CircularProgress/>
+                <CircularProgress />
             </div>
         );
     }
@@ -62,7 +63,7 @@ function ProductDetail(){
                 </div>
                 <div className="row product-intro mt-4">
                     <div className="col-md-6 product-image text-center">
-                        <img src={productInfo.image} alt="img"/>
+                        <img src={productInfo.image} alt="img" />
                     </div>
                     <div className="col-md-6 col-xs-12">
                         <Description name={productInfo.name} des={productInfo.description} numOfFeedbacks={productInfo.feedback.length} category={category}/>
@@ -73,15 +74,15 @@ function ProductDetail(){
                     <div className="col-md-6 more-description">
                         <div className="title text-center">MÔ TẢ SẢN PHẨM</div>
                         <div className="content mt-2">
-                        {productInfo.description}
+                            {productInfo.description}
                         </div>
                     </div>
                     <div className="col-md-6 feedbacklist text-center">
                         <div className="title text-center">ĐÁNH GIÁ ({productInfo.feedback.length})</div>
                         <div className="mt-2">
-                        {productInfo.feedback.map((fb) => {
+                            {productInfo.feedback.map((fb) => {
                                 return (
-                                    <Feedback username={fb.username} timestamp={fb.timestamp} content={fb.content}/>
+                                    <Feedback username={fb.username} timestamp={fb.timestamp} content={fb.content} />
                                 );
                             })}
                         </div>
@@ -97,7 +98,7 @@ function ProductDetail(){
                         {list.map((i) => {
                             return (
                                 <div className="col-4">
-                                    <HotBlogCard img='https://www.wheystore.vn/upload/news_optimize/wst_1602494019_workout_la_gi__tam_quan_trong_cua_workout_trong_the_hinh_image_1602494019_1.jpg' tags='FITNESS' title='5 WORKOUTS YOU CAN DO ALMOST EVERYWHERE'/>
+                                    <HotBlogCard img='https://www.wheystore.vn/upload/news_optimize/wst_1602494019_workout_la_gi__tam_quan_trong_cua_workout_trong_the_hinh_image_1602494019_1.jpg' tags='FITNESS' title='5 WORKOUTS YOU CAN DO ALMOST EVERYWHERE' />
                                 </div>
                             );
                         })}

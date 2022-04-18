@@ -20,7 +20,7 @@ export default function Address(){
                 <p > Nhà khách: <span style={{marginLeft:"15px"}}>Đại Học Bách Khoa TPHCM</span></p>
             </div>
             <p style={{display:"block"}}>
-                <img src="https://cdn-icons.flaticon.com/png/512/439/premium/439342.png?token=exp=1649641783~hmac=e1effe332fa5e097956bf114706ce635" width="25px" height="25px" style={{cursor:"pointer"}}/>
+                <img src="https://cdn-icons-png.flaticon.com/512/900/900834.png" width="25px" height="25px" style={{cursor:"pointer"}}/>
             </p>
           </div>
           <div style={{alignItems: "center",justifyContent: "center",margin:"0 auto",display: "flex"}}>

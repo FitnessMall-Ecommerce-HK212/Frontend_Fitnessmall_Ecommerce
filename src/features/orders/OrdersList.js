@@ -20,7 +20,7 @@ export default function OrdersList() {
 
     const [orders, setOrders] = useState()
     const [products, setProducts] = useState([])
-    // const [imgurl, setImagurl] = useState()
+
     useEffect(() => {
         var axios = require('axios');
         var data = JSON.stringify({
@@ -47,76 +47,10 @@ export default function OrdersList() {
 
     }, [])
 
-    // useEffect(() => {
-    //     if (orders) {
-    //         getProduct()
-    //     }
-    // }, [orders])
-    // const orders = useSelector(selectOrder)
     const [kind, setKind] = useState("Tất cả đơn hàng")
 
     const onChangeKind = (e) => {
         setKind(e.target.value)
-    }
-
-    // const getProduct = () => {
-    //     var axios = require('axios');
-    //     var data = JSON.stringify({
-    //         "username": "giacat"
-    //     });
-    //     orders.map(order => {
-    //         order.products.map(product => {
-    //             var config = {
-    //                 method: 'get',
-    //                 url: `http://localhost:8080/api/item/${product.code}`,
-    //                 headers: {
-    //                     'Content-Type': 'application/json',
-    //                 },
-    //                 data: data
-    //             };
-
-    //             axios(config)
-    //                 .then(function (response) {
-    //                     if (response.data.image) {
-    //                         console.log(response.data);
-    //                         // products.push(response.data.image)
-    //                         if (products[products.length - 1] != response.data.image) {
-    //                             setProducts([...products, response.data.image])
-    //                         }
-    //                     }
-    //                 })
-    //                 .catch(function (error) {
-    //                     console.log(error);
-    //                 });
-    //         })
-
-    //     })
-    // }
-
-    const getProductImageUrl = (productCode) => {
-        var axios = require('axios');
-        var data = JSON.stringify({
-            "username": "giacat"
-        });
-
-        var config = {
-            method: 'get',
-            url: `http://localhost:8080/api/item/image/${productCode}`,
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            data: data
-        };
-
-        axios(config)
-            .then(function (response) {
-                console.log(response.data);
-                return response.data
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-
     }
 
     const renderState = (order) => {
@@ -179,15 +113,12 @@ export default function OrdersList() {
     }
     const renderItems = (order) => {
         return order.products.map((product, index) => {
-            // return getProductImageUrl(product.code)
-            // let urlImage = getProductImageUrl(product.code)
             console.log(product)
             return (
                 <div className={styles.orderlist__header__content__item__info} key={product.code}>
                     <div className={styles.orderlist__header__content__item__info__thumbquantity}>
                         <div>
                             <img src={product.image_name.image
-                                // products[pIndex]
                             } alt='...' className={styles.orderlist__header__content__item__info__thumb} />
                         </div>
                         <div className={styles.orderlist__header__content__item__info__text}>

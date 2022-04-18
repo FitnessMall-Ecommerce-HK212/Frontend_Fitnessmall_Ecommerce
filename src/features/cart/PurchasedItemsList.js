@@ -4,7 +4,7 @@ import styles from './PurchasedItems.module.css'
 import { selectCart } from './cartSlice'
 import ChangeQuantity from './ChangeQuantity'
 import Sale from '../../assets/logo/Sale.svg'
-import { checkItem, removeItem } from './cartSlice'
+import { checkItem, removeItem, addItem } from './cartSlice'
 import NoItemInCart from './NoItemInCart'
 import Header from '../../components/Header/index'
 import Footer from '../../components/Footer/index'
@@ -20,28 +20,6 @@ import PersonIcon from '@mui/icons-material/Person';
 import AddIcon from '@mui/icons-material/Add';
 import { blue } from '@mui/material/colors';
 
-// const a1 = <>
-//   <div className={styles.alldata__paymentinfo__diachi__namephone}>
-//     <p>Võ Hồng Phúc</p>
-//     <p>|</p>
-//     <p>0123456789</p>
-//   </div>
-//   <div>
-//     <p>Ký túc xá khu A ĐHQG TP Hồ Chí Minh, Phường Linh Trung, Quận Thủ Đức - TP Thủ Đức, Hồ Chí Minh</p>
-//   </div>
-// </>
-
-// const a2 =
-//   <>
-//     <div className={styles.alldata__paymentinfo__diachi__namephone}>
-//       <p>Võ Ngọc Quang</p>
-//       <p>|</p>
-//       <p>0123999999</p>
-//     </div>
-//     <div>
-//       <p>10-12 Đinh Tiên Hoàng Quận 1 Thành phố Hồ Chí Minh</p>
-//     </div>
-//   </>
 const addresses = [];
 
 export class SimpleDialogProps {
@@ -145,6 +123,7 @@ export default function PurchasedItemsList() {
   }, [])
 
   const items = useSelector(selectCart)
+
   var isChosenAll = true
   var sum = 0
   const dispatch = useDispatch()
