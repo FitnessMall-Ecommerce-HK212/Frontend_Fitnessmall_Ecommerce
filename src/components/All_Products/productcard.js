@@ -8,14 +8,9 @@ function ProductCard(props){
         <div className="productcard">
             <div className='card'>
                 <img src={props.img} className="card-img-top" alt="..."/>
-                <div className="card-body text-center">
-                <div className="card-title text-center pt-2">{props.name}</div>
-                    <div className='row d-flex justify-content-center'>
-                        <div className='col-5'>
-                            <RatingStar/>
-                        </div>
-                        <div className='col-7 price'>{props.price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}</div>
-                    </div>
+                <div className="card-body text-center justify-content-center">
+                    <div className="card-title text-center pt-2">{props.name}<span class="badge bg-warning ms-2">5</span></div>
+                    <div className='price justify-content-center'><h5>{props.price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}</h5></div>
                     <div className='moreaction mt-2 d-flex justify-content-center'>
                         <GhostButton value="View Detail"/>
                     </div>

@@ -1,13 +1,33 @@
-import { FaStar } from "react-icons/fa";
-import '../../styles/AllProducts.css';
-import InputSpinner from "./inputSpinner";
+import { NavLink } from 'react-router-dom'
+import '../../styles/ProductDetail.css';
+import InputSpinner from 'react-bootstrap-input-spinner'  
 import { CTAButton, GhostButton } from '../Buttons'
 import RatingStar from "./ratingstar";
+import { useState } from 'react';
 import { increment, decrement, checkItem, removeItem, addItem } from '../../features/cart/cartSlice'
 import { useSelector, useDispatch } from 'react-redux'
 
 function Description(props) {
     const dispatch = useDispatch()
+    const [active, setActive] = useState(0);
+    const [showResult, setShowResult] = useState(false);
+    const onClick = () => setShowResult(!showResult)
+    const Info = (props) => {
+        return (
+            <div>
+                {props.des.slice(0, 200)}
+                <button class="readmore" onClick={onClick}>...Xem thêm</button>
+            </div>
+        )
+    }
+    const LessInfo = (props) => {
+        return (
+            <div>
+                {props.des}
+                <button class="readmore" onClick={onClick}>...Thu gọn</button>
+            </div>
+        )
+    }
 
     const handleAddCart = () => {
         dispatch(addItem(props.id, props.name, props.price, props.image, props.quantity))
@@ -22,29 +42,39 @@ function Description(props) {
                 <span class="feedback-num">| {props.numOfFeedbacks} đánh giá</span>
             </div>
             <div className="brief">
-                {props.des}
-                <span class="readmore">...Xem thêm</span>
+            {showResult ? <LessInfo des={props.des}/>: <Info des={props.des}/>}
             </div>
             <div className="row category">
                 <div className="col-2">Phân loại:</div>
-                <div className="col-4 text-center">
-                    <button className="btn btn-option clicked">250g</button>
-                    <button className="btn btn-option ms-5">500g</button>
+                <div className="col-4 d-flex justify-content-center">
+                    {props.category.map((e) => {
+                        return (
+                            <button type='button' className={props.category[active] === e ? "btn btn-option ms-5 clicked": "btn btn-option ms-5"} onClick={()=>setActive(props.category.indexOf(e))}>{e.cat}</button>
+                        );
+                    })}
                 </div>
             </div>
             <div className="row price mt-3">
-                <div className="col-2">Giá:</div>
-                <div className="col-4 action text-center">55.000 đ</div>
+                <div className="col-2">Giá:</div> 
+                <div className="col-4 action text-center">{props.category[active].price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}</div>
             </div>
             <div className="row numberToOrder mt-3">
-                <div className="col-2">Số lượng:</div>
-                <div className="col-4">
-                    <InputSpinner />
+                <div className="col-2">Số lượng:</div> 
+                <div className="col-4 input-spinner">
+                    <InputSpinner
+                        type={'int'}
+                        max={props.category[active].quantity}
+                        min={1}
+                        step={1}
+                        value={1}
+                        onChange={num=>console.log(num)}
+                        size="sm"
+                    />
                 </div>
-                <div className="col-6 feedback-num">100 sản phẩm có sẵn</div>
+                <div className="col-6 feedback-num">{props.category[active].quantity} sản phẩm có sẵn</div>
             </div>
-            <div className="row d-flex mt-4">
-                <div className="col-2"></div>
+            <div className="row d-flex mt-5">
+                <div className="col-2"></div> 
                 <div className="col-10 action d-flex">
                     <GhostButton value="Thêm vào giỏ hàng" onClick={handleAddCart} />
                     <CTAButton value="Mua ngay" className="after" />

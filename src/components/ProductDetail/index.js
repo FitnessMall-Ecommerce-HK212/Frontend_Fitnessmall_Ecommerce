@@ -11,8 +11,21 @@ const BASE_URL = "http://localhost:8080";
 
 const list = [1, 2, 3];
 
-function ProductDetail() {
-    const { type, code } = useParams();
+const category = [
+    {
+        'cat': '250g',
+        'price': 150000,
+        'quantity': 10
+    }, 
+    {
+        'cat': '500g',
+        'price': 200000,
+        'quantity': 20
+    }
+]
+
+function ProductDetail(){
+    const { type, code} = useParams();
     const [productInfo, setProductInfo] = useState([]);
     var typename, api;
     if (type === 'food') {
@@ -53,7 +66,7 @@ function ProductDetail() {
                         <img src={productInfo.image} alt="img" />
                     </div>
                     <div className="col-md-6 col-xs-12">
-                        <Description name={productInfo.name} des={productInfo.description.slice(0, 200)} numOfFeedbacks={productInfo.feedback.length} quantity={1} image={productInfo.image} id={code} price={productInfo.price} />
+                        <Description name={productInfo.name} des={productInfo.description} numOfFeedbacks={productInfo.feedback.length} category={category}/>
                     </div>
                 </div>
                 <div class='divider mt-5'></div>
@@ -73,8 +86,8 @@ function ProductDetail() {
                                 );
                             })}
                         </div>
-                        <div className="action d-flex justify-content-center">
-                            <CTAButton value="Thêm đánh giá" />
+                        <div className="action d-flex justify-content-center mt-4">
+                            <CTAButton value="Thêm đánh giá"/>
                         </div>
                     </div>
                 </div>
