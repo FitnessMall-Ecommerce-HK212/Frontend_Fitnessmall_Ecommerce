@@ -43,6 +43,7 @@
     border-radius: 0 15px 0 0;
     border-color: var(--background);
     background-color: var(--background);
+    box-shadow: 0 10px 20px rgba(0,0,0,.12);
 }
 .productcard .card img{
     height: 250px;
@@ -56,6 +57,10 @@
 .productcard .card-body{
     padding: 0 10px 10px 5px;
     background-color: var(--surface);
+}
+
+.price h5{
+    color: var(--positive);
 }
 
 .productcard .card-title{
@@ -77,11 +82,43 @@
     font-size: 14px;
 }
 
-.productcard .price {
-    align-items: flex-end !important;
-    font-size: 18px;
-}
-
 .moreaction .Ghost_Button {
     height: 30px;
+}
+  
+.paginationBttns {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: .3em;
+}
+
+.paginationBttns a {
+    padding: 10px;
+    border: 1px solid var(--primary);
+    border-radius: 10px;
+    cursor: pointer;
+    color: var(--primary) !important;
+}
+
+.paginationBttns a:hover {
+    color: white !important;
+    background-color: var(--primary);
+}
+
+.paginationActive a {
+    color: white !important;
+    background-color: var(--primary);
+}
+
+.paginationDisabled a {
+    color: var(--lightprimary) !important;
+    background-color: white;
+    border: 1px solid var(--lightprimary);
+}
+
+.paginationDisabled a:hover{
+    color: var(--lightprimary) !important;
+    background-color: white;
+    border: 1px solid var(--lightprimary);
 }

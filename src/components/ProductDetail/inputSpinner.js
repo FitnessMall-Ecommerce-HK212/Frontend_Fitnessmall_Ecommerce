@@ -1,9 +1,9 @@
-import React from "react";
-function InputSpinner(){
+import { useEffect, useState } from "react";
+function InputSpinner(props){
     return (
         <div class="input-spinner">
             <button className="sub">-</button>
-            <input type="text" id="qtyBox" value="1"/>
+            <input type="text" value='1'/>
             <button className="add">+</button>
         </div>
     );

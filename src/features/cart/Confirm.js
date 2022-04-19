@@ -83,7 +83,10 @@ function SimpleDialog(props) {
 
 export default function Confirm() {
 
-  const items = useSelector(selectCart)
+  const items = JSON.parse(localStorage.getItem("giacat"))
+  // const items = JSON.parse(localStorage.getItem("giacat")).cart
+
+
   var sum = 0
   const dispatch = useDispatch()
   const [open, setOpen] = React.useState(false);

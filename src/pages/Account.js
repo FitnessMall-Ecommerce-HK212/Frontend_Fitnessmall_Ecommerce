@@ -12,22 +12,6 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 export default function Account(){
   const history=useHistory();
-  useEffect(()=>{
-    axios
-      .get(
-        "http://127.0.0.1:8080/api/user_author",
-            {
-            },
-            { headers: { "Content-Type": "application/json" } }
-          )
-                        .then((res) => {
-                          if (res.data=="Not Author") 
-                            history.push("/");
-                        })
-                        .catch((err) => {
-                          alert(err);
-                        });
-  },[])
   // For Radio button
   const [checked,setCheck]=useState(false)
   function handleChecked(e){
@@ -60,7 +44,7 @@ export default function Account(){
     setCountry(event.target.value);
   };
    return (
-       <>
+       <div className="account">
         <Header/>
         <div class="Container_acc" style={{backgroundColor:"white"}}>
           <div class="Account_Style">
@@ -146,7 +130,7 @@ export default function Account(){
           </div>
         </div>
         <Footer/>
-       </>
+       </div>
       
    )
 }

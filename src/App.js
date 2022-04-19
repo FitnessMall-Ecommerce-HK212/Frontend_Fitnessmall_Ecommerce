@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import store from './redux/store';
-import React from "react";
+import PrivateRoute from './PrivateRoute';
 import  {Login,Register,HomePage,Account,HealthInfo,Address} from './pages';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AllProducts from './pages/AllProducts';
@@ -26,12 +26,12 @@ const App = () => {
           <Route exact path="/" component={HomePage} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/account" component={Account} />
+          <PrivateRoute exact path="/account" component={Account} />
           <Route exact path="/products/:type" component={AllProducts} />
           <Route exact path="/products/:type/:code" component={ProductDetailPage} />
-          <Route path="/account" component={Account} />
-          <Route path="/healthinfo" component={HealthInfo} />
-          <Route path="/address" component={Address} />
+          <PrivateRoute path="/account" component={Account} />
+          <PrivateRoute path="/healthinfo" component={HealthInfo} />
+          <PrivateRoute path="/address" component={Address} />
           <Route exact path="/blog" component={BlogPage} />
           <Route path="/blog/detail/:idBlog" component={BlogDetailPage} />
           {/* <PrivateRoute path="/..." component={...} /> */}

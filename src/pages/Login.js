@@ -156,7 +156,6 @@ export default function Login() {
     event.preventDefault();
   };
   const [password, setPass]=useState('')
-  const rounds = 10;
   const handlePasswordChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
@@ -166,9 +165,9 @@ export default function Login() {
     e.preventDefault();  
     const hash =md5(values.pwd);
     setPass(hash)
-    // console.log(hash)
-    dispatch(loginUser({ username:username, password: password}));
-    axios
+    dispatch(loginUser({ username:username, password: hash}));
+    setTimeout(() => {
+      axios
       .get(
         `http://127.0.0.1:8080/api/user_author/${sessionStorage.getItem("sessionID")}`,
             {
@@ -176,13 +175,17 @@ export default function Login() {
             { headers: { "Content-Type": "application/json" } }
           )
                         .then((res) => {
-                             history.push("/")
+                             if (res.data==="OK")
+                             {
+                               localStorage.setItem('isAuthenticated',true)
+                               history.push("/")
+                            }
                         })
                         .catch((err) => {
                           alert(err);
                         });
+    }, 1000);
   };
-
   return (
     <>
     <Header/>
@@ -249,7 +252,7 @@ type={values.showPassword ? "text" : "password"} onChange={handlePasswordChange(
           <br></br>
           <div>
             <p style={{textAlign:"center",fontSize:"13px",fontWeight:600}}>New to fitnessmall?  
-            <Link to="/register" style={{textDecoration:"None"}}  ><span style={{color:"#FF2C86",cursor: "pointer"}} >Sign up</span></Link></p>
+            <Link to="/register" style={{textDecoration:"None"}}  ><span style={{color:"#FF2C86",cursor: "pointer"}} > Sign up</span></Link></p>
           </div>
         </Card>
       </Grid>

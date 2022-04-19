@@ -131,20 +131,20 @@
     justify-content: space-between;
     flex-direction: column;
 }
-.form-control{
+.account .form-control{
 
     -webkit-box-align: center;
     align-items: center;
     margin: 0px 0px 25px;
     
 }
-.form-info .form-control{
+.account .form-info .form-control{
     display: flex;
     -webkit-box-align: center;
     align-items: center;
     margin: 0px 0px 34px;
 }
-.form-control .input-label{
+.account .form-control .input-label{
     width: 110px;
     min-width: 110px;
     font-size: 16px;
