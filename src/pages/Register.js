@@ -1,8 +1,10 @@
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect,useHistory } from 'react-router-dom';
 import {Footer, Header} from '../components';
+import axios from "axios";
+import '../styles/Login_Register.css'
 // import { registerUser,checkRegister } from '../redux/auth/authSlice';
 import {
   Grid,
@@ -128,38 +130,9 @@ const useStyles = makeStyles((theme) => ({
 export default function Register() {
   const classes = useStyles();
   const theme = useTheme();
-  
-  // const dispatch = useDispatch();
-  // const { isAuthenticated,errorRegister } = useSelector((state) => state.auth);
-   
-  // const [errorpass,setError]=useState("");
-  // const [formData, setFormData] = useState({
-  //   username: '',
-  //   email: '',
-  //   password: '',
-  //   repassword:'',
-  // });
-
-  // const { username, email, password, repassword } = formData;
-  // const onChange = (e) => setFormData(
-  //  { ...formData, [e.target.name]: e.target.value }
-  //   );
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   // if(password!==repassword){ 
-  //   //   setError("Not correct password!! Please try again." );
-  //   // }
-   
-  //     dispatch(checkRegister({username, email, password}))
-  //     dispatch(registerUser({ username, email, password}));
-  //     if(password!==repassword){ 
-  //       setError("Not correct password!! Please try again." );
-  //     }
-  // };
-
-  // if (isAuthenticated) {
-  //   return <Redirect to="/control" />;
-  // }
+  const history=useHistory();
+  const [value_mail,setEmail]=useState('');
+  const [value_pass,setPass]=useState('');
 
   return (
     <>
@@ -180,14 +153,15 @@ export default function Register() {
           alignItems: "center",
         }}
       >
-        <Card style={{ padding: "35px 29px", height: "420px", width: "472px" }}>
+        <Card style={{ padding: "35px 29px", height: "450px", width: "472px" }}>
           <Typography className={classes.text20}>Sign up</Typography>
            
           <form>
-            <input type="text" id="inputPhone" className={classes.input} name="phonenumber" placeholder = "Phone number" 
+            <input type="text" id="inputEmail" className={classes.input} name="email" placeholder = "Email" 
             // onChange={onChange}
             ></input>
             {/* <p className="fst-italic text-danger">{errorLogin.userError}</p> */}
+            <input type="text" id="inputPass" className={classes.input} name="password" placeholder = "Password" ></input>
           </form>
 
           <Button variant="contained" type="submit" className={classes.button_login}
@@ -200,7 +174,23 @@ export default function Register() {
           </div>
           <br></br>
           <div style={{margin: "0px 45px ",justifyContent: "space-between",flexWrap: "wrap",display: "flex"}} >
-          <button className={classes.button_social}>
+          <button className={classes.button_social} onClick={()=>{
+             axios
+             .get(
+               `http://127.0.0.1:8080/api/user_signin_signup/google`
+             )
+             .then((res) => {
+               window.open(res.data,'','popup')
+               localStorage.setItem('isAuthenticated',true)
+               setTimeout(() => {
+                history.push("/")
+              }, 9000);
+             })
+             .catch((err) => {
+               alert(err);
+             });
+
+          }}>
             <div className={classes.icon}><div className={classes.icon_Google}></div></div>
             <div>Google</div>
           </button> 
