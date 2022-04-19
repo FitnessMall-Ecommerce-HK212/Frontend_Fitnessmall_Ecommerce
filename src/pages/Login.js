@@ -169,7 +169,7 @@ export default function Login() {
     setTimeout(() => {
       axios
       .get(
-        `http://127.0.0.1:8080/api/user_author/${sessionStorage.getItem("sessionID")}`,
+        `http://127.0.0.1:8080/api/user_author/${localStorage.getItem("sessionID")}`,
             {
             },
             { headers: { "Content-Type": "application/json" } }
@@ -240,7 +240,23 @@ type={values.showPassword ? "text" : "password"} onChange={handlePasswordChange(
           </div>
           <br></br>
           <div style={{margin: "0px 45px ",justifyContent: "space-between",flexWrap: "wrap",display: "flex"}} >
-          <button className={classes.button_social}>
+          <button className={classes.button_social} onClick={()=>{
+             axios
+             .get(
+               `http://127.0.0.1:8080/api/user_signin_signup/google`
+             )
+             .then((res) => {
+               window.open(res.data,'','popup')
+               localStorage.setItem('isAuthenticated',true)
+               setTimeout(() => {
+                history.push("/")
+              }, 8900);
+             })
+             .catch((err) => {
+               alert(err);
+             });
+
+          }}>
             <div className={classes.icon}><div className={classes.icon_Google}></div></div>
             <div>Google</div>
           </button> 
