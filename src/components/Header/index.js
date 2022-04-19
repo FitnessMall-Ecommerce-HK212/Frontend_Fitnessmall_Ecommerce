@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Popover, Button } from 'antd';
 function Header(props) {
   let history = useHistory();
-  const sign=sessionStorage.geItem("sessionID");
+  // const sign=sessionStorage.geItem("sessionID");
   const [visible,setVisible]=useState(false)
   const hide = () => {
     setVisible(false);
