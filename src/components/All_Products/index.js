@@ -1,20 +1,18 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, NavLink } from "react-router-dom";
 import ProductCard from './productcard'
-import SideBar from "./sidebar";
 import ReactPaginate from 'react-paginate';
 import { CircularProgress } from "@mui/material";
 const BASE_URL = "http://localhost:8080";
 
 function All_Products(){
     const [productList, setProductList] = useState([]);
+    const [link, setLink] = useState("/api/foods");
     const [pageNumber, setPageNumber] = useState(0);
 
     const productsPerPage = 6;
     const pagesVisited = pageNumber * productsPerPage;
-    
-    const pageCount = Math.ceil(productList.length / productsPerPage);
 
     const changePage = ({ selected }) => {
         setPageNumber(selected);
@@ -22,17 +20,13 @@ function All_Products(){
 
     const { type } = useParams();
     const getProductList = async () => {
-        var api;
-        if (type === 'equipment')
-            api = "/api/items";
-        else 
-            api = "/api/foods";
-        const res = await axios.get(BASE_URL + api);
+        const res = await axios.get(BASE_URL + link);
         setProductList(res.data);
     }
     useEffect(() => {
         getProductList();
-      }, []);
+        setPageNumber(0);
+      }, [link]);
 
     if (productList.length === 0){
         return (
@@ -42,6 +36,7 @@ function All_Products(){
         );
     }
     else {
+        const pageCount = Math.ceil(productList.length / productsPerPage);
         const displayProducts = productList
         .slice(pagesVisited, pagesVisited + productsPerPage)
         .map((product) => {
@@ -61,7 +56,16 @@ function All_Products(){
         return (
             <div className="row all_products d-flex">
                 <div className="col-md-3">
-                    <SideBar />
+                <div className='sidebar-product'>
+                    <div className='title pt-5'>
+                        CÁC SẢN PHẨM VÀ DỊCH VỤ
+                    </div>
+                    <div className="optionbutton mb-5">
+                        <NavLink to='/products/food' activeStyle={{color: 'white', background: '#FFA5CB'}} type='button' className="btn btn-option btn-lg mt-5" onClick={()=>setLink("/api/foods")}>Thực phẩm dinh dưỡng</NavLink>
+                        <NavLink to='/products/equipment' activeStyle={{color: 'white', background: '#FFA5CB'}} type='button' className="btn btn-option btn-lg mt-5" onClick={()=>setLink("/api/items")}>Dụng cụ tập luyện</NavLink>
+                        <NavLink to='/products/personal-training' activeStyle={{color: 'white', background: '#FFA5CB'}} className="btn btn-option btn-lg mt-5" onClick={()=>setLink("/api/foods")}>Gói Personal Training</NavLink>
+                    </div>
+                </div>
                 </div>
                 <div className="col-md-9">
                     <div className="row content d-flex justify-content-center ms-5">
@@ -73,6 +77,7 @@ function All_Products(){
                             nextLabel={">>"}
                             pageCount={pageCount}
                             onPageChange={changePage}
+                            forcePage = {pageNumber}
                             containerClassName={"paginationBttns"}
                             previousLinkClassName={"previousBttn"}
                             nextLinkClassName={"nextBttn"}
