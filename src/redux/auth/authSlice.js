@@ -41,7 +41,7 @@ export const loginUser = createAsyncThunk('user_signin', async ({ username, pass
       alert("Account hasn't been verified yet")
       break
     default:
-      sessionStorage.setItem("sessionID", res.data)
+      localStorage.setItem("sessionID", res.data)
       break
   }
   // console.log(res.data);

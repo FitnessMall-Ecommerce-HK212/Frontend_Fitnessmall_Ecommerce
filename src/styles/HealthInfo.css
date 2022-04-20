@@ -4,6 +4,10 @@
     margin-top: 1rem;
     gap: 15rem!important;
 }
+#date::placeholder{
+    color: var(--lightprimary);
+    font-size: 15px;
+}
 .healthBox{
     border-radius: 10px 10px;
     margin-left: 50px;

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { Link,Redirect} from 'react-router-dom';
-import {Footer, Header,Sidebar,CTAButton,DropdownButton} from '../components';
+import {Footer, Header,Sidebar,CTAButton,DropdownButton,GhostButton} from '../components';
 import '../styles/HealthInfo.css'
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-
+import axios from "axios";
 import { DatePicker, Space } from 'antd';
 import 'antd/dist/antd.css';
 export default function HealthInfo(){
@@ -59,8 +59,25 @@ export default function HealthInfo(){
               </div>
               
           </div>
-          <div style={{height:"5rem"}}>
+          <div style={{height:"5rem",marginTop:'10px'}}>
            <p>Theo dõi luyện tập</p>
+           <GhostButton value="Liên kết gg fit" onClick={()=>{
+             axios
+             .get(
+               "http://127.0.0.1:8080/api/google_fit"
+             )
+             .then((res) => {
+               window.open(res.data,'','popup')
+              //  localStorage.setItem('isAuthenticated',true)
+              //  setTimeout(() => {
+              //   history.push("/")
+              // }, 8900);
+             })
+             .catch((err) => {
+               alert(err);
+             });
+
+          }} ></GhostButton>
           </div>
           <div>
            <p>Thêm lộ trình tập</p>
@@ -68,7 +85,7 @@ export default function HealthInfo(){
                 <DropdownButton value={["Tay","Chan","Co"]}/>
                 <div style={{marginTop:"20px",marginLeft:"30px",marginRight:"30px"}}>
                 <Space direction="vertical" size={12} style={{color:"var(--lightprimary)"}}>
-                <DatePicker showTime onChange={onChange} onOk={onOk} style={{color:"var(--lightprimary)",borderRadius: "12px",display:"flex",backgroundColor:"var(--surface)",border: "solid 1.5px var(--lightprimary)",padding:"10px"}}/>
+                <DatePicker id="date" showTime onChange={onChange} onOk={onOk} style={{color:"var(--lightprimary)",fontSize:"18px",borderRadius: "12px",display:"flex",backgroundColor:"var(--surface)",border: "solid 1px var(--lightprimary)",padding:"10px"}}/>
                 </Space>
                 </div>
                 <DropdownButton value={["1 ngay","2 ngay","1 tuan"]}/>
