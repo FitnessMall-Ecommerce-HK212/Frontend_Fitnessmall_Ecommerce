@@ -53,6 +53,7 @@ function Header(props) {
                           .then((res) => {
                             if (res.data == "Sign Out Successfully") {
                               localStorage.removeItem('isAuthenticated');
+                              sessionStorage.removeItem('sessionID');
                               history.push("/");
                             }
 

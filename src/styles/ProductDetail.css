@@ -158,9 +158,12 @@
     width: fit-content;
     padding: 0 10px;
 }
-.action .CTA_Button{
+
+.action .FormSearch_Button{
     width: fit-content;
+    padding: 0 10px;
 }
+
 .action{
     gap: 30px;
 }

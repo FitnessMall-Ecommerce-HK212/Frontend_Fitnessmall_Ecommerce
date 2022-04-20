@@ -3,30 +3,21 @@ import { Link, useParams } from 'react-router-dom';
 import Description from "./description";
 import Feedback from "./feedback";
 import HotBlogCard from '../Home/hotblogcard';
-import { CTAButton } from '../Buttons'
+import { CTAButton, GhostButton} from '../Buttons'
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { CircularProgress } from "@mui/material";
+import { BsPersonCircle } from 'react-icons/bs';
+import { FaStar, FaRegStar } from "react-icons/fa";
+import ReactStars from "react-rating-stars-component";
 const BASE_URL = "http://localhost:8080";
 
 const list = [1, 2, 3];
 
-const category = [
-    {
-        'cat': '250g',
-        'price': 150000,
-        'quantity': 10
-    }, 
-    {
-        'cat': '500g',
-        'price': 200000,
-        'quantity': 20
-    }
-]
-
 function ProductDetail(){
     const { type, code} = useParams();
     const [productInfo, setProductInfo] = useState([]);
+    const [username, setUsername] = useState("");
     var typename, api;
     if (type === 'food') {
         typename = 'THỰC PHẨM DINH DƯỠNG';
@@ -38,10 +29,19 @@ function ProductDetail(){
     }
     const getProductInfo = async () => {
         const res = await axios.get(BASE_URL + api);
-        console.log(res.data)
+        console.log(res)
         setProductInfo(res.data);
     }
+    const getUsername = async () => {
+        const res = await axios.get(BASE_URL + "/api/user_session/" + sessionStorage.sessionID);
+        setUsername(res.data.username);
+    }
+    const ratingChanged = (newRating) => {
+        console.log(newRating);
+      };
     useEffect(() => {
+        if (sessionStorage.length !== 0)
+            getUsername();
         getProductInfo();
     }, []);
     if (productInfo.length === 0) {
@@ -66,7 +66,7 @@ function ProductDetail(){
                         <img src={productInfo.image} alt="img" />
                     </div>
                     <div className="col-md-6 col-xs-12">
-                        <Description name={productInfo.name} des={productInfo.description} numOfFeedbacks={productInfo.feedback.length} category={category}/>
+                        <Description name={productInfo.name} des={productInfo.description} point={productInfo.point} numOfFeedbacks={productInfo.feedback.length} itemtype={productInfo.itemtype}/>
                     </div>
                 </div>
                 <div class='divider mt-5'></div>
@@ -82,14 +82,43 @@ function ProductDetail(){
                         <div className="mt-2">
                             {productInfo.feedback.map((fb) => {
                                 return (
-                                    <Feedback username={fb.username} timestamp={fb.timestamp} content={fb.content} />
+                                    <div className="mt-3">
+                                        <Feedback username={fb.username} timestamp={fb.date} content={fb.content} point={fb.point} />
+                                    </div>
                                 );
                             })}
+                            <div className="mt-3">
+                                {sessionStorage.length === 0 && <div style={{color: '#B3BDC8'}}>Vui lòng <Link to="/login"><span style={{color: '#FF2C86', fontWeight: '500'}}>đăng nhập</span></Link> để đánh giá sản phẩm!</div>}
+                                {sessionStorage.length !== 0 &&
+                                    <div>
+                                    <div className="row feedback align-items-center mb-3">
+                                        <div className="col-1">
+                                            <BsPersonCircle size='24'/>
+                                        </div>
+                                        <div className='col-2'>
+                                            {username}
+                                        </div>
+                                        <div className='col-9 d-flex justify-content-center'>
+                                        <ReactStars
+                                            rating={3}
+                                            count={5}
+                                            onChange={ratingChanged}
+                                            size={24}
+                                            activeColor="#ffd700"
+                                        />
+                                        </div>
+                                        <div class='col-12'>
+                                            <textarea class="form-control ms-5 mt-2" style={{width: '520px'}} id="feedback" rows="2" placeholder="Vui lòng chọn sao và điền nội dung đánh giá"></textarea>
+                                        </div>
+                                        <div class='col-12 d-flex justify-content-center mt-4'>
+                                            <CTAButton style={{width: 'fit-content', padding: '0 10px'}} value="Gửi đánh giá" onClick={() => {}}/>
+                                        </div>
+                                    </div>
+                                    </div>
+                                }
+                            </div>
                         </div>
-                        <div className="action d-flex justify-content-center mt-4">
-                            <CTAButton value="Thêm đánh giá"/>
-                        </div>
-                    </div>
+                    </div> 
                 </div>
                 <div class='divider mt-5'></div>
                 <div class='related-blog mt-3'>

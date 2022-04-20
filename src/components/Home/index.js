@@ -84,11 +84,17 @@ function Home() {
         ]
     };
     const [hotItems, setHotItems] = useState([]);
+    const [hotFood, setHotFood] = useState([]);
     const [hotBlogs, setHotBlogs] = useState([]);
     const getHotItems = async () => {
         const res = await axios.get(BASE_URL + '/api/items/hot');
         console.log(res.data.hotItems);
         setHotItems(res.data.hotItems);
+    }
+    const getHotFood = async () => {
+        const res = await axios.get(BASE_URL + '/api/foods/hot');
+        console.log(res.data.hotFoods);
+        setHotFood(res.data.hotFoods);
     }
     const getHotBlogs = async () => {
         const res = await axios.get(BASE_URL + '/api/blogs');
@@ -96,10 +102,11 @@ function Home() {
         setHotBlogs(res.data.blogList);
     }
     useEffect(() => {
+        getHotFood();
         getHotItems();
         getHotBlogs();
       }, []);
-    if (hotItems.length === 0 || hotBlogs.length === 0){
+    if (hotFood.length === 0 || hotItems.length === 0 || hotBlogs.length === 0){
         return (
             <div className="d-flex justify-content-center mt-5">
                 <CircularProgress/>
@@ -127,7 +134,30 @@ function Home() {
                 <div className='hotdeals pt-5'>
                     <div className='intro'>
                         <div className='line'></div>
-                        <h5 className='pt-2 ps-1 pe-1'>Hot Deals</h5>
+                        <h5 className='pt-2 ps-1 pe-1'>Food Deals</h5>
+                        <div className='line'></div>
+                    </div>
+                    <Slider {...setting1}>
+                        {hotFood.map((item) => {
+                            return (
+                                <div className="pt-3 pb-3 d-flex justify-content-center">
+                                    <ProductCard 
+                                            img={item.image}
+                                            name={item.name}
+                                            price={item.itemtype[0].price}
+                                            type='food'
+                                            code={item.code}
+                                            point={item.point}
+                                        />
+                                </div>
+                            );
+                        })}
+                    </Slider>
+                </div>
+                <div className='hotdeals pt-5'>
+                    <div className='intro'>
+                        <div className='line'></div>
+                        <h5 className='pt-2 ps-1 pe-1'>Equipment Deals</h5>
                         <div className='line'></div>
                     </div>
                     <Slider {...setting1}>
@@ -135,11 +165,12 @@ function Home() {
                             return (
                                 <div className="pt-3 pb-3 d-flex justify-content-center">
                                     <ProductCard 
-                                            img={item.id.image}
-                                            name={item.id.name}
-                                            price={item.id.itemtype[0].price}
+                                            img={item.image}
+                                            name={item.name}
+                                            price={item.itemtype[0].price}
                                             type='equipment'
-                                            code={item.id.code}
+                                            code={item.code}
+                                            point={5}
                                         />
                                 </div>
                             );
@@ -156,7 +187,7 @@ function Home() {
                         {hotBlogs.map((blog) => {
                             return (
                                 <div className="pt-3 ps-5 pe-5 pb-3 d-flex justify-content-center">
-                                    <HotBlogCard img={blog.image} tags={blog.tags[0]} title={blog.title.toUpperCase()}/>
+                                        <HotBlogCard id={blog.idBlog} img={blog.image} tags={blog.tags[0]} title={blog.title.toUpperCase()}/>
                                 </div>
                             );
                         })}

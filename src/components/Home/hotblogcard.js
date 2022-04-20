@@ -1,6 +1,8 @@
 import '../../styles/HomePage.css'
+import {Link} from 'react-router-dom'
 function HotBlogCard(props){
     return(
+        <Link to={"/blog/detail/"+props.id}>
         <div className='hotblogcard'>
             <div class="card shadow">
             <img src={props.img} class="card-img-top" alt="..."/>
@@ -10,6 +12,7 @@ function HotBlogCard(props){
             </div>
             </div>
         </div>
+        </Link>
     );
 }
 
