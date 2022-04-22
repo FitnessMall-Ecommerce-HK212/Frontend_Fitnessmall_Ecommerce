@@ -137,6 +137,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Login() {
+  // useEffect(()=>{
+
+  // },[])
   const classes = useStyles();
   const theme = useTheme();
   const dispatch = useDispatch();
@@ -245,12 +248,11 @@ type={values.showPassword ? "text" : "password"} onChange={handlePasswordChange(
              .get(
                `http://127.0.0.1:8080/api/user_signin_signup/google`
              )
-             .then((res) => {
+             .then( (res) => {
                window.open(res.data,'','popup')
-               localStorage.setItem('isAuthenticated',true)
-               setTimeout(() => {
-                history.push("/")
-              }, 8900);
+               setTimeout(() => 
+                window.localStorage.getItem('isAuthenticated')=='true'?history.push("/"):''
+              , 3000);
              })
              .catch((err) => {
                alert(err);
