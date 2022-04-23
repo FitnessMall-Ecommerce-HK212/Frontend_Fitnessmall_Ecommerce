@@ -10,10 +10,10 @@ function Feedback(props){
             <div className='col-2'>
                 {props.username}
             </div>
-            <div className='col-2 ratingstar'>
-                <RatingStar/>
+            <div className='col-3 ratingstar'>
+                <RatingStar point={props.point}/>
             </div>
-            <div className='col-7 feedback-num'>
+            <div className='col-6 feedback-num'>
                 {props.timestamp}
             </div>
             <div class='col-auto'>

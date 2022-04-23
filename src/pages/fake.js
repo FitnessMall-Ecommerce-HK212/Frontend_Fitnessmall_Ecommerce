@@ -4,11 +4,11 @@ export default function Fake({match}){
     const history=useHistory();
     const data=match.params
     useEffect(()=>{
+        window.localStorage.setItem('sessionID',data.data)
+        window.localStorage.setItem('isAuthenticated',true)
         setTimeout(() => {
-            window.localStorage.setItem('sessionID',data.data)
+            window.close();
           }, 1000);
-        window.close();
-        
     })
     return (
         <></>

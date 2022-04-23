@@ -37,33 +37,32 @@ function Description(props) {
     return (
         <div className="description">
             <div className="product-name">{props.name}</div>
-            <div class="rating d-flex" style={{ gap: '5px' }}>
-                <RatingStar />
-                <span class="feedback-num">| {props.numOfFeedbacks} đánh giá</span>
+            <div style={{ gap: '5px' }}>
+                <div class="feedback-num">{props.numOfFeedbacks} đánh giá | Điểm đánh giá: <span class="badge bg-warning text-dark">{props.point.toFixed(1)}</span></div>
             </div>
             <div className="brief">
             {showResult ? <LessInfo des={props.des}/>: <Info des={props.des}/>}
             </div>
             <div className="row category">
                 <div className="col-2">Phân loại:</div>
-                <div className="col-4 d-flex justify-content-center">
-                    {props.category.map((e) => {
+                <div className="col-10 d-flex">
+                    {props.itemtype.map((e) => {
                         return (
-                            <button type='button' className={props.category[active] === e ? "btn btn-option ms-5 clicked": "btn btn-option ms-5"} onClick={()=>setActive(props.category.indexOf(e))}>{e.cat}</button>
+                            <button type='button' className={props.itemtype[active] === e ? "btn btn-option ms-5 clicked": "btn btn-option ms-5"} onClick={()=>setActive(props.itemtype.indexOf(e))}>{e.category}</button>
                         );
                     })}
                 </div>
             </div>
             <div className="row price mt-3">
                 <div className="col-2">Giá:</div> 
-                <div className="col-4 action text-center">{props.category[active].price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}</div>
+                <div className="col-5 action text-center">{props.itemtype[active].price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}</div>
             </div>
             <div className="row numberToOrder mt-3">
                 <div className="col-2">Số lượng:</div> 
-                <div className="col-4 input-spinner">
+                <div className="col-5 input-spinner">
                     <InputSpinner
                         type={'int'}
-                        max={props.category[active].quantity}
+                        max={props.itemtype[active].quantity}
                         min={1}
                         step={1}
                         value={1}
@@ -71,13 +70,13 @@ function Description(props) {
                         size="sm"
                     />
                 </div>
-                <div className="col-6 feedback-num">{props.category[active].quantity} sản phẩm có sẵn</div>
+                <div className="col-5 feedback-num">{props.itemtype[active].quantity} sản phẩm có sẵn</div>
             </div>
             <div className="row d-flex mt-5">
                 <div className="col-2"></div> 
                 <div className="col-10 action d-flex">
                     <GhostButton value="Thêm vào giỏ hàng" onClick={handleAddCart} />
-                    <CTAButton value="Mua ngay" className="after" />
+                    <CTAButton value="Mua ngay" className="after" onClick={() => { }}/>
                 </div>
             </div>
         </div>

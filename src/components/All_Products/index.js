@@ -45,7 +45,7 @@ function All_Products(){
                     <ProductCard 
                         img={product.image}
                         name={product.name}
-                        price={product.price}
+                        price={100000}
                         point={product.point}
                         code={product.code}
                         type={type}
