@@ -1,50 +1,30 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AuthAPI } from '../../services/auth';
 import { utils } from '../../helpers';
-import {useHistory} from 'react-router-dom';
 import axios from "axios";
 const { setAuthToken } = utils;
-
 const initialState = {
-  // token: localStorage.getItem('token'),
-  sessionID:'',
-  isAuthenticated: null,
+   errorLogin:'',
+   errorRegister:''
 };
 
-export const loadUser = createAsyncThunk('user_session', async () => {
-
-  const res = await AuthAPI.loadUser();
-  console.log('user: ', res.data);
-  return res.data;
-});
-
-export const registerUser = createAsyncThunk('auth/registerUser', async ({ firstName, lastName, email, password }) => {
-  const res = await AuthAPI.registerUser({ firstName, lastName, email, password });
-
+export const registerUser = createAsyncThunk('user_signup', async ({ username, password, email }) => {
+  const res = await AuthAPI.registerUser({ username, password,name:'',email });
+  if (res.data=='Sign up successfully! Please verify email to sign in'){
+    axios.post(`http://127.0.0.1:8080/api/send_email`,{email:email})
+    .then((res) => {
+      localStorage.setItem('isAuthenticated',true)
+    })
+    .catch((err) => {
+    alert(err);
+    });
+  }
   console.log(res.data);
   return res.data;
 });
 
 export const loginUser = createAsyncThunk('user_signin', async ({ username, password }) => {
   const res = await AuthAPI.loginUser({ username, password });
-  switch (res.data){
-    case "Missing username value":
-      alert("Missing username value")
-      break;
-    case "Missing password value":
-      alert("Missing password value")
-      break
-    case "Wrong information":
-      alert("Wrong information")
-      break
-    case "Account hasn't been verified yet":
-      alert("Account hasn't been verified yet")
-      break
-    default:
-      localStorage.setItem("sessionID", res.data)
-      break
-  }
-  // console.log(res.data);
   return res.data;
 });
 
@@ -52,39 +32,63 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    logout(state) {
-      // localStorage.removeItem('token');
-      console.log('logged out...');
 
-      return {
-        // token: null,
-        isAuthenticated: false,
-      };
-    },
   },
 
   extraReducers: (builder) => {
     builder
-      .addCase(loadUser.fulfilled, (state, action) => ({
-        ...state,
-        isAuthenticated: true,
-      }))
       .addCase(registerUser.fulfilled, (state, action) => {
-        // localStorage.setItem('token', action.payload.token);
-        return {
-          ...state,
-          // token: action.payload.token,
-          isAuthenticated: true,
-        };
+        switch (action.payload){
+          case "Missing username value":
+            return {
+              ...state,errorRegister:action.payload
+            };
+          case "Missing password value":
+            return {
+              ...state,errorRegister:action.payload
+            };
+          case "Missing email value":
+            return {
+              ...state,errorRegister:action.payload
+            };
+          case "Sign up failed ! Account has existed already":
+            return {
+              ...state,errorRegister:action.payload
+            };
+          case "Sign up failed ! Email has existed already":
+              return {
+                ...state,errorRegister:action.payload
+              };
+          default:
+            return {
+              ...state,errorRegister:''
+            };
+          };
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        // localStorage.setItem('token', action.payload.token);
-        return {
-          ...state,
-          // token: action.payload.token,
-          isAuthenticated: true,
-          sessionID:action.payload,
-        };
+        switch (action.payload){
+          case "Missing username value":
+            return {
+              ...state,errorLogin:action.payload
+            };
+          case "Missing password value":
+            return {
+              ...state,errorLogin:action.payload
+            };
+          case "Wrong information":
+            return {
+              ...state,errorLogin:action.payload
+            };
+          case "Account hasn't been verified yet":
+            return {
+              ...state,errorLogin:action.payload
+            };
+          default:
+            localStorage.setItem("sessionID", action.payload)
+            return {
+              ...state,errorLogin:''
+            };
+          };
       });
   },
 });

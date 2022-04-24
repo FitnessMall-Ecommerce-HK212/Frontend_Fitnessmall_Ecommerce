@@ -106,7 +106,7 @@ export default function Account(){
                     </div>
                 <div class="form-control" style={{display:"flex",border:"none"}}>
                     <label class="input-label">Quốc tịch</label>
-                    <DropdownButton value={["England","France","American","Wakanda"]} style={{width:"300px",fontSize:"15px",margin:"none"}}/>
+                    <DropdownButton className="dropdown" value={["VietNam","England","France","American","Wakanda"]} style={{width:"340px",fontSize:"15px",margin:"0"}}/>
                 </div>
                 <div class="form-control" style={{display:"flex",border:"none"}}>
                     <label class="input-label">Số điện thoại</label>

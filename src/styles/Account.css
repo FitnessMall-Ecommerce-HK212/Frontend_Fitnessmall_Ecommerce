@@ -241,3 +241,15 @@
 .hisWEc ::placeholder{
     color:var(--lightprimary)
 }
+.dropdown{
+    flex: 1;
+    display: flex;
+    background-color: var(--surface);
+    border-radius: 12px;
+    border: 1px solid var(--lightprimary);
+    align-items: center;
+    justify-content: flex-start;
+    color: var(--lightprimary);
+    padding: 10px;
+    font-size: larger;
+}
