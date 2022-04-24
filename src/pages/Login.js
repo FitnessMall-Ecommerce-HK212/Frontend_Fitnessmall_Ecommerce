@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import axios from "axios";
 import { Link,useHistory} from 'react-router-dom';
- import { loginUser } from '../redux/auth/authSlice';
+import { loginUser } from '../redux/auth/authSlice';
 import {Footer, Header} from '../components';
 import '../styles/Login_Register.css'
 import IconButton from "@material-ui/core/IconButton";
@@ -11,17 +11,13 @@ import Visibility from "@material-ui/icons/Visibility";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import md5 from 'md5';
-import Input from "@material-ui/core/Input";
+import {notification,Modal} from 'antd';
 import {
   Grid,
   Card,
   Typography,
-  List,
-  ListItem,
   Button,
 } from "@material-ui/core";
-import { loadUser } from '../redux/auth/authSlice';
-import bcrypt from 'bcryptjs';
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -137,17 +133,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Login() {
-  // useEffect(()=>{
-
-  // },[])
   const classes = useStyles();
   const theme = useTheme();
   const dispatch = useDispatch();
   const [username, setName]=useState('');
   const history=useHistory();
-  
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const { errorLogin } = useSelector((state) => state.auth);
+  const [newPass,setnewPass]=useState('');
   const [values, setValues] = useState({
-    pwd: "",
+    pwd: '',
     showPassword: false,
   });
   
@@ -158,16 +153,43 @@ export default function Login() {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-  const [password, setPass]=useState('')
   const handlePasswordChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
-
+  const handleForgot =() =>{
+    if(username!='') {
+      notification.info({
+        message: 'Get the new code',
+        description:
+          'You should get the code in the sented email to continue using our website',
+        placement:'topLeft'
+      });
+      axios.get(`http://localhost:8080/api/user/forgotpass/${username}`,{username:username})
+        .then((res) => {
+          console.log(res.data)
+        })
+        .catch((err) => {
+        alert(err);
+        });
+      setTimeout(()=>setIsModalVisible(true),3000)  
+    }
+    else{
+      notification.info({
+        message: 'Wrong',
+        description:
+          'Please fill in the right username that you forgot password',
+        placement:'topLeft'
+      });
+    }
+    
+  }
   
   const handleSubmit = async (e) => {
     e.preventDefault();  
-    const hash =md5(values.pwd);
-    setPass(hash)
+    let hash='';
+    if(values.pwd!=''){
+      hash =md5(values.pwd);
+    }
     dispatch(loginUser({ username:username, password: hash}));
     setTimeout(() => {
       axios
@@ -208,10 +230,11 @@ export default function Login() {
           alignItems: "center",
         }}
       >
-        <Card style={{ padding: "35px 29px", height: "480px", width: "472px" }}>
+        <Card style={{ padding: "35px 29px", height: "500px", width: "472px" }}>
           <Typography className={classes.text20}>Login</Typography>
 
           <form>
+            <p className="fst-italic text-danger">{errorLogin}</p>
             <input type="text" id="inputName" className={classes.input} name="username" placeholder = "Username"  onChange={(e)=>{setName(e.target.value)}}
             ></input>
             <div style={{position:"relative"}}>
@@ -230,9 +253,12 @@ type={values.showPassword ? "text" : "password"} onChange={handlePasswordChange(
           </div>
           </form>
 
-          <p style={{fontSize:"14px",color: "#FF2C86",fontWeight:600,cursor: "pointer"}}
+          <p style={{fontSize:"14px",color: "#FF2C86",fontWeight:600,cursor: "pointer"}} onClick={handleForgot}
           >Forgotten password</p>
-
+           <Modal title="Confirm Code" visible={isModalVisible} onOk={()=>{setIsModalVisible(false);axios.get(`http://localhost:8080/api/user/forgotpass/code/${username}?code=${newPass}`,{username:username}).then((res) =>{if(res.data.check==true) {localStorage.setItem('isAuthenticated',true);history.push('/')}}).catch((err) => alert(err)
+      ); }} onCancel={()=>setIsModalVisible(false)}>
+        <input type="text" id="inputName" className={classes.input} placeholder="Write in here" onChange={(e)=>setnewPass(e.target.value)}></input>
+        </Modal>
           <Button variant="contained" type="submit" className={classes.button_login} onClick={handleSubmit}
           >Login</Button>
 
@@ -243,22 +269,17 @@ type={values.showPassword ? "text" : "password"} onChange={handlePasswordChange(
           </div>
           <br></br>
           <div style={{margin: "0px 45px ",justifyContent: "space-between",flexWrap: "wrap",display: "flex"}} >
-          <button className={classes.button_social} onClick={()=>{
-             axios
-             .get(
-               `http://127.0.0.1:8080/api/user_signin_signup/google`
-             )
-             .then( (res) => {
-               window.open(res.data,'','popup')
-               setTimeout(() => 
-                window.localStorage.getItem('isAuthenticated')=='true'?history.push("/"):''
-              , 3000);
-             })
-             .catch((err) => {
-               alert(err);
-             });
-
-          }}>
+          <button className={classes.button_social} onClick={()=>{ axios.get(`http://localhost:8080/api/user_signin_signup/google`)
+    .then((res) => {
+      window.open(res.data,'','popup')
+      setTimeout(() => 
+       window.localStorage.getItem('isAuthenticated')=='true'?history.push("/"):''
+     , 9000);
+    })
+    .catch((err) => {
+      alert(err);
+    }); 
+    } }>
             <div className={classes.icon}><div className={classes.icon_Google}></div></div>
             <div>Google</div>
           </button> 
