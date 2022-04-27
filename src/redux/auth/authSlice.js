@@ -5,7 +5,7 @@ import axios from "axios";
 const { setAuthToken } = utils;
 const initialState = {
    errorLogin:'',
-   errorRegister:''
+   errorRegister:'',
 };
 
 export const registerUser = createAsyncThunk('user_signup', async ({ username, password, email }) => {
@@ -19,7 +19,6 @@ export const registerUser = createAsyncThunk('user_signup', async ({ username, p
     alert(err);
     });
   }
-  console.log(res.data);
   return res.data;
 });
 
@@ -32,7 +31,6 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-
   },
 
   extraReducers: (builder) => {

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import axios from "axios";
 import { Link,useHistory} from 'react-router-dom';
-import { loginUser } from '../redux/auth/authSlice';
+import { loginUser} from '../redux/auth/authSlice';
 import {Footer, Header} from '../components';
 import '../styles/Login_Register.css'
 import IconButton from "@material-ui/core/IconButton";
@@ -11,7 +11,7 @@ import Visibility from "@material-ui/icons/Visibility";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import md5 from 'md5';
-import {notification,Modal} from 'antd';
+import {notification,Modal,message} from 'antd';
 import {
   Grid,
   Card,
@@ -139,7 +139,9 @@ export default function Login() {
   const [username, setName]=useState('');
   const history=useHistory();
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isModalVisible1, setIsModalVisible1] = useState(false);
   const { errorLogin } = useSelector((state) => state.auth);
+  const [newCode,setnewCode]=useState('');
   const [newPass,setnewPass]=useState('');
   const [values, setValues] = useState({
     pwd: '',
@@ -202,6 +204,7 @@ export default function Login() {
                         .then((res) => {
                              if (res.data==="OK")
                              {
+                               localStorage.setItem("pwd",values.pwd);
                                localStorage.setItem('isAuthenticated',true)
                                history.push("/")
                             }
@@ -255,9 +258,16 @@ type={values.showPassword ? "text" : "password"} onChange={handlePasswordChange(
 
           <p style={{fontSize:"14px",color: "#FF2C86",fontWeight:600,cursor: "pointer"}} onClick={handleForgot}
           >Forgotten password</p>
-           <Modal title="Confirm Code" visible={isModalVisible} onOk={()=>{setIsModalVisible(false);axios.get(`http://localhost:8080/api/user/forgotpass/code/${username}?code=${newPass}`,{username:username}).then((res) =>{if(res.data.check==true) {localStorage.setItem('isAuthenticated',true);history.push('/')}}).catch((err) => alert(err)
+           <Modal title="Confirm Code" visible={isModalVisible} onOk={()=>{setIsModalVisible(false);axios.get(`http://localhost:8080/api/user/forgotpass/code/${username}?code=${newCode}`,{username:username}).then((res) =>{if(res.data.check==true) {setIsModalVisible1(true)}}).catch((err) => alert(err)
       ); }} onCancel={()=>setIsModalVisible(false)}>
-        <input type="text" id="inputName" className={classes.input} placeholder="Write in here" onChange={(e)=>setnewPass(e.target.value)}></input>
+        <input type="text" id="inputName" className={classes.input} placeholder="Write in here" onChange={(e)=>setnewCode(e.target.value)}></input>
+        </Modal>
+        <Modal title="Change Password" visible={isModalVisible1} onOk={()=>{setIsModalVisible1(false);axios.post(`http://localhost:8080/api/change_pass`,{username:username,password:md5(newPass)},{'Content-Type': 'application/json'
+  }).then((res) =>{if(res.data=="Update password successfully") {
+    message.success('Change successful! Please log in again');
+  }}).catch((err) => alert(err)
+      ); }} onCancel={()=>setIsModalVisible1(false)}>
+        <input type="text" id="inputName" className={classes.input} placeholder="Write the new password" onChange={(e)=>setnewPass(e.target.value)}></input>
         </Modal>
           <Button variant="contained" type="submit" className={classes.button_login} onClick={handleSubmit}
           >Login</Button>
@@ -271,6 +281,7 @@ type={values.showPassword ? "text" : "password"} onChange={handlePasswordChange(
           <div style={{margin: "0px 45px ",justifyContent: "space-between",flexWrap: "wrap",display: "flex"}} >
           <button className={classes.button_social} onClick={()=>{ axios.get(`http://localhost:8080/api/user_signin_signup/google`)
     .then((res) => {
+      localStorage.setItem('pwd','Not declared')
       window.open(res.data,'','popup')
       setTimeout(() => 
        window.localStorage.getItem('isAuthenticated')=='true'?history.push("/"):''
