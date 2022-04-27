@@ -64,7 +64,7 @@ const cartSlice = createSlice({
             name,
             price,
             image,
-            quantity: 1,
+            quantity,
             isChosen: false
           }
         }
