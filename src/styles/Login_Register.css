@@ -10,3 +10,7 @@
     color: var(--lightprimary);
     opacity: 1;
 }
+#inputAll::placeholder {
+    color: var(--lightprimary);
+    opacity: 1;
+}

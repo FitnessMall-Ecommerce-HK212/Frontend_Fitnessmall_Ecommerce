@@ -150,15 +150,14 @@ export default function Register() {
       notification.info({
         message: 'Vertify to continue using the page',
         description:
-          'You should vertify in the email to continue using our website',
+          'You should vertify in the email to continue login and using our website',
         placement:'topLeft'
       });
     };
     const a= setInterval(()=>{
       axios.post(`http://localhost:8080/api/users/${value_username}/vertify`,{username:value_username})
       .then((res) => {
-        console.log(res.data)
-        if(res.data==true) {clearInterval(a);history.push('/');}
+        if(res.data==true) {clearInterval(a);history.push('/login');}
       })
       .catch((err) => {
       alert(err);
@@ -216,6 +215,7 @@ export default function Register() {
           <div style={{margin: "0px 45px ",justifyContent: "space-between",flexWrap: "wrap",display: "flex"}} >
           <button className={classes.button_social} onClick={()=>{ axios.get(`http://localhost:8080/api/user_signin_signup/google`)
     .then((res) => {
+      localStorage.setItem('pwd','Not declared')
       window.open(res.data,'','popup')
       setTimeout(() => 
        window.localStorage.getItem('isAuthenticated')=='true'?history.push("/"):''
