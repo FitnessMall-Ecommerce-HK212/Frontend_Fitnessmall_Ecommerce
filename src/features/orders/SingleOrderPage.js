@@ -59,7 +59,7 @@ export default function SingleOrderPage({ match }) {
       <div className={styles.orderlist__header__content__item__state}>
         <div className={styles.orderlist__header__content__item__state__icontext}>
           <div>
-            <img src={Close} alt='cancel' />
+            {/* <img src={Close} alt='cancel' /> */}
           </div>
           <div className={styles.orderlist__header__content__item__state__text}>
             <p className={styles.orderlist__header__content__item__state__text}>{des}</p>

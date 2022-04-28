@@ -200,7 +200,7 @@ export default function Confirm() {
                       <h2>Giao tới</h2>
                     </div>
                     <div className={styles.alldata__paymentinfo__diachi__namephone}>
-                      <p>{localStorage.getItem("username")}</p>
+                      <p>{localStorage.getItem("receiver")}</p>
                       <p>|</p>
                       <p>{localStorage.getItem("phone")}</p>
                     </div>
@@ -243,7 +243,7 @@ export default function Confirm() {
                     <p>Phí vận chuyển</p>
                   </div>
                   <div>
-                    <p>-0đ</p>
+                    <p>+20.000đ</p>
                   </div>
                 </div>
 
@@ -262,7 +262,7 @@ export default function Confirm() {
                     <p>Tổng cộng</p>
                   </div>
                   <div>
-                    <p className={styles.text_pink}>{sum == 0 ? "Vui lòng chọn sản phẩm" : `${formatToCurrency(sum)}đ`}</p>
+                    <p className={styles.text_pink}>{sum == 0 ? "Vui lòng chọn sản phẩm" : `${formatToCurrency(sum + 20000)}đ`}</p>
                   </div>
                 </div>
               </div>

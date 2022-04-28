@@ -1,12 +1,32 @@
-import React,{ useState } from 'react';
+import React,{ useState,useEffect } from 'react';
 import '../../styles/Account.css'
+import axios from "axios";
 import unknown_logo from '../../assets/img/secret_avatar.png'
 function Sidebar({nameActive}) {
+    const [image,setImage]=useState('');
+    const [name,setName]=useState('');
+    useEffect(()=>{
+        axios.get(`http://localhost:8080/api/user_session/${localStorage.sessionID}`)
+            .then((res) => {
+              axios.get(`http://localhost:8080/api/user/${res.data.username}`,{username:res.data.username})
+            .then((res) => {
+              setImage(res.data.avatar)
+              setName(res.data.name)
+            })
+            .catch((err) => {
+            alert(err);
+            });
+            })
+            .catch((err) => {
+            alert(err);
+            });
+        
+      },[])
     return (
         <aside style={{width:"380px",marginTop:"17px",height:"700px",backgroundColor:"var(--lightsecondary)",borderRadius:"12px"}}>
             <div class="Account_StyledAvatar">
-             <img src={unknown_logo} alt="avatar"/>
-               <div class="info">Tài khoản của<strong>Võ Hồng Phúc</strong></div>
+             <img className="w-8 h-8 rounded-full" src={image!=''?image:unknown_logo} alt="avatar" width="60" height="60"/>
+               <div class="info">Tài khoản của<strong>{name!=''?name:'No name'}</strong></div>
             </div>
             <ul class="Account_StyledNav">
               <li>

@@ -8,9 +8,7 @@ const config = {
 };
 
 export const AuthAPI = {
-  loadUser: () => axios.get(`${API_SERVER_URL}/api/user_session`),
-
-  registerUser: (data) => axios.post(`${API_SERVER_URL}/api/users`, data, config),
+  registerUser: (data) => axios.post(`${API_SERVER_URL}/api/user_signup`, data, config),
 
   loginUser: (data) => axios.get(`${API_SERVER_URL}/api/user_signin`, { params: data }, config),
   
