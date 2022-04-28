@@ -1,5 +1,6 @@
 import '../../styles/HomePage.css'
 import { GrSearch } from "react-icons/gr";
+import React from "react";
 function IconCTAButton(){
     return (
         <div className="iconCTAbutton">
