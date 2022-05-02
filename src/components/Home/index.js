@@ -170,7 +170,7 @@ function Home() {
                                             price={item.itemtype[0].price}
                                             type='equipment'
                                             code={item.code}
-                                            point={5}
+                                            point={item.point}
                                         />
                                 </div>
                             );
