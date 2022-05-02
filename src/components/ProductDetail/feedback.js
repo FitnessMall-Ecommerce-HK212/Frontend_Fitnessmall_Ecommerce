@@ -1,6 +1,6 @@
 import { BsPersonCircle } from 'react-icons/bs';
 import RatingStar from './ratingstar';
-
+import React from "react";
 function Feedback(props){
     return (
         <div className="row feedback align-items-center">

@@ -20,7 +20,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import AddIcon from '@mui/icons-material/Add';
 import { blue } from '@mui/material/colors';
 
-const addresses = [];
+var addresses = [];
 
 export class SimpleDialogProps {
   constructor(open, selectedValue, onClose) {
@@ -43,16 +43,32 @@ function SimpleDialog(props) {
 
   return (
     <Dialog onClose={handleClose} open={open}>
-      <DialogTitle>Set backup account</DialogTitle>
+      <DialogTitle>Chọn địa chỉ</DialogTitle>
       <List sx={{ pt: 0 }}>
         {addresses.map((address, index) => (
-          <ListItem button onClick={() => handleListItemClick(address)} key={index}>
+
+          <ListItem button onClick={() => handleListItemClick(
+            address
+          )} key={index}>
             <ListItemAvatar>
               <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
                 <PersonIcon />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText primary={address} />
+            <ListItemText primary={
+              (
+                <>
+                  <div className={styles.alldata__paymentinfo__diachi__namephone}>
+                    <p>{address.receiver}</p>
+                    <p>|</p>
+                    <p>{address.phone}</p>
+                  </div>
+                  <div>
+                    <p>{address.address}, {address.ward},{address.district}, {address.province}</p>
+                  </div>
+                </>
+              )
+            } />
           </ListItem>
         ))}
         <ListItem autoFocus button onClick={() => handleListItemClick('Địa chỉ được thêm')}>
@@ -79,41 +95,47 @@ export default function PurchasedItemsList() {
 
     var config = {
       method: 'get',
-      url: 'http://localhost:8080/api/info/ditdzangxinkdep/W3MXBuMVVh110jCUtLC3',
+      url: `http://localhost:8080/api/infos/${localStorage.getItem("username")}`,
       headers: {
         'Content-Type': 'application/json',
       },
       data: data
     };
-
+    addresses = []
     axios(config)
       .then(function (response) {
         // console.log(JSON.stringify(response.data));
         if (response.data) {
           setUserAd(<>
             <div className={styles.alldata__paymentinfo__diachi__namephone}>
-              <p>{response.data.username}</p>
+              <p>{response.data[0].receiver}</p>
               <p>|</p>
-              <p>{response.data.phone}</p>
+              <p>{response.data[0].phone}</p>
             </div>
             <div>
-              <p>{response.data.address}, {response.data.district}, {response.data.province}</p>
+              <p>{response.data[0].address}, {response.data[0].ward},{response.data[0].district}, {response.data[0].province}</p>
             </div>
           </>)
-          addresses.push(<>
-            <div className={styles.alldata__paymentinfo__diachi__namephone}>
-              <p>{response.data.username}</p>
-              <p>|</p>
-              <p>{response.data.phone}</p>
-            </div>
-            <div>
-              <p>{response.data.address}, {response.data.district}, {response.data.province}</p>
-            </div>
-          </>)
-          localStorage.setItem("username", response.data.username)
-          localStorage.setItem("phone", response.data.phone)
-          localStorage.setItem("address", `${response.data.address}, ${response.data.district}, ${response.data.province}`)
-          localStorage.setItem("username", response.data.username)
+
+
+          localStorage.setItem("phone", response.data[0].phone)
+          localStorage.setItem("address", `${response.data[0].address}, ${response.data[0].district}, ${response.data[0].province}`)
+          localStorage.setItem("receiver", response.data[0].receiver)
+
+          response.data.map(addressV => {
+            addresses.push(
+              // <>
+              //   <div className={styles.alldata__paymentinfo__diachi__namephone}>
+              //     <p>{address.receiver}</p>
+              //     <p>|</p>
+              //     <p>{address.phone}</p>
+              //   </div>
+              //   <div>
+              //     <p>{address.address}, {address.district}, {address.province}</p>
+              //   </div>
+              // </>
+              { receiver: addressV.receiver, phone: addressV.phone, address: addressV.address, district: addressV.district, province: addressV.province, ward: addressV.ward })
+          })
         }
       })
       .catch(function (error) {
@@ -138,10 +160,28 @@ export default function PurchasedItemsList() {
   const handleCloseAddress = (value) => {
     setOpenAddress(false);
     setSelectedValue(value);
+
+    localStorage.setItem("phone", value.phone)
+    localStorage.setItem("address", `${value.address}, ${value.ward}, ${value.district}, ${value.province}`)
+    localStorage.setItem("receiver", value.receiver)
+
+    setUserAd(<>
+      <div className={styles.alldata__paymentinfo__diachi__namephone}>
+        <p>{value.receiver}</p>
+        <p>|</p>
+        <p>{value.phone}</p>
+      </div>
+      <div>
+        <p>{value.address}, {value.ward}, {value.district}, {value.province}</p>
+      </div>
+    </>)
+
   };
   function formatToCurrency(amount) {
-    amount = (amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&.');
-    return amount.substring(0, amount.length - 3);
+    if (amount) {
+      amount = (amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&.');
+      return amount.substring(0, amount.length - 3);
+    }
   }
 
   const onChecked = (itemId) => {
@@ -172,7 +212,7 @@ export default function PurchasedItemsList() {
         </div>
 
         <div className={styles.items__item}>
-          <ChangeQuantity itemId={item.id} />
+          <ChangeQuantity itemId={item.id} numItem={item.quantity} />
         </div>
 
         <div className={styles.items__item}>
@@ -265,7 +305,7 @@ export default function PurchasedItemsList() {
                     <p>Tổng tiền</p>
                   </div>
                   <div>
-                    <p>{`${formatToCurrency(sum)}đ`}</p>
+                    <p>{sum ? `${formatToCurrency(sum)}đ` : "0đ"}</p>
                   </div>
                 </div>
 
@@ -274,7 +314,7 @@ export default function PurchasedItemsList() {
                     <p>Phí vận chuyển</p>
                   </div>
                   <div>
-                    <p>-0đ</p>
+                    <p>+0đ</p>
                   </div>
                 </div>
 
@@ -298,9 +338,14 @@ export default function PurchasedItemsList() {
                 </div>
               </div>
               <div className={styles.alldata__paymentinfo__buybutton}>
-                <Link to={`cart/confirm`} >
-                  <button type='button' className={styles.alldata__paymentinfo__buybutton__element}>Mua hàng</button>
-                </Link>
+                {
+                  sum == 0 ?
+                    <button type='button' className={styles.alldata__paymentinfo__buybutton__element} onClick={() => alert("Hãy chọn sản phẩm trước!")}>Mua hàng</button>
+                    :
+                    <Link to={`cart/confirm`} >
+                      <button type='button' className={styles.alldata__paymentinfo__buybutton__element}>Mua hàng</button>
+                    </Link>
+                }
               </div>
             </div>
           </div>

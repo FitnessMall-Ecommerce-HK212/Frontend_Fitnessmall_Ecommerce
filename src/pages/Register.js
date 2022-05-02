@@ -5,7 +5,9 @@ import { Link, Redirect,useHistory } from 'react-router-dom';
 import {Footer, Header} from '../components';
 import axios from "axios";
 import '../styles/Login_Register.css'
-// import { registerUser,checkRegister } from '../redux/auth/authSlice';
+import md5 from 'md5';
+import { registerUser} from '../redux/auth/authSlice';
+import {notification} from 'antd';
 import {
   Grid,
   Card,
@@ -131,9 +133,39 @@ export default function Register() {
   const classes = useStyles();
   const theme = useTheme();
   const history=useHistory();
+  const dispatch=useDispatch();
   const [value_mail,setEmail]=useState('');
   const [value_pass,setPass]=useState('');
-
+  const [value_username,setUser]=useState('');
+  const { errorRegister } = useSelector((state) => state.auth);
+  const handleSubmit = (e) => {
+    e.preventDefault();  
+    let hash='';
+    if(value_pass!=''){
+      hash =md5(value_pass);
+    }
+    dispatch(registerUser({username:value_username,password:hash,email:value_mail}));
+    setTimeout(()=>{
+    if (window.localStorage.getItem('isAuthenticated')==='true'){
+      notification.info({
+        message: 'Vertify to continue using the page',
+        description:
+          'You should vertify in the email to continue login and using our website',
+        placement:'topLeft'
+      });
+    };
+    const a= setInterval(()=>{
+      axios.post(`http://localhost:8080/api/users/${value_username}/vertify`,{username:value_username})
+      .then((res) => {
+        if(res.data==true) {clearInterval(a);history.push('/login');}
+      })
+      .catch((err) => {
+      alert(err);
+      });
+    },5000);
+    },1000)
+    
+  };
   return (
     <>
     <Header/>
@@ -153,18 +185,25 @@ export default function Register() {
           alignItems: "center",
         }}
       >
-        <Card style={{ padding: "35px 29px", height: "450px", width: "472px" }}>
+        <Card style={{ padding: "35px 29px", height: "540px", width: "472px" }}>
           <Typography className={classes.text20}>Sign up</Typography>
            
           <form>
-            <input type="text" id="inputEmail" className={classes.input} name="email" placeholder = "Email" 
-            // onChange={onChange}
+            <p className="fst-italic text-danger">{errorRegister}</p>
+            <input type="text" id="inputName" className={classes.input} name="username" placeholder = "Username" 
+            onChange={(e)=>setUser(e.target.value)}
             ></input>
-            {/* <p className="fst-italic text-danger">{errorLogin.userError}</p> */}
-            <input type="text" id="inputPass" className={classes.input} name="password" placeholder = "Password" ></input>
+            <input type="text" id="inputPass" className={classes.input} name="password" placeholder = "Password" 
+            onChange={(e)=>setPass(e.target.value)}
+            ></input>
+            <input type="text" id="inputEmail" className={classes.input} name="email" placeholder = "Email" 
+            onChange={(e)=>setEmail(e.target.value)}
+            ></input>
+            
           </form>
 
           <Button variant="contained" type="submit" className={classes.button_login}
+          onClick={handleSubmit}
           >Next</Button>
 
           <div style={{paddingBottom:"0.875rem",display:"flex",alignItems:"center",paddingTop:"20px"}} >
@@ -174,23 +213,18 @@ export default function Register() {
           </div>
           <br></br>
           <div style={{margin: "0px 45px ",justifyContent: "space-between",flexWrap: "wrap",display: "flex"}} >
-          <button className={classes.button_social} onClick={()=>{
-             axios
-             .get(
-               `http://127.0.0.1:8080/api/user_signin_signup/google`
-             )
-             .then((res) => {
-               window.open(res.data,'','popup')
-               localStorage.setItem('isAuthenticated',true)
-               setTimeout(() => {
-                history.push("/")
-              }, 9000);
-             })
-             .catch((err) => {
-               alert(err);
-             });
-
-          }}>
+          <button className={classes.button_social} onClick={()=>{ axios.get(`http://localhost:8080/api/user_signin_signup/google`)
+    .then((res) => {
+      localStorage.setItem('pwd','Not declared')
+      window.open(res.data,'','popup')
+      setTimeout(() => 
+       window.localStorage.getItem('isAuthenticated')=='true'?history.push("/"):''
+     , 9000);
+    })
+    .catch((err) => {
+      alert(err);
+    }); 
+    }}>
             <div className={classes.icon}><div className={classes.icon_Google}></div></div>
             <div>Google</div>
           </button> 
