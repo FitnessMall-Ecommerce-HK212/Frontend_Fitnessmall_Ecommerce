@@ -195,3 +195,27 @@
 .listblog .hotblogcard{
     width: 80%;
 }
+
+.btn-send {
+    background-color: var(--primary);
+    color: white;
+    border-radius: 5px;
+    border-width: 2px;
+}
+
+.btn-send:active {
+    background-color: var(--primary) !important;
+    outline: none !important;
+    box-shadow: none !important;
+    color: white;
+    border-radius: 5px;
+    border-width: 2px;
+}
+
+.btn-send:hover{
+    background-color: var(--lightprimary);
+    color: white;
+    border-radius: 5px;
+    border-width: 2px;
+    border-color: var(--lightprimary);
+}
