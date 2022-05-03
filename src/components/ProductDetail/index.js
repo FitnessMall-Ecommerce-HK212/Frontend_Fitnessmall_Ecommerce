@@ -13,8 +13,6 @@ import ProductCard from '../All_Products/productcard'
 import StarRating from "./starRating";
 const BASE_URL = "http://localhost:8080";
 
-const list = [1, 2, 3];
-
 function ProductDetail(){
     const { type, code} = useParams();
     const [productInfo, setProductInfo] = useState([]);
@@ -23,6 +21,7 @@ function ProductDetail(){
     const [username, setUsername] = useState("");
     const [date, setDate] = useState("");
     const [content, setContent] = useState("");
+    const [checkFB, setCheckFB] = useState(false);
     var typename, api;
     if (type === 'food') {
         typename = 'THỰC PHẨM DINH DƯỠNG';
@@ -73,6 +72,8 @@ function ProductDetail(){
             point: 4,
             food_id: productInfo.id
         })
+        setCheckFB(!checkFB);
+        setContent("");
     }
     const handleChangeForm = (event) => {
         setContent(event.target.value);
@@ -84,7 +85,8 @@ function ProductDetail(){
         getProductInfo();
         getRelatedProducts();
         getHotBlogs();
-    }, []);
+    }, [checkFB]);
+
     if (productInfo.length === 0 || relatedProducts.length === 0 || hotBlogs.length === 0 || ("sessionID" in localStorage && username === "")) {
         return (
             <div className="d-flex justify-content-center mt-5">
@@ -131,7 +133,6 @@ function ProductDetail(){
                             <div className="mt-3">
                                 {!("sessionID" in localStorage) && <div style={{color: '#B3BDC8'}}>Vui lòng <Link to="/login"><span style={{color: '#FF2C86', fontWeight: '500'}}>đăng nhập</span></Link> để đánh giá sản phẩm!</div>}
                                 {("sessionID" in localStorage) &&
-                                    <form onSubmit={handleSubmit}>
                                     <div className="row feedback align-items-center mb-3">
                                         <div className="col-1">
                                             <BsPersonCircle size='24'/>
@@ -146,16 +147,15 @@ function ProductDetail(){
                                             {date}
                                         </div>
                                         <div class='col-10'>
-                                            <textarea class="form-control ms-5 mt-2" style={{width: '520px'}} onChange={handleChangeForm} id="feedback" rows="1" placeholder="Vui lòng chọn sao và điền nội dung đánh giá" required></textarea>
+                                            <textarea class="form-control ms-5 mt-2" style={{width: '520px'}} value={content} onChange={handleChangeForm} id="feedback" rows="1" placeholder="Vui lòng chọn sao và điền nội dung đánh giá" required></textarea>
                                         </div>
                                         <div class='col-2 mt-2'>
-                                            <button type="submit" className="btn btn-send">
+                                            <button type="submit" className="btn btn-send" onClick={handleSubmit}>
                                                 Gửi
                                                 <FiSend />
                                             </button>
                                         </div>
                                     </div>
-                                    </form>
                                 }
                             </div>
                         </div>
