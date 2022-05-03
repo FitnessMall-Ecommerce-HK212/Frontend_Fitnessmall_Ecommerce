@@ -258,7 +258,7 @@ export default function PurchasedItemsList() {
               <div className={styles.alldata__itemslist__header}>
                 <div className={styles.alldata__itemslist__header__tatca}>
                   <input type='checkbox' className={styles.alldata__itemslist__header__tatca__input} checked={isChosenAll} onChange={handleChooseAll}></input>
-                  <p>Tất cả (1 sản phẩm)</p>
+                  <p>Tất cả</p>
                 </div>
                 <div className={styles.alldata__itemslist__header__item}>
                   <p>Đơn giá</p>
