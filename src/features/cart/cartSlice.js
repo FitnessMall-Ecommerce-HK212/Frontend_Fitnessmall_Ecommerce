@@ -57,7 +57,7 @@ const cartSlice = createSlice({
           localStorage.setItem("giacat", JSON.stringify(state))
         }
       },
-      prepare(id, name, price, image, quantity) {
+      prepare(id, name, price, image, quantity, itemType) {
         return {
           payload: {
             id,
@@ -65,7 +65,8 @@ const cartSlice = createSlice({
             price,
             image,
             quantity,
-            isChosen: false
+            isChosen: false,
+            itemType
           }
         }
       }
