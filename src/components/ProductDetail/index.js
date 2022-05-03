@@ -109,7 +109,7 @@ function ProductDetail(){
                         <img src={productInfo.image} alt="img" />
                     </div>
                     <div className="col-md-6 col-xs-12">
-                        <Description name={productInfo.name} des={productInfo.description} point={productInfo.point} numOfFeedbacks={productInfo.feedback.length} itemtype={productInfo.itemtype}/>
+                    <Description name={productInfo.name} des={productInfo.description} point={productInfo.point} numOfFeedbacks={productInfo.feedback.length} itemtype={productInfo.itemtype} image={productInfo.image} id={productInfo.id} />
                     </div>
                 </div>
                 <div class='divider mt-5'></div>
