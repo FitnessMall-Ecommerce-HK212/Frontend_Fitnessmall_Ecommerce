@@ -31,7 +31,6 @@ function Description(props) {
         )
     }
 
-    localStorage.clear()
     const handleAddCart = () => {
         dispatch(addItem(props.id, props.name, props.itemtype[active].price, props.image, numItem))
         alert(`Thêm sản phẩm '${props.name}' vào giỏ hàng thành công!`)
