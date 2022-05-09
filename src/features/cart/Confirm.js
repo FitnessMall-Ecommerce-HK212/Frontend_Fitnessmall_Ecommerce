@@ -181,6 +181,7 @@ export default function Confirm() {
     axios(config)
       .then(function (response) {
         console.log(response.data);
+        localStorage.removeItem(localStorage.getItem("username"))
         window.location.href = response.data
       })
       .catch(function (error) {
@@ -211,7 +212,7 @@ export default function Confirm() {
                   <p>(!) Được giao bởi J&amp;T Express (giao từ Hồ Chí Minh)</p>
                 </div>
                 <div>
-                  <p>Giao hàng vào thứ Ba, 15/3</p>
+                  <p>Giao hàng vào thứ Ba, 15/7</p>
                 </div>
               </div>
               <div>
