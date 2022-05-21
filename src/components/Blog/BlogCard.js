@@ -21,13 +21,15 @@ const BlogCard = (props) => {
               <p className="datePosted">{blog.date}</p>
               <p className="blogAuthor">{blog.writer}</p>
               <p className="blogShortContent">
-                {blog.content.slice(0, 200)}...
+                {blog.content.slice(0, 200).split("\\n").map((x, index) => {
+                return <div key={index}>{x}</div>;
+              })}...
               </p>
               <Link
                 to={`/blog/detail/${blog.idBlog}`}
                 style={{ textDecoration: "none" }}
               >
-                <CTAButton value="Read More" onClick={() => {}} />
+                <CTAButton value="Đọc thêm" onClick={() => {}} />
               </Link>
             </div>
           </div>

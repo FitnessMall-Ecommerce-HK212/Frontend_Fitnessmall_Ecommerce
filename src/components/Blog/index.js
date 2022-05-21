@@ -10,7 +10,7 @@ const Blog = () => {
 
   useEffect(() => {
     async function getAllBlogs() {
-      const response = await axios.get("http://localhost:8080/api/blogs");
+      const response = await axios.get("https://fitnessmall.herokuapp.com/api/blogs");
       return response.data.blogList;
     }
     getAllBlogs().then((res) => {
