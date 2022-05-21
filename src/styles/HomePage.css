@@ -88,6 +88,11 @@ a{
     box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
 }
 
+.hotblogcard .card img {
+    width: 410px;
+    height: 240px;
+}
+
 .hotblogcard .card-body{
     color: var(--primary)
 }
