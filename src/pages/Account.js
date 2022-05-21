@@ -9,9 +9,19 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import AvatarUploader from '../helpers/supAvatar';
 import md5 from 'md5';
-import { Radio } from 'antd';
+import { Radio,notification } from 'antd';
 import unknown_logo from '../assets/img/secret_avatar.png'
 export default function Account(){
+  const openNotification = () => {
+    notification.open({
+      message: 'Notification Title',
+      description:
+        'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+      onClick: () => {
+        console.log('Notification Clicked!');
+      },
+    });
+  };
   const history=useHistory();
   let valueNations=["VietNam","England","France","American","Wakanda"];
   const [account,setAccount]=useState('');
@@ -22,6 +32,7 @@ export default function Account(){
   const [sex,setSex]=useState('');
   const [phone,setPhone]=useState('');
   const [email,setEmail]=useState('');
+  const [done,setDone]=useState(false)
   useEffect(()=>{
     axios.get(`http://localhost:8080/api/user_session/${localStorage.sessionID}`)
         .then((res) => {
@@ -63,6 +74,7 @@ export default function Account(){
     axios.put(`http://localhost:8080/api/user/${account.username}/update`,
     {username:account.username,name:name,password:md5(values.password),date:date,nation:nation,sex:sex,phone:phone,email:email})
     .then((res) => {
+      setDone(true)
       console.log(res.data)
     })
     .catch((err) => {
@@ -76,6 +88,7 @@ export default function Account(){
         <div class="Container_acc" style={{backgroundColor:"white"}}>
           <div class="Account_Style">
           <Sidebar nameActive="1"/>
+          <span>{done==!done?openNotification:""}</span>
           <div class="Infor_Style">
           <span class="info-title">Thông tin cá nhân</span>
             <div class="styles_StyledAccountInfo">

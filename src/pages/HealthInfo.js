@@ -62,7 +62,7 @@ export default function HealthInfo(){
               <div className="healthBox">
                 <p className="leftBox">
                     <img src="https://img.icons8.com/ios-filled/2x/ffffff/height.png" />
-                    <span className="topRBox">Height</span>
+                    <span className="topRBox">Chiều cao</span>
                 </p>
                 <p className="rightBox">
                     <span style={{color: "var(--lightprimary)"}}>
@@ -72,7 +72,7 @@ export default function HealthInfo(){
               <div className="healthBox">
                 <p className="leftBox">
                     <img src="https://img.icons8.com/ios-filled/2x/ffffff/weight-kg.png" />
-                    <span className="topRBox">Weight</span>
+                    <span className="topRBox">Cân nặng</span>
                 </p>
                 <p className="rightBox">
                     <span style={{color: "var(--lightprimary)"}}>
