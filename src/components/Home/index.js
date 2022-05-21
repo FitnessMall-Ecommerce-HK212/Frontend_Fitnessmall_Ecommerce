@@ -10,7 +10,7 @@ import "slick-carousel/slick/slick-theme.css";
 import HotBlogCard from './hotblogcard';
 import { useEffect, useState } from "react";
 import { CircularProgress } from "@mui/material";
-const BASE_URL = "http://localhost:8080";
+const BASE_URL = "http://fitnessmall.herokuapp.com";
 
 function Home() {
     var setting1 = {

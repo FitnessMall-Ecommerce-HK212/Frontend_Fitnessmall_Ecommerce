@@ -95,7 +95,7 @@ export default function PurchasedItemsList() {
 
     var config = {
       method: 'get',
-      url: `http://localhost:8080/api/infos/${localStorage.getItem("username")}`,
+      url: `http://fitnessmall.herokuapp.com/api/infos/${localStorage.getItem("username")}`,
       headers: {
         'Content-Type': 'application/json',
       },

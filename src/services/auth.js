@@ -1,5 +1,5 @@
 import axios from 'axios';
-const API_SERVER_URL = 'http://localhost:8080';
+const API_SERVER_URL = 'http://fitnessmall.herokuapp.com';
 
 const config = {
   headers: {

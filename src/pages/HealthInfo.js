@@ -16,10 +16,10 @@ export default function HealthInfo(){
     const [weight,setWeight]=useState("")
     const [username,setUsername]=useState("")
     useEffect(()=>{
-      axios.get(`http://localhost:8080/api/user_session/${localStorage.sessionID}`)
+      axios.get(`http://fitnessmall.herokuapp.com/api/user_session/${localStorage.sessionID}`)
           .then((res) => {
             setUsername(res.data.username);
-            axios.get(`http://localhost:8080/api/user/${res.data.username}`,{username:res.data.username})
+            axios.get(`http://fitnessmall.herokuapp.com/api/user/${res.data.username}`,{username:res.data.username})
           .then((res) => {
             // console.log(res.data)
              setHeight(res.data.height)
