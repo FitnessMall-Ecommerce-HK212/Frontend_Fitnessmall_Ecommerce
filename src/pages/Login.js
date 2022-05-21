@@ -2,16 +2,16 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import axios from "axios";
-import { Link,useHistory} from 'react-router-dom';
-import { loginUser} from '../redux/auth/authSlice';
-import {Footer, Header} from '../components';
+import { Link, useHistory } from 'react-router-dom';
+import { loginUser } from '../redux/auth/authSlice';
+import { Footer, Header } from '../components';
 import '../styles/Login_Register.css'
 import IconButton from "@material-ui/core/IconButton";
 import Visibility from "@material-ui/icons/Visibility";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import md5 from 'md5';
-import {notification,Modal,message} from 'antd';
+import { notification, Modal, message } from 'antd';
 import {
   Grid,
   Card,
@@ -141,8 +141,8 @@ export default function Login() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isModalVisible1, setIsModalVisible1] = useState(false);
   const { errorLogin } = useSelector((state) => state.auth);
-  const [newCode,setnewCode]=useState('');
-  const [newPass,setnewPass]=useState('');
+  const [newCode, setnewCode] = useState('');
+  const [newPass, setnewPass] = useState('');
   const [values, setValues] = useState({
     pwd: '',
     showPassword: false,
@@ -161,9 +161,9 @@ export default function Login() {
   const handleForgot = () => {
     if (username != '') {
       notification.info({
-        message: 'Get the new code',
+        message: 'Lấy Mã mới',
         description:
-          'You should get the code in the sented email to continue using our website',
+          'Bạn phải lấy Mã đã được gửi tới Email để tiếp tục sử dụng Website',
         placement: 'topLeft'
       });
       axios.get(`https://fitnessmall.herokuapp.com/api/user/forgotpass/${username}`, { username: username })
@@ -177,9 +177,9 @@ export default function Login() {
     }
     else {
       notification.info({
-        message: 'Wrong',
+        message: 'Sai',
         description:
-          'Please fill in the right username that you forgot password',
+          'Vui lòng nhập Tài khoản mà bạn đã quên mật khẩu',
         placement: 'topLeft'
       });
     }
@@ -196,23 +196,22 @@ export default function Login() {
     localStorage.setItem("username", username) //Thanh
     setTimeout(() => {
       axios
-      .get(
-        `https://fitnessmall.herokuapp.com/api/user_author/${localStorage.getItem("sessionID")}`,
-            {
-            },
-            { headers: { "Content-Type": "application/json" } }
-          )
-                        .then((res) => {
-                             if (res.data==="OK")
-                             {
-                               localStorage.setItem("pwd",values.pwd);
-                               localStorage.setItem('isAuthenticated',true)
-                               history.push("/")
-                            }
-                        })
-                        .catch((err) => {
-                          alert(err);
-                        });
+        .get(
+          `https://fitnessmall.herokuapp.com/api/user_author/${localStorage.getItem("sessionID")}`,
+          {
+          },
+          { headers: { "Content-Type": "application/json" } }
+        )
+        .then((res) => {
+          if (res.data === "OK") {
+            localStorage.setItem("pwd", values.pwd);
+            localStorage.setItem('isAuthenticated', true)
+            history.push("/")
+          }
+        })
+        .catch((err) => {
+          alert(err);
+        });
     }, 1000);
   };
   return (
@@ -235,11 +234,11 @@ export default function Login() {
           }}
         >
           <Card style={{ padding: "35px 29px", height: "500px", width: "472px" }}>
-            <Typography className={classes.text20}>Login</Typography>
+            <Typography className={classes.text20}>Đăng nhập</Typography>
 
             <form>
               <p className="fst-italic text-danger">{errorLogin}</p>
-              <input type="text" id="inputName" className={classes.input} name="username" placeholder="Username" onChange={(e) => { setName(e.target.value) }}
+              <input type="text" id="inputName" className={classes.input} name="username" placeholder="Tài khoản" onChange={(e) => { setName(e.target.value) }}
               ></input>
               <div style={{ position: "relative" }}>
                 <InputAdornment position="end" style={{ zIndex: 1, position: "absolute", right: "20px", top: "35px" }}>
@@ -250,62 +249,70 @@ export default function Login() {
                     {values.showPassword ? <Visibility /> : <VisibilityOff />}
                   </IconButton>
                 </InputAdornment>
-                <input id="inputPass" className={classes.input} name="password" placeholder="Password"
+                <input id="inputPass" className={classes.input} name="password" placeholder="Mật khẩu"
                   type={values.showPassword ? "text" : "password"} onChange={handlePasswordChange("pwd")} value={values.pwd}
                 >
                 </input>
               </div>
             </form>
 
-          <p style={{fontSize:"14px",color: "#FF2C86",fontWeight:600,cursor: "pointer"}} onClick={handleForgot}
-          >Forgotten password</p>
-           <Modal title="Confirm Code" visible={isModalVisible} onOk={()=>{setIsModalVisible(false);axios.get(`https://fitnessmall.herokuapp.com/api/user/forgotpass/code/${username}?code=${newCode}`,{username:username}).then((res) =>{if(res.data.check==true) {setIsModalVisible1(true)}}).catch((err) => alert(err)
-      ); }} onCancel={()=>setIsModalVisible(false)}>
-        <input type="text" id="inputName" className={classes.input} placeholder="Write in here" onChange={(e)=>setnewCode(e.target.value)}></input>
-           </Modal>
-           <Modal title="Change Password" visible={isModalVisible1} onOk={()=>{setIsModalVisible1(false);axios.post(`https://fitnessmall.herokuapp.com/api/change_pass`,{username:username,password:md5(newPass)},{'Content-Type': 'application/json'
-  }).then((res) =>{if(res.data=="Update password successfully") {
-    message.success('Change successful! Please log in again');
-  }}).catch((err) => alert(err)
-      ); }} onCancel={()=>setIsModalVisible1(false)}>
-        <input type="text" id="inputName" className={classes.input} placeholder="Write the new password" onChange={(e)=>setnewPass(e.target.value)}></input>
-           </Modal>
-          <Button variant="contained" type="submit" className={classes.button_login} onClick={handleSubmit}>Login</Button>
+            <p style={{ fontSize: "14px", color: "#FF2C86", fontWeight: 600, cursor: "pointer" }} onClick={handleForgot}
+            >Quên mật khẩu</p>
+            <Modal title="Xác thực Mã" visible={isModalVisible} onOk={() => {
+              setIsModalVisible(false); axios.get(`https://fitnessmall.herokuapp.com/api/user/forgotpass/code/${username}?code=${newCode}`, { username: username }).then((res) => { if (res.data.check == true) { setIsModalVisible1(true) } }).catch((err) => alert(err)
+              );
+            }} onCancel={() => setIsModalVisible(false)}>
+              <input type="text" id="inputName" className={classes.input} placeholder="Điền vào đây" onChange={(e) => setnewCode(e.target.value)}></input>
+            </Modal>
+            <Modal title="Change Password" visible={isModalVisible1} onOk={() => {
+              setIsModalVisible1(false); axios.post(`https://fitnessmall.herokuapp.com/api/change_pass`, { username: username, password: md5(newPass) }, {
+                'Content-Type': 'application/json'
+              }).then((res) => {
+                if (res.data == "Update password successfully") {
+                  message.success('Change successful! Please log in again');
+                }
+              }).catch((err) => alert(err)
+              );
+            }} onCancel={() => setIsModalVisible1(false)}>
+              <input type="text" id="inputName" className={classes.input} placeholder="Write the new password" onChange={(e) => setnewPass(e.target.value)}></input>
+            </Modal>
+            <Button variant="contained" type="submit" className={classes.button_login} onClick={handleSubmit}>Đăng nhập</Button>
 
-          <div style={{paddingBottom:"0.875rem",display:"flex",alignItems:"center",paddingTop:"20px"}} >
-             <div className={classes.line}></div>
-             <span className={classes.or}>OR</span>
-             <div className={classes.line}></div>
-          </div>
-          <br></br>
-          <div style={{margin: "0px 45px ",justifyContent: "space-between",flexWrap: "wrap",display: "flex"}} >
-          <button className={classes.button_social} onClick={()=>{ axios.get(`https://fitnessmall.herokuapp.com/api/user_signin_signup/google`)
-    .then((res) => {
-      localStorage.setItem('pwd','Not declared')
-      window.open(res.data,'','popup')
-      setTimeout(() => 
-       window.localStorage.getItem('isAuthenticated')=='true'?history.push("/"):''
-     , 9000);
-    })
-    .catch((err) => {
-      alert(err);
-    }); 
-    } }>
-            <div className={classes.icon}><div className={classes.icon_Google}></div></div>
-            <div>Google</div>
-          </button> 
-          <button className={classes.button_social}>
-            <div className={classes.icon}><div className={classes.icon_Facebook}></div></div>
-            <div>Facebook</div>
-          </button>        
-          </div> 
-          <br></br>
-          <div>
-            <p style={{textAlign:"center",fontSize:"13px",fontWeight:600}}>New to fitnessmall?  
-            <Link to="/register" style={{textDecoration:"None"}}  ><span style={{color:"#FF2C86",cursor: "pointer"}} > Sign up</span></Link></p>
-          </div>
-        </Card>
-      </Grid></Grid>
+            <div style={{ paddingBottom: "0.875rem", display: "flex", alignItems: "center", paddingTop: "20px" }} >
+              <div className={classes.line}></div>
+              <span className={classes.or}>OR</span>
+              <div className={classes.line}></div>
+            </div>
+            <br></br>
+            <div style={{ margin: "0px 45px ", justifyContent: "space-between", flexWrap: "wrap", display: "flex" }} >
+              <button className={classes.button_social} onClick={() => {
+                axios.get(`https://fitnessmall.herokuapp.com/api/user_signin_signup/google`)
+                  .then((res) => {
+                    localStorage.setItem('pwd', 'Not declared')
+                    window.open(res.data, '', 'popup')
+                    setTimeout(() =>
+                      window.localStorage.getItem('isAuthenticated') == 'true' ? history.push("/") : ''
+                      , 9000);
+                  })
+                  .catch((err) => {
+                    alert(err);
+                  });
+              }}>
+                <div className={classes.icon}><div className={classes.icon_Google}></div></div>
+                <div>Google</div>
+              </button>
+              <button className={classes.button_social}>
+                <div className={classes.icon}><div className={classes.icon_Facebook}></div></div>
+                <div>Facebook</div>
+              </button>
+            </div>
+            <br></br>
+            <div>
+              <p style={{ textAlign: "center", fontSize: "13px", fontWeight: 600 }}>Lần đầu sử dụng  fitnessmall?
+                <Link to="/register" style={{ textDecoration: "None" }}  ><span style={{ color: "#FF2C86", cursor: "pointer" }} > Đăng ký</span></Link></p>
+            </div>
+          </Card>
+        </Grid></Grid>
       <Footer />
     </>
   );

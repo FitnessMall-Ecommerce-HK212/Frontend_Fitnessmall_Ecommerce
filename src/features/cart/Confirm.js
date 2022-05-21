@@ -22,17 +22,6 @@ import PersonIcon from '@mui/icons-material/Person';
 import AddIcon from '@mui/icons-material/Add';
 import { blue } from '@mui/material/colors';
 
-
-// const a1 = <>
-//   <div className={styles.alldata__paymentinfo__diachi__namephone}>
-//     <p>Võ Hồng Phúc</p>
-//     <p>|</p>
-//     <p>0123456789</p>
-//   </div>
-//   <div>
-//     <p>Ký túc xá khu A ĐHQG TP Hồ Chí Minh, Phường Linh Trung, Quận Thủ Đức - TP Thủ Đức, Hồ Chí Minh</p>
-//   </div>
-// </>
 const addresses = [];
 
 export class SimpleDialogProps {
@@ -92,6 +81,7 @@ export default function Confirm() {
   const dispatch = useDispatch()
   const [open, setOpen] = React.useState(false);
   const [note, setNote] = React.useState('');
+  const [paymentMethod, setPaymentMethod] = React.useState('');
 
   const [openAddress, setOpenAddress] = React.useState(false);
   const [selectedValue, setSelectedValue] = React.useState(addresses[0]);
@@ -118,11 +108,14 @@ export default function Confirm() {
   }
 
 
+  const onChangePaymentMethod = (event) => {
+    setPaymentMethod(event.target.value);
+  }
 
   const renderedItems = items.map((item) => {
     if (item.isChosen) {
       sum = sum + item.price * item.quantity
-      products.push({"name": item.name, "code": item.id, "itemType": item.itemType, "quantity": item.quantity, "unit_price": item.price })
+      products.push({ "name": item.name, "code": item.id, "itemType": item.itemType, "quantity": item.quantity, "unit_price": item.price })
       return (
         <div key={item.id} className={styles.items}>
           <div className={styles.items__checkthumb}>
@@ -148,6 +141,53 @@ export default function Confirm() {
     var data = JSON.stringify({
       "username": localStorage.getItem("username"),
       "account": "MOMO",
+      "shipping_fee": 20000,
+      "discount_order": 0,
+      "discount_shipping": 0,
+      "information_id": "MrYNyuKosRMgghsdVNvi",
+      "products": products
+      // [
+      //   {
+      //     "code": "PT300",
+      //     "itemType": " z4GKmS8DRQ9YRBX30SLP",
+      //     "quantity": 10,
+      //     "unit_price": 5000
+      //   },
+      //   {
+      //     "code": "PK300",
+      //     "itemType": " z4GKmS8DRQ9YRBX30SLP",
+      //     "quantity": 10,
+      //     "unit_price": 5000
+      //   }
+      // ]
+    });
+
+    var config = {
+      method: 'post',
+      url: 'https://fitnessmall.herokuapp.com/api/order',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: data
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(response.data);
+        localStorage.removeItem(localStorage.getItem("username"))
+        window.location.href = response.data
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+  }
+
+  const orderCartCash = () => {
+    var axios = require('axios');
+    var data = JSON.stringify({
+      "username": localStorage.getItem("username"),
+      "account": "CASH",
       "shipping_fee": 20000,
       "discount_order": 0,
       "discount_shipping": 0,
@@ -219,13 +259,13 @@ export default function Confirm() {
                 <h3 className={styles.alldata__itemslist__text}>2. Chọn hình thức thanh toán</h3>
                 <div className={styles.alldata__itemslist__paymentmethod}>
                   <div className={styles.alldata__itemslist__paymentmethod__options}>
-                    <input type="radio" id="cash" name="fav_paymethod" value="cash" />
+                    <input type="radio" id="cash" name="fav_paymethod" value="cash" onChange={onChangePaymentMethod} />
                     <img src={cash} alt='...' className={styles.alldata__itemslist__paymentmethod__options__pic} />
                     <label htmlFor="cash">Thanh toán tiền mặt khi nhận hàng</label><br />
                   </div>
 
                   <div className={styles.alldata__itemslist__paymentmethod__options}>
-                    <input type="radio" id="momo" name="fav_paymethod" value="momo" />
+                    <input type="radio" id="momo" name="fav_paymethod" value="momo" onChange={onChangePaymentMethod} />
                     <img src={momo} alt='...' className={styles.alldata__itemslist__paymentmethod__options__pic} />
                     <label htmlFor="momo">Thanh toán bằng ví MoMo</label><br />
                   </div>
@@ -319,7 +359,13 @@ export default function Confirm() {
                 </div>
               </div>
               <div className={styles.alldata__paymentinfo__buybutton}>
-                <button type='button' className={styles.alldata__paymentinfo__buybutton__element} onClick={orderCart}>Đặt mua</button>
+                <button type='button' className={styles.alldata__paymentinfo__buybutton__element} onClick={() => {
+                  if (paymentMethod == "cash") {
+                    orderCartCash();
+                  } else if (paymentMethod == "momo") {
+                    orderCart();
+                  }
+                }}>Đặt mua</button>
               </div>
             </div>
           </div>
