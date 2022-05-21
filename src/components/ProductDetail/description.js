@@ -33,8 +33,13 @@ function Description(props) {
 
     // localStorage.clear()
     const handleAddCart = () => {
-        dispatch(addItem(props.id, props.name, props.itemtype[active].price, props.image, numItem, props.itemtype))
-        alert(`Thêm sản phẩm '${props.name}' vào giỏ hàng thành công!`)
+        if ("sessionID" in localStorage) {
+            dispatch(addItem(props.id, props.name, props.itemtype[active].price, props.image, numItem, props.itemtype))
+            alert(`Thêm sản phẩm '${props.name}' vào giỏ hàng thành công!`)
+        } else {
+            alert("Cần đăng nhập để thêm giỏ hàng!")
+        }
+
     }
 
     return (
