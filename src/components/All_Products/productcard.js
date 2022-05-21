@@ -1,6 +1,7 @@
 import '../../styles/AllProducts.css'
 import { GhostButton } from '../Buttons'
 import { NavLink } from 'react-router-dom';
+
 function ProductCard(props){
     return(
         <NavLink to={'/products/' + props.type + '/' + props.code}>

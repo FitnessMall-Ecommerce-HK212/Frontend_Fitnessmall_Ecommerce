@@ -150,7 +150,8 @@ export default function SingleOrderPage({ match }) {
                     <p>Tổng cộng</p>
                     <p className={styles.orderdetail__content__info__payment__items__sum}>{formatToCurrency(order.amount + 20000)}đ</p>
                   </div>
-                  <p>Thanh toán bằng hình thức {order.payment_method}</p>
+                  {console.log(order)}
+                  <p>Thanh toán bằng hình thức Momo{order.payment_method}</p>
                 </div>
               </div>
               <div >

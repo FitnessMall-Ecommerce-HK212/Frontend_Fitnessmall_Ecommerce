@@ -1,6 +1,6 @@
 import { BsPersonCircle } from 'react-icons/bs';
 import RatingStar from './ratingstar';
-
+import React from "react";
 function Feedback(props){
     return (
         <div className="row feedback align-items-center">
@@ -16,8 +16,8 @@ function Feedback(props){
             <div className='col-6 feedback-num'>
                 {props.timestamp}
             </div>
-            <div class='col-auto'>
-                <input class='form-control content ms-5 mt-2' style={{width: '520px'}} type='text' value={props.content} aria-label='Disabled input example' disabled readonly/>
+            <div class='col-12'>
+                <input class='form-control content ms-5 mt-2' style={{width: '630px'}} type='text' value={props.content} aria-label='Disabled input example' disabled readonly/>
             </div>
         </div>
     );

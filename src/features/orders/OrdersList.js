@@ -10,12 +10,15 @@ import success from '../../assets/icons/success.svg'
 import Tasklist from '../../assets/icons/Tasklist.svg'
 import { Footer, Header, Sidebar, GhostButton } from '../../components'
 import { addOrders } from './orderSlice'
+import { CircularProgress } from '@mui/material'
 
 export default function OrdersList() {
 
     function formatToCurrency(amount) {
-        amount = (amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&.');
-        return amount.substring(0, amount.length - 3);
+        if (amount) {
+            amount = (amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&.');
+            return amount.substring(0, amount.length - 3);
+        }
     }
 
     const [orders, setOrders] = useState()
@@ -161,7 +164,7 @@ export default function OrdersList() {
         })
     }
     return (
-        <div>
+        (<div>
             <div>
                 <Header />
             </div>
@@ -187,13 +190,13 @@ export default function OrdersList() {
                     </div>
 
                     <div className={styles.orderlist__header__content}>
-                        {orders ? renderedOrders() : null}
+                        {orders ? renderedOrders() : <div className={styles.pending}><CircularProgress /></div>}
                     </div>
                 </div>
             </div>
             <div>
                 <Footer />
             </div>
-        </div>
+        </div>)
     )
 }
