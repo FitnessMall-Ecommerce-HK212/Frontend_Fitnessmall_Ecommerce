@@ -9,13 +9,13 @@ export default function Real({match}){
         console.log(localStorage.getItem('sessionID'))
         axios
              .get(
-               `http://127.0.0.1:8080/api/user_session/${localStorage.getItem('sessionID').toString()}`,
+               `https://fitnessmall.herokuapp.com/api/user_session/${localStorage.getItem('sessionID').toString()}`,
              )
              .then((res) => {
                  console.log(res.data)
                 axios
                 .post(
-                  `http://127.0.0.1:8080/api/google_fit_create`,
+                  `https://fitnessmall.herokuapp.com/api/google_fit_create`,
                   {username: res.data.username,data:JSON.parse(data.data)}
                 )
                 .then((res) => {

@@ -48,7 +48,7 @@ function Header(props) {
                       onClick={() => {
                         axios
                           .get(
-                            `http://127.0.0.1:8080/api/user_signout/${sessionStorage.getItem("sessionID")}`
+                            `https://fitnessmall.herokuapp.com/api/user_signout/${sessionStorage.getItem("sessionID")}`
                           )
                           .then((res) => {
                             if (res.data == "Sign Out Successfully") {

@@ -11,7 +11,7 @@ const initialState = {
 export const registerUser = createAsyncThunk('user_signup', async ({ username, password, email }) => {
   const res = await AuthAPI.registerUser({ username, password,name:'',email });
   if (res.data=='Sign up successfully! Please verify email to sign in'){
-    axios.post(`http://127.0.0.1:8080/api/send_email`,{email:email})
+    axios.post(`https://fitnessmall.herokuapp.com/api/send_email`,{email:email})
     .then((res) => {
       localStorage.setItem('isAuthenticated',true)
     })
