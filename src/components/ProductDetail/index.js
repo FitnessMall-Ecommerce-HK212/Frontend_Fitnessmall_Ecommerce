@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import Description from "./description";
 import Feedback from "./feedback";
 import HotBlogCard from '../Home/hotblogcard';
-import { CTAButton, GhostButton} from '../Buttons'
+import { CTAButton, GhostButton } from '../Buttons'
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { CircularProgress } from "@mui/material";
@@ -13,8 +13,8 @@ import ProductCard from '../All_Products/productcard'
 import StarRating from "./starRating";
 const BASE_URL = "http://localhost:8080";
 
-function ProductDetail(){
-    const { type, code} = useParams();
+function ProductDetail() {
+    const { type, code } = useParams();
     const [productInfo, setProductInfo] = useState([]);
     const [hotBlogs, setHotBlogs] = useState([]);
     const [relatedProducts, setRelatedProducts] = useState([])
@@ -44,14 +44,14 @@ function ProductDetail(){
     const getRelatedProducts = async () => {
         if (type === 'food') {
             const res = await axios.get(BASE_URL + '/api/foods/hot');
-            setRelatedProducts(res.data.hotFoods.slice(0,4));
+            setRelatedProducts(res.data.hotFoods.slice(0, 4));
         }
         else if (type === 'equipment') {
             const res = await axios.get(BASE_URL + '/api/items/hot');
-            setRelatedProducts(res.data.hotItems.slice(0,4));
+            setRelatedProducts(res.data.hotItems.slice(0, 4));
         }
     }
-    
+
     const getUsername = async () => {
         const res = await axios.get(BASE_URL + "/api/user_session/" + localStorage.sessionID);
         setUsername(res.data.username);
@@ -59,9 +59,9 @@ function ProductDetail(){
     const getDate = () => {
         var today = new Date();
         var date = today.toJSON().slice(0, 10);
-        var nDate = date.slice(8, 10) + '/' 
-                    + date.slice(5, 7) + '/' 
-                    + date.slice(0, 4);
+        var nDate = date.slice(8, 10) + '/'
+            + date.slice(5, 7) + '/'
+            + date.slice(0, 4);
         setDate(nDate);
     }
     const handleSubmit = () => {
@@ -109,7 +109,8 @@ function ProductDetail(){
                         <img src={productInfo.image} alt="img" />
                     </div>
                     <div className="col-md-6 col-xs-12">
-                    <Description name={productInfo.name} des={productInfo.description} point={productInfo.point} numOfFeedbacks={productInfo.feedback.length} itemtype={productInfo.itemtype} image={productInfo.image} id={productInfo.id} />
+                        {console.log(productInfo)}
+                        <Description name={productInfo.name} des={productInfo.description} point={productInfo.point} numOfFeedbacks={productInfo.feedback.length} itemtype={productInfo.itemtype} image={productInfo.image} id={productInfo.code} />
                     </div>
                 </div>
                 <div class='divider mt-5'></div>
@@ -131,11 +132,11 @@ function ProductDetail(){
                                 );
                             })}
                             <div className="mt-3">
-                                {!("sessionID" in localStorage) && <div style={{color: '#B3BDC8'}}>Vui lòng <Link to="/login"><span style={{color: '#FF2C86', fontWeight: '500'}}>đăng nhập</span></Link> để đánh giá sản phẩm!</div>}
+                                {!("sessionID" in localStorage) && <div style={{ color: '#B3BDC8' }}>Vui lòng <Link to="/login"><span style={{ color: '#FF2C86', fontWeight: '500' }}>đăng nhập</span></Link> để đánh giá sản phẩm!</div>}
                                 {("sessionID" in localStorage) &&
                                     <div className="row feedback align-items-center mb-3">
                                         <div className="col-1">
-                                            <BsPersonCircle size='24'/>
+                                            <BsPersonCircle size='24' />
                                         </div>
                                         <div className='col-2'>
                                             {username}
@@ -147,7 +148,7 @@ function ProductDetail(){
                                             {date}
                                         </div>
                                         <div class='col-10'>
-                                            <textarea class="form-control ms-5 mt-2" style={{width: '520px'}} value={content} onChange={handleChangeForm} id="feedback" rows="1" placeholder="Vui lòng chọn sao và điền nội dung đánh giá" required></textarea>
+                                            <textarea class="form-control ms-5 mt-2" style={{ width: '520px' }} value={content} onChange={handleChangeForm} id="feedback" rows="1" placeholder="Vui lòng chọn sao và điền nội dung đánh giá" required></textarea>
                                         </div>
                                         <div class='col-2 mt-2'>
                                             <button type="submit" className="btn btn-send" onClick={handleSubmit}>
@@ -159,7 +160,7 @@ function ProductDetail(){
                                 }
                             </div>
                         </div>
-                    </div> 
+                    </div>
                 </div>
                 <div class='divider mt-5'></div>
                 <div class='related-product mt-3'>
@@ -168,14 +169,14 @@ function ProductDetail(){
                         {relatedProducts.map((item) => {
                             return (
                                 <div className="col-3">
-                                <ProductCard 
-                                            img={item.image}
-                                            name={item.name}
-                                            price={item.itemtype[0].price}
-                                            type='food'
-                                            code={item.code}
-                                            point={item.point}
-                                        />
+                                    <ProductCard
+                                        img={item.image}
+                                        name={item.name}
+                                        price={item.itemtype[0].price}
+                                        type='food'
+                                        code={item.code}
+                                        point={item.point}
+                                    />
                                 </div>
                             );
                         })}
@@ -188,7 +189,7 @@ function ProductDetail(){
                         {hotBlogs.map((blog) => {
                             return (
                                 <div className="col-4">
-                                <HotBlogCard id={blog.idBlog} img={blog.image} tags={blog.tags[0]} title={blog.title.toUpperCase()}/>
+                                    <HotBlogCard id={blog.idBlog} img={blog.image} tags={blog.tags[0]} title={blog.title.toUpperCase()} />
                                 </div>
                             );
                         })}

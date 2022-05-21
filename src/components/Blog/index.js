@@ -20,15 +20,19 @@ const Blog = () => {
 
   if (allBlogs.length === 0) {
     return (
-      <div style={{display: "flex", justifyContent: "center", margin: "15rem 0"}}>
+      <div
+        style={{ display: "flex", justifyContent: "center", margin: "15rem 0" }}
+      >
         <CircularProgress />
       </div>
-    )
+    );
   } else {
     return (
       <>
         <div className="BlogPage">
-          <BlogCard allBlogs={allBlogs} />
+          <div>
+            <BlogCard allBlogs={allBlogs} />
+          </div>
           <div className="hotBlog" style={{ width: "40%" }}>
             <div className="hotTitle">BÀI VIẾT HAY</div>
             <HotBlog allBlogs={allBlogs} />

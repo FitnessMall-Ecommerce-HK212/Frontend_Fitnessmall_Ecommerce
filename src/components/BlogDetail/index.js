@@ -116,7 +116,7 @@ const BlogDetail = () => {
       setBlog(res);
       console.log(res)
     });
-  }, [checkCmt]);
+  }, [checkCmt, idBlog]);
 
   if (allBlogs.length === 0 || blog.content === undefined) {
     return (

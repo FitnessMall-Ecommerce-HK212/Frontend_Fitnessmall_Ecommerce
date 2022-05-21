@@ -82,6 +82,7 @@ function SimpleDialog(props) {
 }
 
 export default function Confirm() {
+  const products = []
 
   const items = JSON.parse(localStorage.getItem("giacat"))
   // const items = JSON.parse(localStorage.getItem("giacat")).cart
@@ -116,9 +117,12 @@ export default function Confirm() {
     return amount.substring(0, amount.length - 3);
   }
 
+
+
   const renderedItems = items.map((item) => {
     if (item.isChosen) {
       sum = sum + item.price * item.quantity
+      products.push({ "code": item.id, "itemType": item.itemType, "quantity": item.quantity, "unit_price": item.price })
       return (
         <div key={item.id} className={styles.items}>
           <div className={styles.items__checkthumb}>
@@ -138,6 +142,54 @@ export default function Confirm() {
     }
 
   })
+
+  const orderCart = () => {
+    var axios = require('axios');
+    var data = JSON.stringify({
+      "username": localStorage.getItem("username"),
+      "account": "MOMO",
+      "shipping_fee": 20000,
+      "discount_order": 0,
+      "discount_shipping": 0,
+      "information_id": "MrYNyuKosRMgghsdVNvi",
+      "products": products
+      // [
+      //   {
+      //     "code": "PT300",
+      //     "itemType": " z4GKmS8DRQ9YRBX30SLP",
+      //     "quantity": 10,
+      //     "unit_price": 5000
+      //   },
+      //   {
+      //     "code": "PK300",
+      //     "itemType": " z4GKmS8DRQ9YRBX30SLP",
+      //     "quantity": 10,
+      //     "unit_price": 5000
+      //   }
+      // ]
+    });
+
+    var config = {
+      method: 'post',
+      url: 'http://localhost:8080/api/order',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: data
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(response.data);
+        localStorage.removeItem(localStorage.getItem("username"))
+        window.location.href = response.data
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+  }
+
   return (
     items.length === 0 ?
 
@@ -160,7 +212,7 @@ export default function Confirm() {
                   <p>(!) Được giao bởi J&amp;T Express (giao từ Hồ Chí Minh)</p>
                 </div>
                 <div>
-                  <p>Giao hàng vào thứ Ba, 15/3</p>
+                  <p>Giao hàng vào thứ Ba, 15/7</p>
                 </div>
               </div>
               <div>
@@ -267,7 +319,7 @@ export default function Confirm() {
                 </div>
               </div>
               <div className={styles.alldata__paymentinfo__buybutton}>
-                <button type='button' className={styles.alldata__paymentinfo__buybutton__element}>Đặt mua</button>
+                <button type='button' className={styles.alldata__paymentinfo__buybutton__element} onClick={orderCart}>Đặt mua</button>
               </div>
             </div>
           </div>
