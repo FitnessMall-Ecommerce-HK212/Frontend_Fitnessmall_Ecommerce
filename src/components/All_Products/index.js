@@ -4,7 +4,7 @@ import { useParams, NavLink } from "react-router-dom";
 import ProductCard from './productcard'
 import ReactPaginate from 'react-paginate';
 import { CircularProgress } from "@mui/material";
-const BASE_URL = "http://fitnessmall.herokuapp.com";
+const BASE_URL = "https://fitnessmall.herokuapp.com";
 
 function All_Products(){
     const [productList, setProductList] = useState([]);

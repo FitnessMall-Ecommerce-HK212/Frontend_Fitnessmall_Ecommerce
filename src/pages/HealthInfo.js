@@ -46,10 +46,10 @@ export default function HealthInfo(){
   }
     const [type,setType]=useState('')
     useEffect(()=>{
-      axios.get(`http://fitnessmall.herokuapp.com/api/user_session/${localStorage.sessionID}`)
+      axios.get(`https://fitnessmall.herokuapp.com/api/user_session/${localStorage.sessionID}`)
           .then((res) => {
             setUsername(res.data.username);
-            axios.get(`http://fitnessmall.herokuapp.com/api/user/${res.data.username}`,{username:res.data.username})
+            axios.get(`https://fitnessmall.herokuapp.com/api/user/${res.data.username}`,{username:res.data.username})
           .then((res) => {
             // console.log(res.data)
              setHeight(res.data.height)

@@ -32,7 +32,7 @@ export default function OrdersList() {
 
         var config = {
             method: 'get',
-            url: `http://fitnessmall.herokuapp.com/api/orders/giacat`,
+            url: `https://fitnessmall.herokuapp.com/api/orders/giacat`,
             headers: {
                 'Content-Type': 'application/json',
             },

@@ -11,7 +11,7 @@ import { BsPersonCircle } from 'react-icons/bs';
 import { FiSend } from "react-icons/fi";
 import ProductCard from '../All_Products/productcard'
 import StarRating from "./starRating";
-const BASE_URL = "http://fitnessmall.herokuapp.com";
+const BASE_URL = "https://fitnessmall.herokuapp.com";
 
 function ProductDetail() {
     const { type, code } = useParams();

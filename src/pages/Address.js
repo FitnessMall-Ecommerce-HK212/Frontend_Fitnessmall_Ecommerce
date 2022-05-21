@@ -64,7 +64,7 @@ export default function Address(){
     );
   }
   useEffect(()=>{
-    axios.get(`http://fitnessmall.herokuapp.com/api/user_session/${localStorage.sessionID}`)
+    axios.get(`https://fitnessmall.herokuapp.com/api/user_session/${localStorage.sessionID}`)
         .then((res) => {
         if (res.data.username!=undefined) {
           setUsername(res.data.username)
@@ -111,7 +111,7 @@ export default function Address(){
               <div style={{display:"flex"}}>
               <img src="https://cdn-icons-png.flaticon.com/512/900/900834.png" width="25px" height="25px" style={{display:"flex",cursor:"pointer",marginRight:"10px"}} onClick={()=>{setIsModalVisible1(true);console.log(item);changeAddress(item)}}/>
             <Modal title="Chỉnh địa chỉ" visible={isModalVisible1} onOk={
-              ()=>{setOpen(true);setIsModalVisible1(false);axios.put(`http://fitnessmall.herokuapp.com/api/info/${username}/${curAddress.id}`,curAddress).then((res) =>{setType("success");setCheck(!checkChange);console.log(item);changeAddress({...curAddress,'id':'','address':'','province':'','district':'','ward':'','phone':'','receiver':''})}).catch((err) => {setType("error");alert(err);}
+              ()=>{setOpen(true);setIsModalVisible1(false);axios.put(`https://fitnessmall.herokuapp.com/api/info/${username}/${curAddress.id}`,curAddress).then((res) =>{setType("success");setCheck(!checkChange);console.log(item);changeAddress({...curAddress,'id':'','address':'','province':'','district':'','ward':'','phone':'','receiver':''})}).catch((err) => {setType("error");alert(err);}
       ); }} onCancel={()=>setIsModalVisible1(false)}>
         <label style={{color:"var(--lightprimary)",marginRight:"30px"}}>Địa chỉ: </label>
         <input type="text" id="inputAll" value={curAddress.address} style={Input} placeholder="Sửa địa chỉ" onChange={(e)=>changeAddress({...curAddress,'address':e.target.value})}></input>
@@ -141,7 +141,7 @@ export default function Address(){
           </div>
             )}
             <Modal title="Thêm địa chỉ" visible={isModalVisible} onOk={
-              ()=>{setOpen(true);setIsModalVisible(false);axios.post(`http://fitnessmall.herokuapp.com/api/info/${username}`,newAddress).then((res) =>{setType("success");setCheck(!checkChange);addAddress({...newAddress,'address':'','province':'','district':'','ward':'','phone':'','receiver':''})}).catch((err) => {alert(err);setType("error")}
+              ()=>{setOpen(true);setIsModalVisible(false);axios.post(`https://fitnessmall.herokuapp.com/api/info/${username}`,newAddress).then((res) =>{setType("success");setCheck(!checkChange);addAddress({...newAddress,'address':'','province':'','district':'','ward':'','phone':'','receiver':''})}).catch((err) => {alert(err);setType("error")}
       ); }} onCancel={()=>setIsModalVisible(false)}>
         <label style={{color:"var(--lightprimary)",marginRight:"35px"}}>Địa chỉ: </label>
         <input type="text" id="inputAll" value={newAddress.address} style={Input} placeholder="Điền địa chỉ" onChange={(e)=>addAddress({...newAddress,'address':e.target.value})}></input>
