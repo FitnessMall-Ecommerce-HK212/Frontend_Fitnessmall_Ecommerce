@@ -16,6 +16,7 @@ const Blog = () => {
     getAllBlogs().then((res) => {
       setAllBlogs(res);
     });
+    window.scrollTo(0,0)
   }, []);
 
   if (allBlogs.length === 0) {
