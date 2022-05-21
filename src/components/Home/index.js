@@ -120,21 +120,21 @@ function Home() {
                 <div className='all-service pt-5'>
                 <div className='intro'>
                         <div className='line'></div>
-                        <h5 className='pt-2 ps-1 pe-1'>Sản phẩm cung cấp</h5>
+                        <h5 className='pt-2 ps-1 pe-1'>FITNESSMALL Có Gì?</h5>
                         <div className='line'></div>
                     </div>
                     <div className='introcard-container pt-3'>
                         <div className='row'>
-                            <div className='col-4 col-xs-12 ps-5 pe-5'><IntroCard name="Personal Training"/></div>
-                            <div className='col-4 col-xs-12 ps-5 pe-5'><IntroCard name="Medical Blogs"/></div>
-                            <div className='col-4 col-xs-12 ps-5 pe-5'><IntroCard name="Fitness Accessories"/></div>
+                            {/* <div className='col-4 col-xs-12 ps-5 pe-5'><IntroCard name="Personal Training"/></div> */}
+                            <div className='col-6 col-xs-12 ps-5 pe-5'><IntroCard name="Blog Tư Vấn"/></div>
+                            <div className='col-6 col-xs-12 ps-5 pe-5'><IntroCard name="Sản phẩm Fitness"/></div>
                         </div>
                     </div>
                 </div>
                 <div className='hotdeals pt-5'>
                     <div className='intro'>
                         <div className='line'></div>
-                        <h5 className='pt-2 ps-1 pe-1'>Food Deals</h5>
+                        <h5 className='pt-2 ps-1 pe-1'>Thực phẩm nổi bật</h5>
                         <div className='line'></div>
                     </div>
                     <Slider {...setting1}>
@@ -157,7 +157,7 @@ function Home() {
                 <div className='hotdeals pt-5'>
                     <div className='intro'>
                         <div className='line'></div>
-                        <h5 className='pt-2 ps-1 pe-1'>Equipment Deals</h5>
+                        <h5 className='pt-2 ps-1 pe-1'>Dụng cụ nổi bật</h5>
                         <div className='line'></div>
                     </div>
                     <Slider {...setting1}>
@@ -180,7 +180,7 @@ function Home() {
                 <div className='hotblogs pt-5 pb-5'>
                     <div className='intro'>
                         <div className='line'></div>
-                        <h5 className='pt-2 ps-1 pe-1'>Hot Blogs</h5>
+                        <h5 className='pt-2 ps-1 pe-1'>Blog nổi bật</h5>
                         <div className='line'></div>
                     </div>
                     <Slider {...setting2}>

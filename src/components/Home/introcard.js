@@ -4,12 +4,10 @@ import {Link} from 'react-router-dom';
 
 function IntroCard(props){
     var link;
-    if (props.name === "Fitness Accessories")
+    if (props.name === "Sản phẩm Fitness")
         link = '/products/food'
-    else if (props.name === "Medical Blogs")
+    else if (props.name === "Blog Tư Vấn")
         link = '/blog'
-    else 
-        link = '/products/personal-training'
     return (
         <Link to={link}>
         <div className="introcard">
