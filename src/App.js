@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import store from './redux/store';
 import PrivateRoute from './PrivateRoute';
-import  {Login,Register,HomePage,Account,HealthInfo,Address,Fake,Real} from './pages';
+import { Login, Register, HomePage, Account, HealthInfo, Address, Fake, Real } from './pages';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AllProducts from './pages/AllProducts';
 import PurchasedItemsList from './features/cart/PurchasedItemsList';
@@ -35,12 +35,12 @@ const App = () => {
           <Route exact path="/blog" component={BlogPage} />
           <Route path="/blog/detail/:idBlog" component={BlogDetailPage} />
           {/* <PrivateRoute path="/..." component={...} /> */}
-          <Route exact path="/cart" component={PurchasedItemsList} />
-          <Route exact path="/cart/confirm" component={Confirm} />
-          <Route exact path="/cart/confirm/payment" component={PaymentDonePage} />
-          <Route exact path="/history/order" component={OrdersList} />
-          <Route exact path="/history/order/:orderId" component={SingleOrderPage} />
-          <Route exact path="/history/order/:orderId/:shipmentId" component={SingleShipmentPage} />
+          <PrivateRoute exact path="/cart" component={PurchasedItemsList} />
+          <PrivateRoute exact path="/cart/confirm" component={Confirm} />
+          <PrivateRoute exact path="/cart/confirm/payment" component={PaymentDonePage} />
+          <PrivateRoute exact path="/history/order" component={OrdersList} />
+          <PrivateRoute exact path="/history/order/:orderId" component={SingleOrderPage} />
+          <PrivateRoute exact path="/history/order/:orderId/:shipmentId" component={SingleShipmentPage} />
           <Route exact path="/fake/:data" component={Fake} />
           <Route exact path="/real/:data" component={Real} />
         </Switch>
