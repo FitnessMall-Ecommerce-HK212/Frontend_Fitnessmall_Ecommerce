@@ -12,6 +12,8 @@ import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 
+const BASE_URL = "https://fitnessmall.herokuapp.com/"
+
 export function UserInfo(e) {
   if (e.name !== undefined) {
     return (
@@ -66,7 +68,7 @@ const BlogDetail = () => {
 
   const handleAddComment = () => {
     axios
-      .post("http://localhost:8080/api/blog/add-cmt", {
+      .post(BASE_URL+"api/blog/add-cmt", {
         username: user.username,
         content: blogCmt,
         blog_id: idBlog,
@@ -87,7 +89,7 @@ const BlogDetail = () => {
     if ("sessionID" in localStorage) {
       async function getUserInfo() {
         const response = await axios.get(
-          `http://localhost:8080/api/user_session/${localStorage.sessionID}`
+          BASE_URL+`api/user_session/${localStorage.sessionID}`
         );
         return response.data;
       }
@@ -97,7 +99,7 @@ const BlogDetail = () => {
 
   useEffect(() => {
     async function getAllBlogs() {
-      const response = await axios.get("http://localhost:8080/api/blogs");
+      const response = await axios.get(BASE_URL+"api/blogs");
       return response.data.blogList;
     }
     getAllBlogs().then((res) => {
@@ -108,7 +110,7 @@ const BlogDetail = () => {
   useEffect(() => {
     async function getBlog() {
       const response = await axios.get(
-        `http://localhost:8080/api/blogs/${idBlog}`
+        BASE_URL+`api/blogs/${idBlog}`
       );
       return response.data;
     }
