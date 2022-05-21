@@ -197,7 +197,7 @@ export default function Login() {
     setTimeout(() => {
       axios
       .get(
-        `http://127.0.0.1:8080/api/user_author/${localStorage.getItem("sessionID")}`,
+        `https://fitnessmall.herokuapp.com/api/user_author/${localStorage.getItem("sessionID")}`,
             {
             },
             { headers: { "Content-Type": "application/json" } }

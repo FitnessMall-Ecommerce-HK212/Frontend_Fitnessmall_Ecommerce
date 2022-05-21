@@ -68,7 +68,7 @@ export default function Address(){
         .then((res) => {
         if (res.data.username!=undefined) {
           setUsername(res.data.username)
-        axios.get(`http://127.0.0.1:8080/api/infos/${res.data.username}`)
+        axios.get(`https://fitnessmall.herokuapp.com/api/infos/${res.data.username}`)
         .then((res) => {
            if (res.data!='No Information record found'){
               setAddress(res.data)
@@ -126,7 +126,7 @@ export default function Address(){
         <label style={{color:"var(--lightprimary)",marginRight:"10px"}}>Người nhận: </label>
         <input type="text" id="inputAll" value={curAddress.receiver} style={Input} placeholder="Sửa người nhận" onChange={(e)=>changeAddress({...curAddress,'receiver':e.target.value})}></input>
         </Modal>
-              <img src="https://img.icons8.com/plasticine/344/filled-trash.png" width="28px" height="30px" style={{display:"flex",cursor:"pointer"}} onClick={()=>{ setOpen(true);axios.delete(`http://127.0.0.1:8080/api/info/${username}/${item.id}`)
+              <img src="https://img.icons8.com/plasticine/344/filled-trash.png" width="28px" height="30px" style={{display:"flex",cursor:"pointer"}} onClick={()=>{ setOpen(true);axios.delete(`https://fitnessmall.herokuapp.com/api/info/${username}/${item.id}`)
         .then((res) => {
           setType("success");
           setCheck(!checkChange);

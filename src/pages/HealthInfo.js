@@ -118,7 +118,7 @@ export default function HealthInfo(){
              setOpen(!open)
             //  axios
             //  .get(
-            //    "http://127.0.0.1:8080/api/google_fit"
+            //    "https://fitnessmall.herokuapp.com/api/google_fit"
             //  )
             //  .then((res) => {
             //    window.open(res.data,'','popup')
@@ -132,7 +132,7 @@ export default function HealthInfo(){
             //  });
              axios
              .get(
-               `http://127.0.0.1:8080/api/google_fit/data/${username}`
+               `https://fitnessmall.herokuapp.com/api/google_fit/data/${username}`
              )
              .then((res) => {
               //  res.data.onSnapshot((ele)=>console.log(ele.data()));
@@ -144,7 +144,7 @@ export default function HealthInfo(){
           <CTAButton value="Lưu thay đổi" style={{marginLeft:"30px",
                 width:"120px",height:"45px"}} onClick={()=>{axios
                    .put(
-                     `http://127.0.0.1:8080/api/user/${username}/update`,{username:username,height:height,weight:weight}
+                     `https://fitnessmall.herokuapp.com/api/user/${username}/update`,{username:username,height:height,weight:weight}
                    )
                    .then((res) => {
                      setType("success")
