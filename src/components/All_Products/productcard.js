@@ -12,7 +12,7 @@ function ProductCard(props){
                     <div className="card-title text-center pt-2">{props.name}<span class="badge bg-warning ms-2">{props.point.toFixed(1)}</span></div>
                     <div className='price justify-content-center'><h5>{props.price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}</h5></div>
                     <div className='moreaction mt-2 d-flex justify-content-center'>
-                        <GhostButton value="View Detail" onClick={() => { }}/>
+                        <GhostButton value="Xem chi tiết" onClick={() => { }}/>
                     </div>
                 </div>
             </div>
