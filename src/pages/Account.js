@@ -98,7 +98,7 @@ export default function Account(){
       console.log(res.data)
     })
     .catch((err) => {
-      setType("fail")
+      setType("error")
     alert(err);
     });
   }

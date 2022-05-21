@@ -10,11 +10,41 @@ import Select from '@mui/material/Select';
 import axios from "axios";
 import { DatePicker, Space,Progress,Row,Col } from 'antd';
 import 'antd/dist/antd.css';
+import Stack from "@mui/material/Stack";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 export default function HealthInfo(){
     const [open,setOpen]=useState(false)
     const [height,setHeight]=useState("")
     const [weight,setWeight]=useState("")
     const [username,setUsername]=useState("")
+    const [open1,setOpen1]=useState(false)
+    //For alert
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+  
+  function CustomizedSnackbars(props) {
+    return (
+      <Stack spacing={2} sx={{ width: "100%" }}>
+        <Snackbar
+          anchorOrigin={{vertical: 'top', horizontal: 'right'}}
+          open={props.open}
+          autoHideDuration={3000}
+          onClose={props.handleClose}
+        >
+          <Alert
+            onClose={props.handleClose}
+            severity={props.type}
+            sx={{ width: "100%" }}
+          >
+            {props.type === "success" ? "Save successfully" : "Failed, please retry!"}
+          </Alert>
+        </Snackbar>
+      </Stack>
+    );
+  }
+    const [type,setType]=useState('')
     useEffect(()=>{
       axios.get(`http://fitnessmall.herokuapp.com/api/user_session/${localStorage.sessionID}`)
           .then((res) => {
@@ -112,17 +142,21 @@ export default function HealthInfo(){
              });
           }} ></GhostButton>
           <CTAButton value="Lưu thay đổi" style={{marginLeft:"30px",
-                width:"120px",height:"45px"}} onClick={()=>axios
+                width:"120px",height:"45px"}} onClick={()=>{axios
                    .put(
                      `http://127.0.0.1:8080/api/user/${username}/update`,{username:username,height:height,weight:weight}
                    )
                    .then((res) => {
+                     setType("success")
                      console.log(res.data)
                    })
                    .catch((err) => {
+                    setType("error")
                      alert(err);
-                   })}/>
+                   });setOpen1(true)}
+                   }/>
            </div>
+           <CustomizedSnackbars type={type} open={open1} handleClose={()=>setOpen1(false)}/>
           <div id="chart" style={{visibility:(open==true?"visible":"hidden")}}>
           <Row justify="center">
             <Col span={8}><Progress type="circle" percent={75} strokeColor="#0cdbf0" />
