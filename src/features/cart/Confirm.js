@@ -122,7 +122,7 @@ export default function Confirm() {
   const renderedItems = items.map((item) => {
     if (item.isChosen) {
       sum = sum + item.price * item.quantity
-      products.push({ "code": item.id, "itemType": item.itemType, "quantity": item.quantity, "unit_price": item.price })
+      products.push({"name": item.name, "code": item.id, "itemType": item.itemType, "quantity": item.quantity, "unit_price": item.price })
       return (
         <div key={item.id} className={styles.items}>
           <div className={styles.items__checkthumb}>
