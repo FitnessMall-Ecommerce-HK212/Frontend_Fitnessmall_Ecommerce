@@ -166,7 +166,7 @@ export default function Login() {
           'You should get the code in the sented email to continue using our website',
         placement: 'topLeft'
       });
-      axios.get(`http://fitnessmall.herokuapp.com/api/user/forgotpass/${username}`, { username: username })
+      axios.get(`https://fitnessmall.herokuapp.com/api/user/forgotpass/${username}`, { username: username })
         .then((res) => {
           console.log(res.data)
         })
@@ -259,11 +259,11 @@ export default function Login() {
 
           <p style={{fontSize:"14px",color: "#FF2C86",fontWeight:600,cursor: "pointer"}} onClick={handleForgot}
           >Forgotten password</p>
-           <Modal title="Confirm Code" visible={isModalVisible} onOk={()=>{setIsModalVisible(false);axios.get(`http://fitnessmall.herokuapp.com/api/user/forgotpass/code/${username}?code=${newCode}`,{username:username}).then((res) =>{if(res.data.check==true) {setIsModalVisible1(true)}}).catch((err) => alert(err)
+           <Modal title="Confirm Code" visible={isModalVisible} onOk={()=>{setIsModalVisible(false);axios.get(`https://fitnessmall.herokuapp.com/api/user/forgotpass/code/${username}?code=${newCode}`,{username:username}).then((res) =>{if(res.data.check==true) {setIsModalVisible1(true)}}).catch((err) => alert(err)
       ); }} onCancel={()=>setIsModalVisible(false)}>
         <input type="text" id="inputName" className={classes.input} placeholder="Write in here" onChange={(e)=>setnewCode(e.target.value)}></input>
            </Modal>
-           <Modal title="Change Password" visible={isModalVisible1} onOk={()=>{setIsModalVisible1(false);axios.post(`http://fitnessmall.herokuapp.com/api/change_pass`,{username:username,password:md5(newPass)},{'Content-Type': 'application/json'
+           <Modal title="Change Password" visible={isModalVisible1} onOk={()=>{setIsModalVisible1(false);axios.post(`https://fitnessmall.herokuapp.com/api/change_pass`,{username:username,password:md5(newPass)},{'Content-Type': 'application/json'
   }).then((res) =>{if(res.data=="Update password successfully") {
     message.success('Change successful! Please log in again');
   }}).catch((err) => alert(err)
@@ -279,7 +279,7 @@ export default function Login() {
           </div>
           <br></br>
           <div style={{margin: "0px 45px ",justifyContent: "space-between",flexWrap: "wrap",display: "flex"}} >
-          <button className={classes.button_social} onClick={()=>{ axios.get(`http://fitnessmall.herokuapp.com/api/user_signin_signup/google`)
+          <button className={classes.button_social} onClick={()=>{ axios.get(`https://fitnessmall.herokuapp.com/api/user_signin_signup/google`)
     .then((res) => {
       localStorage.setItem('pwd','Not declared')
       window.open(res.data,'','popup')

@@ -5,6 +5,9 @@ import {Footer, Header,Sidebar,GhostButton} from '../components';
 import axios from "axios";
 import '../styles/Login_Register.css'
 import {Modal,Popover} from 'antd';
+import Stack from "@mui/material/Stack";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 const Input= {
   width: "380px",
   height: "48px",
@@ -32,8 +35,36 @@ export default function Address(){
   const [isModalVisible, setIsModalVisible] = useState(false);
   //check for change to reload the elements
   const [checkChange,setCheck]=useState(false);
+  
+  //For alert
+  const [open,setOpen]=useState(false)
+  const [type,setType]=useState('')
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+  
+  function CustomizedSnackbars(props) {
+    return (
+      <Stack spacing={2} sx={{ width: "100%" }}>
+        <Snackbar
+          anchorOrigin={{vertical: 'top', horizontal: 'right'}}
+          open={props.open}
+          autoHideDuration={3000}
+          onClose={props.handleClose}
+        >
+          <Alert
+            onClose={props.handleClose}
+            severity={props.type}
+            sx={{ width: "100%" }}
+          >
+            {props.type === "success" ? "Successfully" : "Failed, please retry!"}
+          </Alert>
+        </Snackbar>
+      </Stack>
+    );
+  }
   useEffect(()=>{
-    axios.get(`http://fitnessmall.herokuapp.com/api/user_session/${localStorage.sessionID}`)
+    axios.get(`https://fitnessmall.herokuapp.com/api/user_session/${localStorage.sessionID}`)
         .then((res) => {
         if (res.data.username!=undefined) {
           setUsername(res.data.username)
@@ -80,7 +111,7 @@ export default function Address(){
               <div style={{display:"flex"}}>
               <img src="https://cdn-icons-png.flaticon.com/512/900/900834.png" width="25px" height="25px" style={{display:"flex",cursor:"pointer",marginRight:"10px"}} onClick={()=>{setIsModalVisible1(true);console.log(item);changeAddress(item)}}/>
             <Modal title="Chỉnh địa chỉ" visible={isModalVisible1} onOk={
-              ()=>{setIsModalVisible1(false);axios.put(`http://fitnessmall.herokuapp.com/api/info/${username}/${curAddress.id}`,curAddress).then((res) =>{setCheck(!checkChange);console.log(item);changeAddress({...curAddress,'id':'','address':'','province':'','district':'','ward':'','phone':'','receiver':''})}).catch((err) => alert(err)
+              ()=>{setOpen(true);setIsModalVisible1(false);axios.put(`https://fitnessmall.herokuapp.com/api/info/${username}/${curAddress.id}`,curAddress).then((res) =>{setType("success");setCheck(!checkChange);console.log(item);changeAddress({...curAddress,'id':'','address':'','province':'','district':'','ward':'','phone':'','receiver':''})}).catch((err) => {setType("error");alert(err);}
       ); }} onCancel={()=>setIsModalVisible1(false)}>
         <label style={{color:"var(--lightprimary)",marginRight:"30px"}}>Địa chỉ: </label>
         <input type="text" id="inputAll" value={curAddress.address} style={Input} placeholder="Sửa địa chỉ" onChange={(e)=>changeAddress({...curAddress,'address':e.target.value})}></input>
@@ -95,12 +126,14 @@ export default function Address(){
         <label style={{color:"var(--lightprimary)",marginRight:"10px"}}>Người nhận: </label>
         <input type="text" id="inputAll" value={curAddress.receiver} style={Input} placeholder="Sửa người nhận" onChange={(e)=>changeAddress({...curAddress,'receiver':e.target.value})}></input>
         </Modal>
-              <img src="https://img.icons8.com/plasticine/344/filled-trash.png" width="28px" height="30px" style={{display:"flex",cursor:"pointer"}} onClick={()=>{ axios.delete(`http://127.0.0.1:8080/api/info/${username}/${item.id}`)
+              <img src="https://img.icons8.com/plasticine/344/filled-trash.png" width="28px" height="30px" style={{display:"flex",cursor:"pointer"}} onClick={()=>{ setOpen(true);axios.delete(`http://127.0.0.1:8080/api/info/${username}/${item.id}`)
         .then((res) => {
+          setType("success");
           setCheck(!checkChange);
            console.log(res.data)
         })
         .catch((err) => {
+          setType("error");
         alert(err);
         });}}/>
               </div>
@@ -108,7 +141,7 @@ export default function Address(){
           </div>
             )}
             <Modal title="Thêm địa chỉ" visible={isModalVisible} onOk={
-              ()=>{setIsModalVisible(false);axios.post(`http://fitnessmall.herokuapp.com/api/info/${username}`,newAddress).then((res) =>{setCheck(!checkChange);addAddress({...newAddress,'address':'','province':'','district':'','ward':'','phone':'','receiver':''})}).catch((err) => alert(err)
+              ()=>{setOpen(true);setIsModalVisible(false);axios.post(`https://fitnessmall.herokuapp.com/api/info/${username}`,newAddress).then((res) =>{setType("success");setCheck(!checkChange);addAddress({...newAddress,'address':'','province':'','district':'','ward':'','phone':'','receiver':''})}).catch((err) => {alert(err);setType("error")}
       ); }} onCancel={()=>setIsModalVisible(false)}>
         <label style={{color:"var(--lightprimary)",marginRight:"35px"}}>Địa chỉ: </label>
         <input type="text" id="inputAll" value={newAddress.address} style={Input} placeholder="Điền địa chỉ" onChange={(e)=>addAddress({...newAddress,'address':e.target.value})}></input>
@@ -126,6 +159,7 @@ export default function Address(){
           <div style={{alignItems: "center",justifyContent: "center",margin:"0 auto",display: "flex"}}>
           <GhostButton value="Thêm địa chỉ" onClick={()=>setIsModalVisible(true)}/>
           </div>
+          <CustomizedSnackbars type={type} open={open} handleClose={()=>setOpen(false)}/>
         </div>
        </div>
        </div>

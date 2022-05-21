@@ -28,9 +28,9 @@ export default function Account(){
   const [open,setOpen]=useState(false)
   const [type,setType]=useState('')
   useEffect(()=>{
-    axios.get(`http://fitnessmall.herokuapp.com/api/user_session/${localStorage.sessionID}`)
+    axios.get(`https://fitnessmall.herokuapp.com/api/user_session/${localStorage.sessionID}`)
         .then((res) => {
-          axios.get(`http://fitnessmall.herokuapp.com/api/user/${res.data.username}`,{username:res.data.username})
+          axios.get(`https://fitnessmall.herokuapp.com/api/user/${res.data.username}`,{username:res.data.username})
         .then((res) => {
           setAccount(res.data);
           setName(res.data.name);
@@ -91,14 +91,14 @@ export default function Account(){
   const handleSubmit=()=>{
     setOpen(true)
     localStorage['pwd']=values.password;
-    axios.put(`http://fitnessmall.herokuapp.com/api/user/${account.username}/update`,
+    axios.put(`https://fitnessmall.herokuapp.com/api/user/${account.username}/update`,
     {username:account.username,name:name,password:md5(values.password),date:date,nation:nation,sex:sex,phone:phone,email:email})
     .then((res) => {
       setType("success")
       console.log(res.data)
     })
     .catch((err) => {
-      setType("fail")
+      setType("error")
     alert(err);
     });
   }
@@ -121,7 +121,7 @@ export default function Account(){
                  {/* <img src={"https://frontend.tikicdn.com/_desktop-next/static/img/account/avatar.png"} alt="avatar" class="default" style={{width: "60px",height: "60px"}}/> */}
                  <AvatarUploader
                 size={140}
-                uploadURL={`http://fitnessmall.herokuapp.com/api/user/${account.username}/update`}
+                uploadURL={`https://fitnessmall.herokuapp.com/api/user/${account.username}/update`}
                 // fileType={ ("image/png") || ("image/jpg") }
                 name={localStorage.getItem('isAuthenticated')==='true'? account.username : 'Anonymous'}
                 // customHeaders={{'Content-Type': 'application/json'}}

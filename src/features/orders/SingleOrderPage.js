@@ -31,7 +31,7 @@ export default function SingleOrderPage({ match }) {
 
     var config = {
       method: 'get',
-      url: `http://fitnessmall.herokuapp.com/api/order/giacat/${orderId}`,
+      url: `https://fitnessmall.herokuapp.com/api/order/giacat/${orderId}`,
       headers: {
         'Content-Type': 'application/json',
       },
