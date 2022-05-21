@@ -171,7 +171,7 @@ export default function Confirm() {
 
     var config = {
       method: 'post',
-      url: 'http://localhost:8080/api/order',
+      url: 'http://fitnessmall.herokuapp.com/api/order',
       headers: {
         'Content-Type': 'application/json',
       },

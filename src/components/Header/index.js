@@ -32,8 +32,8 @@ function Header(props) {
           </div>
           <div class="FormSearch" style={{ flex: "1 1 0%" }}>
             <div class="FormSearch_Form">
-              <input type="text" placeholder="Search accessories you want.." class="FormSearch_Input" />
-              <CTAButton value="Search" />
+              <input type="text" placeholder="Tìm kiếm món hàng bạn muốn.." class="FormSearch_Input" />
+              <CTAButton value="Tìm kiếm" />
             </div>
           </div>
         </div>
@@ -43,7 +43,7 @@ function Header(props) {
               content={
                 <div style={{ display: "flex", flexDirection: "column" }}>
                   {!localStorage.getItem('isAuthenticated') ?
-                    <a href="/login" style={{ color: "var(--primary)", marginBottom: "5px", textDecoration: 'none' }} > Login</a> :
+                    <a href="/login" style={{ color: "var(--primary)", marginBottom: "5px", textDecoration: 'none' }} > Đăng nhập</a> :
                     <a style={{ color: "var(--primary)", marginBottom: "5px", textDecoration: 'none' }}
                       onClick={() => {
                         axios
@@ -63,23 +63,23 @@ function Header(props) {
                             alert(err);
                           });
                       }}
-                    >Logout</a>
+                    >Đăng xuất</a>
                   }
 
-                  <a href="/account" style={{ color: "var(--primary)", marginBottom: "5px", textDecoration: 'none' }} >Profile</a>
-                  <a onClick={hide}>Close</a>
+                  <a href="/account" style={{ color: "var(--primary)", marginBottom: "5px", textDecoration: 'none' }} >Hồ sơ</a>
+                  <a onClick={hide}>Đóng</a>
 
                   {/* <a>Profile</a> */}
                 </div>
 
               }
-              title="Setting"
+              title="Cài đặt"
               trigger="click"
               visible={visible}
               onVisibleChange={handleVisibleChange}
             >
               <img class="profile-icon" src="https://salt.tikicdn.com/ts/upload/67/de/1e/90e54b0a7a59948dd910ba50954c702e.png" />
-              <span style={{ fontSize: "16px", paddingTop: "100px" }}>Account</span>
+              <span style={{ fontSize: "16px", paddingTop: "200px" }}>Tài khoản</span>
             </Popover>
 
           </div>
@@ -88,7 +88,7 @@ function Header(props) {
               <img class="profile-icon" src="https://salt.tikicdn.com/ts/upload/40/44/6c/b80ad73e5e84aeb71c08e5d8d438eaa1.png" />
               <span class="Userstyle_ItemText">
                 <span class="account-label">
-                  <span style={{ fontSize: "16px" }}>Cart</span>
+                  <span style={{ fontSize: "16px" }}>Giỏ hàng</span>
                 </span>
               </span>
             </div>

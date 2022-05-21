@@ -9,8 +9,11 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import AvatarUploader from '../helpers/supAvatar';
 import md5 from 'md5';
-import { Radio } from 'antd';
+import { Radio} from 'antd';
 import unknown_logo from '../assets/img/secret_avatar.png'
+import Stack from "@mui/material/Stack";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 export default function Account(){
   const history=useHistory();
   let valueNations=["VietNam","England","France","American","Wakanda"];
@@ -22,10 +25,12 @@ export default function Account(){
   const [sex,setSex]=useState('');
   const [phone,setPhone]=useState('');
   const [email,setEmail]=useState('');
+  const [open,setOpen]=useState(false)
+  const [type,setType]=useState('')
   useEffect(()=>{
-    axios.get(`http://localhost:8080/api/user_session/${localStorage.sessionID}`)
+    axios.get(`http://fitnessmall.herokuapp.com/api/user_session/${localStorage.sessionID}`)
         .then((res) => {
-          axios.get(`http://localhost:8080/api/user/${res.data.username}`,{username:res.data.username})
+          axios.get(`http://fitnessmall.herokuapp.com/api/user/${res.data.username}`,{username:res.data.username})
         .then((res) => {
           setAccount(res.data);
           setName(res.data.name);
@@ -58,18 +63,46 @@ export default function Account(){
   const handlePasswordChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
+  //For alert
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+  
+  function CustomizedSnackbars(props) {
+    return (
+      <Stack spacing={2} sx={{ width: "100%" }}>
+        <Snackbar
+          anchorOrigin={{vertical: 'top', horizontal: 'right'}}
+          open={props.open}
+          autoHideDuration={3000}
+          onClose={props.handleClose}
+        >
+          <Alert
+            onClose={props.handleClose}
+            severity={props.type}
+            sx={{ width: "100%" }}
+          >
+            {props.type === "success" ? "Save successfully" : "Failed, please retry!"}
+          </Alert>
+        </Snackbar>
+      </Stack>
+    );
+  }
   const handleSubmit=()=>{
+    setOpen(true)
     localStorage['pwd']=values.password;
-    axios.put(`http://localhost:8080/api/user/${account.username}/update`,
+    axios.put(`http://fitnessmall.herokuapp.com/api/user/${account.username}/update`,
     {username:account.username,name:name,password:md5(values.password),date:date,nation:nation,sex:sex,phone:phone,email:email})
     .then((res) => {
+      setType("success")
       console.log(res.data)
     })
     .catch((err) => {
+      setType("fail")
     alert(err);
     });
   }
-   return (
+  return (
 
        <div className="account">
         <Header/>
@@ -88,7 +121,7 @@ export default function Account(){
                  {/* <img src={"https://frontend.tikicdn.com/_desktop-next/static/img/account/avatar.png"} alt="avatar" class="default" style={{width: "60px",height: "60px"}}/> */}
                  <AvatarUploader
                 size={140}
-                uploadURL={`http://localhost:8080/api/user/${account.username}/update`}
+                uploadURL={`http://fitnessmall.herokuapp.com/api/user/${account.username}/update`}
                 // fileType={ ("image/png") || ("image/jpg") }
                 name={localStorage.getItem('isAuthenticated')==='true'? account.username : 'Anonymous'}
                 // customHeaders={{'Content-Type': 'application/json'}}
@@ -168,6 +201,7 @@ export default function Account(){
                         <label class="input-label">&nbsp;</label>
                         <CTAButton value="Lưu thay đổi" onClick={handleSubmit}/>
                         </div>
+                        <CustomizedSnackbars type={type} open={open} handleClose={()=>setOpen(false)}/>
             </form>
             </div>
           </div>
