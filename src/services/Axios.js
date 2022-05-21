@@ -1,5 +1,5 @@
 import axios from 'axios';
-export const END_POINT = 'http://localhost:8080'
+export const END_POINT = 'http://fitnessmall.herokuapp.com'
 const Axios = axios.create({ baseURL: END_POINT });
 
 export default Axios;

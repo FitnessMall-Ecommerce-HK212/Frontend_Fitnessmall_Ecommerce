@@ -16,10 +16,10 @@ export default function HealthInfo(){
     const [weight,setWeight]=useState("")
     const [username,setUsername]=useState("")
     useEffect(()=>{
-      axios.get(`http://localhost:8080/api/user_session/${localStorage.sessionID}`)
+      axios.get(`http://fitnessmall.herokuapp.com/api/user_session/${localStorage.sessionID}`)
           .then((res) => {
             setUsername(res.data.username);
-            axios.get(`http://localhost:8080/api/user/${res.data.username}`,{username:res.data.username})
+            axios.get(`http://fitnessmall.herokuapp.com/api/user/${res.data.username}`,{username:res.data.username})
           .then((res) => {
             // console.log(res.data)
              setHeight(res.data.height)
@@ -62,7 +62,7 @@ export default function HealthInfo(){
               <div className="healthBox">
                 <p className="leftBox">
                     <img src="https://img.icons8.com/ios-filled/2x/ffffff/height.png" />
-                    <span className="topRBox">Height</span>
+                    <span className="topRBox">Chiều cao</span>
                 </p>
                 <p className="rightBox">
                     <span style={{color: "var(--lightprimary)"}}>
@@ -72,7 +72,7 @@ export default function HealthInfo(){
               <div className="healthBox">
                 <p className="leftBox">
                     <img src="https://img.icons8.com/ios-filled/2x/ffffff/weight-kg.png" />
-                    <span className="topRBox">Weight</span>
+                    <span className="topRBox">Cân nặng</span>
                 </p>
                 <p className="rightBox">
                     <span style={{color: "var(--lightprimary)"}}>
