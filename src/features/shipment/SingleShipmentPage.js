@@ -13,72 +13,7 @@ import GHN from '../../assets/img/GHN.png'
 import Radiobuttonunchecked from '../../assets/icons/Radiobuttonunchecked.svg'
 import CheckCircle from '../../assets/icons/CheckCircle.svg'
 
-export default function SingleShipmentPage({ match }) {
-    const { shipmentId } = match.params
-    const logs = [
-        {
-            "status": "picking",
-            "updated_date": "2022-05-18T14:40:46.934Z"
-        },
-        {
-            "status": "picked",
-            "updated_date": "2022-05-19T14:40:59.662Z"
-        },
-        {
-            "status": "storing",
-            "updated_date": "2022-05-24T14:41:19.708Z"
-        },
-        {
-            "status": "return",
-            "updated_date": "2022-06-01T14:52:59.485Z"
-        }
-    ]
-
-    const isBeforeToday = (date) => {
-        var dateO = new Date(date);
-        var today = new Date();
-        return dateO > today;
-    }
-
-    const renderStatus = (status) => {
-        if (status == "picking") {
-            return <>
-                <p>Đang xử lý</p>
-                <p>Đơn hàng của bạn đang được xử lý</p>
-            </>
-        } else if (status == "picked") {
-            return <>
-                <p>Đã đóng gói</p>
-                <p>Kiện hàng của bạn đã hoàn tất đóng gói</p>
-            </>
-        } else if (status == "storing") {
-            return <>
-                <p>Đang vận chuyển</p>
-                <p>Kiện hàng của bạn đang được vận chuyển</p>
-            </>
-        } else if (status == "return") {
-            return <>
-                <p>Giao thành công</p>
-                <p>Kiện hàng của bạn đã được giao thành công.</p>
-            </>
-        }
-
-    }
-
-    const renderShipmentState = logs.map(log => {
-        return <div className={styles.SingleShipmentPageContent__controller__content__stepsdone__items}>
-            <div className={styles.SingleShipmentPageContent__controller__content__stepsdone__items__text}>
-                <p>{isBeforeToday(log.updated_date) ? "Dự kiến" : "Hoàn thành"} : {log.updated_date.substring(0, 10)}</p>
-            </div>
-            <div>
-                {isBeforeToday(log.updated_date) ? <img src={Radiobuttonunchecked} alt='...' /> : <img src={CheckCircle} alt='...' />}
-            </div>
-            <div>
-                {renderStatus(log.status)}
-            </div>
-        </div>;
-    })
-
+export default function SingleShipmentPage() {
     return (
         <div>
             <div>
@@ -102,7 +37,7 @@ export default function SingleShipmentPage({ match }) {
                             </div>
                             <div>
                                 <p className={styles.SingleShipmentPageContent__controller__contentaf__middle__name}>Mã vận đơn</p>
-                                <p>{shipmentId}</p>
+                                <p>GHNST0018037485VN</p>
                             </div>
                         </div>
                         <hr />
@@ -134,11 +69,79 @@ export default function SingleShipmentPage({ match }) {
                             </div>
                         </div>
                         <div className={styles.SingleShipmentPageContent__controller__content__stepsdone}>
-                            {renderShipmentState}
+                            <div className={styles.SingleShipmentPageContent__controller__content__stepsdone__items}>
+                                <div className={styles.SingleShipmentPageContent__controller__content__stepsdone__items__text}>
+                                    <p>18/03 09:11</p>
+                                </div>
+                                <div>
+                                    <img src={CheckCircle} alt='...' />
+                                </div>
+                                <div>
+                                    <p>Đã giao hàng</p>
+                                    <p>Kiện hàng của bạn đã được giao thành công.</p>
+                                </div>
+                            </div>
+                            <div className={styles.SingleShipmentPageContent__controller__content__stepsdone__items}>
+                                <div className={styles.SingleShipmentPageContent__controller__content__stepsdone__items__text}>
+                                    <p>18/03 08:00</p>
+                                </div>
+                                <div>
+                                    <img src={CheckCircle} alt='...' />
+                                </div>
+                                <div>
+                                    <p>Kiện hàng sắp đến!</p>
+                                    <p>Đơn vị vận chuyển sẽ giao hàng tới bạn trong khoảng 1 giờ tới.</p>
+                                </div>
+                            </div>
+                            <div className={styles.SingleShipmentPageContent__controller__content__stepsdone__items}>
+                                <div className={styles.SingleShipmentPageContent__controller__content__stepsdone__items__text}>
+                                    <p>18/03 06:50</p>
+                                </div>
+                                <div>
+                                    <img src={CheckCircle} alt='...' />
+                                </div>
+                                <div>
+                                    <p>Đang giao hàng</p>
+                                    <p>GHN sẽ giao hàng cho bạn trong hôm nay!</p>
+                                </div>
+                            </div>
+                            <div className={styles.SingleShipmentPageContent__controller__content__stepsdone__items}>
+                                <div className={styles.SingleShipmentPageContent__controller__content__stepsdone__items__text}>
+                                    <p>28/02 08:12</p>
+                                </div>
+                                <div>
+                                    <img src={CheckCircle} alt='...' />
+                                </div>
+                                <div>
+                                    <p>Đã rời khỏi trạm giao hàng</p>
+                                    <p>Kiện hàng của bạn đã rời khỏi trạm giao hàng</p>
+                                </div>
+                            </div>
+                            <div className={styles.SingleShipmentPageContent__controller__content__stepsdone__items}>
+                                <div className={styles.SingleShipmentPageContent__controller__content__stepsdone__items__text}>
+                                    <p>22/02 20:00</p>
+                                </div>
+                                <div>
+                                    <img src={CheckCircle} alt='...' />
+                                </div>
+                                <div>
+                                    <p>Đã đến trạm giao hàng</p>
+                                    <p>Kiện hàng của bạn đã đến trạm giao hàng</p>
+                                </div>
+                            </div>
+                            <div className={styles.SingleShipmentPageContent__controller__content__stepsdone__items}>
+                                <div className={styles.SingleShipmentPageContent__controller__content__stepsdone__items__text}>
+                                    <p>20/02 19:00</p>
+                                </div>
+                                <div>
+                                    <img src={CheckCircle} alt='...' />
+                                </div>
+                                <div>
+                                    <p>Hoàn tất đóng gói</p>
+                                    <p>Kiện hàng của bạn đã hoàn tất đóng gói</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div >
-                        <Link to="/history/order" className={styles.pink_link}>&lt;&lt; Quay lại danh sách đơn hàng</Link>
                     </div>
                 </div>
             </div>
