@@ -26,12 +26,12 @@ export default function SingleOrderPage({ match }) {
   React.useEffect(() => {
     var axios = require('axios');
     var data = JSON.stringify({
-      "username": "giacat"
+      "username": localStorage.getItem("username")
     });
 
     var config = {
       method: 'get',
-      url: `https://fitnessmall.herokuapp.com/api/order/giacat/${orderId}`,
+      url: `https://fitnessmall.herokuapp.com/api/order/${localStorage.getItem("username")}/${orderId}`,
       headers: {
         'Content-Type': 'application/json',
       },
@@ -66,7 +66,7 @@ export default function SingleOrderPage({ match }) {
           </div>
         </div>
         <div>
-          <Link to={`/history/order/${orderId}/${order.shipmentId}`} className={styles.orderlist__header__content__item__state__shipmentdetail}>
+          <Link to={`/history/order/${orderId}/${order.receiptID}`} className={styles.orderlist__header__content__item__state__shipmentdetail}>
             <CTAButton value="Chi tiết" onClick={() => { }} />
           </Link>
         </div>
