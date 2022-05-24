@@ -193,11 +193,11 @@ export default function Login() {
       hash = md5(values.pwd);
     }
     dispatch(loginUser({ username: username, password: hash }));
-    localStorage.setItem("username", username) //Thanh
+    window.localStorage.setItem("username", username) //Thanh
     setTimeout(() => {
       axios
         .get(
-          `https://fitnessmall.herokuapp.com/api/user_author/${localStorage.getItem("sessionID")}`,
+          `https://fitnessmall.herokuapp.com/api/user_author/${window.localStorage.getItem("sessionID")}`,
           {
           },
           { headers: { "Content-Type": "application/json" } }
@@ -288,11 +288,11 @@ export default function Login() {
               <button className={classes.button_social} onClick={() => {
                 axios.get(`https://fitnessmall.herokuapp.com/api/user_signin_signup/google`)
                   .then((res) => {
-                    localStorage.setItem('pwd', 'Not declared')
+                    window.localStorage.setItem('pwd', 'Not declared')
                     window.open(res.data, '', 'popup')
-                    // setTimeout(() =>
-                    //   window.localStorage.getItem('isAuthenticated') == 'true' ? history.push("/") : ''
-                    //   , 9000);
+                    setTimeout(() =>
+                      window.localStorage.getItem('isAuthenticated') == 'true' ? history.push("/") : ''
+                      , 9000);
                   })
                   .catch((err) => {
                     alert(err);

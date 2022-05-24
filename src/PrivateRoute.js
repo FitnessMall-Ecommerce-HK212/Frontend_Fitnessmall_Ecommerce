@@ -3,7 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import axios from "axios";
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const check=localStorage.getItem('isAuthenticated');
+  const check=window.localStorage.getItem('isAuthenticated');
   return (
     <Route
       {...rest}

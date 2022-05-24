@@ -26,12 +26,12 @@ export default function SingleOrderPage({ match }) {
   React.useEffect(() => {
     var axios = require('axios');
     var data = JSON.stringify({
-      "username": localStorage.getItem("username")
+      "username": window.localStorage.getItem("username")
     });
 
     var config = {
       method: 'get',
-      url: `https://fitnessmall.herokuapp.com/api/order/${localStorage.getItem("username")}/${orderId}`,
+      url: `https://fitnessmall.herokuapp.com/api/order/${window.localStorage.getItem("username")}/${orderId}`,
       headers: {
         'Content-Type': 'application/json',
       },

@@ -69,7 +69,7 @@ export default function HealthInfo(){
   }
     const [type,setType]=useState('')
     useEffect(()=>{
-      axios.get(`https://fitnessmall.herokuapp.com/api/user_session/${localStorage.sessionID}`)
+      axios.get(`https://fitnessmall.herokuapp.com/api/user_session/${window.localStorage.sessionID}`)
           .then((res) => {
             setUsername(res.data.username);
             axios.get(`https://fitnessmall.herokuapp.com/api/user/${res.data.username}`,{username:res.data.username})
@@ -144,7 +144,7 @@ export default function HealthInfo(){
              )
              .then((res) => {
                window.open(res.data,'','popup')
-              //  localStorage.setItem('isAuthenticated',true)
+              //  window.localStorage.setItem('isAuthenticated',true)
               //  setTimeout(() => {
               //   history.push("/")
               // }, 8900);
@@ -160,6 +160,8 @@ export default function HealthInfo(){
                `https://fitnessmall.herokuapp.com/api/google_fit/data/${username}`
              )
              .then((res) => {
+               console.log(res)
+              if (res.data!='Not Found Data'){
                var calo=res.data.data.calo
                var arr=[]
                for(var i=0;i<calo.length;i++){
@@ -178,7 +180,6 @@ export default function HealthInfo(){
                    arr2.push(step[i]['steps_value'])
                }
                setStep(arr2)
-               console.log(res.data,arr,arr1,arr2)
                setData({
                 labels:['Day1', 'Day2', 'Day3', 'Day4', 'Day5', 'Day6', 'Day7'],
                 datasets: [
@@ -200,6 +201,8 @@ export default function HealthInfo(){
                 ],
               });
               //  res.data.onSnapshot((ele)=>console.log(ele.data()));
+              }
+              
              })
              .catch((err) => {
                alert(err);

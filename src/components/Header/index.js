@@ -42,7 +42,7 @@ function Header(props) {
             <Popover
               content={
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                  {!localStorage.getItem('isAuthenticated') ?
+                  {!window.localStorage.getItem('isAuthenticated') ?
                     <a href="/login" style={{ color: "var(--primary)", marginBottom: "5px", textDecoration: 'none' }} > Đăng nhập</a> :
                     <a style={{ color: "var(--primary)", marginBottom: "5px", textDecoration: 'none' }}
                       onClick={() => {
@@ -52,9 +52,9 @@ function Header(props) {
                           )
                           .then((res) => {
                             if (res.data == "Sign Out Successfully") {
-                              localStorage.removeItem('isAuthenticated');
-                              localStorage.removeItem('sessionID');
-                              localStorage.removeItem("pwd");
+                              window.localStorage.removeItem('isAuthenticated');
+                              window.localStorage.removeItem('sessionID');
+                              window.localStorage.removeItem("pwd");
                               history.push("/");
                             }
 
