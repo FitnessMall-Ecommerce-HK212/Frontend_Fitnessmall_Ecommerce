@@ -204,8 +204,8 @@ export default function Login() {
         )
         .then((res) => {
           if (res.data === "OK") {
-            localStorage.setItem("pwd", values.pwd);
-            localStorage.setItem('isAuthenticated', true)
+            window.localStorage.setItem("pwd", values.pwd);
+            window.localStorage.setItem('isAuthenticated', true)
             history.push("/")
           }
         })
@@ -290,9 +290,9 @@ export default function Login() {
                   .then((res) => {
                     localStorage.setItem('pwd', 'Not declared')
                     window.open(res.data, '', 'popup')
-                    setTimeout(() =>
-                      window.localStorage.getItem('isAuthenticated') == 'true' ? history.push("/") : ''
-                      , 9000);
+                    // setTimeout(() =>
+                    //   window.localStorage.getItem('isAuthenticated') == 'true' ? history.push("/") : ''
+                    //   , 9000);
                   })
                   .catch((err) => {
                     alert(err);

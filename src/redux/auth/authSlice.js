@@ -82,7 +82,7 @@ export const authSlice = createSlice({
               ...state,errorLogin:action.payload
             };
           default:
-            localStorage.setItem("sessionID", action.payload)
+            window.localStorage.setItem("sessionID", action.payload)
             return {
               ...state,errorLogin:''
             };
