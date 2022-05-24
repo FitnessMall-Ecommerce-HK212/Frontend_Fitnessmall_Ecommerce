@@ -6,9 +6,9 @@ export default function Fake({match}){
     useEffect(()=>{
         window.localStorage.setItem('sessionID',data.data)
         window.localStorage.setItem('isAuthenticated',true)
-        setTimeout(() => {
-            window.close();
-          }, 1000);
+        // setTimeout(() => {
+        //     window.close();
+        //   }, 1000);
     })
     return (
         <></>
