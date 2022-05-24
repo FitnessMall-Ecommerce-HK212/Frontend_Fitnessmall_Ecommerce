@@ -64,7 +64,7 @@ export default function Address(){
     );
   }
   useEffect(()=>{
-    axios.get(`https://fitnessmall.herokuapp.com/api/user_session/${localStorage.sessionID}`)
+    axios.get(`https://fitnessmall.herokuapp.com/api/user_session/${window.localStorage.sessionID}`)
         .then((res) => {
         if (res.data.username!=undefined) {
           setUsername(res.data.username)

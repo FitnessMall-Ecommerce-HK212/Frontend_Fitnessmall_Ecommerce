@@ -86,10 +86,10 @@ const BlogDetail = () => {
   };
 
   useEffect(() => {
-    if ("sessionID" in localStorage) {
+    if ("sessionID" in window.localStorage) {
       async function getUserInfo() {
         const response = await axios.get(
-          BASE_URL+`api/user_session/${localStorage.sessionID}`
+          BASE_URL+`api/user_session/${window.localStorage.sessionID}`
         );
         return response.data;
       }

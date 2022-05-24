@@ -31,9 +31,9 @@ function Description(props) {
         )
     }
 
-    // localStorage.clear()
+    // window.localStorage.clear()
     const handleAddCart = () => {
-        if ("sessionID" in localStorage) {
+        if ("sessionID" in window.localStorage) {
             dispatch(addItem(props.id, props.name, props.itemtype[active].price, props.image, numItem, props.itemtype))
             alert(`Thêm sản phẩm '${props.name}' vào giỏ hàng thành công!`)
         } else {

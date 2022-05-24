@@ -12,7 +12,6 @@ export default function Real({match}){
                `https://fitnessmall.herokuapp.com/api/user_session/${window.localStorage.getItem('sessionID').toString()}`,
              )
              .then((res) => {
-              
                 console.log(res.data)
                 axios
                 .post(

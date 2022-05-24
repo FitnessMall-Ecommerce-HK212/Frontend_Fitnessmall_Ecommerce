@@ -73,8 +73,8 @@ function SimpleDialog(props) {
 export default function Confirm() {
   const products = []
 
-  const items = JSON.parse(localStorage.getItem("giacat"))
-  // const items = JSON.parse(localStorage.getItem("giacat")).cart
+  const items = JSON.parse(window.localStorage.getItem("giacat"))
+  // const items = JSON.parse(window.localStorage.getItem("giacat")).cart
 
 
   var sum = 0
@@ -139,7 +139,7 @@ export default function Confirm() {
   const orderCart = () => {
     var axios = require('axios');
     var data = JSON.stringify({
-      "username": localStorage.getItem("username"),
+      "username": window.localStorage.getItem("username"),
       "account": "MOMO",
       "shipping_fee": 20000,
       "discount_order": 0,
@@ -174,7 +174,7 @@ export default function Confirm() {
     axios(config)
       .then(function (response) {
         console.log(response.data);
-        localStorage.removeItem(localStorage.getItem("username"))
+        window.localStorage.removeItem(window.localStorage.getItem("username"))
         window.location.href = response.data
       })
       .catch(function (error) {
@@ -186,7 +186,7 @@ export default function Confirm() {
   const orderCartCash = () => {
     var axios = require('axios');
     var data = JSON.stringify({
-      "username": localStorage.getItem("username"),
+      "username": window.localStorage.getItem("username"),
       "account": "CASH",
       "shipping_fee": 20000,
       "discount_order": 0,
@@ -221,7 +221,7 @@ export default function Confirm() {
     axios(config)
       .then(function (response) {
         console.log(response.data);
-        localStorage.removeItem(localStorage.getItem("username"))
+        window.localStorage.removeItem(window.localStorage.getItem("username"))
         window.location.href = response.data
       })
       .catch(function (error) {
@@ -292,12 +292,12 @@ export default function Confirm() {
                       <h2>Giao tới</h2>
                     </div>
                     <div className={styles.alldata__paymentinfo__diachi__namephone}>
-                      <p>{localStorage.getItem("receiver")}</p>
+                      <p>{window.localStorage.getItem("receiver")}</p>
                       <p>|</p>
-                      <p>{localStorage.getItem("phone")}</p>
+                      <p>{window.localStorage.getItem("phone")}</p>
                     </div>
                     <div>
-                      <p>{localStorage.getItem("address")}</p>
+                      <p>{window.localStorage.getItem("address")}</p>
                     </div>
                   </div>
                   {/* <h3 className={styles.text_pink} onClick={handleClickOpenAddress}>Thay đổi</h3> */}

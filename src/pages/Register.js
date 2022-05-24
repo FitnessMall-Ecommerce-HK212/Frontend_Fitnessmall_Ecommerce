@@ -215,7 +215,7 @@ export default function Register() {
           <div style={{margin: "0px 45px ",justifyContent: "space-between",flexWrap: "wrap",display: "flex"}} >
           <button className={classes.button_social} onClick={()=>{ axios.get(`https://fitnessmall.herokuapp.com/api/user_signin_signup/google`)
     .then((res) => {
-      localStorage.setItem('pwd','Not declared')
+      window.localStorage.setItem('pwd','Not declared')
       window.open(res.data,'','popup')
       setTimeout(() => 
        window.localStorage.getItem('isAuthenticated')=='true'?history.push("/"):''
