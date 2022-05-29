@@ -53,7 +53,7 @@ function ProductDetail() {
     }
 
     const getUsername = async () => {
-        const res = await axios.get(BASE_URL + "/api/user_session/" + localStorage.sessionID);
+        const res = await axios.get(BASE_URL + "/api/user_session/" + window.localStorage.sessionID);
         setUsername(res.data.username);
     }
     const getDate = () => {
@@ -79,7 +79,7 @@ function ProductDetail() {
         setContent(event.target.value);
     }
     useEffect(() => {
-        if ("sessionID" in localStorage)
+        if ("sessionID" in window.localStorage)
             getUsername();
         getDate();
         getProductInfo();
@@ -87,7 +87,7 @@ function ProductDetail() {
         getHotBlogs();
     }, [checkFB]);
 
-    if (productInfo.length === 0 || relatedProducts.length === 0 || hotBlogs.length === 0 || ("sessionID" in localStorage && username === "")) {
+    if (productInfo.length === 0 || relatedProducts.length === 0 || hotBlogs.length === 0 || ("sessionID" in window.localStorage && username === "")) {
         return (
             <div className="d-flex justify-content-center mt-5">
                 <CircularProgress />
@@ -132,8 +132,8 @@ function ProductDetail() {
                                 );
                             })}
                             <div className="mt-3">
-                                {!("sessionID" in localStorage) && <div style={{ color: '#B3BDC8' }}>Vui lòng <Link to="/login"><span style={{ color: '#FF2C86', fontWeight: '500' }}>đăng nhập</span></Link> để đánh giá sản phẩm!</div>}
-                                {("sessionID" in localStorage) &&
+                                {!("sessionID" in window.localStorage) && <div style={{ color: '#B3BDC8' }}>Vui lòng <Link to="/login"><span style={{ color: '#FF2C86', fontWeight: '500' }}>đăng nhập</span></Link> để đánh giá sản phẩm!</div>}
+                                {("sessionID" in window.localStorage) &&
                                     <div className="row feedback align-items-center mb-3">
                                         <div className="col-1">
                                             <BsPersonCircle size='24' />

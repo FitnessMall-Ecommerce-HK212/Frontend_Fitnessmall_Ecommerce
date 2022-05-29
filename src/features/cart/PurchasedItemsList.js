@@ -95,7 +95,7 @@ export default function PurchasedItemsList() {
 
     var config = {
       method: 'get',
-      url: `https://fitnessmall.herokuapp.com/api/infos/${localStorage.getItem("username")}`,
+      url: `https://fitnessmall.herokuapp.com/api/infos/${window.localStorage.getItem("username")}`,
       headers: {
         'Content-Type': 'application/json',
       },
@@ -118,9 +118,9 @@ export default function PurchasedItemsList() {
           </>)
 
 
-          localStorage.setItem("phone", response.data[0].phone)
-          localStorage.setItem("address", `${response.data[0].address}, ${response.data[0].district}, ${response.data[0].province}`)
-          localStorage.setItem("receiver", response.data[0].receiver)
+          window.localStorage.setItem("phone", response.data[0].phone)
+          window.localStorage.setItem("address", `${response.data[0].address}, ${response.data[0].district}, ${response.data[0].province}`)
+          window.localStorage.setItem("receiver", response.data[0].receiver)
 
           response.data.map(addressV => {
             addresses.push(
@@ -161,9 +161,9 @@ export default function PurchasedItemsList() {
     setOpenAddress(false);
     setSelectedValue(value);
 
-    localStorage.setItem("phone", value.phone)
-    localStorage.setItem("address", `${value.address}, ${value.ward}, ${value.district}, ${value.province}`)
-    localStorage.setItem("receiver", value.receiver)
+    window.localStorage.setItem("phone", value.phone)
+    window.localStorage.setItem("address", `${value.address}, ${value.ward}, ${value.district}, ${value.province}`)
+    window.localStorage.setItem("receiver", value.receiver)
 
     setUserAd(<>
       <div className={styles.alldata__paymentinfo__diachi__namephone}>

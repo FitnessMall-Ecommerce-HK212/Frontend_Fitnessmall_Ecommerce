@@ -6,13 +6,13 @@ export default function Real({match}){
     const data=match.params;
     useEffect(()=>{
         console.log(JSON.parse(data.data));
-        console.log(localStorage.getItem('sessionID'))
+        console.log(window.localStorage.getItem('sessionID'));
         axios
              .get(
-               `https://fitnessmall.herokuapp.com/api/user_session/${localStorage.getItem('sessionID').toString()}`,
+               `https://fitnessmall.herokuapp.com/api/user_session/${window.localStorage.getItem('sessionID').toString()}`,
              )
              .then((res) => {
-                 console.log(res.data)
+                console.log(res.data)
                 axios
                 .post(
                   `https://fitnessmall.herokuapp.com/api/google_fit_create`,
@@ -20,7 +20,7 @@ export default function Real({match}){
                 )
                 .then((res) => {
                    
-         window.close();
+        //  window.close();
                 })
                 .catch((err) => {
                   alert(err);

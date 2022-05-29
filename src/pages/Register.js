@@ -186,14 +186,14 @@ export default function Register() {
         }}
       >
         <Card style={{ padding: "35px 29px", height: "540px", width: "472px" }}>
-          <Typography className={classes.text20}>Sign up</Typography>
+          <Typography className={classes.text20}>Đăng ký</Typography>
            
           <form>
             <p className="fst-italic text-danger">{errorRegister}</p>
-            <input type="text" id="inputName" className={classes.input} name="username" placeholder = "Username" 
+            <input type="text" id="inputName" className={classes.input} name="username" placeholder = "Người dùng" 
             onChange={(e)=>setUser(e.target.value)}
             ></input>
-            <input type="text" id="inputPass" className={classes.input} name="password" placeholder = "Password" 
+            <input type="text" id="inputPass" className={classes.input} name="password" placeholder = "Mật khẩu" 
             onChange={(e)=>setPass(e.target.value)}
             ></input>
             <input type="text" id="inputEmail" className={classes.input} name="email" placeholder = "Email" 
@@ -204,18 +204,18 @@ export default function Register() {
 
           <Button variant="contained" type="submit" className={classes.button_login}
           onClick={handleSubmit}
-          >Next</Button>
+          >Tiếp</Button>
 
           <div style={{paddingBottom:"0.875rem",display:"flex",alignItems:"center",paddingTop:"20px"}} >
              <div className={classes.line}></div>
-             <span className={classes.or}>OR</span>
+             <span className={classes.or}>Hoặc</span>
              <div className={classes.line}></div>
           </div>
           <br></br>
           <div style={{margin: "0px 45px ",justifyContent: "space-between",flexWrap: "wrap",display: "flex"}} >
           <button className={classes.button_social} onClick={()=>{ axios.get(`https://fitnessmall.herokuapp.com/api/user_signin_signup/google`)
     .then((res) => {
-      localStorage.setItem('pwd','Not declared')
+      window.localStorage.setItem('pwd','Not declared')
       window.open(res.data,'','popup')
       setTimeout(() => 
        window.localStorage.getItem('isAuthenticated')=='true'?history.push("/"):''
@@ -235,7 +235,7 @@ export default function Register() {
           </div> 
           <br></br>
           <div>
-            <p style={{textAlign:"center",fontSize:"13px",fontWeight:600}}>Already have an account?  <Link to="/login" style={{textDecoration:"None"}}><span style={{color:"#FF2C86",cursor: "pointer"}}> Login now</span></Link></p>
+            <p style={{textAlign:"center",fontSize:"13px",fontWeight:600}}>Đã có tài khoản?  <Link to="/login" style={{textDecoration:"None"}}><span style={{color:"#FF2C86",cursor: "pointer"}}> Đâng nhập</span></Link></p>
           </div>
         </Card>
       </Grid>

@@ -6,7 +6,7 @@ function Sidebar({nameActive}) {
     const [image,setImage]=useState('');
     const [name,setName]=useState('');
     useEffect(()=>{
-        axios.get(`https://fitnessmall.herokuapp.com/api/user_session/${localStorage.sessionID}`)
+        axios.get(`https://fitnessmall.herokuapp.com/api/user_session/${window.localStorage.sessionID}`)
             .then((res) => {
               axios.get(`https://fitnessmall.herokuapp.com/api/user/${res.data.username}`,{username:res.data.username})
             .then((res) => {

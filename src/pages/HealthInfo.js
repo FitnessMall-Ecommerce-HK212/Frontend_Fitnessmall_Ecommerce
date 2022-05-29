@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { Link,Redirect} from 'react-router-dom';
 import {Footer, Header,Sidebar,CTAButton,DropdownButton,GhostButton} from '../components';
-import BarChart from '../components/BarChart/index'
+import ColumnChart from '../components/ColumnChart/index'
 import '../styles/HealthInfo.css'
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -19,6 +19,29 @@ export default function HealthInfo(){
     const [weight,setWeight]=useState("")
     const [username,setUsername]=useState("")
     const [open1,setOpen1]=useState(false)
+    const [calo,setCalo]=useState([])
+    const [distance,setDistance]=useState([])
+    const [step,setStep]=useState([])
+    const [data,setData]=useState({
+      labels:['Day1', 'Day2', 'Day3', 'Day4', 'Day5', 'Day6', 'Day7'],
+      datasets: [
+        {
+          label: 'Calo',
+          data: [0,0,0,0,0,0,0],
+          backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        },
+        {
+          label: 'Distance',
+          data: [0,0,0,0,0,0,0],
+          backgroundColor: 'rgba(53, 162, 235, 0.5)',
+        },
+        {
+            label: 'Steps',
+            data: [0,0,0,0,0,0,0],
+            backgroundColor: 'rgba(88, 231, 45, 0.5)',
+          },
+      ],
+    })
     //For alert
   const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -46,7 +69,7 @@ export default function HealthInfo(){
   }
     const [type,setType]=useState('')
     useEffect(()=>{
-      axios.get(`https://fitnessmall.herokuapp.com/api/user_session/${localStorage.sessionID}`)
+      axios.get(`https://fitnessmall.herokuapp.com/api/user_session/${window.localStorage.sessionID}`)
           .then((res) => {
             setUsername(res.data.username);
             axios.get(`https://fitnessmall.herokuapp.com/api/user/${res.data.username}`,{username:res.data.username})
@@ -86,7 +109,7 @@ export default function HealthInfo(){
        <div style={{backgroundColor:"white", paddingRight: "15px",marginRight: "auto",marginLeft: "auto"}}>
        <div style={{display: "flex",width: "100%",marginRight: "20px",flexWrap: "wrap"}}>
         <Sidebar nameActive="2"/>
-        <div style={{height:(open==true?"900px":"700px"),flex: "1 1 0%",marginTop:"17px",marginLeft:"15px",flexWrap: "nowrap",justifyContent: "space-between",padding: "20px 40px 20px 40px",backgroundColor: "rgb(255, 255, 255)"}}>
+        <div style={{height:(open==true?"1020px":"700px"),flex: "1 1 0%",marginTop:"17px",marginLeft:"15px",flexWrap: "nowrap",justifyContent: "space-between",padding: "20px 40px 20px 40px",backgroundColor: "rgb(255, 255, 255)"}}>
           <p>Theo dõi sức khỏe</p>
           <div className="gridBox">
               <div className="healthBox">
@@ -115,27 +138,71 @@ export default function HealthInfo(){
            <p style={{marginBottom:"10px"}}>Theo dõi luyện tập</p>
            <div style={{display:"flex"}}>
            <GhostButton style={{marginBottom:"20px",display:"flex"}} value="Liên kết gg fit" onClick={()=>{
+             axios
+             .get(
+               "https://fitnessmall.herokuapp.com/api/google_fit"
+             )
+             .then((res) => {
+               window.open(res.data,'','popup')
+              //  window.localStorage.setItem('isAuthenticated',true)
+              //  setTimeout(() => {
+              //   history.push("/")
+              // }, 8900);
+             })
+             .catch((err) => {
+               alert(err);
+             });
+          }} ></GhostButton>
+          <GhostButton style={{marginLeft:"30px",marginBottom:"20px",display:"flex"}} value="Hiện thống kê" onClick={()=>{
              setOpen(!open)
-            //  axios
-            //  .get(
-            //    "https://fitnessmall.herokuapp.com/api/google_fit"
-            //  )
-            //  .then((res) => {
-            //    window.open(res.data,'','popup')
-            //   //  localStorage.setItem('isAuthenticated',true)
-            //   //  setTimeout(() => {
-            //   //   history.push("/")
-            //   // }, 8900);
-            //  })
-            //  .catch((err) => {
-            //    alert(err);
-            //  });
              axios
              .get(
                `https://fitnessmall.herokuapp.com/api/google_fit/data/${username}`
              )
              .then((res) => {
+               console.log(res)
+              if (res.data!='Not Found Data'){
+               var calo=res.data.data.calo
+               var arr=[]
+               for(var i=0;i<calo.length;i++){
+                   arr.push(calo[i]['calories_value']/1000)
+               }
+               setCalo(arr)
+               var distance=res.data.data.distance
+               var arr1=[]
+               for(var i=0;i<distance.length;i++){
+                   arr1.push(distance[i]['distances_value'])
+               }
+               setDistance(arr1)
+               var step=res.data.data.step
+               var arr2=[]
+               for(var i=0;i<step.length;i++){
+                   arr2.push(step[i]['steps_value'])
+               }
+               setStep(arr2)
+               setData({
+                labels:['Day1', 'Day2', 'Day3', 'Day4', 'Day5', 'Day6', 'Day7'],
+                datasets: [
+                  {
+                    label: 'Calo',
+                    data: arr,
+                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                  },
+                  {
+                    label: 'Distance',
+                    data: arr1,
+                    backgroundColor: 'rgba(53, 162, 235, 0.5)',
+                  },
+                  {
+                      label: 'Steps',
+                      data: arr2,
+                      backgroundColor: 'rgba(88, 231, 45, 0.5)',
+                    },
+                ],
+              });
               //  res.data.onSnapshot((ele)=>console.log(ele.data()));
+              }
+              
              })
              .catch((err) => {
                alert(err);
@@ -158,18 +225,19 @@ export default function HealthInfo(){
            </div>
            <CustomizedSnackbars type={type} open={open1} handleClose={()=>setOpen1(false)}/>
           <div id="chart" style={{visibility:(open==true?"visible":"hidden")}}>
-          <Row justify="center">
-            <Col span={8}><Progress type="circle" percent={75} strokeColor="#0cdbf0" />
-            <p style={{margin:"10px 0 0 25px",fontSize:"15px"}}>Số bước</p>
-            </Col>
-            <Col span={8}><Progress type="circle" percent={75} strokeColor="#37f00c" />
+          <Row justify="center" style={{marginLeft:"100px",marginBottom:"20px"}}>
+            <Col span={8}><Progress type="circle" percent={(calo.reduce((a, b) => a + b, 0) / calo.length).toFixed(3)} format={percent => `${percent} Calories`} strokeColor="rgba(255, 99, 132, 0.5)" />
             <p style={{margin:"10px 0 0 40px",fontSize:"15px"}}>Calo</p>
             </Col>
-            <Col span={8}><Progress type="circle" percent={75} strokeColor="#ef4336" />
+            <Col span={8}><Progress type="circle" percent={(distance.reduce((a, b) => a + b, 0) / distance.length).toFixed(2)} format={percent => `${percent} km`} strokeColor="rgba(53, 162, 235, 0.5)" />
             <p style={{margin:"10px 0 0 10px",fontSize:"15px"}}>Khoảng cách di chuyển</p>
             </Col>
+            <Col span={8}><Progress type="circle" percent={(step.reduce((a, b) => a + b, 0) / step.length).toFixed(0)} format={percent => `${percent} bước`} strokeColor="rgba(88, 231, 45, 0.5)" />
+            <p style={{margin:"10px 0 0 25px",fontSize:"15px"}}>Số bước</p>
+            </Col>
           </Row>
-          <BarChart/></div>
+          <ColumnChart data={data}/>
+          </div>
           </div>
           <div>
            {/* <p>Thêm lộ trình tập</p> */}

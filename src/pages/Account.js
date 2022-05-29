@@ -28,7 +28,7 @@ export default function Account(){
   const [open,setOpen]=useState(false)
   const [type,setType]=useState('')
   useEffect(()=>{
-    axios.get(`https://fitnessmall.herokuapp.com/api/user_session/${localStorage.sessionID}`)
+    axios.get(`https://fitnessmall.herokuapp.com/api/user_session/${window.localStorage.sessionID}`)
         .then((res) => {
           axios.get(`https://fitnessmall.herokuapp.com/api/user/${res.data.username}`,{username:res.data.username})
         .then((res) => {
@@ -51,7 +51,7 @@ export default function Account(){
   },[])
   //For password eye
   const [values, setValues] = useState({
-    password: localStorage.getItem('pwd'),
+    password: window.localStorage.getItem('pwd'),
     showPassword: false,
   });
   const handleClickShowPassword = () => {
@@ -90,7 +90,7 @@ export default function Account(){
   }
   const handleSubmit=()=>{
     setOpen(true)
-    localStorage['pwd']=values.password;
+    window.localStorage['pwd']=values.password;
     axios.put(`https://fitnessmall.herokuapp.com/api/user/${account.username}/update`,
     {username:account.username,name:name,password:md5(values.password),date:date,nation:nation,sex:sex,phone:phone,email:email})
     .then((res) => {
@@ -123,10 +123,10 @@ export default function Account(){
                 size={140}
                 uploadURL={`https://fitnessmall.herokuapp.com/api/user/${account.username}/update`}
                 // fileType={ ("image/png") || ("image/jpg") }
-                name={localStorage.getItem('isAuthenticated')==='true'? account.username : 'Anonymous'}
+                name={window.localStorage.getItem('isAuthenticated')==='true'? account.username : 'Anonymous'}
                 // customHeaders={{'Content-Type': 'application/json'}}
                 placeholder=''
-                defaultImg={(localStorage.getItem('isAuthenticated')==='true')?(account.avatar!=''?account.avatar:unknown_logo):"https://frontend.tikicdn.com/_desktop-next/static/img/account/avatar.png"}
+                defaultImg={(window.localStorage.getItem('isAuthenticated')==='true')?(account.avatar!=''?account.avatar:unknown_logo):"https://frontend.tikicdn.com/_desktop-next/static/img/account/avatar.png"}
                 onFinished={(false,()=>{
                   setTimeout(() => {
                     window.location.reload(false);

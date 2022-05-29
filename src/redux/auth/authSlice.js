@@ -13,7 +13,7 @@ export const registerUser = createAsyncThunk('user_signup', async ({ username, p
   if (res.data=='Sign up successfully! Please verify email to sign in'){
     axios.post(`https://fitnessmall.herokuapp.com/api/send_email`,{email:email})
     .then((res) => {
-      localStorage.setItem('isAuthenticated',true)
+      window.localStorage.setItem('isAuthenticated',true)
     })
     .catch((err) => {
     alert(err);
@@ -82,7 +82,7 @@ export const authSlice = createSlice({
               ...state,errorLogin:action.payload
             };
           default:
-            localStorage.setItem("sessionID", action.payload)
+            window.localStorage.setItem("sessionID", action.payload)
             return {
               ...state,errorLogin:''
             };
