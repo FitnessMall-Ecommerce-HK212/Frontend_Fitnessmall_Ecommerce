@@ -90,7 +90,7 @@ export default function PurchasedItemsList() {
   React.useEffect(() => {
     var axios = require('axios');
     var data = JSON.stringify({
-      "username": "giacat"
+      "username": localStorage.getItem("username")
     });
 
     var config = {

@@ -73,9 +73,8 @@ function SimpleDialog(props) {
 export default function Confirm() {
   const products = []
 
-  const items = JSON.parse(window.localStorage.getItem("giacat"))
-  // const items = JSON.parse(window.localStorage.getItem("giacat")).cart
-
+  const items = JSON.parse(window.localStorage.getItem(localStorage.getItem("username")))
+  // const items = JSON.parse(window.localStorage.getItem(localStorage.getItem("username"))).cart
 
   var sum = 0
   const dispatch = useDispatch()
