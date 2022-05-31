@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
+import { Offcanvas } from 'react-bootstrap';
 import '../../styles/Header.css'
 import axios from "axios";
 import { Link, useHistory } from 'react-router-dom';
@@ -7,51 +7,61 @@ import logo_fitness from '../../assets/logo/fitness_logo.png'
 import { CTAButton } from '../'
 import { useDispatch, useSelector } from 'react-redux';
 import { Popover, Button } from 'antd';
+import {BsList} from "react-icons/bs";
 function Header(props) {
   let history = useHistory();
   //const sign=sessionStorage.geItem("sessionID");
   const [visible, setVisible] = useState(false)
-  const hide = () => {
-    setVisible(false);
-  };
 
   const handleVisibleChange = visible => {
     setVisible(visible);
   };
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const toggleShow = () => setShow((s) => !s);
+  const setting = {
+    name: 'Enable backdrop (default)',
+    scroll: false,
+    backdrop: true,
+    placement: 'end'
+  }
   return (
     <div class="Container">
-      <div class="Middle_Wrap">
         <div class="LeftContainer">
-          <div class="logo-menu">
-            <div class="style_Logo">
-              <a href="/" class="logo">
-                <img style={{ width: "100%", height: "100%", borderStyle: "none" }}
-                  src={logo_fitness} />
-              </a>
-            </div>
-          </div>
-          <div class="FormSearch" style={{ flex: "1 1 0%" }}>
+          <a href="/" class="logo">
+            <img style={{ width: "100%", height: "100%", borderStyle: "none" }}
+              src={logo_fitness} alt="logo"/>
+          </a>
             <div class="FormSearch_Form">
-              <input type="text" placeholder="Tìm kiếm món hàng bạn muốn.." class="FormSearch_Input" />
+              <input type="text" placeholder="Tìm kiếm ..." class="FormSearch_Input" />
               <CTAButton value="Tìm kiếm" />
             </div>
-          </div>
         </div>
+        {!window.localStorage.getItem('isAuthenticated') ? 
         <div class="RightContainer">
-          <div class="Userstyle_Item">
-            <Popover
-              content={
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                  {!window.localStorage.getItem('isAuthenticated') ?
-                    <a href="/login" style={{ color: "var(--primary)", marginBottom: "5px", textDecoration: 'none' }} > Đăng nhập</a> :
-                    <a style={{ color: "var(--primary)", marginBottom: "5px", textDecoration: 'none' }}
+        <button className='btn btn-send' onClick={toggleShow}><BsList className='menu-icon' color='white' size='30'/></button>
+          <Offcanvas show={show} onHide={handleClose} {...setting}>
+            <Offcanvas.Header closeButton>
+              <Offcanvas.Title></Offcanvas.Title>
+            </Offcanvas.Header>
+            <Offcanvas.Body>
+            {!window.localStorage.getItem('isAuthenticated') ? 
+            <ul style={{listStyle: 'none'}}>
+              <li><Link to="/login"><button className='btn btn-send' style={{width: '100%'}}>Đăng nhập</button></Link></li>
+              <li className='pt-3'><Link to="/register"><button className='btn btn-send' style={{width: '100%'}}>Đăng ký</button></Link></li>
+            </ul>: 
+            <ul style={{listStyle: 'none'}}>
+              <li><Link to="/account"><button className='btn btn-send' style={{width: '100%'}}>Xem hồ sơ</button></Link></li>
+              <li className='pt-3'><Link to="/cart"><button className='btn btn-send' style={{width: '100%'}}>Xem giỏ hàng</button></Link></li>
+              <li className='pt-3'><Link to="/"
                       onClick={() => {
                         axios
                           .get(
                             `https://fitnessmall.herokuapp.com/api/user_signout/${sessionStorage.getItem("sessionID")}`
                           )
                           .then((res) => {
-                            if (res.data == "Sign Out Successfully") {
+                            if (res.data === "Sign Out Successfully") {
                               window.localStorage.removeItem('isAuthenticated');
                               window.localStorage.removeItem('sessionID');
                               window.localStorage.removeItem("pwd");
@@ -63,17 +73,84 @@ function Header(props) {
                             alert(err);
                           });
                       }}
-                    >Đăng xuất</a>
-                  }
+                    ><button className='btn btn-send' style={{width: '100%'}}>Đăng xuất</button></Link></li>
+            </ul>}
+            </Offcanvas.Body>
+          </Offcanvas>
+          <div class="Userstyle_Item">
+            <img class="profile-icon" src="https://salt.tikicdn.com/ts/upload/67/de/1e/90e54b0a7a59948dd910ba50954c702e.png" alt="icon1"/>
+            <Link to="/login"><span style={{ fontSize: "16px", paddingTop: "200px", color: 'white' }}>Đăng nhập</span></Link>
+          </div>
+          <div class="Userstyle_Item">
+            <img class="profile-icon" src="https://salt.tikicdn.com/ts/upload/67/de/1e/90e54b0a7a59948dd910ba50954c702e.png" alt="icon1"/>
+            <Link to="/register"><span style={{ fontSize: "16px", paddingTop: "200px", color: 'white' }}>Đăng ký</span></Link>
+          </div>
+        </div> :
+        <div class="RightContainer">
+          <button className='btn btn-send' onClick={toggleShow}><BsList className='menu-icon' color='white' size='30'/></button>
+          <Offcanvas show={show} onHide={handleClose} {...setting}>
+            <Offcanvas.Header closeButton>
+              <Offcanvas.Title></Offcanvas.Title>
+            </Offcanvas.Header>
+            <Offcanvas.Body>
+            {!window.localStorage.getItem('isAuthenticated') ? 
+            <ul style={{listStyle: 'none'}}>
+              <li><Link to="/login"><button className='btn btn-send' style={{width: '100%'}}>Đăng nhập</button></Link></li>
+              <li className='pt-3'><Link to="/register"><button className='btn btn-send' style={{width: '100%'}}>Đăng ký</button></Link></li>
+            </ul>: 
+            <ul style={{listStyle: 'none'}}>
+              <li><Link to="/account"><button className='btn btn-send' style={{width: '100%'}}>Xem hồ sơ</button></Link></li>
+              <li className='pt-3'><Link to="/cart"><button className='btn btn-send' style={{width: '100%'}}>Xem giỏ hàng</button></Link></li>
+              <li className='pt-3'><Link to="/"
+                      onClick={() => {
+                        axios
+                          .get(
+                            `https://fitnessmall.herokuapp.com/api/user_signout/${sessionStorage.getItem("sessionID")}`
+                          )
+                          .then((res) => {
+                            if (res.data === "Sign Out Successfully") {
+                              window.localStorage.removeItem('isAuthenticated');
+                              window.localStorage.removeItem('sessionID');
+                              window.localStorage.removeItem("pwd");
+                              history.push("/");
+                            }
 
-                  <a href="/account" style={{ color: "var(--primary)", marginBottom: "5px", textDecoration: 'none' }} >Hồ sơ</a>
-                  <a onClick={hide}>Đóng</a>
+                          })
+                          .catch((err) => {
+                            alert(err);
+                          });
+                      }}
+                    ><button className='btn btn-send' style={{width: '100%'}}>Đăng xuất</button></Link></li>
+            </ul>}
+            </Offcanvas.Body>
+          </Offcanvas>
+          <div class="Userstyle_Item">
+            <Popover
+              content={
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <Link to="/account" style={{ color: "var(--primary)", marginBottom: "5px", textDecoration: 'none' }}>Hồ sơ</Link>
+                  <Link to="/" style={{ color: "var(--primary)", marginBottom: "5px", textDecoration: 'none' }}
+                      onClick={() => {
+                        axios
+                          .get(
+                            `https://fitnessmall.herokuapp.com/api/user_signout/${sessionStorage.getItem("sessionID")}`
+                          )
+                          .then((res) => {
+                            if (res.data === "Sign Out Successfully") {
+                              window.localStorage.removeItem('isAuthenticated');
+                              window.localStorage.removeItem('sessionID');
+                              window.localStorage.removeItem("pwd");
+                              history.push("/");
+                            }
 
-                  {/* <a>Profile</a> */}
+                          })
+                          .catch((err) => {
+                            alert(err);
+                          });
+                      }}
+                    >Đăng xuất</Link>
                 </div>
-
               }
-              title="Cài đặt"
               trigger="click"
               visible={visible}
               onVisibleChange={handleVisibleChange}
@@ -81,7 +158,6 @@ function Header(props) {
               <img class="profile-icon" src="https://salt.tikicdn.com/ts/upload/67/de/1e/90e54b0a7a59948dd910ba50954c702e.png" />
               <span style={{ fontSize: "16px", paddingTop: "200px" }}>Tài khoản</span>
             </Popover>
-
           </div>
           <Link to={"/cart"}>
             <div class="Userstyle_Item">
@@ -93,9 +169,9 @@ function Header(props) {
               </span>
             </div>
           </Link>
-        </div>
+          </div>
+        }
       </div>
-    </div>
   );
 }
 

@@ -4,8 +4,8 @@ import express_logo from '../../assets/logo/Express.png'
 function Footer() {
     return (
         <div class="styles_Information">
-          <div style={{display:"flex",justifyContent:"space-between"}} class="Container1">
-           <div class="block" style={{width:"180px"}}>
+          <div class="row Container1 d-flex justify-content-center">
+           <div class="col-sm-3 col-2" style={{width:"180px"}}>
              <h4 class="styles_FooterHeading">Hỗ trợ khách hàng</h4>
              <a href="#" class="small-text" target="_blank">Hotline: 1900 6035</a>
              <a href="#" class="small-text" target="_blank">Các câu hỏi thường gặp</a>
@@ -14,7 +14,7 @@ function Footer() {
              <a href="#" class="small-text" target="_blank">Chính sách đổi trả</a>
              <a href="#" class="small-text" target="_blank">Hướng dẫn trả góp</a>
            </div>
-           <div class="block" style={{width:"260px"}}>
+           <div class="col-sm-3 col-2" style={{width:"260px"}}>
              <h4 class="styles_FooterHeading">Về Fitness mall</h4>
              <a href="#" class="small-text" target="_blank">Giới thiệu</a>
              <a href="#" class="small-text" target="_blank">Chính sách bảo mật thanh toán</a>
@@ -23,7 +23,7 @@ function Footer() {
              <a href="#" class="small-text" target="_blank">Điều khoản sử dụng</a>
              <a href="#" class="small-text" target="_blank">Chính sách nhập khẩu</a>
            </div>
-           <div class="block" style={{width:"200px"}}>
+           <div class="col-sm-3 col-2" style={{width:"200px"}}>
             <h4 class="styles_FooterHeading" style={{marginBottom:"10px"}}>Chứng nhận bởi</h4>
             <div class="flex">
               <a href="http://online.gov.vn/Home/WebDetails/21193" aria-label="" target="_blank" style={{height:"32px"}}>
@@ -50,7 +50,7 @@ function Footer() {
                  </span>
              </p> 
            </div>
-           <div class="block" style={{width:"200px"}}>
+           <div class="col-sm-3 col-2" style={{width:"200px"}}>
            <h4 class="styles_FooterHeading">Kết nối với chúng tôi</h4>
             <p>
             <a style={{marginRight:"20px"}} href="https://www.facebook.com/tiki.vn/" class="icon" target="_blank" title="Facebook"><svg width="50" height="50" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -67,13 +67,11 @@ function Footer() {
              </a>
              </p>
              </div>
-            <div class="block" style={{width:"340px"}}>
+            <div class="col-sm-12 col-4" style={{width:"340px"}}>
             <h4 class="styles_FooterHeading">Địa chỉ</h4>
             <a href="#" class="small-text" target="_blank"><span style={{color: "B3BDC8",fontWeight:550}}>Cơ sở 1: </span>268 Lý Thường Kiệt, P.14, Q.10, HCM</a>
             <a href="#" class="small-text" target="_blank"><span style={{color: "B3BDC8",fontWeight:550}}>Cơ sở 2: </span>Khu đô thị ĐHQG HCM, Thủ Đức, HCM</a>
-            <br></br><br></br><br></br><br></br>
-            <p class="small-text" style={{position: "absolute",marginBottom:0}}
-        >© 2021 - Bản quyền của Công Ty Cổ Phần Fitness</p>
+            <p class="small-text" style={{position: "absolute",marginBottom:0}}>© 2022 - Bản quyền của Công Ty Cổ Phần Fitness</p>
             </div>         
           </div>
         </div>

@@ -1,10 +1,8 @@
 .Container {
-    /* width: 1270px; */
-    padding-left: 50px;
-    padding-right: 15px;
     margin-right: auto;
     margin-left: auto;
     background-color: var(--secondary);
+    display: flex;
 }
 
 .Middle_Wrap {
@@ -22,9 +20,10 @@
     flex: 1 1 0%;
     -webkit-box-align: center;
     align-items: center;
+    width: 75%;
 }
 
-.logo-menu {
+/* .logo-menu {
     display: flex;
     align-items: flex-start;
     flex-basis: 350px;
@@ -37,11 +36,10 @@
     -webkit-box-pack: justify;
     justify-content: space-between;
     flex: 1 1 0%;
-}
+} */
 
 .logo {
-    width: 300px;
-    height: 57px;
+    width: 35%;
     display: block;
     color: rgb(11, 116, 229);
     text-decoration: none;
@@ -49,7 +47,7 @@
 }
 
 .FormSearch_Form {
-    width: 90%;
+    width: 60%;
     display: flex;
     position: relative;
     box-shadow: rgb(98 98 98 / 50%) 0px 1px 2px 0px;
@@ -57,6 +55,7 @@
 }
 
 .FormSearch_Input {
+    width: 80%;
     padding: 0px 12px;
     font-size: 13px;
     border-radius: 10px 0px 0px 10px;
@@ -65,8 +64,8 @@
     flex: 1 1 0%;
     /* outline: none; */
     background: none;
-    height: 48px;
-    width: 100px;
+    /* height: 48px;
+    width: 100px; */
     color: var(--lightprimary);
 }
 
@@ -121,8 +120,7 @@
     -webkit-box-align: center;
     align-items: center;
     -webkit-box-pack: end;
-    justify-content: flex-end;
-
+    width: 25%;
 }
 
 .Userstyle_Item {
@@ -217,4 +215,27 @@
     padding: 10px;
     /* width: 200px; */
     font-size: larger;
+}
+
+.RightContainer button {
+    display: none;
+}
+
+@media (max-width: 1250px) {
+    .LeftContainer {
+        width: 90%;
+    }
+
+    .RightContainer {
+        width: 10%;
+    }
+    .RightContainer .Userstyle_Item{
+        display: none;
+    }
+
+    .RightContainer button {
+        display: flex;
+        width: fit-content !important;
+        overflow: hidden;
+    }
 }
