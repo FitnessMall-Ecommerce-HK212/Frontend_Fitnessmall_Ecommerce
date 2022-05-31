@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import Description from "./description";
 import Feedback from "./feedback";
 import HotBlogCard from '../Home/hotblogcard';
+import Slider from "react-slick";
 import { CTAButton, GhostButton } from '../Buttons'
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -51,6 +52,76 @@ function ProductDetail() {
             setRelatedProducts(res.data.hotItems.slice(0, 4));
         }
     }
+    var setting1 = {
+        dots: true,
+        infinite: false,
+        speed: 500,
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        initialSlide: 0,
+        responsive: [
+            {
+            breakpoint: 1350,
+            settings: {
+                  slidesToShow: 3,
+                  slidesToScroll: 3,
+                  infinite: true,
+                  dots: true
+            }
+            },
+            {
+            breakpoint: 1100,
+            settings: {
+                slidesToShow: 2,
+                centerMode: false,
+                dots: true
+            }
+            },
+            {
+            breakpoint: 750,
+            settings: {
+                slidesToShow: 1,
+                initialSlide: 1,
+                centerMode: false,
+            }
+            }
+        ]
+    };
+    var setting2 = {
+        dots: true,
+        infinite: false,
+        speed: 500,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        initialSlide: 1,
+        responsive: [
+            // {
+            // breakpoint: 1350,
+            // settings: {
+            //       slidesToShow: 3,
+            //       slidesToScroll: 3,
+            //       infinite: true,
+            //       dots: true
+            // }
+            // },
+            {
+            breakpoint: 1350,
+            settings: {
+                slidesToShow: 2,
+                centerMode: false,
+                dots: true
+            }
+            },
+            {
+            breakpoint: 850,
+            settings: {
+                slidesToShow: 1,
+                initialSlide: 1,
+                centerMode: false,
+            }
+            }
+        ]
+    };
 
     const getUsername = async () => {
         const res = await axios.get(BASE_URL + "/api/user_session/" + window.localStorage.sessionID);
@@ -105,10 +176,10 @@ function ProductDetail() {
                     </ol>
                 </div>
                 <div className="row product-intro mt-4">
-                    <div className="col-md-6 product-image text-center">
+                    <div className="col-md-6 col-12 product-image text-center">
                         <img src={productInfo.image} alt="img" />
                     </div>
-                    <div className="col-md-6 col-xs-12">
+                    <div className="col-md-6 col-12 mt-3">
                         {console.log(productInfo)}
                         <Description name={productInfo.name} des={productInfo.description} point={productInfo.point} numOfFeedbacks={productInfo.feedback.length} itemtype={productInfo.itemtype} image={productInfo.image} id={productInfo.code} />
                     </div>
@@ -116,13 +187,13 @@ function ProductDetail() {
                 <div class='divider mt-5'></div>
                 <div className="row more-info mt-3">
                     <div className="col-md-6 more-description">
-                        <div className="title text-center">MÔ TẢ SẢN PHẨM</div>
+                        <div className="title text-center mt-3">MÔ TẢ SẢN PHẨM</div>
                         <div className="content mt-2">
                             {productInfo.description}
                         </div>
                     </div>
                     <div className="col-md-6 feedbacklist text-center">
-                        <div className="title text-center">ĐÁNH GIÁ ({productInfo.feedback.length})</div>
+                        <div className="title text-center mt-3">ĐÁNH GIÁ ({productInfo.feedback.length})</div>
                         <div className="mt-2">
                             {productInfo.feedback.map((fb) => {
                                 return (
@@ -166,34 +237,36 @@ function ProductDetail() {
                 <div class='related-product mt-3'>
                     <div className="title">SẢN PHẨM TƯƠNG TỰ</div>
                     <div className="row listblog mt-3 d-flex justify-content-center">
+                    <Slider {...setting1}>
                         {relatedProducts.map((item) => {
                             return (
-                                <div className="col-3">
-                                    <ProductCard
-                                        img={item.image}
-                                        name={item.name}
-                                        price={item.itemtype[0].price}
-                                        type='food'
-                                        code={item.code}
-                                        point={item.point}
-                                    />
+                                <div className="pt-3 pb-3 d-flex justify-content-center">
+                                    <ProductCard 
+                                            img={item.image}
+                                            name={item.name}
+                                            price={item.itemtype[0].price}
+                                            type='food'
+                                            code={item.code}
+                                            point={item.point}
+                                        />
                                 </div>
                             );
                         })}
+                    </Slider>
                     </div>
                 </div>
                 <div class='divider mt-5'></div>
                 <div class='related-blog mt-3'>
-                    <div className="title">BLOG LIÊN QUAN</div>
-                    <div className="row listblog mt-3 d-flex justify-content-center">
+                    <div className="title pb-3">BLOG LIÊN QUAN</div>
+                    <Slider {...setting2}>
                         {hotBlogs.map((blog) => {
                             return (
-                                <div className="col-4">
-                                    <HotBlogCard id={blog.idBlog} img={blog.image} tags={blog.tags[0]} title={blog.title.toUpperCase()} />
+                                <div className="d-flex justify-content-center">
+                                        <HotBlogCard id={blog.idBlog} img={blog.image} tags={blog.tags[0]} title={blog.title.toUpperCase()}/>
                                 </div>
                             );
                         })}
-                    </div>
+                    </Slider>
                 </div>
             </div>
         );

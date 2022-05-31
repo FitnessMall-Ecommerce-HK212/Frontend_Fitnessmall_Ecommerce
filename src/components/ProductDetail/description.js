@@ -52,8 +52,8 @@ function Description(props) {
                 {showResult ? <LessInfo des={props.des} /> : <Info des={props.des} />}
             </div>
             <div className="row category">
-                <div className="col-2">Phân loại:</div>
-                <div className="col-10 d-flex">
+                <div className="col-6">Phân loại:</div>
+                <div className="col-6 d-flex">
                     {props.itemtype.map((e) => {
                         return (
                             <button type='button' className={props.itemtype[active] === e ? "btn btn-option ms-5 clicked" : "btn btn-option ms-5"} onClick={() => setActive(props.itemtype.indexOf(e))}>{e.category}</button>
@@ -62,12 +62,12 @@ function Description(props) {
                 </div>
             </div>
             <div className="row price mt-3">
-                <div className="col-2">Giá:</div>
+                <div className="col-6">Giá:</div>
                 <div className="col-5 action text-center">{props.itemtype[active].price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}</div>
             </div>
             <div className="row numberToOrder mt-3">
-                <div className="col-2">Số lượng:</div>
-                <div className="col-5 input-spinner">
+                <div className="col-6">Số lượng:</div>
+                <div className="col-6 input-spinner">
                     <InputSpinner
                         type={'int'}
                         max={props.itemtype[active].quantity}
