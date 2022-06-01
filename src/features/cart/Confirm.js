@@ -176,37 +176,45 @@ export default function Confirm() {
 
   }
 
-  const orderCartCash = async () => {
-      var axios = require('axios');
+    const orderCartCash = async () => {
+        var axios = require('axios');
 
-      var data = JSON.stringify({
-          "username": window.localStorage.getItem("username"),
-          "account": "CASH",
-          "shipping_fee": 20000,
-          "discount_order": 0,
-          "discount_shipping": 0,
-          "information_id": window.localStorage.information_id,
-          "products": products
-      });
+        var user = await axios({
+            method: 'GET',
+            url: `${BASE_URL}api/user_session/${window.localStorage.sessionID}`
+        });
 
-      var config = {
-          method: 'post',
-          url: `${BASE_URL}api/order`,
-          headers: {
-              'Content-Type': 'application/json'
-          },
-          data: data
-      };
+        console.log(user.data)
+        var data = JSON.stringify({
+            "username": user.data.username,
+            "account": "CASH",
+            "shipping_fee": 20000,
+            "discount_order": 0,
+            "discount_shipping": 0,
+            "information_id": window.localStorage.information_id,
+            "products": products
+        });
 
-      axios(config)
-          .then(function (response) {
-              console.log(JSON.stringify(response.data));
-          })
-          .catch(function (error) {
-              console.log(error);
-          });
+        var config = {
+            method: 'post',
+            url: `${BASE_URL}api/order`,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            data: data
+        };
 
-  }
+        axios(config)
+            .then(function (response) {
+                console.log(response.data);
+                //window.localStorage.removeItem(window.localStorage.getItem("username"))
+                window.location.href = response.data
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+    }
 
   return (
     items.length === 0 ?
