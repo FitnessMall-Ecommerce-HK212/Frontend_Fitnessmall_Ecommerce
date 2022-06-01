@@ -54,19 +54,19 @@ function Home() {
         speed: 500,
         slidesToShow: 3,
         slidesToScroll: 1,
-        initialSlide: 0,
+        initialSlide: 1,
         responsive: [
+            // {
+            // breakpoint: 1350,
+            // settings: {
+            //       slidesToShow: 3,
+            //       slidesToScroll: 3,
+            //       infinite: true,
+            //       dots: true
+            // }
+            // },
             {
             breakpoint: 1350,
-            settings: {
-                  slidesToShow: 3,
-                  slidesToScroll: 3,
-                  infinite: true,
-                  dots: true
-            }
-            },
-            {
-            breakpoint: 1100,
             settings: {
                 slidesToShow: 2,
                 centerMode: false,
@@ -74,7 +74,7 @@ function Home() {
             }
             },
             {
-            breakpoint: 750,
+            breakpoint: 850,
             settings: {
                 slidesToShow: 1,
                 initialSlide: 1,
@@ -119,17 +119,14 @@ function Home() {
             <div>
                 <img src={banner_homepage} alt='banner' style={{width:"100%",height:"100%",borderStyle:"none"}}/>
                 <div className='all-service pt-5'>
-                <div className='intro'>
+                    <div className='intro'>
                         <div className='line'></div>
                         <h5 className='pt-2 ps-1 pe-1'>FITNESSMALL Có Gì?</h5>
                         <div className='line'></div>
                     </div>
-                    <div className='introcard-container pt-3'>
-                        <div className='row'>
-                            {/* <div className='col-4 col-xs-12 ps-5 pe-5'><IntroCard name="Personal Training"/></div> */}
-                            <div className='col-6 col-xs-12 ps-5 pe-5'><IntroCard name="Blog Tư Vấn"/></div>
-                            <div className='col-6 col-xs-12 ps-5 pe-5'><IntroCard name="Sản phẩm Fitness"/></div>
-                        </div>
+                    <div className='row mt-3 g-3'>
+                        <div className='col-sm-6 col-12'><IntroCard name="Blog Tư Vấn"/></div>
+                        <div className='col-sm-6 col-12'><IntroCard name="Sản phẩm Fitness"/></div>
                     </div>
                 </div>
                 <div className='hotdeals pt-5'>
@@ -187,7 +184,7 @@ function Home() {
                     <Slider {...setting2}>
                         {hotBlogs.map((blog) => {
                             return (
-                                <div className="pt-3 ps-5 pe-5 pb-3 d-flex justify-content-center">
+                                <div className="d-flex justify-content-center">
                                         <HotBlogCard id={blog.idBlog} img={blog.image} tags={blog.tags[0]} title={blog.title.toUpperCase()}/>
                                 </div>
                             );
