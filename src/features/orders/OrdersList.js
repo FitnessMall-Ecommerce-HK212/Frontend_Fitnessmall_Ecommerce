@@ -58,7 +58,7 @@ export default function OrdersList() {
     }
 
     const renderState = (order) => {
-         if (order.state === "Đã thanh toán") {
+        if (order.state === "Đã thanh toán") {
             return (
                 <div className={styles.orderlist__header__content__item__state}>
                     <div>
@@ -69,14 +69,14 @@ export default function OrdersList() {
                     </div>
                 </div>
             )
-            } else if (order.state === "Chưa thanh toán") {
+        } else if (order.state === "Chưa thanh toán") {
             return (
                 <div className={styles.orderlist__header__content__item__state}>
                     <div>
                         <img src={Package} alt='...' />
                     </div>
                     <div className={styles.orderlist__header__content__item__state__text}>
-                        <p className={styles.orderlist__header__content__item__state__text}>Đã đóng gói ngày {order.ngaygiao}</p>
+                        <p className={styles.orderlist__header__content__item__state__text}>Chưa thanh toán</p>
                     </div>
                 </div>
             )
@@ -87,7 +87,7 @@ export default function OrdersList() {
                         <img src={DeliveryTruck} alt='...' />
                     </div>
                     <div className={styles.orderlist__header__content__item__state__text}>
-                        <p className={styles.orderlist__header__content__item__state__text}>Đang vận chuyển</p>
+                        <p className={styles.orderlist__header__content__item__state__text}>Thanh toán khi nhận hàng</p>
                     </div>
                 </div>
             )
