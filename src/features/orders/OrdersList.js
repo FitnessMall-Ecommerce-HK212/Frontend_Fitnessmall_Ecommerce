@@ -11,6 +11,7 @@ import Tasklist from '../../assets/icons/Tasklist.svg'
 import { Footer, Header, Sidebar, GhostButton } from '../../components'
 import { addOrders } from './orderSlice'
 import { CircularProgress } from '@mui/material'
+import { BASE_URL } from '../../config/host';
 
 export default function OrdersList() {
 
@@ -32,7 +33,7 @@ export default function OrdersList() {
 
         var config = {
             method: 'get',
-            url: `https://fitnessmall.herokuapp.com/api/orders/giacat`,
+            url: `${BASE_URL}api/orders/giacat`,
             headers: {
                 'Content-Type': 'application/json',
             },

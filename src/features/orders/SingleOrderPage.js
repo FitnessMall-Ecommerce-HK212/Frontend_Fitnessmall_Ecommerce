@@ -8,6 +8,7 @@ import DeliveryTruck from '../../assets/icons/DeliveryTruck.svg'
 import Package from '../../assets/icons/Package.svg'
 import success from '../../assets/icons/success.svg'
 import Tasklist from '../../assets/icons/Tasklist.svg'
+import { BASE_URL } from '../../config/host';
 
 export default function SingleOrderPage({ match }) {
 
@@ -31,7 +32,7 @@ export default function SingleOrderPage({ match }) {
 
     var config = {
       method: 'get',
-      url: `https://fitnessmall.herokuapp.com/api/order/${window.localStorage.getItem("username")}/${orderId}`,
+      url: `${BASE_URL}api/order/${window.localStorage.getItem("username")}/${orderId}`,
       headers: {
         'Content-Type': 'application/json',
       },

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import { BASE_URL } from '../config/host';
 export default function Real({match}){
     const history=useHistory();
     const data=match.params;
@@ -9,13 +10,13 @@ export default function Real({match}){
         console.log(window.localStorage.getItem('sessionID'));
         axios
              .get(
-               `https://fitnessmall.herokuapp.com/api/user_session/${window.localStorage.getItem('sessionID').toString()}`,
+               `${BASE_URL}api/user_session/${window.localStorage.getItem('sessionID').toString()}`,
              )
              .then((res) => {
                 console.log(res.data)
                 axios
                 .post(
-                  `https://fitnessmall.herokuapp.com/api/google_fit_create`,
+                  `${BASE_URL}api/google_fit_create`,
                   {username: res.data.username,data:JSON.parse(data.data)}
                 )
                 .then((res) => {

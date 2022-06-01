@@ -4,7 +4,6 @@ import {Footer, Header, Home } from '../components';
 
 
 function HomePage(props) {
-
   return (
     <>
       <Header />

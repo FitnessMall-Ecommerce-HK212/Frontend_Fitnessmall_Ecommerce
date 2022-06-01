@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AuthAPI } from '../../services/auth';
 import { utils } from '../../helpers';
 import axios from "axios";
+import { BASE_URL } from '../../config/host';
 const { setAuthToken } = utils;
 const initialState = {
    errorLogin:'',
@@ -11,7 +12,7 @@ const initialState = {
 export const registerUser = createAsyncThunk('user_signup', async ({ username, password, email }) => {
   const res = await AuthAPI.registerUser({ username, password,name:'',email });
   if (res.data=='Sign up successfully! Please verify email to sign in'){
-    axios.post(`https://fitnessmall.herokuapp.com/api/send_email`,{email:email})
+    axios.post(`${BASE_URL}api/send_email`,{email:email})
     .then((res) => {
       window.localStorage.setItem('isAuthenticated',true)
     })

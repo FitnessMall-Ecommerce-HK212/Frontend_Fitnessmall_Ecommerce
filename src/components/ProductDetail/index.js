@@ -11,7 +11,7 @@ import { BsPersonCircle } from 'react-icons/bs';
 import { FiSend } from "react-icons/fi";
 import ProductCard from '../All_Products/productcard'
 import StarRating from "./starRating";
-const BASE_URL = "https://fitnessmall.herokuapp.com";
+import { BASE_URL } from '../../config/host';
 
 function ProductDetail() {
     const { type, code } = useParams();
@@ -25,11 +25,11 @@ function ProductDetail() {
     var typename, api;
     if (type === 'food') {
         typename = 'THỰC PHẨM DINH DƯỠNG';
-        api = '/api/food/' + code;
+        api = 'api/food/' + code;
     }
     else if (type === 'equipment') {
         typename = 'DỤNG CỤ TẬP LUYỆN';
-        api = '/api/item/' + code;
+        api = 'api/item/' + code;
     }
     const getProductInfo = async () => {
         const res = await axios.get(BASE_URL + api);
@@ -37,23 +37,23 @@ function ProductDetail() {
         setProductInfo(res.data);
     }
     const getHotBlogs = async () => {
-        const res = await axios.get(BASE_URL + '/api/blogs');
+        const res = await axios.get(BASE_URL + 'api/blogs');
         console.log(res.data.blogList);
         setHotBlogs(res.data.blogList);
     }
     const getRelatedProducts = async () => {
         if (type === 'food') {
-            const res = await axios.get(BASE_URL + '/api/foods/hot');
+            const res = await axios.get(BASE_URL + 'api/foods/hot');
             setRelatedProducts(res.data.hotFoods.slice(0, 4));
         }
         else if (type === 'equipment') {
-            const res = await axios.get(BASE_URL + '/api/items/hot');
+            const res = await axios.get(BASE_URL + 'api/items/hot');
             setRelatedProducts(res.data.hotItems.slice(0, 4));
         }
     }
 
     const getUsername = async () => {
-        const res = await axios.get(BASE_URL + "/api/user_session/" + window.localStorage.sessionID);
+        const res = await axios.get(BASE_URL + "api/user_session/" + window.localStorage.sessionID);
         setUsername(res.data.username);
     }
     const getDate = () => {
@@ -65,7 +65,7 @@ function ProductDetail() {
         setDate(nDate);
     }
     const handleSubmit = () => {
-        axios.post(BASE_URL + "/api/food/feedback/", {
+        axios.post(BASE_URL + "api/food/feedback/", {
             username: username,
             content: content,
             date: date,

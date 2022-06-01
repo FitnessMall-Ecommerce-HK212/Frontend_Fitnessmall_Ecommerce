@@ -4,11 +4,11 @@ import { useParams, NavLink } from "react-router-dom";
 import ProductCard from './productcard'
 import ReactPaginate from 'react-paginate';
 import { CircularProgress } from "@mui/material";
-const BASE_URL = "https://fitnessmall.herokuapp.com";
+import { BASE_URL } from '../../config/host';
 
 function All_Products(){
     const [productList, setProductList] = useState([]);
-    const [link, setLink] = useState("/api/foods");
+    const [link, setLink] = useState("api/foods");
     const [pageNumber, setPageNumber] = useState(0);
 
     const productsPerPage = 6;
@@ -61,8 +61,8 @@ function All_Products(){
                         CÁC SẢN PHẨM VÀ DỊCH VỤ
                     </div>
                     <div className="optionbutton mb-5">
-                        <NavLink to='/products/food' activeStyle={{color: 'white', background: '#FFA5CB'}} type='button' className="btn btn-option btn-lg mt-5" onClick={()=>setLink("/api/foods")}>Thực phẩm dinh dưỡng</NavLink>
-                        <NavLink to='/products/equipment' activeStyle={{color: 'white', background: '#FFA5CB'}} type='button' className="btn btn-option btn-lg mt-5" onClick={()=>setLink("/api/items")}>Dụng cụ tập luyện</NavLink>
+                        <NavLink to='/products/food' activeStyle={{color: 'white', background: '#FFA5CB'}} type='button' className="btn btn-option btn-lg mt-5" onClick={()=>setLink("api/foods")}>Thực phẩm dinh dưỡng</NavLink>
+                        <NavLink to='/products/equipment' activeStyle={{color: 'white', background: '#FFA5CB'}} type='button' className="btn btn-option btn-lg mt-5" onClick={()=>setLink("api/items")}>Dụng cụ tập luyện</NavLink>
                     </div>
                 </div>
                 </div>

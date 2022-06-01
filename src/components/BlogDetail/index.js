@@ -12,7 +12,7 @@ import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 
-const BASE_URL = "https://fitnessmall.herokuapp.com/"
+import { BASE_URL } from '../../config/host';
 
 export function UserInfo(e) {
   if (e.name !== undefined) {

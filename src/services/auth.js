@@ -1,5 +1,5 @@
 import axios from 'axios';
-const API_SERVER_URL = 'https://fitnessmall.herokuapp.com';
+import { BASE_URL } from '../config/host';
 
 const config = {
   headers: {
@@ -8,8 +8,8 @@ const config = {
 };
 
 export const AuthAPI = {
-  registerUser: (data) => axios.post(`${API_SERVER_URL}/api/user_signup`, data, config),
+  registerUser: (data) => axios.post(`${BASE_URL}api/user_signup`, data, config),
 
-  loginUser: (data) => axios.get(`${API_SERVER_URL}/api/user_signin`, { params: data }, config),
+  loginUser: (data) => axios.get(`${BASE_URL}api/user_signin`, { params: data }, config),
   
 };

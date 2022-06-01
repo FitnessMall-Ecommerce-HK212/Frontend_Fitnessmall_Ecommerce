@@ -21,6 +21,7 @@ import Dialog from '@mui/material/Dialog';
 import PersonIcon from '@mui/icons-material/Person';
 import AddIcon from '@mui/icons-material/Add';
 import { blue } from '@mui/material/colors';
+import { BASE_URL } from '../../config/host';
 
 const addresses = [];
 
@@ -135,35 +136,28 @@ export default function Confirm() {
 
   })
 
-  const orderCart = () => {
+  const orderCart = async () => {
     var axios = require('axios');
+
+    var user = await axios({
+      method: 'GET',
+      url: `${BASE_URL}api/user_session/${window.localStorage.sessionID}`
+    });
+    
+    console.log(user.data)
     var data = JSON.stringify({
-      "username": window.localStorage.getItem("username"),
+      "username": user.data.username,
       "account": "MOMO",
       "shipping_fee": 20000,
       "discount_order": 0,
       "discount_shipping": 0,
-      "information_id": "MrYNyuKosRMgghsdVNvi",
+      "information_id": window.localStorage.information_id,
       "products": products
-      // [
-      //   {
-      //     "code": "PT300",
-      //     "itemType": " z4GKmS8DRQ9YRBX30SLP",
-      //     "quantity": 10,
-      //     "unit_price": 5000
-      //   },
-      //   {
-      //     "code": "PK300",
-      //     "itemType": " z4GKmS8DRQ9YRBX30SLP",
-      //     "quantity": 10,
-      //     "unit_price": 5000
-      //   }
-      // ]
     });
 
     var config = {
       method: 'post',
-      url: 'https://fitnessmall.herokuapp.com/api/order',
+      url: `${BASE_URL}api/order`,
       headers: {
         'Content-Type': 'application/json',
       },
@@ -182,15 +176,21 @@ export default function Confirm() {
 
   }
 
-  const orderCartCash = () => {
+  const orderCartCash = async () => {
     var axios = require('axios');
+    
+    var user = await axios({
+      method: 'GET',
+      url: `${BASE_URL}api/infos/session/${window.localStorage.sessionID}`
+    });
+
     var data = JSON.stringify({
-      "username": window.localStorage.getItem("username"),
+      "username": user.data.username,
       "account": "CASH",
       "shipping_fee": 20000,
       "discount_order": 0,
       "discount_shipping": 0,
-      "information_id": "MrYNyuKosRMgghsdVNvi",
+      "information_id": window.localStorage.information_id,
       "products": products
       // [
       //   {
@@ -210,7 +210,7 @@ export default function Confirm() {
 
     var config = {
       method: 'post',
-      url: 'https://fitnessmall.herokuapp.com/api/order',
+      url: `${BASE_URL}api/order`,
       headers: {
         'Content-Type': 'application/json',
       },
@@ -248,7 +248,7 @@ export default function Confirm() {
               </div>
               <div className={styles.alldata__itemslist__shipinfo}>
                 <div className={styles.alldata__itemslist__shipinfo__text}>
-                  <p>(!) Được giao bởi J&amp;T Express (giao từ Hồ Chí Minh)</p>
+                  <p>(!) Được giao bởi GHN (giao từ Hồ Chí Minh)</p>
                 </div>
                 <div>
                   <p>Giao hàng vào thứ Ba, 15/7</p>

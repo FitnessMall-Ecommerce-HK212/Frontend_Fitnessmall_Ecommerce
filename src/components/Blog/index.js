@@ -4,13 +4,14 @@ import HotBlog from "./HotBlog";
 import "../../styles/BlogPage.css";
 import axios from "axios";
 import { CircularProgress } from "@mui/material";
+import { BASE_URL } from '../../config/host';
 
 const Blog = () => {
   const [allBlogs, setAllBlogs] = useState([]);
 
   useEffect(() => {
     async function getAllBlogs() {
-      const response = await axios.get("https://fitnessmall.herokuapp.com/api/blogs");
+      const response = await axios.get(`${BASE_URL}api/blogs`);
       return response.data.blogList;
     }
     getAllBlogs().then((res) => {

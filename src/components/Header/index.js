@@ -7,6 +7,7 @@ import logo_fitness from '../../assets/logo/fitness_logo.png'
 import { CTAButton } from '../'
 import { useDispatch, useSelector } from 'react-redux';
 import { Popover, Button } from 'antd';
+import { BASE_URL } from '../../config/host';
 function Header(props) {
   let history = useHistory();
   //const sign=sessionStorage.geItem("sessionID");
@@ -48,7 +49,7 @@ function Header(props) {
                       onClick={() => {
                         axios
                           .get(
-                            `https://fitnessmall.herokuapp.com/api/user_signout/${sessionStorage.getItem("sessionID")}`
+                            `${BASE_URL}api/user_signout/${sessionStorage.getItem("sessionID")}`
                           )
                           .then((res) => {
                             if (res.data == "Sign Out Successfully") {
