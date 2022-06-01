@@ -39,6 +39,7 @@ export function CustomizedSnackbars(props) {
 }
 function Description(props) {
     const [open, setOpen] = useState(false);
+    const [type, setType] = useState("");
     const handleClose = () => {
         setOpen(false);
     };
@@ -69,18 +70,21 @@ function Description(props) {
     // window.localStorage.clear()
     const handleAddCart = () => {
         if ("sessionID" in window.localStorage) {
+            setType("success")
             dispatch(addItem(props.id, props.name, props.itemtype[active].price, props.image, numItem, props.itemtype))
             setOpen(true);
             //alert(`Thêm sản phẩm '${props.name}' vào giỏ hàng thành công!`)
         } else {
-            alert("Cần đăng nhập để thêm giỏ hàng!")
+            //alert("Cần đăng nhập để thêm giỏ hàng!")
+            setType("fail")
+            setOpen(true)
         }
 
     }
 
     return (
         <div className="description">
-            <CustomizedSnackbars type={"success"} open={open} handleClose={handleClose} />
+            <CustomizedSnackbars type={type} open={open} handleClose={handleClose} />
             <div className="product-name">{props.name}</div>
             <div style={{ gap: '5px' }}>
                 <div class="feedback-num">{props.numOfFeedbacks} đánh giá | Điểm đánh giá: <span class="badge bg-warning text-dark">{props.point.toFixed(1)}</span></div>
