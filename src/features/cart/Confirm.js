@@ -178,6 +178,12 @@ export default function Confirm() {
 
   const orderCartCash = async () => {
       var axios = require('axios');
+
+      var user = await axios({
+          method: 'GET',
+          url: `${BASE_URL}api/infos/session/${window.localStorage.sessionID}`
+      });
+
       var data = JSON.stringify({
           "username": user.data.username,
           "account": "CASH",
