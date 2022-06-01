@@ -7,17 +7,19 @@ function Feedback(props){
             <div className="col-1">
                 <BsPersonCircle size='24'/>
             </div>
-            <div className='col-2'>
+            <div className='col-4'>
                 {props.username}
             </div>
             <div className='col-3 ratingstar'>
                 <RatingStar point={props.point}/>
             </div>
-            <div className='col-6 feedback-num'>
+            <div className='col-4 feedback-num'>
                 {props.timestamp}
             </div>
-            <div class='col-12'>
-                <input class='form-control content ms-5 mt-2' style={{width: '630px'}} type='text' value={props.content} aria-label='Disabled input example' disabled readonly/>
+            <div className="col-1">
+            </div>
+            <div class='col-11'>
+                <input class='form-control content mt-2' style={{width: '100%'}} type='text' value={props.content} aria-label='Disabled input example' disabled readonly/>
             </div>
         </div>
     );

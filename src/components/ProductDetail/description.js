@@ -51,23 +51,23 @@ function Description(props) {
             <div className="brief">
                 {showResult ? <LessInfo des={props.des} /> : <Info des={props.des} />}
             </div>
-            <div className="row category">
-                <div className="col-6">Phân loại:</div>
-                <div className="col-6 d-flex">
+            <div className="row category d-flex align-items-center pt-5">
+                <div className="col-4">Phân loại:</div>
+                <div className="col-8 d-flex justify-content-center">
                     {props.itemtype.map((e) => {
                         return (
-                            <button type='button' className={props.itemtype[active] === e ? "btn btn-option ms-5 clicked" : "btn btn-option ms-5"} onClick={() => setActive(props.itemtype.indexOf(e))}>{e.category}</button>
+                            <button type='button' className={props.itemtype[active] === e ? "btn btn-option clicked" : "btn btn-option ms-5"} onClick={() => setActive(props.itemtype.indexOf(e))}>{e.category}</button>
                         );
                     })}
                 </div>
             </div>
-            <div className="row price mt-3">
-                <div className="col-6">Giá:</div>
-                <div className="col-5 action text-center">{props.itemtype[active].price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}</div>
+            <div className="row price d-flex align-items-center mt-3">
+                <div className="col-4">Giá:</div>
+                <div className="col-8 action text-center">{props.itemtype[active].price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}</div>
             </div>
-            <div className="row numberToOrder mt-3">
-                <div className="col-6">Số lượng:</div>
-                <div className="col-6 input-spinner">
+            <div className="row numberToOrder d-flex align-items-center mt-3">
+                <div className="col-4">Số lượng:</div>
+                <div className="col-8 input-spinner">
                     <InputSpinner
                         type={'int'}
                         max={props.itemtype[active].quantity}
@@ -78,11 +78,12 @@ function Description(props) {
                         size="sm"
                     />
                 </div>
-                <div className="col-5 feedback-num">{props.itemtype[active].quantity} sản phẩm có sẵn</div>
+                <div className="col-4"></div>
+                <div className="col-8 feedback-num text-center mt-3">{props.itemtype[active].quantity} sản phẩm có sẵn</div>
             </div>
             <div className="row d-flex mt-5">
-                <div className="col-2"></div>
-                <div className="col-10 action d-flex">
+                <div className="col-4"></div>
+                <div className="col-sm-8 col-12 action d-flex justify-content-center">
                     <GhostButton value="Thêm vào giỏ hàng" onClick={() => handleAddCart(props.itemtype[active].price)} />
                     <Link to="/cart">
                         <CTAButton value="Mua ngay" className="after" onClick={() => handleAddCart(props.itemtype[active].price)} />

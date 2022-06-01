@@ -48,6 +48,7 @@
 
 .FormSearch_Form {
     width: 60%;
+    height: 60%;
     display: flex;
     position: relative;
     box-shadow: rgb(98 98 98 / 50%) 0px 1px 2px 0px;
@@ -77,10 +78,10 @@
 .FormSearch_Button {
     cursor: pointer;
     border: 0px;
-    width: 100px;
+    width: fit-content;
+    padding: 0px 10px;
     background: var(--primary);
-    height: 48px;
-    border-radius: 10px 10px 10px 10px;
+    border-radius: 0px 10px 10px 0px;
     color: var(--background);
     font-size: 15px;
     font-weight: 500;
@@ -218,6 +219,11 @@
 }
 
 .RightContainer button {
+    background-color: black;
+    border: none;
+}
+
+.RightContainer .menu-icon {
     display: none;
 }
 
@@ -228,14 +234,18 @@
 
     .RightContainer {
         width: 10%;
+        height: 60%;
+        justify-content: center;
+        padding: 20px;
     }
     .RightContainer .Userstyle_Item{
         display: none;
     }
 
-    .RightContainer button {
-        display: flex;
-        width: fit-content !important;
-        overflow: hidden;
+    .RightContainer .menu-icon{
+        display: inline-block;
+        width: 30px;
+        height: 30px;
     }
+
 }

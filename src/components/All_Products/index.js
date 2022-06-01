@@ -41,7 +41,7 @@ function All_Products(){
         .slice(pagesVisited, pagesVisited + productsPerPage)
         .map((product) => {
             return (
-                <div className="col-md-4 pt-5">
+                <div className="col-lg-4 col-sm-6 col-12 pt-5">
                     <ProductCard 
                         img={product.image}
                         name={product.name}
@@ -67,7 +67,7 @@ function All_Products(){
                 </div>
                 </div>
                 <div className="col-md-9">
-                    <div className="row content d-flex justify-content-center ms-5">
+                    <div className="row content d-flex">
                         {displayProducts}
                     </div>
                     <div className="mt-5 d-flex justify-content-center"> 
