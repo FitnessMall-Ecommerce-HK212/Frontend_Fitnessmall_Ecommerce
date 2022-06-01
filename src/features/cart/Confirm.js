@@ -167,7 +167,7 @@ export default function Confirm() {
     axios(config)
       .then(function (response) {
         console.log(response.data);
-        window.localStorage.removeItem(window.localStorage.getItem("username"))
+        //window.localStorage.removeItem(window.localStorage.getItem("username"))
         window.location.href = response.data
       })
       .catch(function (error) {
@@ -179,13 +179,8 @@ export default function Confirm() {
   const orderCartCash = async () => {
       var axios = require('axios');
 
-      var user = await axios({
-          method: 'GET',
-          url: `${BASE_URL}api/infos/session/${window.localStorage.sessionID}`
-      });
-
       var data = JSON.stringify({
-          "username": user.data.username,
+          "username": window.localStorage.getItem("username"),
           "account": "CASH",
           "shipping_fee": 20000,
           "discount_order": 0,
