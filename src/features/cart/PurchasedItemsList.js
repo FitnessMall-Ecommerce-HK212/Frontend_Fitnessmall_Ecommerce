@@ -19,8 +19,7 @@ import Dialog from '@mui/material/Dialog';
 import PersonIcon from '@mui/icons-material/Person';
 import AddIcon from '@mui/icons-material/Add';
 import { blue } from '@mui/material/colors';
-
-var addresses = [];
+import { BASE_URL } from '../../config/host';
 
 export class SimpleDialogProps {
   constructor(open, selectedValue, onClose) {
@@ -29,6 +28,8 @@ export class SimpleDialogProps {
     this.onClose = onClose;
   }
 }
+
+var addresses = [];
 
 function SimpleDialog(props) {
   const { onClose, selectedValue, open } = props;
@@ -87,25 +88,16 @@ function SimpleDialog(props) {
 export default function PurchasedItemsList() {
   const [userAd, setUserAd] = React.useState();
 
-  React.useEffect(() => {
+  React.useEffect(async () => {
     var axios = require('axios');
-    var data = JSON.stringify({
-      "username": localStorage.getItem("username")
-    });
 
-    var config = {
-      method: 'get',
-      url: `https://fitnessmall.herokuapp.com/api/infos/${window.localStorage.getItem("username")}`,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      data: data
-    };
-    addresses = []
-    axios(config)
-      .then(function (response) {
-        // console.log(JSON.stringify(response.data));
+    var data = await axios({
+      method: 'GET',
+      url: `${BASE_URL}api/infos/session/${window.localStorage.sessionID}`
+    }).then(function (response) {
         if (response.data) {
+          addresses = response.data;
+          console.log(addresses[0])
           setUserAd(<>
             <div className={styles.alldata__paymentinfo__diachi__namephone}>
               <p>{response.data[0].receiver}</p>
@@ -121,21 +113,12 @@ export default function PurchasedItemsList() {
           window.localStorage.setItem("phone", response.data[0].phone)
           window.localStorage.setItem("address", `${response.data[0].address}, ${response.data[0].district}, ${response.data[0].province}`)
           window.localStorage.setItem("receiver", response.data[0].receiver)
+          window.localStorage.setItem("information_id", response.data[0].id)
 
-          response.data.map(addressV => {
-            addresses.push(
-              // <>
-              //   <div className={styles.alldata__paymentinfo__diachi__namephone}>
-              //     <p>{address.receiver}</p>
-              //     <p>|</p>
-              //     <p>{address.phone}</p>
-              //   </div>
-              //   <div>
-              //     <p>{address.address}, {address.district}, {address.province}</p>
-              //   </div>
-              // </>
-              { receiver: addressV.receiver, phone: addressV.phone, address: addressV.address, district: addressV.district, province: addressV.province, ward: addressV.ward })
-          })
+          // response.data.map(addressV => {
+          //   addresses.push(
+          //     { receiver: addressV.receiver, phone: addressV.phone, address: addressV.address, district: addressV.district, province: addressV.province, ward: addressV.ward })
+          // })
         }
       })
       .catch(function (error) {
@@ -160,10 +143,6 @@ export default function PurchasedItemsList() {
   const handleCloseAddress = (value) => {
     setOpenAddress(false);
     setSelectedValue(value);
-
-    window.localStorage.setItem("phone", value.phone)
-    window.localStorage.setItem("address", `${value.address}, ${value.ward}, ${value.district}, ${value.province}`)
-    window.localStorage.setItem("receiver", value.receiver)
 
     setUserAd(<>
       <div className={styles.alldata__paymentinfo__diachi__namephone}>

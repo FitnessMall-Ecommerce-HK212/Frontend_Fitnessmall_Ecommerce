@@ -14,8 +14,9 @@ import unknown_logo from '../assets/img/secret_avatar.png'
 import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import { BASE_URL } from '../config/host';
 export default function Account(){
-  const history=useHistory();
+  const history = useHistory();
   let valueNations=["VietNam","England","France","American","Wakanda"];
   const [account,setAccount]=useState('');
   // For all fields
@@ -27,10 +28,11 @@ export default function Account(){
   const [email,setEmail]=useState('');
   const [open,setOpen]=useState(false)
   const [type,setType]=useState('')
+  console.log(`${BASE_URL}api/user_session/${window.localStorage.sessionID}`)
   useEffect(()=>{
-    axios.get(`https://fitnessmall.herokuapp.com/api/user_session/${window.localStorage.sessionID}`)
+    axios.get(`${BASE_URL}api/user_session/${window.localStorage.sessionID}`)
         .then((res) => {
-          axios.get(`https://fitnessmall.herokuapp.com/api/user/${res.data.username}`,{username:res.data.username})
+          axios.get(`${BASE_URL}api/user/${res.data.username}`,{username:res.data.username})
         .then((res) => {
           setAccount(res.data);
           setName(res.data.name);
@@ -91,7 +93,7 @@ export default function Account(){
   const handleSubmit=()=>{
     setOpen(true)
     window.localStorage['pwd']=values.password;
-    axios.put(`https://fitnessmall.herokuapp.com/api/user/${account.username}/update`,
+    axios.put(`${BASE_URL}api/user/${account.username}/update`,
     {username:account.username,name:name,password:md5(values.password),date:date,nation:nation,sex:sex,phone:phone,email:email})
     .then((res) => {
       setType("success")
@@ -121,7 +123,7 @@ export default function Account(){
                  {/* <img src={"https://frontend.tikicdn.com/_desktop-next/static/img/account/avatar.png"} alt="avatar" class="default" style={{width: "60px",height: "60px"}}/> */}
                  <AvatarUploader
                 size={140}
-                uploadURL={`https://fitnessmall.herokuapp.com/api/user/${account.username}/update`}
+                uploadURL={`${BASE_URL}api/user/${account.username}/update`}
                 // fileType={ ("image/png") || ("image/jpg") }
                 name={window.localStorage.getItem('isAuthenticated')==='true'? account.username : 'Anonymous'}
                 // customHeaders={{'Content-Type': 'application/json'}}

@@ -7,8 +7,43 @@ import { useState } from 'react';
 import { increment, decrement, checkItem, removeItem, addItem } from '../../features/cart/cartSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import React from 'react'
 
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
+export function CustomizedSnackbars(props) {
+    return (
+        <Stack spacing={2} sx={{ width: "100%" }}>
+            <Snackbar
+                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                open={props.open}
+                autoHideDuration={3000}
+                onClose={props.handleClose}
+            >
+                <Alert
+                    onClose={props.handleClose}
+                    severity={props.type}
+                    sx={{ width: "100%" }}
+                >
+                    {props.type === "success" ? "Thêm vào giỏ hàng thành công" : "Thêm thất bại vui lòng thử lại!"}
+                </Alert>
+            </Snackbar>
+        </Stack>
+    );
+}
 function Description(props) {
+    const [open, setOpen] = useState(false);
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+
     const dispatch = useDispatch()
     const [active, setActive] = useState(0);
     const [showResult, setShowResult] = useState(false);
@@ -35,7 +70,8 @@ function Description(props) {
     const handleAddCart = () => {
         if ("sessionID" in window.localStorage) {
             dispatch(addItem(props.id, props.name, props.itemtype[active].price, props.image, numItem, props.itemtype))
-            alert(`Thêm sản phẩm '${props.name}' vào giỏ hàng thành công!`)
+            setOpen(true);
+            //alert(`Thêm sản phẩm '${props.name}' vào giỏ hàng thành công!`)
         } else {
             alert("Cần đăng nhập để thêm giỏ hàng!")
         }
@@ -44,6 +80,7 @@ function Description(props) {
 
     return (
         <div className="description">
+            <CustomizedSnackbars type={"success"} open={open} handleClose={handleClose} />
             <div className="product-name">{props.name}</div>
             <div style={{ gap: '5px' }}>
                 <div class="feedback-num">{props.numOfFeedbacks} đánh giá | Điểm đánh giá: <span class="badge bg-warning text-dark">{props.point.toFixed(1)}</span></div>

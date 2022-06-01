@@ -12,6 +12,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import md5 from 'md5';
 import { notification, Modal, message } from 'antd';
+import { BASE_URL } from '../config/host';
 import {
   Grid,
   Card,
@@ -166,7 +167,7 @@ export default function Login() {
           'Bạn phải lấy Mã đã được gửi tới Email để tiếp tục sử dụng Website',
         placement: 'topLeft'
       });
-      axios.get(`https://fitnessmall.herokuapp.com/api/user/forgotpass/${username}`, { username: username })
+      axios.get(`${BASE_URL}api/user/forgotpass/${username}`, { username: username })
         .then((res) => {
           console.log(res.data)
         })
@@ -197,7 +198,7 @@ export default function Login() {
     setTimeout(() => {
       axios
         .get(
-          `https://fitnessmall.herokuapp.com/api/user_author/${window.localStorage.getItem("sessionID")}`,
+          `${BASE_URL}api/user_author/${window.localStorage.getItem("sessionID")}`,
           {
           },
           { headers: { "Content-Type": "application/json" } }
@@ -259,13 +260,13 @@ export default function Login() {
             <p style={{ fontSize: "14px", color: "#FF2C86", fontWeight: 600, cursor: "pointer" }} onClick={handleForgot}
             >Quên mật khẩu</p>
             <Modal title="Xác thực Mã" visible={isModalVisible} onOk={() => {
-              setIsModalVisible(false); axios.get(`https://fitnessmall.herokuapp.com/api/user/forgotpass/code/${username}?code=${newCode}`, { username: username }).then((res) => { if (res.data.check == true) { setIsModalVisible1(true) } }).catch((err) => alert(err)
+              setIsModalVisible(false); axios.get(`${BASE_URL}api/user/forgotpass/code/${username}?code=${newCode}`, { username: username }).then((res) => { if (res.data.check == true) { setIsModalVisible1(true) } }).catch((err) => alert(err)
               );
             }} onCancel={() => setIsModalVisible(false)}>
               <input type="text" id="inputName" className={classes.input} placeholder="Điền vào đây" onChange={(e) => setnewCode(e.target.value)}></input>
             </Modal>
             <Modal title="Change Password" visible={isModalVisible1} onOk={() => {
-              setIsModalVisible1(false); axios.post(`https://fitnessmall.herokuapp.com/api/change_pass`, { username: username, password: md5(newPass) }, {
+              setIsModalVisible1(false); axios.post(`${BASE_URL}api/change_pass`, { username: username, password: md5(newPass) }, {
                 'Content-Type': 'application/json'
               }).then((res) => {
                 if (res.data == "Update password successfully") {
@@ -286,7 +287,7 @@ export default function Login() {
             <br></br>
             <div style={{ margin: "0px 45px ", justifyContent: "space-between", flexWrap: "wrap", display: "flex" }} >
               <button className={classes.button_social} onClick={() => {
-                axios.get(`https://fitnessmall.herokuapp.com/api/user_signin_signup/google`)
+                axios.get(`${BASE_URL}api/user_signin_signup/google`)
                   .then((res) => {
                     window.localStorage.setItem('pwd', 'Not declared')
                     window.open(res.data, '', 'popup')
@@ -301,14 +302,14 @@ export default function Login() {
                 <div className={classes.icon}><div className={classes.icon_Google}></div></div>
                 <div>Google</div>
               </button>
-              <button className={classes.button_social}>
+              {/* <button className={classes.button_social}>
                 <div className={classes.icon}><div className={classes.icon_Facebook}></div></div>
                 <div>Facebook</div>
-              </button>
+              </button> */}
             </div>
             <br></br>
             <div>
-              <p style={{ textAlign: "center", fontSize: "13px", fontWeight: 600 }}>Lần đầu sử dụng  fitnessmall?
+              <p style={{ textAlign: "center", fontSize: "13px", fontWeight: 600 }}>Lần đầu sử dụng Fitness Mall?
                 <Link to="/register" style={{ textDecoration: "None" }}  ><span style={{ color: "#FF2C86", cursor: "pointer" }} > Đăng ký</span></Link></p>
             </div>
           </Card>

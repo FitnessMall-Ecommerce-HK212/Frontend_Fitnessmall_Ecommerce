@@ -2,13 +2,14 @@ import React,{ useState,useEffect } from 'react';
 import '../../styles/Account.css'
 import axios from "axios";
 import unknown_logo from '../../assets/img/secret_avatar.png'
+import { BASE_URL } from '../../config/host';
 function Sidebar({nameActive}) {
     const [image,setImage]=useState('');
     const [name,setName]=useState('');
     useEffect(()=>{
-        axios.get(`https://fitnessmall.herokuapp.com/api/user_session/${window.localStorage.sessionID}`)
+        axios.get(`${BASE_URL}api/user_session/${window.localStorage.sessionID}`)
             .then((res) => {
-              axios.get(`https://fitnessmall.herokuapp.com/api/user/${res.data.username}`,{username:res.data.username})
+              axios.get(`${BASE_URL}api/user/${res.data.username}`,{username:res.data.username})
             .then((res) => {
               setImage(res.data.avatar)
               setName(res.data.name)

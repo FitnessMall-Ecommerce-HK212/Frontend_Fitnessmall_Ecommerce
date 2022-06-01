@@ -13,6 +13,7 @@ import 'antd/dist/antd.css';
 import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import { BASE_URL } from '../config/host';
 export default function HealthInfo(){
     const [open,setOpen]=useState(false)
     const [height,setHeight]=useState("")
@@ -69,10 +70,10 @@ export default function HealthInfo(){
   }
     const [type,setType]=useState('')
     useEffect(()=>{
-      axios.get(`https://fitnessmall.herokuapp.com/api/user_session/${window.localStorage.sessionID}`)
+      axios.get(`${BASE_URL}api/user_session/${window.localStorage.sessionID}`)
           .then((res) => {
             setUsername(res.data.username);
-            axios.get(`https://fitnessmall.herokuapp.com/api/user/${res.data.username}`,{username:res.data.username})
+            axios.get(`${BASE_URL}api/user/${res.data.username}`,{username:res.data.username})
           .then((res) => {
             // console.log(res.data)
              setHeight(res.data.height)
@@ -140,7 +141,7 @@ export default function HealthInfo(){
            <GhostButton style={{marginBottom:"20px",display:"flex"}} value="Liên kết gg fit" onClick={()=>{
              axios
              .get(
-               "https://fitnessmall.herokuapp.com/api/google_fit"
+               `${BASE_URL}api/google_fit`
              )
              .then((res) => {
                window.open(res.data,'','popup')
@@ -157,7 +158,7 @@ export default function HealthInfo(){
              setOpen(!open)
              axios
              .get(
-               `https://fitnessmall.herokuapp.com/api/google_fit/data/${username}`
+               `${BASE_URL}api/google_fit/data/${username}`
              )
              .then((res) => {
                console.log(res)
@@ -211,7 +212,7 @@ export default function HealthInfo(){
           <CTAButton value="Lưu thay đổi" style={{marginLeft:"30px",
                 width:"120px",height:"45px"}} onClick={()=>{axios
                    .put(
-                     `https://fitnessmall.herokuapp.com/api/user/${username}/update`,{username:username,height:height,weight:weight}
+                     `${BASE_URL}api/user/${username}/update`,{username:username,height:height,weight:weight}
                    )
                    .then((res) => {
                      setType("success")

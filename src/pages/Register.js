@@ -8,6 +8,7 @@ import '../styles/Login_Register.css'
 import md5 from 'md5';
 import { registerUser} from '../redux/auth/authSlice';
 import {notification} from 'antd';
+import { BASE_URL } from '../config/host';
 import {
   Grid,
   Card,
@@ -155,7 +156,7 @@ export default function Register() {
       });
     };
     const a= setInterval(()=>{
-      axios.post(`https://fitnessmall.herokuapp.com/api/users/${value_username}/vertify`,{username:value_username})
+      axios.post(`${BASE_URL}api/users/${value_username}/vertify`,{username:value_username})
       .then((res) => {
         if(res.data==true) {clearInterval(a);history.push('/login');}
       })
@@ -213,7 +214,7 @@ export default function Register() {
           </div>
           <br></br>
           <div style={{margin: "0px 45px ",justifyContent: "space-between",flexWrap: "wrap",display: "flex"}} >
-          <button className={classes.button_social} onClick={()=>{ axios.get(`https://fitnessmall.herokuapp.com/api/user_signin_signup/google`)
+          <button className={classes.button_social} onClick={()=>{ axios.get(`${BASE_URL}api/user_signin_signup/google`)
     .then((res) => {
       window.localStorage.setItem('pwd','Not declared')
       window.open(res.data,'','popup')

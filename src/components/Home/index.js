@@ -10,7 +10,7 @@ import "slick-carousel/slick/slick-theme.css";
 import HotBlogCard from './hotblogcard';
 import { useEffect, useState } from "react";
 import { CircularProgress } from "@mui/material";
-const BASE_URL = "https://fitnessmall.herokuapp.com";
+import { BASE_URL } from '../../config/host';
 
 function Home() {
     var setting1 = {
@@ -83,21 +83,22 @@ function Home() {
             }
         ]
     };
+    console.log(BASE_URL)
     const [hotItems, setHotItems] = useState([]);
     const [hotFood, setHotFood] = useState([]);
     const [hotBlogs, setHotBlogs] = useState([]);
     const getHotItems = async () => {
-        const res = await axios.get(BASE_URL + '/api/items/hot');
+        const res = await axios.get(BASE_URL + 'api/items/hot');
         console.log(res.data.hotItems);
         setHotItems(res.data.hotItems);
     }
     const getHotFood = async () => {
-        const res = await axios.get(BASE_URL + '/api/foods/hot');
+        const res = await axios.get(BASE_URL + 'api/foods/hot');
         console.log(res.data.hotFoods);
         setHotFood(res.data.hotFoods);
     }
     const getHotBlogs = async () => {
-        const res = await axios.get(BASE_URL + '/api/blogs');
+        const res = await axios.get(BASE_URL + 'api/blogs');
         console.log(res.data.blogList);
         setHotBlogs(res.data.blogList);
     }
