@@ -21,7 +21,9 @@ function ProductDetail() {
     const [relatedProducts, setRelatedProducts] = useState([])
     const [username, setUsername] = useState("");
     const [date, setDate] = useState("");
+    const [rating, setRating] = useState(0);
     const [content, setContent] = useState("");
+    const [error, setError] = useState("");
     const [checkFB, setCheckFB] = useState(false);
     var typename, api;
     if (type === 'food') {
@@ -32,14 +34,15 @@ function ProductDetail() {
         typename = 'DỤNG CỤ TẬP LUYỆN';
         api = 'api/item/' + code;
     }
+    const childToParent = (childdata) => {
+        setRating(childdata)
+    }
     const getProductInfo = async () => {
         const res = await axios.get(BASE_URL + api);
-        console.log(res)
         setProductInfo(res.data);
     }
     const getHotBlogs = async () => {
-        const res = await axios.get(BASE_URL + 'api/blogs');
-        console.log(res.data.blogList);
+        const res = await axios.get(BASE_URL + '/api/blogs');
         setHotBlogs(res.data.blogList);
     }
     const getRelatedProducts = async () => {
@@ -136,13 +139,22 @@ function ProductDetail() {
         setDate(nDate);
     }
     const handleSubmit = () => {
-        axios.post(BASE_URL + "api/food/feedback/", {
-            username: username,
-            content: content,
-            date: date,
-            point: 4,
-            food_id: productInfo.id
-        })
+        if (content === "") {
+            setError("Bạn chưa điền nội dung đánh giá!")
+        }
+        else if (rating === 0) {
+            setError("Bạn chưa chọn sao!")
+        }
+        else {
+            axios.post(BASE_URL + "/api/food/feedback/", {
+                username: username,
+                content: content,
+                date: date,
+                point: rating,
+                food_id: productInfo.id
+            })
+            setError("")
+        }
         setCheckFB(!checkFB);
         setContent("");
     }
@@ -179,8 +191,7 @@ function ProductDetail() {
                     <div className="col-md-6 col-12 product-image text-center">
                         <img src={productInfo.image} alt="img" />
                     </div>
-                    <div className="col-md-6 col-12 mt-3">
-                        {console.log(productInfo)}
+                    <div className="col-md-6 col-12">
                         <Description name={productInfo.name} des={productInfo.description} point={productInfo.point} numOfFeedbacks={productInfo.feedback.length} itemtype={productInfo.itemtype} image={productInfo.image} id={productInfo.code} />
                     </div>
                 </div>
@@ -209,24 +220,27 @@ function ProductDetail() {
                                         <div className="col-1">
                                             <BsPersonCircle size='24' />
                                         </div>
-                                        <div className='col-2'>
+                                        <div className='col-4'>
                                             {username}
                                         </div>
                                         <div className='col-3 d-flex justify-content-center'>
-                                            <StarRating />
+                                            <StarRating childToParent={childToParent}/>
                                         </div>
-                                        <div className='col-6 feedback-num'>
+                                        <div className='col-4 feedback-num'>
                                             {date}
                                         </div>
-                                        <div class='col-10'>
-                                            <textarea class="form-control ms-5 mt-2" style={{ width: '520px' }} value={content} onChange={handleChangeForm} id="feedback" rows="1" placeholder="Vui lòng chọn sao và điền nội dung đánh giá" required></textarea>
+                                        <div className="col-1"></div>
+                                        <div class='col-8'>
+                                            <textarea class="form-control mt-2" style={{ width: '100%' }} value={content} onChange={handleChangeForm} id="feedback" rows="2" placeholder="Vui lòng chọn sao và điền nội dung đánh giá" required></textarea>
                                         </div>
-                                        <div class='col-2 mt-2'>
+                                        <div class='col-3 mt-2'>
                                             <button type="submit" className="btn btn-send" onClick={handleSubmit}>
                                                 Gửi
                                                 <FiSend />
                                             </button>
                                         </div>
+                                        <div className="col-1"></div>
+                                        <div className="col-9 mt-2" style={{color: '#FF2C86'}}>{error}</div>
                                     </div>
                                 }
                             </div>
