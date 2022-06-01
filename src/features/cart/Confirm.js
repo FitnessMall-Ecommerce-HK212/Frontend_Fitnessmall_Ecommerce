@@ -177,55 +177,33 @@ export default function Confirm() {
   }
 
   const orderCartCash = async () => {
-    var axios = require('axios');
-    
-    var user = await axios({
-      method: 'GET',
-      url: `${BASE_URL}api/infos/session/${window.localStorage.sessionID}`
-    });
-
-    var data = JSON.stringify({
-      "username": user.data.username,
-      "account": "CASH",
-      "shipping_fee": 20000,
-      "discount_order": 0,
-      "discount_shipping": 0,
-      "information_id": window.localStorage.information_id,
-      "products": products
-      // [
-      //   {
-      //     "code": "PT300",
-      //     "itemType": " z4GKmS8DRQ9YRBX30SLP",
-      //     "quantity": 10,
-      //     "unit_price": 5000
-      //   },
-      //   {
-      //     "code": "PK300",
-      //     "itemType": " z4GKmS8DRQ9YRBX30SLP",
-      //     "quantity": 10,
-      //     "unit_price": 5000
-      //   }
-      // ]
-    });
-
-    var config = {
-      method: 'post',
-      url: `${BASE_URL}api/order`,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      data: data
-    };
-
-    axios(config)
-      .then(function (response) {
-        console.log(response.data);
-        window.localStorage.removeItem(window.localStorage.getItem("username"))
-        window.location.href = response.data
-      })
-      .catch(function (error) {
-        console.log(error);
+      var axios = require('axios');
+      var data = JSON.stringify({
+          "username": user.data.username,
+          "account": "CASH",
+          "shipping_fee": 20000,
+          "discount_order": 0,
+          "discount_shipping": 0,
+          "information_id": window.localStorage.information_id,
+          "products": products
       });
+
+      var config = {
+          method: 'post',
+          url: `${BASE_URL}api/order`,
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          data: data
+      };
+
+      axios(config)
+          .then(function (response) {
+              console.log(JSON.stringify(response.data));
+          })
+          .catch(function (error) {
+              console.log(error);
+          });
 
   }
 
