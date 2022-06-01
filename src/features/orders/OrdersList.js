@@ -58,29 +58,18 @@ export default function OrdersList() {
     }
 
     const renderState = (order) => {
-        if (order.state === "Đã hủy") {
-            return (
-                <div className={styles.orderlist__header__content__item__state}>
-                    <div>
-                        <img src={Close} alt='cancel' />
-                    </div>
-                    <div className={styles.orderlist__header__content__item__state__text}>
-                        <p className={styles.orderlist__header__content__item__state__text}>Đã hủy</p>
-                    </div>
-                </div>
-            )
-        } else if (order.state === "Đã thanh toán") {
+         if (order.state === "Đã thanh toán") {
             return (
                 <div className={styles.orderlist__header__content__item__state}>
                     <div>
                         <img src={success} alt='...' />
                     </div>
                     <div className={styles.orderlist__header__content__item__state__text}>
-                        <p className={styles.orderlist__header__content__item__state__text}>Đã giao ngày {order.timestamp.slice(0, 10)}</p>
+                        <p className={styles.orderlist__header__content__item__state__text}>Đã thanh toán ngày {order.timestamp.slice(0, 10)}</p>
                     </div>
                 </div>
             )
-        } else if (order.state === "Đã đóng gói") {
+            } else if (order.state === "Chưa thanh toán") {
             return (
                 <div className={styles.orderlist__header__content__item__state}>
                     <div>
@@ -91,7 +80,7 @@ export default function OrdersList() {
                     </div>
                 </div>
             )
-        } else if (order.state === "Đang vận chuyển") {
+        } else if (order.state === "Thanh toán khi nhận hàng") {
             return (
                 <div className={styles.orderlist__header__content__item__state}>
                     <div>
@@ -99,17 +88,6 @@ export default function OrdersList() {
                     </div>
                     <div className={styles.orderlist__header__content__item__state__text}>
                         <p className={styles.orderlist__header__content__item__state__text}>Đang vận chuyển</p>
-                    </div>
-                </div>
-            )
-        } else if (order.state === "Đang xử lý") {
-            return (
-                <div className={styles.orderlist__header__content__item__state}>
-                    <div>
-                        <img src={Tasklist} alt='...' />
-                    </div>
-                    <div className={styles.orderlist__header__content__item__state__text}>
-                        <p className={styles.orderlist__header__content__item__state__text}>Đang xử lý</p>
                     </div>
                 </div>
             )
@@ -181,11 +159,9 @@ export default function OrdersList() {
                         <div>
                             <select name="kind" className={styles.orderlist__header__select} onChange={onChangeKind}>
                                 <option value="Tất cả đơn hàng">Tất cả đơn hàng</option>
-                                <option value="Đang xử lý">Đang xử lý</option>
-                                <option value="Đã đóng gói">Đã đóng gói</option>
-                                <option value="Đang vận chuyển">Đang vận chuyển</option>
+                                <option value="Chưa thanh toán">Chưa thanh toán</option>
+                                <option value="Thanh toán khi nhận hàng">Thanh toán khi nhận hàng</option>
                                 <option value="Đã thanh toán">Đã thanh toán</option>
-                                <option value="Đã hủy">Đã hủy</option>
                             </select>
                         </div>
                     </div>
