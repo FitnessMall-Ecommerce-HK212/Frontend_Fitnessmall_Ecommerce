@@ -29,7 +29,7 @@ const BlogCard = (props) => {
                 to={`/blog/detail/${blog.idBlog}`}
                 style={{ textDecoration: "none" }}
               >
-                <CTAButton style={{marginLeft: '0.5rem', marginBottom: '0.5rem'}} value="Đọc thêm" onClick={() => {}} />
+                <CTAButton style={{borderRadius: '10px', padding: '10px', marginLeft: '0.5rem', marginBottom: '0.5rem'}} value="Đọc thêm" onClick={() => {}} />
               </Link>
             </div>
           </div>
