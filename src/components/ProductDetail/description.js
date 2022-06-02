@@ -31,7 +31,7 @@ export function CustomizedSnackbars(props) {
                     severity={props.type}
                     sx={{ width: "100%" }}
                 >
-                    {props.type === "success" ? "Thêm vào giỏ hàng thành công" : "Thêm thất bại vui lòng thử lại!"}
+                    {props.type === "success" ? "Thêm vào giỏ hàng thành công" : "Vui lòng đăng nhập và thử lại!"}
                 </Alert>
             </Snackbar>
         </Stack>
@@ -75,9 +75,8 @@ function Description(props) {
             setOpen(true);
             //alert(`Thêm sản phẩm '${props.name}' vào giỏ hàng thành công!`)
         } else {
-            //alert("Cần đăng nhập để thêm giỏ hàng!")
-            setType("fail")
-            setOpen(true)
+            alert("Cần đăng nhập để thêm giỏ hàng!")
+            window.location.href = "https://fitnessmall.netlify.app"
         }
 
     }
