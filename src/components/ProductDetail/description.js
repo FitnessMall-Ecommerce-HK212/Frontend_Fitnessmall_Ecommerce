@@ -97,7 +97,7 @@ function Description(props) {
                 <div className="col-8 d-flex justify-content-center">
                     {props.itemtype.map((e) => {
                         return (
-                            <button type='button' className={props.itemtype[active] === e ? "btn btn-option clicked" : "btn btn-option ms-5"} onClick={() => setActive(props.itemtype.indexOf(e))}>{e.category}</button>
+                            <button type='button' className={props.itemtype[active] === e ? "btn btn-option clicked ms-3 me-3" : "btn btn-option ms-3 me-3"} onClick={() => setActive(props.itemtype.indexOf(e))}>{e.category}</button>
                         );
                     })}
                 </div>
