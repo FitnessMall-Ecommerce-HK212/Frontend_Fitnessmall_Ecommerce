@@ -174,9 +174,9 @@ export default function Account(){
                 <div class="form-control" style={{display:"flex",border:"none"}}>
                     <label class="input-label">Giới tính</label>
                     <Radio.Group onChange={(e)=>{setSex(e.target.value)}} value={sex}>
-                      <Radio value={'Male'} style={{color:"var(--lightprimary)",fontSize:"16px",marginRight:"20px"}}>Male</Radio>
-                      <Radio value={'Female'} style={{color:"var(--lightprimary)",fontSize:"16px",marginRight:"20px"}}>Female</Radio>
-                      <Radio value={'Other'} style={{color:"var(--lightprimary)",fontSize:"16px",marginRight:"20px"}}>Other</Radio>
+                      <Radio value={'Male'} style={{color:"var(--lightprimary)",fontSize:"16px",marginRight:"20px"}}>Nam</Radio>
+                      <Radio value={'Female'} style={{color:"var(--lightprimary)",fontSize:"16px",marginRight:"20px"}}>Nữ</Radio>
+                      <Radio value={'Other'} style={{color:"var(--lightprimary)",fontSize:"16px",marginRight:"20px"}}>Khác</Radio>
                     </Radio.Group>
                   </div>
                 <div class="form-control" style={{display:"flex",border:"none"}}>
