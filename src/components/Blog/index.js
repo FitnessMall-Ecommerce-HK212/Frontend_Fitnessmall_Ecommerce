@@ -35,7 +35,7 @@ const Blog = () => {
           <div>
             <BlogCard allBlogs={allBlogs} />
           </div>
-          <div className="hotBlog" style={{ width: "40%" }}>
+          <div className="hotBlog">
             <div className="hotTitle">BÀI VIẾT HAY</div>
             <HotBlog allBlogs={allBlogs} />
           </div>

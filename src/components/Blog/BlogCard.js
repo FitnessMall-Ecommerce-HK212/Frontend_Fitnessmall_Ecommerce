@@ -9,7 +9,7 @@ const BlogCard = (props) => {
       <div className="container">
         <div className="blogCardContainer">
           <div className="row">
-            <div className="col-md-6">
+            <div className="col-lg-6 col-md-6">
               {blog.tags.map((tag, index) => {
                 return <span key={index} className="blogTag">{tag}</span>;
               })}
@@ -17,7 +17,7 @@ const BlogCard = (props) => {
               <p className="blogTitle">{blog.title}</p>
             </div>
 
-            <div className="col-md-6">
+            <div className="col-lg-6 col-md-6">
               <p className="datePosted">{blog.date}</p>
               <p className="blogAuthor">{blog.writer}</p>
               <p className="blogShortContent">
@@ -29,7 +29,7 @@ const BlogCard = (props) => {
                 to={`/blog/detail/${blog.idBlog}`}
                 style={{ textDecoration: "none" }}
               >
-                <CTAButton value="Đọc thêm" onClick={() => {}} />
+                <CTAButton style={{marginLeft: '0.5rem', marginBottom: '0.5rem'}} value="Đọc thêm" onClick={() => {}} />
               </Link>
             </div>
           </div>

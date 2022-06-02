@@ -32,10 +32,10 @@ function Header(props) {
   return (
     <div class="Container">
         <div class="LeftContainer">
-          <a href="/" class="logo">
-            <img style={{ width: "100%", height: "100%", borderStyle: "none" }}
-              src={logo_fitness} alt="logo"/>
-          </a>
+            <a href="/" class="logo">
+              <img style={{ width: "100%", height: "100%", borderStyle: "none" }}
+                src={logo_fitness} alt="logo"/>
+            </a>
             <div class="FormSearch_Form">
               <input type="text" placeholder="Tìm kiếm ..." class="FormSearch_Input" />
               <CTAButton value="Tìm kiếm" />
@@ -43,7 +43,7 @@ function Header(props) {
         </div>
         {!window.localStorage.getItem('isAuthenticated') ? 
         <div class="RightContainer">
-        <button className='btn btn-send' onClick={toggleShow}><BsList className='menu-icon' color='white' size='30'/></button>
+          <button onClick={toggleShow}><BsList className='menu-icon' color='#FF2C86'/></button>
           <Offcanvas show={show} onHide={handleClose} {...setting}>
             <Offcanvas.Header closeButton>
               <Offcanvas.Title></Offcanvas.Title>
@@ -90,7 +90,7 @@ function Header(props) {
           </div>
         </div> :
         <div class="RightContainer">
-          <button className='btn btn-send' onClick={toggleShow}><BsList className='menu-icon' color='white' size='30'/></button>
+          <button onClick={toggleShow}><BsList className='menu-icon' color='#FF2C86'/></button>
           <Offcanvas show={show} onHide={handleClose} {...setting}>
             <Offcanvas.Header closeButton>
               <Offcanvas.Title></Offcanvas.Title>
