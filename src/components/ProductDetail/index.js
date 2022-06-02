@@ -42,7 +42,7 @@ function ProductDetail() {
         setProductInfo(res.data);
     }
     const getHotBlogs = async () => {
-        const res = await axios.get(BASE_URL + '/api/blogs');
+        const res = await axios.get(BASE_URL + 'api/blogs');
         setHotBlogs(res.data.blogList);
     }
     const getRelatedProducts = async () => {
@@ -146,7 +146,7 @@ function ProductDetail() {
             setError("Bạn chưa chọn sao!")
         }
         else {
-            axios.post(BASE_URL + "/api/food/feedback/", {
+            axios.post(BASE_URL + "api/food/feedback/", {
                 username: username,
                 content: content,
                 date: date,
