@@ -42,7 +42,7 @@ function ProductDetail() {
         setProductInfo(res.data);
     }
     const getHotBlogs = async () => {
-        const res = await axios.get(BASE_URL + '/api/blogs');
+        const res = await axios.get(BASE_URL + 'api/blogs');
         setHotBlogs(res.data.blogList);
     }
     const getRelatedProducts = async () => {
@@ -67,7 +67,7 @@ function ProductDetail() {
             breakpoint: 1350,
             settings: {
                   slidesToShow: 3,
-                  slidesToScroll: 3,
+                  slidesToScroll: 1,
                   infinite: true,
                   dots: true
             }
@@ -76,6 +76,7 @@ function ProductDetail() {
             breakpoint: 1100,
             settings: {
                 slidesToShow: 2,
+                slidesToScroll: 1,
                 centerMode: false,
                 dots: true
             }
@@ -84,6 +85,7 @@ function ProductDetail() {
             breakpoint: 750,
             settings: {
                 slidesToShow: 1,
+                slidesToScroll: 1,
                 initialSlide: 1,
                 centerMode: false,
             }
@@ -98,19 +100,11 @@ function ProductDetail() {
         slidesToScroll: 1,
         initialSlide: 1,
         responsive: [
-            // {
-            // breakpoint: 1350,
-            // settings: {
-            //       slidesToShow: 3,
-            //       slidesToScroll: 3,
-            //       infinite: true,
-            //       dots: true
-            // }
-            // },
             {
             breakpoint: 1350,
             settings: {
                 slidesToShow: 2,
+                slidesToScroll: 1,
                 centerMode: false,
                 dots: true
             }
@@ -119,6 +113,7 @@ function ProductDetail() {
             breakpoint: 850,
             settings: {
                 slidesToShow: 1,
+                slidesToScroll: 1,
                 initialSlide: 1,
                 centerMode: false,
             }
@@ -146,7 +141,7 @@ function ProductDetail() {
             setError("Bạn chưa chọn sao!")
         }
         else {
-            axios.post(BASE_URL + "/api/food/feedback/", {
+            axios.post(BASE_URL + "api/food/feedback/", {
                 username: username,
                 content: content,
                 date: date,
@@ -168,7 +163,8 @@ function ProductDetail() {
         getProductInfo();
         getRelatedProducts();
         getHotBlogs();
-    }, [checkFB]);
+        window.scrollTo(0, 0);
+    }, [checkFB, code]);
 
     if (productInfo.length === 0 || relatedProducts.length === 0 || hotBlogs.length === 0 || ("sessionID" in window.localStorage && username === "")) {
         return (
@@ -259,7 +255,7 @@ function ProductDetail() {
                                             img={item.image}
                                             name={item.name}
                                             price={item.itemtype[0].price}
-                                            type='food'
+                                            type={type}
                                             code={item.code}
                                             point={item.point}
                                         />

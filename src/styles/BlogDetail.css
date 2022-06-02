@@ -74,6 +74,15 @@
     display: flex;
 }
 
+.blogDetail .userInfo, .blogDetail .commentOnBlog .formComment .FormSearch_Button {
+    width: fit-content;
+    height: 100%;
+    padding: 10px 10px;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 10px !important;
+}
+
 .blogDetail .userInfo img {
     width: 3rem;
     margin: 0rem 1rem 4rem 0;

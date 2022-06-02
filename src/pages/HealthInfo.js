@@ -137,7 +137,7 @@ export default function HealthInfo(){
           </div>
           <div style={{height:"5rem",marginTop:'10px'}}>
            <p style={{marginBottom:"10px"}}>Theo dõi luyện tập</p>
-           <div style={{display:"flex"}}>
+           <div className="all-button" style={{display:"flex"}}>
            <GhostButton style={{marginBottom:"20px",display:"flex"}} value="Liên kết gg fit" onClick={()=>{
              axios
              .get(
