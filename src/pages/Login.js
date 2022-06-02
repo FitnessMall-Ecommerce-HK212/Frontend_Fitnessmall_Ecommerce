@@ -11,6 +11,7 @@ import Visibility from "@material-ui/icons/Visibility";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import md5 from 'md5';
+import { CircularProgress } from "@mui/material";
 import { notification, Modal, message } from 'antd';
 import { BASE_URL } from '../config/host';
 import {
@@ -135,6 +136,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login() {
   const classes = useStyles();
+  const [progress, setProgress] = useState('')
   const theme = useTheme();
   const dispatch = useDispatch();
   const [username, setName] = useState('');
@@ -148,6 +150,7 @@ export default function Login() {
     pwd: '',
     showPassword: false,
   });
+  const [messageLogin, setMessage] = useState('');
 
   const handleClickShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword });
@@ -193,27 +196,56 @@ export default function Login() {
     if (values.pwd != '') {
       hash = md5(values.pwd);
     }
-    dispatch(loginUser({ username: username, password: hash }));
-    window.localStorage.setItem("username", username) //Thanh
-    setTimeout(() => {
-      axios
-        .get(
-          `${BASE_URL}api/user_author/${window.localStorage.getItem("sessionID")}`,
-          {
-          },
-          { headers: { "Content-Type": "application/json" } }
-        )
-        .then((res) => {
-          if (res.data === "OK") {
-            window.localStorage.setItem("pwd", values.pwd);
-            window.localStorage.setItem('isAuthenticated', true)
-            history.push("/")
-          }
-        })
-        .catch((err) => {
-          alert(err);
-        });
-    }, 1000);
+    setProgress(<> &nbsp; <CircularProgress size={20} color='inherit'/> </>);
+    axios({
+      method: "GET",
+      url: `${BASE_URL}api/user_signin/?username=${username}&password=${hash}`
+    }).then(response => {
+      if (typeof (response.data) === "string") {
+        setProgress('')
+        setMessage(response.data)
+      } else {
+        window.localStorage.setItem("sessionID", response.data.sessionID);
+        axios
+          .get(
+            `${BASE_URL}api/user_author/${window.localStorage.getItem("sessionID")}`,
+            {
+            },
+            { headers: { "Content-Type": "application/json" } }
+          )
+          .then((res) => {
+            setProgress('')
+            if (res.data === "OK") {
+              window.localStorage.setItem("pwd", values.pwd);
+              window.localStorage.setItem('isAuthenticated', true)
+              history.push("/")
+            }
+          })
+          .catch((err) => {
+            alert(err);
+          });
+      }
+    })
+    // dispatch(loginUser({ username: username, password: hash }));
+    // setTimeout(() => {
+    //   axios
+    //     .get(
+    //       `${BASE_URL}api/user_author/${window.localStorage.getItem("sessionID")}`,
+    //       {
+    //       },
+    //       { headers: { "Content-Type": "application/json" } }
+    //     )
+    //     .then((res) => {
+    //       if (res.data === "OK") {
+    //         window.localStorage.setItem("pwd", values.pwd);
+    //         window.localStorage.setItem('isAuthenticated', true)
+    //         history.push("/")
+    //       }
+    //     })
+    //     .catch((err) => {
+    //       alert(err);
+    //     });
+    // }, 1000);
   };
   return (
     <>
@@ -235,10 +267,10 @@ export default function Login() {
           }}
         >
           <Card style={{ padding: "35px 29px", height: "500px", width: "472px" }}>
-            <Typography className={classes.text20}>Đăng nhập</Typography>
+            <Typography className={classes.text20}>Đăng nhập </Typography>
 
             <form>
-              <p className="fst-italic text-danger">{errorLogin}</p>
+              <p className="fst-italic text-danger"> {messageLogin} </p>
               <input type="text" id="inputName" className={classes.input} name="username" placeholder="Tài khoản" onChange={(e) => { setName(e.target.value) }}
               ></input>
               <div style={{ position: "relative" }}>
@@ -277,7 +309,9 @@ export default function Login() {
             }} onCancel={() => setIsModalVisible1(false)}>
               <input type="text" id="inputName" className={classes.input} placeholder="Write the new password" onChange={(e) => setnewPass(e.target.value)}></input>
             </Modal>
-            <Button variant="contained" type="submit" className={classes.button_login} onClick={handleSubmit}>Đăng nhập</Button>
+            <Button variant="contained" type="submit" className={classes.button_login} onClick={handleSubmit}>Đăng nhập   
+                  {progress}
+            </Button>
 
             <div style={{ paddingBottom: "0.875rem", display: "flex", alignItems: "center", paddingTop: "20px" }} >
               <div className={classes.line}></div>
@@ -293,7 +327,7 @@ export default function Login() {
                     window.open(res.data, '', 'popup')
                     setTimeout(() =>
                       window.localStorage.getItem('isAuthenticated') == 'true' ? history.push("/") : ''
-                      , 9000);
+                      , 100);
                   })
                   .catch((err) => {
                     alert(err);

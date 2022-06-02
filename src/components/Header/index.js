@@ -12,7 +12,6 @@ import {BsList} from "react-icons/bs";
 
 function Header(props) {
   let history = useHistory();
-  //const sign=sessionStorage.geItem("sessionID");
   const [visible, setVisible] = useState(false)
 
   const handleVisibleChange = visible => {
@@ -60,7 +59,7 @@ function Header(props) {
                       onClick={() => {
                         axios
                           .get(
-                            `${BASE_URL}api/user_signout/${sessionStorage.getItem("sessionID")}`
+                            `${BASE_URL}api/user_signout/${window.localStorage.getItem("sessionID")}`
                           )
                           .then((res) => {
                             if (res.data === "Sign Out Successfully") {
@@ -107,7 +106,7 @@ function Header(props) {
                       onClick={() => {
                         axios
                           .get(
-                            `${BASE_URL}api/user_signout/${sessionStorage.getItem("sessionID")}`
+                            `${BASE_URL}api/user_signout/${window.localStorage.getItem("sessionID")}`
                           )
                           .then((res) => {
                             if (res.data === "Sign Out Successfully") {
@@ -135,7 +134,7 @@ function Header(props) {
                       onClick={() => {
                         axios
                           .get(
-                            `${BASE_URL}api/user_signout/${sessionStorage.getItem("sessionID")}`
+                            `${BASE_URL}api/user_signout/${window.localStorage.getItem("sessionID")}`
                           )
                           .then((res) => {
                             if (res.data === "Sign Out Successfully") {

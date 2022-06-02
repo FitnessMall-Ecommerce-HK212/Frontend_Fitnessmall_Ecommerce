@@ -220,7 +220,7 @@ export default function Register() {
       window.open(res.data,'','popup')
       setTimeout(() => 
        window.localStorage.getItem('isAuthenticated')=='true'?history.push("/"):''
-     , 9000);
+     , 1000);
     })
     .catch((err) => {
       alert(err);
@@ -229,10 +229,10 @@ export default function Register() {
             <div className={classes.icon}><div className={classes.icon_Google}></div></div>
             <div>Google</div>
           </button> 
-          <button className={classes.button_social}>
+          {/* <button className={classes.button_social}>
             <div className={classes.icon}><div className={classes.icon_Facebook}></div></div>
             <div>Facebook</div>
-          </button>        
+          </button>         */}
           </div> 
           <br></br>
           <div>
