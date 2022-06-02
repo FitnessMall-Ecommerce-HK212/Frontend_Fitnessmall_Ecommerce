@@ -68,7 +68,7 @@ export default function SingleOrderPage({ match }) {
         </div>
         <div>
           <Link to={`/history/order/${orderId}/${order.receiptID}`} className={styles.orderlist__header__content__item__state__shipmentdetail}>
-            <CTAButton value="Chi tiết" onClick={() => { }} />
+          <CTAButton style={{borderRadius: '10px', padding: '10px', marginLeft: '0.5rem', marginBottom: '0.5rem'}} value="Chi tiết" onClick={() => { }} />
           </Link>
         </div>
       </div>
