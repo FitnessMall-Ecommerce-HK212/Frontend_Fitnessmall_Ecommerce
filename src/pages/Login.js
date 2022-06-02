@@ -327,10 +327,12 @@ export default function Login() {
                   .then((res) => {
                     window.localStorage.setItem('pwd', 'Not declared')
                     window.open(res.data, '', 'popup')
-                    setInterval(() => 
-                      // console.log("hello")
-                      window.localStorage.getItem('isAuthenticated') == true ? history.push("/") : ''
-                      , 2000);
+                    var looper = setInterval(() => {
+                      if (window.localStorage.getItem('isAuthenticated') == "true") {
+                        clearInterval(looper); 
+                        history.push("/")
+                      }
+                    }, 2000);
 
                   })
                   .catch((err) => {
