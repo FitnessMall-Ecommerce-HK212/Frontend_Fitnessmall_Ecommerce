@@ -9,12 +9,14 @@ function IntroCard(props){
     else if (props.name === "Blog Tư Vấn")
         link = '/blog'
     return (
-        <Link to={link}>
         <div className="introcard">
-            <div className='icon-container'><IconCTAButton/></div>
-            <h5 className='name'>{props.name}</h5>
+            <Link to={link}>
+            <div className='content'>
+                <div className='icon-container'><IconCTAButton/></div>
+                <h5 className='name'>{props.name}</h5>
+            </div>
+            </Link>
         </div>
-        </Link>
     );
 }
 
