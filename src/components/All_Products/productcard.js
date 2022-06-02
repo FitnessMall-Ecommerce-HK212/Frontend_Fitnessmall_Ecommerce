@@ -4,8 +4,8 @@ import { NavLink } from 'react-router-dom';
 
 function ProductCard(props){
     return(
-        <NavLink to={'/products/' + props.type + '/' + props.code}>
-        <div className="productcard">
+        <div className='productcard'>
+            <NavLink to={'/products/' + props.type + '/' + props.code}>
             <div className='card'>
                 <img src={props.img} className="card-img-top" alt="..."/>
                 <div className="card-body text-center justify-content-center">
@@ -16,8 +16,8 @@ function ProductCard(props){
                     </div>
                 </div>
             </div>
+            </NavLink>
         </div>
-        </NavLink>
     );
 }
 
