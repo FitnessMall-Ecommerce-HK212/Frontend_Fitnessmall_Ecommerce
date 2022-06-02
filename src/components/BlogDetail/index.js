@@ -188,7 +188,7 @@ const BlogDetail = () => {
           </div>
 
           <div className="rightBar">
-            <div className="hotBlog">
+            <div className="hotBlog1">
               <div className="hotTitle">BÀI VIẾT HAY</div>
               <HotBlog allBlogs={allBlogs} />
             </div>

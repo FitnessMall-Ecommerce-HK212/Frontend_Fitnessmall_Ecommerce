@@ -34,11 +34,13 @@
     font-weight: bold;
     text-transform: capitalize;
     margin-bottom: 0;
+    margin-left: 0.5rem;
 }
 
 .blogCardContainer .blogShortContent {
     margin-right: 1rem;
     margin-bottom: 0.5rem;
+    margin-left: 0.5rem;
 }
 
 .BlogPage {
@@ -66,13 +68,13 @@
     transform: scale(1.01);
 }
 
-.hotBlog, .relatedBlog {
+.hotBlog, .hotBlog1, .relatedBlog {
     background-color: var(--lightprimary);
     margin: 2rem;
     border-radius: 0.5rem;
 }
 
-.hotBlog .hotTitle, .relatedBlog .hotTitle {
+.hotBlog .hotTitle, .hotBlog1 .hotTitle, .relatedBlog .hotTitle {
     text-align: center;
     font-weight: bold;
     border-bottom: 1px solid black;
@@ -86,4 +88,24 @@
 
 .hotBlogCard .card-tag .card-title {
     margin: 0 0.5rem 0.5rem 0.5rem;
+}
+
+.hotBlog {
+    width: 40%;
+}
+
+@media screen and (max-width: 996px) {
+    .BlogPage {
+        display: block;
+    }
+    .hotBlog {
+        width: fit-content;
+        margin: 1rem auto;
+    }
+}
+
+@media screen and (max-width: 752px) {
+    .hotBlog {
+        margin: 1rem 2rem;
+    }
 }
