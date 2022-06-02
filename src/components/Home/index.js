@@ -25,7 +25,7 @@ function Home() {
             breakpoint: 1350,
             settings: {
                   slidesToShow: 3,
-                  slidesToScroll: 3,
+                  slidesToScroll: 1,
                   infinite: true,
                   dots: true
             }
@@ -34,6 +34,7 @@ function Home() {
             breakpoint: 1100,
             settings: {
                 slidesToShow: 2,
+                slidesToScroll: 1,
                 centerMode: false,
                 dots: true
             }
@@ -42,6 +43,7 @@ function Home() {
             breakpoint: 750,
             settings: {
                 slidesToShow: 1,
+                slidesToScroll: 1,
                 initialSlide: 1,
                 centerMode: false,
             }
@@ -56,19 +58,11 @@ function Home() {
         slidesToScroll: 1,
         initialSlide: 1,
         responsive: [
-            // {
-            // breakpoint: 1350,
-            // settings: {
-            //       slidesToShow: 3,
-            //       slidesToScroll: 3,
-            //       infinite: true,
-            //       dots: true
-            // }
-            // },
             {
             breakpoint: 1350,
             settings: {
                 slidesToShow: 2,
+                slidesToScroll: 1,
                 centerMode: false,
                 dots: true
             }
@@ -77,6 +71,7 @@ function Home() {
             breakpoint: 850,
             settings: {
                 slidesToShow: 1,
+                slidesToScroll: 1,
                 initialSlide: 1,
                 centerMode: false,
             }

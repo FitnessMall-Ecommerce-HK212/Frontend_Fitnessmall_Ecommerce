@@ -95,6 +95,7 @@ const BlogDetail = () => {
       }
       getUserInfo().then((res) => setUser(res));
     }
+    window.scrollTo(0,0)
   }, []);
 
   useEffect(() => {
