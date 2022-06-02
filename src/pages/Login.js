@@ -197,6 +197,7 @@ export default function Login() {
       hash = md5(values.pwd);
     }
     setProgress(<> &nbsp; <CircularProgress size={20} color='inherit'/> </>);
+    setMessage('')
     axios({
       method: "GET",
       url: `${BASE_URL}api/user_signin/?username=${username}&password=${hash}`
@@ -321,13 +322,16 @@ export default function Login() {
             <br></br>
             <div style={{ margin: "0px 45px ", justifyContent: "space-between", flexWrap: "wrap", display: "flex" }} >
               <button className={classes.button_social} onClick={() => {
+                window.localStorage.setItem('isAuthenticated', false)
                 axios.get(`${BASE_URL}api/user_signin_signup/google`)
                   .then((res) => {
                     window.localStorage.setItem('pwd', 'Not declared')
                     window.open(res.data, '', 'popup')
-                    setTimeout(() =>
-                      window.localStorage.getItem('isAuthenticated') == 'true' ? history.push("/") : ''
-                      , 100);
+                    setInterval(() => 
+                      // console.log("hello")
+                      window.localStorage.getItem('isAuthenticated') == true ? history.push("/") : ''
+                      , 2000);
+
                   })
                   .catch((err) => {
                     alert(err);

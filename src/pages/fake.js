@@ -5,7 +5,7 @@ export default function Fake({match}){
     const data=match.params
     useEffect(()=>{
         window.localStorage.setItem('sessionID',data.data)
-        window.localStorage.setItem('isAuthenticated',true)
+        window.localStorage.setItem('isAuthenticated', true)
         window.close();
     })
     return (
