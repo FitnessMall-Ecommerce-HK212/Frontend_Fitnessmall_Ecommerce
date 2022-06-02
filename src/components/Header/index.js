@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Popover, Button } from 'antd';
 import { BASE_URL } from '../../config/host';
 import {BsList} from "react-icons/bs";
-import { BASE_URL } from '../../config/host';
 
 function Header(props) {
   let history = useHistory();
