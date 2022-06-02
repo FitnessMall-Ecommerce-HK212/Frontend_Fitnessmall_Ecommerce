@@ -33,7 +33,7 @@ export default function OrdersList() {
 
         var config = {
             method: 'get',
-            url: `${BASE_URL}api/orders/giacat`,
+            url: `${BASE_URL}api/orders/${localStorage.getItem("username")}`,
             headers: {
                 'Content-Type': 'application/json',
             },
